@@ -1,0 +1,122 @@
+.primary-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  width: 56px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 68%, rgba(92, 105, 112, 0.08) 100%);
+}
+
+.primary-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.primary-sidebar__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease backwards;
+}
+
+.primary-sidebar__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-lg);
+  color: var(--color-olive);
+  background: var(--btn-ghost-bg);
+  transition: all 0.15s ease;
+}
+
+.primary-sidebar__icon-wrapper:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.primary-sidebar__icon-wrapper:active {
+  background: var(--btn-ghost-active-bg);
+}
+
+.primary-sidebar__icon-wrapper.active {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.primary-sidebar__icon-wrapper.active:hover {
+  background: var(--btn-primary-hover-bg);
+}
+
+.primary-sidebar__icon-wrapper.active:active {
+  background: var(--btn-primary-active-bg);
+  color: var(--btn-primary-active-text);
+}
+
+.primary-sidebar__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.primary-sidebar__spacer {
+  flex: 1;
+}
+
+.primary-sidebar__expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--spacing-sm);
+  background: var(--color-bg-white);
+  border-radius: var(--radius-xl);
+  color: var(--color-grey-icon);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.primary-sidebar__expand-btn:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.primary-sidebar__expand-btn:active {
+  background: var(--btn-ghost-active-bg);
+}
+
+.primary-sidebar__expand-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .primary-sidebar__expand-btn {
+  background: var(--color-grey-600);
+  color: var(--color-text-primary);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .primary-sidebar__expand-btn:hover {
+  background: var(--color-olive);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

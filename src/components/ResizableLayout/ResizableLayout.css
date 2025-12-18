@@ -1,0 +1,224 @@
+.resizable-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.resizable-layout.dragging {
+  cursor: col-resize;
+}
+
+/* Prevent text selection and pointer events during drag */
+.resizable-layout.dragging * {
+  user-select: none;
+  pointer-events: none;
+}
+
+.resizable-layout.dragging .resizable-layout__resizer {
+  pointer-events: auto;
+}
+
+/* Navigation Panel */
+.resizable-layout__nav {
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.15s ease;
+}
+
+.resizable-layout.dragging .resizable-layout__nav {
+  transition: none;
+}
+
+.resizable-layout__nav.collapsed {
+  overflow: visible;
+}
+
+/* Right Content Area */
+.resizable-layout__right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Top Bar */
+.resizable-layout__topbar {
+  flex-shrink: 0;
+}
+
+/* Content Area (Main + Widgets) */
+.resizable-layout__content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Main Content */
+.resizable-layout__main {
+  flex: 1;
+  min-width: 300px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Action Panel */
+.resizable-layout__action-panel {
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.15s ease;
+}
+
+.resizable-layout.dragging .resizable-layout__action-panel {
+  transition: none;
+}
+
+/* Widgets Panel */
+.resizable-layout__widgets {
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.15s ease;
+}
+
+.resizable-layout.dragging .resizable-layout__widgets {
+  transition: none;
+}
+
+/* Resizer Handle */
+.resizable-layout__resizer {
+  width: 12px;
+  height: 100%;
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  background: transparent;
+  margin: 0 -4px;
+}
+
+.resizable-layout__resizer:hover {
+  background: var(--color-hover-overlay);
+}
+
+.resizable-layout__resizer.active {
+  background: var(--color-active-overlay);
+}
+
+/* Resizer Visual Line */
+.resizable-layout__resizer-line {
+  width: 2px;
+  height: 100%;
+  background: transparent;
+  border-radius: 1px;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.resizable-layout__resizer:hover .resizable-layout__resizer-line {
+  width: 3px;
+  background: var(--color-grey-300);
+}
+
+.resizable-layout__resizer.active .resizable-layout__resizer-line {
+  width: 3px;
+  background: var(--color-green-light);
+  box-shadow: 0 0 8px rgba(159, 193, 165, 0.5);
+}
+
+/* Resizer Grip Indicator */
+.resizable-layout__resizer-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 40px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-grey-300) 0px,
+    var(--color-grey-300) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  border-radius: 2px;
+}
+
+.resizable-layout__resizer:hover .resizable-layout__resizer-line::before {
+  opacity: 1;
+}
+
+.resizable-layout__resizer.active .resizable-layout__resizer-line::before {
+  opacity: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-green-light) 0px,
+    var(--color-green-light) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+}
+
+/* Expand button for collapsed widgets */
+.resizable-layout__expand-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 48px;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-md);
+  color: var(--color-grey-icon);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-xs);
+  z-index: 20;
+}
+
+.resizable-layout__expand-btn:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  border-color: var(--color-green-light);
+}
+
+/* Responsive behavior */
+@media (max-width: 900px) {
+  .resizable-layout__widgets,
+  .resizable-layout__content > .resizable-layout__resizer {
+    display: none;
+  }
+  
+  .resizable-layout__expand-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .resizable-layout__nav {
+    width: 56px !important;
+  }
+  
+  .resizable-layout > .resizable-layout__resizer {
+    display: none;
+  }
+}

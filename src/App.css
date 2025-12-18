@@ -1,0 +1,228 @@
+.app {
+  height: 100%;
+  width: 100%;
+  background: var(--color-bg-primary);
+}
+
+/* Navigation Panel Container */
+.nav-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nav-panel__content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Navigation Top Bar with Logo */
+.nav-top-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  height: 48px;
+  padding: var(--spacing-xs);
+  flex-shrink: 0;
+  background: var(--color-bg-primary);
+}
+
+.nav-top-bar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.nav-top-bar__logo-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-primary);
+}
+
+.nav-top-bar__product-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  height: 32px;
+  padding: 6px 12px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  background: var(--btn-ghost-bg);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.25px;
+}
+
+.nav-top-bar__product-selector:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.nav-top-bar__product-selector:active {
+  background: var(--btn-ghost-active-bg);
+}
+
+.nav-top-bar__product-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.154px;
+}
+
+.nav-top-bar__chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey-icon);
+  transition: transform 0.2s ease;
+}
+
+.nav-top-bar__chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.nav-top-bar__product-selector.active {
+  background: var(--btn-ghost-active-bg);
+}
+
+/* Dropdown Menu */
+.nav-top-bar__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: var(--spacing-xs);
+  min-width: 220px;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  overflow: hidden;
+  animation: dropdownSlide 0.2s ease;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-top-bar__dropdown-list {
+  padding: var(--spacing-xs) 0;
+}
+
+.nav-top-bar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  height: 36px;
+  padding: 6px var(--spacing-md);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.25px;
+  color: var(--color-text-primary);
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-top-bar__dropdown-item:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.nav-top-bar__dropdown-item:active {
+  background: var(--btn-ghost-active-bg);
+}
+
+.nav-top-bar__dropdown-item.selected {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.nav-top-bar__dropdown-item.selected:hover {
+  background: var(--btn-primary-hover-bg);
+}
+
+.nav-top-bar__dropdown-item.selected:active {
+  background: var(--btn-primary-active-bg);
+  color: var(--btn-primary-active-text);
+}
+
+.nav-top-bar__dropdown-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey-icon);
+  flex-shrink: 0;
+}
+
+.nav-top-bar__dropdown-item.selected .nav-top-bar__dropdown-icon {
+  color: var(--btn-primary-text);
+}
+
+.nav-top-bar__dropdown-name {
+  flex: 1;
+}
+
+.nav-top-bar__dropdown-check {
+  width: 16px;
+  height: 16px;
+  color: var(--color-lime-dark);
+  flex-shrink: 0;
+}
+
+/* Main Content Container */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: var(--spacing-xs);
+  padding-left: 0;
+}
+
+/* Action Panel Wrapper */
+.action-panel-wrapper {
+  height: 100%;
+  padding: var(--spacing-xs);
+  padding-left: 0;
+  overflow: hidden;
+}
+
+/* Make action panel fill the container */
+.action-panel-wrapper > * {
+  height: 100%;
+}
+
+/* Widgets Panel Container */
+.widgets-panel {
+  height: 100%;
+  padding: var(--spacing-xs);
+  padding-left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Make widgets fill the container */
+.widgets-panel > * {
+  height: 100%;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .nav-top-bar__dropdown {
+  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.5);
+}

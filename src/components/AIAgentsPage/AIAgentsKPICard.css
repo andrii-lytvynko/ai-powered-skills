@@ -1,0 +1,154 @@
+.ai-kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-md);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-lg);
+}
+
+.ai-kpi-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ai-kpi-card__title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: var(--color-text-primary);
+}
+
+.ai-kpi-card__description {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.ai-kpi-card__stats {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ai-kpi-card__value {
+  font-family: 'Geist Mono', monospace;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.5px;
+  color: var(--color-text-primary);
+}
+
+.ai-kpi-card__trend {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: right;
+}
+
+.ai-kpi-card__trend--up {
+  color: var(--color-trend-up);
+}
+
+.ai-kpi-card__trend--down {
+  color: var(--color-trend-down);
+}
+
+.ai-kpi-card__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.ai-kpi-card__bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ai-kpi-card__bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ai-kpi-card__bar-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ai-kpi-card__bar-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.ai-kpi-card__bar-info {
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey-600);
+  opacity: 0.6;
+}
+
+.ai-kpi-card__bar-values {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ai-kpi-card__bar-percentage {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--color-text-primary);
+}
+
+.ai-kpi-card__bar-count {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.25px;
+  color: var(--color-text-secondary);
+}
+
+.ai-kpi-card__bar-track {
+  height: 8px;
+  background: var(--color-chart-track);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ai-kpi-card__bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.ai-kpi-card__bar-fill--blue {
+  background: var(--color-chart-blue);
+}
+
+.ai-kpi-card__bar-fill--green {
+  background: var(--color-chart-green);
+}
+
+.ai-kpi-card__bar-fill--red {
+  background: var(--color-chart-red);
+}
+

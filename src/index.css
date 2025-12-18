@@ -1,0 +1,480 @@
+:root {
+  /* Color Palette - Light Theme */
+  --color-bg-primary: #faf9f5;
+  --color-bg-white: #ffffff;
+  --color-bg-subtle: #f8f9f9;
+  
+  /* Lime/Yellow-green accent palette */
+  --color-lime-primary: #d0d33f;
+  --color-lime-dark: #3b3c07;
+  --color-lime-light: rgba(208, 211, 63, 0.2);
+  
+  /* Green palette */
+  --color-green-primary: #263c28;
+  --color-green-light: #9fc1a5;
+  --color-green-accent: rgba(159, 193, 165, 0.32);
+  --color-green-200: #d1e8df;
+  --color-green-800: #0b3b29;
+  
+  /* Olive/Sage icon color */
+  --color-olive: #a7a88b;
+  
+  /* Kale (teal) palette */
+  --color-kale-200: #daeded;
+  --color-kale-700: #03363d;
+  
+  /* Grey palette */
+  --color-grey-300: #d8dcde;
+  --color-grey-600: #68737d;
+  --color-grey-700: #73726c;
+  --color-grey-800: #2f3941;
+  --color-grey-icon: #73726c;
+  
+  /* Text colors */
+  --color-text-primary: #141413;
+  --color-text-secondary: #73726c;
+  --color-text-muted: #68737d;
+  
+  /* Status colors */
+  --color-status-open: #c72a1c;
+  --color-status-pending: #1371d6;
+  --color-status-onhold: #2f3941;
+  --color-status-solved: #228f67;
+  
+  /* SLA colors */
+  --color-sla-green: #d1e8df;
+  --color-sla-green-text: #0b3b29;
+  --color-sla-yellow: #ffb057;
+  --color-sla-yellow-text: #703815;
+  --color-sla-red: #cc3340;
+  
+  /* Chart/KPI colors */
+  --color-chart-blue: #acb4e7;
+  --color-chart-blue-medium: #d8dcf4;
+  --color-chart-blue-light: #f4f5fc;
+  --color-chart-green: #94c1b0;
+  --color-chart-red: #d62054;
+  --color-chart-track: #e8eaec;
+  --color-trend-up: #38a336;
+  --color-trend-down: #e53e3e;
+  
+  /* Knowledge gaps colors */
+  --color-bubble-bg: #fee3e5;
+  --color-bubble-primary: #cd3642;
+  --color-bubble-text: #cd3642;
+  --color-muted-icon: #b0b8be;
+  --color-table-footer-bg: #f8f9f9;
+  
+  /* Azure (blue) */
+  --color-azure-600: #1f73b7;
+  --color-azure-700: #22527a;
+  
+  /* Shadows */
+  --shadow-xs: 0px 0px 4px 0px rgba(10, 13, 14, 0.16);
+  --shadow-md: 0px 16px 24px 0px rgba(10, 13, 14, 0.16);
+  
+  /* Border radii */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 20px;
+  
+  /* Spacing */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+  
+  /* Fonts */
+  --font-display: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-system: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Hover/Active overlays */
+  --color-hover-overlay: rgba(0, 0, 0, 0.03);
+  --color-hover-overlay-strong: rgba(0, 0, 0, 0.05);
+  --color-active-overlay: rgba(0, 0, 0, 0.08);
+  
+  /* Widget colors */
+  --color-schedule-item-bg: #f5f3eb;
+  --color-stat-card-bg: #f5f3eb;
+  --color-stat-card-border: #e8e5d8;
+  
+  /* Button colors */
+  --btn-ghost-bg: transparent;
+  --btn-ghost-hover-bg: rgba(92, 105, 112, 0.08);
+  --btn-ghost-active-bg: rgba(92, 105, 112, 0.16);
+  --btn-ghost-text: #141413;
+  
+  --btn-primary-bg: #d0d33f;
+  --btn-primary-hover-bg: #b7b936;
+  --btn-primary-active-bg: #3b3c07;
+  --btn-primary-text: #0e0e02;
+  --btn-primary-active-text: #fefee2;
+  
+  --btn-outline-border: #d0d33f;
+  --btn-outline-hover-border: #b7b936;
+  --btn-outline-active-border: #3b3c07;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Background colors - dark olive-charcoal from Figma */
+  --color-bg-primary: #191902;
+  --color-bg-white: #1f1f0a;
+  --color-bg-subtle: #252512;
+  
+  /* Lime/Yellow-green accent palette - dark mode */
+  --color-lime-primary: #d0d33f;
+  --color-lime-dark: #3b3c07;
+  --color-lime-light: rgba(208, 211, 63, 0.2);
+  
+  /* Green palette - adjusted for dark mode */
+  --color-green-primary: #a7a88b;
+  --color-green-light: #4a4b32;
+  --color-green-accent: rgba(167, 168, 139, 0.15);
+  --color-green-200: #2d2e1a;
+  --color-green-800: #c8c9a8;
+  
+  /* Olive/Sage icon color - dark mode */
+  --color-olive: #a7a88b;
+  --color-olive-subtle: #91926e;
+  
+  /* Kale (teal) palette */
+  --color-kale-200: #1f2a1a;
+  --color-kale-700: #8b9b70;
+  
+  /* Grey palette - inverted for dark */
+  --color-grey-300: #2a2a18;
+  --color-grey-600: #91926e;
+  --color-grey-700: #a7a88b;
+  --color-grey-800: #c8c9a8;
+  --color-grey-icon: #91926e;
+  
+  /* Text colors - cream/off-white from Figma */
+  --color-text-primary: #fefee2;
+  --color-text-secondary: #a7a88b;
+  --color-text-muted: #91926e;
+  
+  /* Status colors - brighter for dark mode visibility */
+  --color-status-open: #f25c4e;
+  --color-status-pending: #4da3ff;
+  --color-status-onhold: #91926e;
+  --color-status-solved: #4aba8c;
+  
+  /* SLA colors */
+  --color-sla-green: #2d2e1a;
+  --color-sla-green-text: #c8c9a8;
+  --color-sla-yellow: #8b6a20;
+  --color-sla-yellow-text: #ffc67a;
+  --color-sla-red: #a82b36;
+  
+  /* Chart/KPI colors - dark mode */
+  --color-chart-blue: #7a84c9;
+  --color-chart-blue-medium: #4a5090;
+  --color-chart-blue-light: #2a2f50;
+  --color-chart-green: #5a9a7a;
+  --color-chart-red: #c44a6a;
+  --color-chart-track: #2a2a18;
+  --color-trend-up: #4aba8c;
+  --color-trend-down: #f25c4e;
+  
+  /* Knowledge gaps colors - dark mode */
+  --color-bubble-bg: #3d2a2a;
+  --color-bubble-primary: #e05860;
+  --color-bubble-text: #f08080;
+  --color-muted-icon: #91926e;
+  --color-table-footer-bg: #252512;
+  
+  /* Azure (blue) - teal-ish for dark theme */
+  --color-azure-600: #5aaa9f;
+  --color-azure-700: #7bc4bb;
+  
+  /* Shadows - deeper for dark mode */
+  --shadow-xs: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0px 16px 32px 0px rgba(0, 0, 0, 0.6);
+  
+  /* Hover/Active overlays - subtle for dark theme */
+  --color-hover-overlay: rgba(254, 254, 226, 0.04);
+  --color-hover-overlay-strong: rgba(254, 254, 226, 0.08);
+  --color-active-overlay: rgba(254, 254, 226, 0.12);
+  
+  /* Widget colors - dark olive theme */
+  --color-schedule-item-bg: #1f1f0a;
+  --color-stat-card-bg: #1f1f0a;
+  --color-stat-card-border: #2a2a18;
+  
+  /* Button colors - dark theme */
+  --btn-ghost-bg: transparent;
+  --btn-ghost-hover-bg: rgba(254, 254, 226, 0.08);
+  --btn-ghost-active-bg: rgba(254, 254, 226, 0.16);
+  --btn-ghost-text: #fefee2;
+  
+  --btn-primary-bg: #d0d33f;
+  --btn-primary-hover-bg: #b7b936;
+  --btn-primary-active-bg: #3b3c07;
+  --btn-primary-text: #0e0e02;
+  --btn-primary-active-text: #fefee2;
+  
+  --btn-outline-border: #d0d33f;
+  --btn-outline-hover-border: #b7b936;
+  --btn-outline-active-border: #3b3c07;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-lime-primary);
+  color: var(--color-lime-dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-grey-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grey-600);
+}
+
+/* Typography utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+/* ========================================
+   Base Button System (Figma Design)
+   ======================================== */
+
+/* Common button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  height: 32px;
+  padding: 6px 12px;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.25px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  outline: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ghost Button (text-only, transparent background) */
+.btn--ghost {
+  background: var(--btn-ghost-bg);
+  color: var(--btn-ghost-text);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.btn--ghost:active:not(:disabled) {
+  background: var(--btn-ghost-active-bg);
+}
+
+/* Primary Button (lime/yellow filled) */
+.btn--primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--btn-primary-hover-bg);
+}
+
+.btn--primary:active:not(:disabled) {
+  background: var(--btn-primary-active-bg);
+  color: var(--btn-primary-active-text);
+}
+
+/* Outline Button (lime border) */
+.btn--outline {
+  background: transparent;
+  color: var(--btn-primary-text);
+  border: 2px solid var(--btn-outline-border);
+  padding: 4px 10px; /* Adjust for border width */
+}
+
+.btn--outline:hover:not(:disabled) {
+  background: var(--btn-primary-hover-bg);
+  border-color: var(--btn-outline-hover-border);
+}
+
+.btn--outline:active:not(:disabled) {
+  background: var(--btn-primary-active-bg);
+  border-color: var(--btn-outline-active-border);
+  color: var(--btn-primary-active-text);
+}
+
+/* Secondary Button (subtle gray background) */
+.btn--secondary {
+  background: var(--color-bg-white);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-grey-300);
+  padding: 5px 11px; /* Adjust for border */
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background: var(--btn-ghost-hover-bg);
+  border-color: var(--color-grey-600);
+}
+
+.btn--secondary:active:not(:disabled) {
+  background: var(--btn-ghost-active-bg);
+}
+
+/* Icon-only button */
+.btn--icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.btn--icon-sm {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+
+/* Button sizes */
+.btn--sm {
+  height: 28px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+.btn--lg {
+  height: 40px;
+  padding: 10px 16px;
+  font-size: 15px;
+}
+
+/* Dark theme button text adjustments */
+[data-theme="dark"] .btn--outline {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .btn--secondary {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-grey-300);
+}
+
+[data-theme="dark"] .btn--secondary:hover:not(:disabled) {
+  background: var(--btn-ghost-hover-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ========================================
+   Material Symbols (Rounded, Filled)
+   ======================================== */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  /* FILL: 1 = filled, WGHT: 400 = normal weight, GRAD: 0, OPSZ: 20 */
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}
+
+/* Icon size variants */
+.material-symbols-rounded.icon-sm {
+  font-size: 16px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 16;
+}
+
+.material-symbols-rounded.icon-md {
+  font-size: 20px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}
+
+.material-symbols-rounded.icon-lg {
+  font-size: 24px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-rounded.icon-xl {
+  font-size: 28px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 28;
+}
+
+/* Outlined variant (when needed) */
+.material-symbols-rounded.icon-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}

@@ -1,0 +1,290 @@
+/* Command Palette Styles */
+
+/* Backdrop */
+.command-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 120px;
+  background: rgba(10, 13, 14, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  animation: backdropFadeIn 0.15s ease;
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Main Container */
+.command-palette {
+  width: 100%;
+  max-width: 567px;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0px 0px 4px 0px rgba(10, 13, 14, 0.16),
+              0px 16px 32px -8px rgba(10, 13, 14, 0.24);
+  overflow: hidden;
+  animation: paletteSlideIn 0.2s ease;
+}
+
+@keyframes paletteSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Search Header */
+.command-palette__search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.command-palette__search-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.command-palette__search-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-lime-dark);
+  flex-shrink: 0;
+}
+
+.command-palette__input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.command-palette__input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.command-palette__shortcut {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Content Area */
+.command-palette__content {
+  padding: 16px 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Context Header */
+.command-palette__context-header {
+  padding: 0 16px 12px;
+  border-bottom: 1px solid var(--color-grey-200);
+  margin-bottom: 8px;
+}
+
+.command-palette__context-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--color-lime-light);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-lime-dark);
+  letter-spacing: -0.25px;
+}
+
+/* Sections */
+.command-palette__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.command-palette__section + .command-palette__section {
+  margin-top: 16px;
+}
+
+.command-palette__section-header {
+  padding: 0 16px;
+}
+
+.command-palette__section-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: -0.25px;
+  line-height: 20px;
+}
+
+/* Items */
+.command-palette__items {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.command-palette__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s ease;
+}
+
+.command-palette__item:hover,
+.command-palette__item.selected {
+  background: var(--color-bg-subtle);
+}
+
+.command-palette__item-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-lime-dark);
+  flex-shrink: 0;
+}
+
+.command-palette__item-icon--ai {
+  color: var(--color-lime-dark);
+}
+
+.command-palette__item-label {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  letter-spacing: -0.154px;
+  line-height: 20px;
+}
+
+/* Empty State */
+.command-palette__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  gap: 12px;
+}
+
+.command-palette__empty-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-lime-dark);
+}
+
+.command-palette__empty-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.command-palette__empty-text strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Dark Theme */
+[data-theme="dark"] .command-palette {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-grey-300);
+}
+
+[data-theme="dark"] .command-palette__search {
+  background: var(--color-bg-white);
+  border-bottom-color: var(--color-grey-300);
+}
+
+[data-theme="dark"] .command-palette__shortcut {
+  background: var(--color-bg-primary);
+  border-color: var(--color-grey-300);
+}
+
+[data-theme="dark"] .command-palette__item:hover,
+[data-theme="dark"] .command-palette__item.selected {
+  background: var(--color-bg-subtle);
+}
+
+[data-theme="dark"] .command-palette__item-icon {
+  color: var(--color-lime-primary);
+}
+
+[data-theme="dark"] .command-palette__search-icon {
+  color: var(--color-lime-primary);
+}
+
+[data-theme="dark"] .command-palette__empty-icon {
+  color: var(--color-lime-primary);
+}
+
+[data-theme="dark"] .command-palette__context-header {
+  border-bottom-color: var(--color-grey-300);
+}
+
+[data-theme="dark"] .command-palette__context-badge {
+  background: rgba(163, 230, 53, 0.15);
+  color: var(--color-lime-primary);
+}
+
+/* Scrollbar styling */
+.command-palette__content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.command-palette__content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.command-palette__content::-webkit-scrollbar-thumb {
+  background: var(--color-grey-300);
+  border-radius: 3px;
+}
+
+.command-palette__content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grey-600);
+}
+
