@@ -188,11 +188,51 @@
 /* Main Content Container */
 .main-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
   overflow: hidden;
   padding: var(--spacing-xs);
   padding-left: 0;
+  gap: 0;
+}
+
+.main-content__ticket-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  transition: flex 0.3s ease, max-width 0.3s ease;
+}
+
+.main-content__ticket-list--narrow {
+  flex: 0 0 310px;
+  max-width: 310px;
+}
+
+.main-content__conversation {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  animation: conversationSlideIn 0.3s ease;
+  padding-right: var(--spacing-xs);
+}
+
+@keyframes conversationSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.main-content--with-conversation {
+  gap: 0;
 }
 
 /* Action Panel Wrapper */

@@ -1,4 +1,4 @@
-export { default } from './TicketList';
+export { default, tickets } from './TicketList';
 
 
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './components/Header';
 import { PrimarySidebar, SecondarySidebar } from './components/Sidebar';
-import TicketList from './components/TicketList';
+import TicketList, { tickets } from './components/TicketList';
+import ConversationPanel from './components/ConversationPanel';
 import Widgets from './components/Widgets';
-import { ActionPanel } from './components/Panel';
 import ResizableLayout from './components/ResizableLayout';
 import QAPage from './components/QAPage';
 import AdminCenterPage from './components/AdminCenterPage';
@@ -12,7 +12,7 @@ import AIAgentsPage from './components/AIAgentsPage';
 import WFMPage from './components/WFMPage';
 import PageTransition from './components/PageTransition';
 import { CommandPalette } from './components/CommandPalette';
-import { ZendeskLogo, ChevronDownIcon, CheckIcon, SparkleIcon, ChartIcon, GearIcon, InboxIcon, ShapesIcon, ContactsIcon, QALogoIcon, AIAgentsLogoIcon, WFMLogoIcon } from './components/Icons';
+import { ZendeskLogo, ChevronDownIcon, CheckIcon, SparkleIcon, GearIcon, InboxIcon, ShapesIcon, ContactsIcon, QALogoIcon, AIAgentsLogoIcon, WFMLogoIcon } from './components/Icons';
 import './App.css';
 
 const products = [
@@ -22,7 +22,6 @@ const products = [
   { id: 'admin', name: 'Admin center', icon: GearIcon },
   { id: 'ai-agents', name: 'AI agents', icon: AIAgentsLogoIcon },
   { id: 'knowledge', name: 'Knowledge', icon: ShapesIcon },
-  { id: 'analytics', name: 'Analytics', icon: ChartIcon },
 ];
 
 function NavTopBar({ onProductChange, selectedProduct }) {
@@ -97,10 +96,25 @@ function NavPanel({ onToggleNav, isNavCollapsed, onProductChange, selectedProduc
   );
 }
 
-function MainContent({ selectedTicket, onSelectTicket }) {
+function MainContent({ selectedTicket, onSelectTicket, onCloseConversation, onStatusChange, currentTicketIndex, onPrevTicket, onNextTicket }) {
   return (
-    <div className="main-content">
-      <TicketList selectedTicket={selectedTicket} onSelectTicket={onSelectTicket} />
+    <div className={`main-content ${selectedTicket ? 'main-content--with-conversation' : ''}`}>
+      <div className={`main-content__ticket-list ${selectedTicket ? 'main-content__ticket-list--narrow' : ''}`}>
+        <TicketList selectedTicket={selectedTicket} onSelectTicket={onSelectTicket} />
+      </div>
+      {selectedTicket && (
+        <div className="main-content__conversation">
+          <ConversationPanel 
+            ticket={selectedTicket} 
+            onClose={onCloseConversation}
+            onStatusChange={onStatusChange}
+            currentIndex={currentTicketIndex}
+            totalTickets={tickets.length}
+            onPrevTicket={onPrevTicket}
+            onNextTicket={onNextTicket}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -109,18 +123,6 @@ function WidgetsPanel() {
   return (
     <div className="widgets-panel">
       <Widgets />
-    </div>
-  );
-}
-
-function ActionPanelWrapper({ selectedTicket, onClose, onStatusChange }) {
-  return (
-    <div className="action-panel-wrapper">
-      <ActionPanel 
-        ticket={selectedTicket} 
-        onClose={onClose}
-        onStatusChange={onStatusChange}
-      />
     </div>
   );
 }
@@ -149,6 +151,23 @@ function App() {
       setSelectedTicket({ ...selectedTicket, status: newStatus });
     }
   }, [selectedTicket]);
+
+  // Calculate current ticket index
+  const currentTicketIndex = selectedTicket 
+    ? tickets.findIndex(t => t.id === selectedTicket.id && t.title === selectedTicket.title)
+    : -1;
+
+  const handlePrevTicket = useCallback(() => {
+    if (currentTicketIndex > 0) {
+      setSelectedTicket(tickets[currentTicketIndex - 1]);
+    }
+  }, [currentTicketIndex]);
+
+  const handleNextTicket = useCallback(() => {
+    if (currentTicketIndex < tickets.length - 1) {
+      setSelectedTicket(tickets[currentTicketIndex + 1]);
+    }
+  }, [currentTicketIndex]);
 
   // Global keyboard shortcut for Command Palette (⌘+K / Ctrl+K)
   useEffect(() => {
@@ -253,8 +272,17 @@ function App() {
       <ResizableLayout
         navPanel={<NavPanel onProductChange={handleProductChange} selectedProduct={selectedProduct} />}
         topBar={<Header onOpenCommandPalette={openCommandPalette} />}
-        mainContent={<MainContent selectedTicket={selectedTicket} onSelectTicket={handleSelectTicket} />}
-        actionPanel={selectedTicket ? <ActionPanelWrapper selectedTicket={selectedTicket} onClose={handleCloseActionPanel} onStatusChange={handleStatusChange} /> : null}
+        mainContent={
+          <MainContent 
+            selectedTicket={selectedTicket} 
+            onSelectTicket={handleSelectTicket} 
+            onCloseConversation={handleCloseActionPanel} 
+            onStatusChange={handleStatusChange}
+            currentTicketIndex={currentTicketIndex}
+            onPrevTicket={handlePrevTicket}
+            onNextTicket={handleNextTicket}
+          />
+        }
         widgetsPanel={<WidgetsPanel />}
       />
     );
