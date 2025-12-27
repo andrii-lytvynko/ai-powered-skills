@@ -160,7 +160,7 @@
 }
 
 .sidebar-team__name {
-  font-family: var(--font-body);
+  font-family: "Instrument Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -245,7 +245,7 @@
 }
 
 .sidebar-sub-row__value {
-  font-family: var(--font-body);
+  font-family: "Geist Mono", monospace;
   font-size: 13px;
   font-weight: 500;
   color: var(--color-text-primary);

@@ -115,7 +115,7 @@
 }
 
 .wfm-summary__schedule-value {
-  font-family: var(--font-body);
+  font-family: "Geist Mono", monospace;
   font-size: 14px;
   color: var(--color-text-primary);
   white-space: nowrap;
@@ -150,7 +150,7 @@
 }
 
 .wfm-summary__section-title {
-  font-family: var(--font-body);
+  font-family: "Instrument Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text-primary);
