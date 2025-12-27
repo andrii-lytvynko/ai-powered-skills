@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { PlusIcon, SearchIcon, BellIcon, AppsIcon, HelpIcon, HomeIcon, SunIcon, MoonIcon } from '../Icons';
+import { PlusIcon, SearchIcon, BellIcon, AppsIcon, HelpIcon, SunIcon, MoonIcon } from '../Icons';
 import { useTheme } from '../../contexts';
 import './Header.css';
 
@@ -42,11 +42,6 @@ export default function Header({ onToggleWidgets, isWidgetsVisible, onOpenComman
 
       {/* Right section - Actions */}
       <div className="header__right">
-        {/* Icon buttons */}
-        <button className="header__icon-btn" title="Phone">
-          <HomeIcon className="header__icon" />
-        </button>
-        
         <button className="header__icon-btn" title="Notifications">
           <BellIcon className="header__icon" />
           <span className="header__notification-badge">5</span>

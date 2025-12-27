@@ -40,3 +40,7 @@ export default function FilterBar({ filters = defaultFilters }) {
   );
 }
 
+
+
+
+

@@ -127,7 +127,7 @@
 }
 
 .schedule-item__time {
-  font-family: var(--font-body);
+  font-family: "Geist Mono";
   font-size: 13px;
   color: var(--color-text-secondary);
   line-height: 1.3;

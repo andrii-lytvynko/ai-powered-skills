@@ -132,42 +132,320 @@ function PlusIcon({ className }) {
   );
 }
 
-// Dummy conversation data
+// Conversation data mapped by ticket title for unique conversations per ticket
+const conversationsData = {
+  "Call with Caller +1 (123) 456-7890": {
+    category: 'Phone Support',
+    sentiment: 'Neutral',
+    messages: [
+      { id: 1, sender: 'system', name: 'System', text: 'Call connected with +1 (123) 456-7890', time: '4:25 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hello! Thank you for calling support. How can I assist you today?', time: '4:25 PM' },
+      { id: 3, sender: 'customer', name: 'Caller', text: 'Hi, I need help setting up my new subscription.', time: '4:26 PM' },
+    ],
+  },
+  "I can't access my account": {
+    category: 'Account Access',
+    sentiment: 'Frustrated',
+    messages: [
+      { id: 1, sender: 'customer', name: 'Rebecca Wells', text: 'Hi, I need help with my account.', time: '4:10 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hello Rebecca! I\'d be happy to help you with your account. What seems to be the issue?', time: '4:11 PM' },
+      { id: 3, sender: 'customer', name: 'Rebecca Wells', text: 'I just started my day and I can\'t access my account. It keeps saying my password is wrong but I\'m sure it\'s correct.', time: '4:12 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: 'I understand how frustrating that can be. Let me check your account status.', time: '4:12 PM' },
+      { id: 5, sender: 'customer', name: 'Rebecca Wells', text: 'Can you help?', time: '4:13 PM' },
+    ],
+  },
+  "Can't find discount code for beef": {
+    category: 'Product Inquiry',
+    sentiment: 'Curious',
+    messages: [
+      { id: 1, sender: 'customer', name: 'Dwight Torff', text: 'Hey there! I\'m looking for a discount code for beef products.', time: '4:05 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hi Dwight! Welcome to our support. I\'d be glad to help you find that discount code.', time: '4:06 PM' },
+      { id: 3, sender: 'customer', name: 'Dwight Torff', text: 'I saw an ad for 20% off premium beef cuts but can\'t find where to apply it.', time: '4:07 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: 'The code should be BEEF20. You can apply it at checkout under "Promo Code".', time: '4:08 PM' },
+      { id: 5, sender: 'customer', name: 'Dwight Torff', text: 'Typing...', time: '4:10 PM' },
+    ],
+  },
+  "Discount code disactivated": {
+    category: 'Billing Issue',
+    sentiment: 'Frustrated',
+    messages: [
+      { id: 1, sender: 'customer', name: 'Kevin Smith', text: 'My discount code stopped working!', time: '3:30 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'I\'m sorry to hear that, Kevin. Let me look into this for you right away.', time: '3:32 PM' },
+      { id: 3, sender: 'customer', name: 'Kevin Smith', text: 'I\'ve been using SAVE15 for months and now it says it\'s deactivated.', time: '3:33 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: 'I see. Let me check the status of that promotional code in our system.', time: '3:35 PM' },
+      { id: 5, sender: 'customer', name: 'Kevin Smith', text: 'Hi there, Can you assist me with this.', time: '3:40 PM' },
+    ],
+  },
+  "Discount code": {
+    category: 'Product Inquiry',
+    sentiment: 'Neutral',
+    messages: [
+      { id: 1, sender: 'customer', name: 'Angela Martin', text: 'Hello, I have a question about discount codes.', time: '4:08 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hi Angela! How can I help you with discount codes today?', time: '4:09 PM' },
+      { id: 3, sender: 'customer', name: 'Angela Martin', text: 'Hi I\'m looking for the discount code for paper', time: '4:13 PM' },
+    ],
+  },
+  "Need help with emails": {
+    category: 'Technical Support',
+    sentiment: 'Neutral',
+    messages: [
+      { id: 1, sender: 'customer', name: 'Mike Vaccaro', text: 'Hey, I\'m having trouble with my email notifications.', time: '3:15 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hi Mike! I\'d be happy to help with your email settings. What\'s happening?', time: '3:17 PM' },
+      { id: 3, sender: 'customer', name: 'Mike Vaccaro', text: 'I\'m not receiving any order confirmations to my inbox.', time: '3:20 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: 'Let me check your notification preferences. Have you checked your spam folder?', time: '3:22 PM' },
+      { id: 5, sender: 'customer', name: 'Mike Vaccaro', text: 'Badabing badaboom', time: '3:30 PM' },
+    ],
+  },
+  "Need help with hamster tubes": {
+    category: 'Product Support',
+    sentiment: 'Positive',
+    messages: [
+      { id: 1, sender: 'customer', name: 'Mike Vaccaro', text: 'Hi! I need assistance with hamster tube accessories.', time: '3:20 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hello Mike! Fun purchase! How can I help with the hamster tubes?', time: '3:21 PM' },
+      { id: 3, sender: 'customer', name: 'Mike Vaccaro', text: 'I bought the starter kit but my hamster habitat is bigger. I need more tubes to expand it.', time: '3:24 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: 'We have extension packs available! The "Mega Tube Pack" has 12 additional tubes in various colors.', time: '3:26 PM' },
+      { id: 5, sender: 'customer', name: 'Mike Vaccaro', text: 'I need more tubes', time: '3:28 PM' },
+    ],
+  },
+};
+
+// Get conversation data for a specific ticket
 const getConversationForTicket = (ticket) => {
   if (!ticket) return null;
+  
+  const conversationData = conversationsData[ticket.title] || {
+    category: 'General Support',
+    sentiment: 'Neutral',
+    messages: [
+      { id: 1, sender: 'customer', name: ticket.lastMessage?.name || 'Customer', text: ticket.lastMessage?.text || 'Hello, I need assistance.', time: ticket.time },
+      { id: 2, sender: 'agent', name: 'You', text: 'Hello! How can I help you today?', time: ticket.time },
+    ],
+  };
   
   return {
     id: ticket.id,
     subject: ticket.title,
-    category: 'Lost account access',
-    sentiment: 'Neutral',
-    totalMessages: 8,
-    messages: [
-      {
-        id: 1,
-        sender: 'customer',
-        name: ticket.lastMessage?.name || 'Customer',
-        text: 'Can you help?',
-        time: '4:13 PM',
-        avatar: null,
-      },
-      {
-        id: 2,
-        sender: 'agent',
-        name: 'You',
-        text: 'Hello! How can I help you?',
-        time: '4:13 PM',
-        avatar: null,
-      },
-      {
-        id: 3,
-        sender: 'customer',
-        name: ticket.lastMessage?.name || 'Customer',
-        text: "I just started my day and I can't access my account.",
-        time: '4:14 PM',
-        avatar: null,
-      },
-    ],
+    category: conversationData.category,
+    sentiment: conversationData.sentiment,
+    totalMessages: conversationData.messages.length,
+    messages: conversationData.messages.map(msg => ({
+      ...msg,
+      name: msg.sender === 'customer' ? (ticket.lastMessage?.name || msg.name) : msg.name,
+      avatar: null,
+    })),
+  };
+};
+
+// ========================================
+// Knowledge Base AI Copilot Data
+// ========================================
+
+// Knowledge base articles with keywords for matching
+const knowledgeArticles = [
+  {
+    id: 1,
+    title: 'How to Reset Your Password',
+    category: 'Account Access',
+    keywords: ['password', 'reset', 'access', 'login', 'account', 'locked', 'forgot'],
+    content: 'Guide customers through the password reset process via email or SMS verification.',
+  },
+  {
+    id: 2,
+    title: 'Account Recovery Options',
+    category: 'Account Access',
+    keywords: ['account', 'recovery', 'access', 'locked', 'verify', 'identity'],
+    content: 'Steps to recover accounts when standard login fails.',
+  },
+  {
+    id: 3,
+    title: 'Current Promotional Codes',
+    category: 'Discounts & Promotions',
+    keywords: ['discount', 'code', 'promo', 'coupon', 'save', 'offer', 'deal'],
+    content: 'List of active promotional codes and their terms.',
+  },
+  {
+    id: 4,
+    title: 'How to Apply Discount Codes',
+    category: 'Discounts & Promotions',
+    keywords: ['discount', 'code', 'apply', 'checkout', 'promo', 'coupon'],
+    content: 'Step-by-step guide for applying discount codes at checkout.',
+  },
+  {
+    id: 5,
+    title: 'Why Was My Discount Code Rejected?',
+    category: 'Discounts & Promotions',
+    keywords: ['discount', 'code', 'rejected', 'expired', 'invalid', 'deactivated', 'not working'],
+    content: 'Common reasons for discount code failures and solutions.',
+  },
+  {
+    id: 6,
+    title: 'Email Notification Settings',
+    category: 'Technical Support',
+    keywords: ['email', 'notification', 'settings', 'inbox', 'spam', 'receiving'],
+    content: 'How to configure email preferences and troubleshoot delivery issues.',
+  },
+  {
+    id: 7,
+    title: 'Order Confirmation Emails',
+    category: 'Technical Support',
+    keywords: ['email', 'order', 'confirmation', 'receipt', 'not received'],
+    content: 'Information about order confirmation emails and what to do if not received.',
+  },
+  {
+    id: 8,
+    title: 'Product Return Policy',
+    category: 'Refunds & Returns',
+    keywords: ['return', 'refund', 'exchange', 'policy', 'cancel'],
+    content: 'Our return and refund policies for different product categories.',
+  },
+  {
+    id: 9,
+    title: 'How to Track Your Order',
+    category: 'Order Management',
+    keywords: ['track', 'order', 'shipping', 'delivery', 'status', 'where'],
+    content: 'Guide to tracking orders and understanding delivery statuses.',
+  },
+  {
+    id: 10,
+    title: 'Subscription Setup Guide',
+    category: 'Subscriptions',
+    keywords: ['subscription', 'setup', 'plan', 'recurring', 'billing'],
+    content: 'How to set up and manage subscription plans.',
+  },
+  {
+    id: 11,
+    title: 'Product Accessories & Extensions',
+    category: 'Products',
+    keywords: ['accessories', 'extension', 'add-on', 'tubes', 'parts', 'kit'],
+    content: 'Information about product accessories and expansion options.',
+  },
+  {
+    id: 12,
+    title: 'Payment Methods Accepted',
+    category: 'Payment & Billing',
+    keywords: ['payment', 'card', 'billing', 'method', 'accepted'],
+    content: 'List of accepted payment methods and billing information.',
+  },
+];
+
+// AI response suggestions by category
+const responseSuggestions = {
+  'Account Access': {
+    response: "I understand you're having trouble accessing your account. I've checked your account status and can help you regain access. Would you like me to send a password reset link to your registered email, or would you prefer to verify your identity through our security questions?",
+    tone: 'empathetic',
+  },
+  'Discounts & Promotions': {
+    response: "I'd be happy to help you with the discount code! I can see the code you're looking for. Let me provide you with the current active promotional codes and guide you through applying them at checkout.",
+    tone: 'helpful',
+  },
+  'Technical Support': {
+    response: "I see you're experiencing technical difficulties. Let me help troubleshoot this issue. First, could you confirm which email address is associated with your account? I'll check your notification settings and ensure everything is configured correctly.",
+    tone: 'professional',
+  },
+  'Products': {
+    response: "Great choice! I can help you find the right accessories for your purchase. We have several options available that would work perfectly with what you already have. Let me share the details with you.",
+    tone: 'enthusiastic',
+  },
+  'General Support': {
+    response: "Thank you for reaching out! I'm here to help you with your inquiry. Could you please provide a bit more detail about what you need assistance with so I can better serve you?",
+    tone: 'friendly',
+  },
+};
+
+// Quick actions based on ticket context
+const quickActionsConfig = {
+  'Account Access': [
+    { id: 'reset-password', label: 'Send password reset', type: 'primary' },
+    { id: 'verify-identity', label: 'Verify identity', type: 'secondary' },
+    { id: 'escalate-security', label: 'Escalate to security', type: 'warning' },
+  ],
+  'Discounts & Promotions': [
+    { id: 'apply-discount', label: 'Apply discount manually', type: 'primary' },
+    { id: 'extend-code', label: 'Extend code validity', type: 'secondary' },
+    { id: 'create-exception', label: 'Create exception', type: 'secondary' },
+  ],
+  'Technical Support': [
+    { id: 'resend-email', label: 'Resend confirmation', type: 'primary' },
+    { id: 'check-spam', label: 'Guide: Check spam folder', type: 'secondary' },
+    { id: 'update-email', label: 'Update email address', type: 'secondary' },
+  ],
+  'Products': [
+    { id: 'recommend-product', label: 'Recommend products', type: 'primary' },
+    { id: 'check-inventory', label: 'Check inventory', type: 'secondary' },
+    { id: 'add-to-cart', label: 'Add to customer cart', type: 'secondary' },
+  ],
+  'General Support': [
+    { id: 'request-info', label: 'Request more info', type: 'primary' },
+    { id: 'transfer-agent', label: 'Transfer to specialist', type: 'secondary' },
+    { id: 'create-ticket', label: 'Create follow-up ticket', type: 'secondary' },
+  ],
+};
+
+// Get knowledge recommendations for a ticket based on keyword matching
+const getKnowledgeForTicket = (ticket) => {
+  if (!ticket) return null;
+  
+  // Extract text to search from ticket
+  const searchText = `${ticket.title} ${ticket.lastMessage?.text || ''}`.toLowerCase();
+  
+  // Determine conversation category
+  const conversationData = conversationsData[ticket.title];
+  const category = conversationData?.category || 'General Support';
+  
+  // Score and rank articles by keyword matches
+  const scoredArticles = knowledgeArticles.map(article => {
+    let score = 0;
+    
+    // Check keyword matches
+    article.keywords.forEach(keyword => {
+      if (searchText.includes(keyword.toLowerCase())) {
+        score += 2;
+      }
+    });
+    
+    // Boost articles in the same category
+    if (article.category === category) {
+      score += 3;
+    }
+    
+    // Check title match
+    const titleWords = article.title.toLowerCase().split(' ');
+    titleWords.forEach(word => {
+      if (word.length > 3 && searchText.includes(word)) {
+        score += 1;
+      }
+    });
+    
+    return { ...article, relevance: score };
+  });
+  
+  // Sort by relevance and take top 4
+  const topArticles = scoredArticles
+    .filter(a => a.relevance > 0)
+    .sort((a, b) => b.relevance - a.relevance)
+    .slice(0, 4);
+  
+  // If no matches, provide default articles based on category
+  if (topArticles.length === 0) {
+    const categoryArticles = knowledgeArticles
+      .filter(a => a.category === category || a.category === 'General Support')
+      .slice(0, 3)
+      .map(a => ({ ...a, relevance: 1 }));
+    topArticles.push(...categoryArticles);
+  }
+  
+  // Get response suggestion
+  const suggestion = responseSuggestions[category] || responseSuggestions['General Support'];
+  
+  // Get quick actions
+  const actions = quickActionsConfig[category] || quickActionsConfig['General Support'];
+  
+  return {
+    articles: topArticles,
+    suggestedResponse: suggestion.response,
+    responseTone: suggestion.tone,
+    quickActions: actions,
+    category,
   };
 };
 
@@ -299,9 +577,13 @@ function ComposerToolbar() {
   );
 }
 
-function MessageComposer({ onSend }) {
-  const [message, setMessage] = useState("I got you covered! I'd be happy to help. Have you tried restarting the device?");
+function MessageComposer({ onSend, value, onChange }) {
+  const [localMessage, setLocalMessage] = useState('');
   const textareaRef = useRef(null);
+  
+  // Use controlled value if provided, otherwise use local state
+  const message = value !== undefined ? value : localMessage;
+  const setMessage = onChange || setLocalMessage;
 
   const handleSend = () => {
     if (message.trim()) {
@@ -316,6 +598,16 @@ function MessageComposer({ onSend }) {
       handleSend();
     }
   };
+  
+  // Focus textarea when value is programmatically set
+  useEffect(() => {
+    if (value && textareaRef.current) {
+      textareaRef.current.focus();
+      // Move cursor to end
+      textareaRef.current.selectionStart = textareaRef.current.value.length;
+      textareaRef.current.selectionEnd = textareaRef.current.value.length;
+    }
+  }, [value]);
 
   return (
     <div className="message-composer">
@@ -426,8 +718,279 @@ function TicketTypeIcon({ type, className }) {
   return <Icon className={className} />;
 }
 
+// ========================================
+// Knowledge Copilot Panel Icons
+// ========================================
+
+function ArticleIcon({ className }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 1H4C3.44772 1 3 1.44772 3 2V14C3 14.5523 3.44772 15 4 15H12C12.5523 15 13 14.5523 13 14V5L9 1Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M9 1V5H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M5 8H11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M5 11H9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function CopyIcon({ className }) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.25"/>
+      <path d="M10 2H3.5C2.67157 2 2 2.67157 2 3.5V10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function InsertIcon({ className }) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 2V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M4 9L7 12L10 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M2 2H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function ExternalLinkIcon({ className }) {
+  return (
+    <svg className={className} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 6.5V9.5C9 10.0523 8.55228 10.5 8 10.5H2.5C1.94772 10.5 1.5 10.0523 1.5 9.5V4C1.5 3.44772 1.94772 3 2.5 3H5.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7.5 1.5H10.5V4.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M5 7L10.5 1.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function LightbulbIcon({ className }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 12V13C6 13.5523 6.44772 14 7 14H9C9.55228 14 10 13.5523 10 13V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M6 12H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M8 2C5.23858 2 3 4.23858 3 7C3 8.65685 3.8 10.1569 5.05 11.0569C5.65 11.5 6 12 6 12H10C10 12 10.35 11.5 10.95 11.0569C12.2 10.1569 13 8.65685 13 7C13 4.23858 10.7614 2 8 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function ZapIcon({ className }) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7.5 1L2 8H7L6.5 13L12 6H7L7.5 1Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function RefreshIcon({ className }) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 7C1 3.68629 3.68629 1 7 1C9.22082 1 11.1458 2.24609 12.125 4.0625" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
+      <path d="M13 7C13 10.3137 10.3137 13 7 13C4.77918 13 2.85422 11.7539 1.875 9.9375" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
+      <path d="M12.125 1V4.0625H9.0625" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M1.875 13V9.9375H4.9375" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+// ========================================
+// Knowledge Copilot Panel Component
+// ========================================
+
+function KnowledgeCopilotPanel({ ticket, onInsertResponse }) {
+  const [copiedId, setCopiedId] = useState(null);
+  const [expandedSections, setExpandedSections] = useState({
+    articles: true,
+    response: true,
+    actions: true,
+  });
+  
+  const knowledge = getKnowledgeForTicket(ticket);
+  
+  if (!knowledge) return null;
+  
+  const { articles, suggestedResponse, responseTone, quickActions, category } = knowledge;
+  
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+  
+  const handleCopyResponse = () => {
+    navigator.clipboard.writeText(suggestedResponse);
+    setCopiedId('response');
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+  
+  const handleInsertResponse = () => {
+    onInsertResponse?.(suggestedResponse);
+  };
+  
+  const handleUseArticle = (article) => {
+    // In a real app, this would insert article content or open article details
+    console.log('Using article:', article.title);
+  };
+  
+  const handleQuickAction = (action) => {
+    // In a real app, this would trigger the specific action
+    console.log('Quick action:', action.label);
+  };
+  
+  const getRelevanceBadge = (relevance) => {
+    if (relevance >= 5) return { label: 'Best match', className: 'copilot-article__relevance--high' };
+    if (relevance >= 3) return { label: 'Good match', className: 'copilot-article__relevance--medium' };
+    return { label: 'Related', className: 'copilot-article__relevance--low' };
+  };
+  
+  return (
+    <div className="copilot-panel">
+      {/* Header */}
+      <div className="copilot-panel__header">
+        <div className="copilot-panel__header-icon">
+          <SparkleIcon className="copilot-panel__sparkle" />
+        </div>
+        <div className="copilot-panel__header-text">
+          <h3 className="copilot-panel__title">AI Copilot</h3>
+          <span className="copilot-panel__subtitle">Knowledge-powered assistance</span>
+        </div>
+      </div>
+      
+      {/* Category Badge */}
+      <div className="copilot-panel__category">
+        <LightbulbIcon className="copilot-panel__category-icon" />
+        <span>Detected: {category}</span>
+      </div>
+      
+      {/* Suggested Articles Section */}
+      <div className="copilot-section">
+        <button 
+          className="copilot-section__header"
+          onClick={() => toggleSection('articles')}
+        >
+          <div className="copilot-section__header-left">
+            <ArticleIcon className="copilot-section__icon" />
+            <span className="copilot-section__title">Suggested Articles</span>
+            <span className="copilot-section__count">{articles.length}</span>
+          </div>
+          <ChevronDownIcon className={`copilot-section__chevron ${expandedSections.articles ? '' : 'copilot-section__chevron--collapsed'}`} />
+        </button>
+        
+        {expandedSections.articles && (
+          <div className="copilot-section__content">
+            {articles.map((article, index) => {
+              const relevanceBadge = getRelevanceBadge(article.relevance);
+              return (
+                <div key={article.id} className="copilot-article" style={{ animationDelay: `${index * 50}ms` }}>
+                  <div className="copilot-article__header">
+                    <span className={`copilot-article__relevance ${relevanceBadge.className}`}>
+                      {relevanceBadge.label}
+                    </span>
+                    <button 
+                      className="copilot-article__view-btn"
+                      title="Open article"
+                    >
+                      <ExternalLinkIcon className="copilot-article__view-icon" />
+                    </button>
+                  </div>
+                  <h4 className="copilot-article__title">{article.title}</h4>
+                  <span className="copilot-article__category">{article.category}</span>
+                  <button 
+                    className="copilot-article__use-btn"
+                    onClick={() => handleUseArticle(article)}
+                  >
+                    Use this article
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      
+      {/* AI Response Section */}
+      <div className="copilot-section">
+        <button 
+          className="copilot-section__header"
+          onClick={() => toggleSection('response')}
+        >
+          <div className="copilot-section__header-left">
+            <AISparkleIcon className="copilot-section__icon copilot-section__icon--sparkle" />
+            <span className="copilot-section__title">Suggested Response</span>
+          </div>
+          <ChevronDownIcon className={`copilot-section__chevron ${expandedSections.response ? '' : 'copilot-section__chevron--collapsed'}`} />
+        </button>
+        
+        {expandedSections.response && (
+          <div className="copilot-section__content">
+            <div className="copilot-response">
+              <div className="copilot-response__tone">
+                <span className="copilot-response__tone-label">Tone:</span>
+                <span className="copilot-response__tone-value">{responseTone}</span>
+              </div>
+              <p className="copilot-response__text">{suggestedResponse}</p>
+              <div className="copilot-response__actions">
+                <button 
+                  className="copilot-response__btn copilot-response__btn--primary"
+                  onClick={handleInsertResponse}
+                >
+                  <InsertIcon className="copilot-response__btn-icon" />
+                  <span>Insert</span>
+                </button>
+                <button 
+                  className="copilot-response__btn"
+                  onClick={handleCopyResponse}
+                >
+                  <CopyIcon className="copilot-response__btn-icon" />
+                  <span>{copiedId === 'response' ? 'Copied!' : 'Copy'}</span>
+                </button>
+                <button 
+                  className="copilot-response__btn copilot-response__btn--icon-only"
+                  title="Regenerate response"
+                >
+                  <RefreshIcon className="copilot-response__btn-icon" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      {/* Quick Actions Section */}
+      <div className="copilot-section">
+        <button 
+          className="copilot-section__header"
+          onClick={() => toggleSection('actions')}
+        >
+          <div className="copilot-section__header-left">
+            <ZapIcon className="copilot-section__icon" />
+            <span className="copilot-section__title">Quick Actions</span>
+          </div>
+          <ChevronDownIcon className={`copilot-section__chevron ${expandedSections.actions ? '' : 'copilot-section__chevron--collapsed'}`} />
+        </button>
+        
+        {expandedSections.actions && (
+          <div className="copilot-section__content">
+            <div className="copilot-actions">
+              {quickActions.map((action, index) => (
+                <button 
+                  key={action.id}
+                  className={`copilot-action copilot-action--${action.type}`}
+                  onClick={() => handleQuickAction(action)}
+                  style={{ animationDelay: `${index * 30}ms` }}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // Context Panel Content (replaces ActionPanel)
-function ContextPanelContent({ ticket, activeTab, onStatusChange }) {
+function ContextPanelContent({ ticket, activeTab, onStatusChange, onInsertResponse }) {
   if (!ticket) return null;
 
   const typeLabels = {
@@ -585,6 +1148,11 @@ function ContextPanelContent({ ticket, activeTab, onStatusChange }) {
     );
   }
 
+  // Knowledge tab - AI Copilot
+  if (activeTab === 'knowledge') {
+    return <KnowledgeCopilotPanel ticket={ticket} onInsertResponse={onInsertResponse} />;
+  }
+
   // Default placeholder for other tabs
   return (
     <div className="context-panel__content context-panel__content--empty">
@@ -625,15 +1193,58 @@ function ContextSidebar({ activeTab, onTabChange, isPanelOpen }) {
 export default function ConversationPanel({ ticket, onClose, onStatusChange, currentIndex, totalTickets, onPrevTicket, onNextTicket }) {
   const [activeTab, setActiveTab] = useState('user');
   const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [messages, setMessages] = useState([]);
+  const [conversationMeta, setConversationMeta] = useState(null);
+  const [composerMessage, setComposerMessage] = useState('');
   
-  const conversation = getConversationForTicket(ticket);
+  // Sync messages when ticket changes
+  useEffect(() => {
+    if (ticket) {
+      const conversation = getConversationForTicket(ticket);
+      if (conversation) {
+        setMessages(conversation.messages);
+        setConversationMeta({
+          id: conversation.id,
+          subject: conversation.subject,
+          category: conversation.category,
+          sentiment: conversation.sentiment,
+          totalMessages: conversation.totalMessages,
+        });
+      }
+      // Clear composer when switching tickets
+      setComposerMessage('');
+    }
+  }, [ticket]);
   
-  if (!conversation) {
+  if (!ticket || !conversationMeta) {
     return null;
   }
 
-  const handleSendMessage = (message) => {
-    console.log('Sending message:', message);
+  // Create conversation object for header
+  const conversation = {
+    ...conversationMeta,
+    messages,
+  };
+
+  const handleSendMessage = (messageText) => {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    
+    const newMessage = {
+      id: Date.now(),
+      sender: 'agent',
+      name: 'You',
+      text: messageText,
+      time: timeString,
+      avatar: null,
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+    setComposerMessage('');
+  };
+  
+  const handleInsertResponse = (text) => {
+    setComposerMessage(text);
   };
 
   const handleTabChange = (tabId) => {
@@ -661,7 +1272,11 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
         
         <div className="conversation-panel__composer-area">
           <ChannelSwitcher />
-          <MessageComposer onSend={handleSendMessage} />
+          <MessageComposer 
+            onSend={handleSendMessage} 
+            value={composerMessage}
+            onChange={setComposerMessage}
+          />
           <TicketFooter status={ticket.status === 'open' ? 'Open' : ticket.status} />
         </div>
       </div>
@@ -672,6 +1287,7 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
             ticket={ticket} 
             activeTab={activeTab}
             onStatusChange={onStatusChange}
+            onInsertResponse={handleInsertResponse}
           />
         </div>
       )}

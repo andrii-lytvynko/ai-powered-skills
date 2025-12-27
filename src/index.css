@@ -42,8 +42,8 @@
   --color-status-solved: #228f67;
   
   /* SLA colors */
-  --color-sla-green: #d1e8df;
-  --color-sla-green-text: #0b3b29;
+  --color-sla-green: rgba(208, 211, 63, 1);
+  --color-sla-green-text: rgba(59, 60, 7, 1);
   --color-sla-yellow: #ffb057;
   --color-sla-yellow-text: #703815;
   --color-sla-red: #cc3340;

@@ -138,7 +138,7 @@
   justify-content: center;
   min-width: 24px;
   padding: 2px var(--spacing-xs);
-  background: var(--color-lime-primary);
+  background: rgba(255, 255, 255, 0.24);
   color: var(--color-text-primary);
   font-family: 'Geist Mono', 'SF Mono', 'Monaco', monospace;
   font-size: 12px;

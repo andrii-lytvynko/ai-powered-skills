@@ -178,10 +178,9 @@ function SortDropdown({ selectedSort, onSelectSort }) {
   return (
     <div className="sort-dropdown" ref={dropdownRef}>
       <button 
-        className={`ticket-list__action-btn ticket-list__action-btn--sort ${isOpen ? 'ticket-list__action-btn--active' : ''}`}
+        className={`ticket-list__action-btn ticket-list__action-btn--icon-only ticket-list__action-btn--sort ${isOpen ? 'ticket-list__action-btn--active' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{selectedOption.label}</span>
         <SelectedIcon className="ticket-list__action-icon ticket-list__sparkle-icon" />
       </button>
       
@@ -295,9 +294,8 @@ export default function TicketList({ selectedTicket, onSelectTicket }) {
       <div className="ticket-list__header">
         <span className="ticket-list__count">{tickets.length} tickets</span>
         <div className="ticket-list__actions">
-          <button className="ticket-list__action-btn">
-            <span>Filter</span>
-            <ChevronDownSmallIcon className="ticket-list__action-icon" />
+          <button className="ticket-list__action-btn ticket-list__action-btn--icon-only">
+            <FilterIcon className="ticket-list__action-icon" />
           </button>
           <SortDropdown 
             selectedSort={selectedSort} 
