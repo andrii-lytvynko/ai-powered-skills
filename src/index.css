@@ -1,73 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  /* Color Palette - Light Theme */
-  --color-bg-primary: #faf9f5;
-  --color-bg-white: #ffffff;
-  --color-bg-subtle: #f8f9f9;
-  
-  /* Lime/Yellow-green accent palette */
-  --color-lime-primary: #d0d33f;
-  --color-lime-dark: #3b3c07;
-  --color-lime-light: rgba(208, 211, 63, 0.2);
-  
-  /* Green palette */
-  --color-green-primary: #263c28;
-  --color-green-light: #9fc1a5;
-  --color-green-accent: rgba(159, 193, 165, 0.32);
-  --color-green-200: #d1e8df;
-  --color-green-800: #0b3b29;
-  
-  /* Olive/Sage icon color */
-  --color-olive: #a7a88b;
-  
-  /* Kale (teal) palette */
-  --color-kale-200: #daeded;
-  --color-kale-700: #03363d;
-  
-  /* Grey palette */
-  --color-grey-300: #d8dcde;
-  --color-grey-600: #68737d;
-  --color-grey-700: #73726c;
-  --color-grey-800: #2f3941;
-  --color-grey-icon: #73726c;
-  
-  /* Text colors */
-  --color-text-primary: #141413;
-  --color-text-secondary: #73726c;
-  --color-text-muted: #68737d;
-  
-  /* Status colors */
-  --color-status-open: #c72a1c;
-  --color-status-pending: #1371d6;
-  --color-status-onhold: #2f3941;
-  --color-status-solved: #228f67;
-  
+  /* Color Palette - Light Theme (Zendesk Garden)
+   * Palette reference: @zendeskgarden/react-theming DEFAULT_THEME.palette
+   * https://github.com/zendeskgarden/tailwindcss
+   */
+
+  /* Background - Garden elevation system (white / grey.100) */
+  --color-bg-primary: #ffffff;   /* white */
+  --color-bg-white: #ffffff;     /* white */
+  --color-bg-subtle: #f8f9f9;   /* grey.100 */
+  --color-bg-recessed: #f8f9f9; /* grey.100 */
+
+  /* Primary Blue (interactive) - Garden blue.100–800 */
+  --color-primary-100: #edf7ff; /* blue.100 */
+  --color-primary-200: #ddecf8; /* blue.200 */
+  --color-primary-300: #cce0f1; /* blue.300 */
+  --color-primary-400: #93bcdc; /* blue.400 */
+  --color-primary-500: #66a0cd; /* blue.500 */
+  --color-primary-600: #2694d6; /* blue.600 */
+  --color-primary-700: #1f73b7; /* blue.700 */
+  --color-primary-800: #13456d; /* blue.800 */
+
+  /* Legacy alias — mapped to blue for backward compatibility */
+  --color-lime-primary: #1f73b7;                 /* blue.700 */
+  --color-lime-dark: #13456d;                    /* blue.800 */
+  --color-lime-light: rgba(31, 115, 183, 0.15);  /* blue.700 @ 15% */
+
+  /* Green palette - Garden green.100–800 */
+  --color-green-100: #eef8f4; /* green.100 */
+  --color-green-200: #daeee6; /* green.200 */
+  --color-green-300: #cae3d9; /* green.300 */
+  --color-green-400: #94c1b0; /* green.400 */
+  --color-green-500: #4eab89; /* green.500 */
+  --color-green-600: #26a178; /* green.600 */
+  --color-green-700: #037f52; /* green.700 */
+  --color-green-800: #104b35; /* green.800 */
+  --color-green-primary: #037f52;               /* green.700 */
+  --color-green-light: #daeee6;                 /* green.200 */
+  --color-green-accent: rgba(3, 127, 82, 0.15); /* green.700 @ 15% */
+
+  /* Kale (teal) palette - Garden kale.100–800 */
+  --color-kale-100: #ecf9f9; /* kale.100 */
+  --color-kale-200: #daeded; /* kale.200 */
+  --color-kale-600: #4a9999; /* kale.600 */
+  --color-kale-700: #40787a; /* kale.700 */
+  --color-kale-800: #16494f; /* kale.800 */
+
+  /* Grey palette - Garden grey.100–1000 */
+  --color-grey-100: #f8f9f9;  /* grey.100 */
+  --color-grey-200: #e8eaec;  /* grey.200 */
+  --color-grey-300: #d8dcde;  /* grey.300 */
+  --color-grey-400: #b0b8be;  /* grey.400 */
+  --color-grey-500: #919ca5;  /* grey.500 */
+  --color-grey-600: #848f99;  /* grey.600 */
+  --color-grey-700: #5c6970;  /* grey.700 */
+  --color-grey-800: #39434b;  /* grey.800 */
+  --color-grey-900: #293239;  /* grey.900 */
+  --color-grey-1000: #1c2227; /* grey.1000 */
+  --color-grey-icon: #5c6970; /* grey.700 */
+
+  /* Olive/Sage icon color (kept for compatibility) — grey.600 */
+  --color-olive: #848f99; /* grey.600 */
+
+  /* Text colors — Garden grey scale */
+  --color-text-primary: #39434b;   /* grey.800 */
+  --color-text-secondary: #5c6970; /* grey.700 */
+  --color-text-muted: #848f99;     /* grey.600 */
+
+  /* Status colors - Garden semantic */
+  --color-status-open: #cd3642;    /* red.700 */
+  --color-status-pending: #1f73b7; /* blue.700 */
+  --color-status-onhold: #5c6970;  /* grey.700 */
+  --color-status-solved: #037f52;  /* green.700 */
+
+  /* Semantic colors - Garden */
+  --color-success: #037f52; /* green.700 */
+  --color-warning: #d67305; /* yellow.600 */
+  --color-danger: #cd3642;  /* red.700 */
+  --color-info: #1f73b7;    /* blue.700 */
+
+  /* Red palette - Garden red.100–800 */
+  --color-red-100: #fff2f3; /* red.100 */
+  --color-red-200: #fee3e5; /* red.200 */
+  --color-red-300: #f5d5d8; /* red.300 */
+  --color-red-400: #f2a1a8; /* red.400 */
+  --color-red-500: #ea7881; /* red.500 */
+  --color-red-600: #eb5c69; /* red.600 */
+  --color-red-700: #cd3642; /* red.700 */
+  --color-red-800: #7e1d25; /* red.800 */
+
+  /* Yellow palette - Garden yellow.100–800 */
+  --color-yellow-100: #fff3e4; /* yellow.100 */
+  --color-yellow-200: #ffe6cb; /* yellow.200 */
+  --color-yellow-300: #fed6a9; /* yellow.300 */
+  --color-yellow-400: #fca347; /* yellow.400 */
+  --color-yellow-500: #e38215; /* yellow.500 */
+  --color-yellow-600: #d67305; /* yellow.600 */
+  --color-yellow-700: #ac5918; /* yellow.700 */
+  --color-yellow-800: #673515; /* yellow.800 */
+
   /* SLA colors */
-  --color-sla-green: rgba(208, 211, 63, 1);
-  --color-sla-green-text: rgba(59, 60, 7, 1);
-  --color-sla-yellow: #ffb057;
-  --color-sla-yellow-text: #703815;
-  --color-sla-red: #cc3340;
-  
-  /* Chart/KPI colors */
-  --color-chart-blue: #acb4e7;
-  --color-chart-blue-medium: #d8dcf4;
-  --color-chart-blue-light: #f4f5fc;
-  --color-chart-green: #94c1b0;
-  --color-chart-red: #d62054;
-  --color-chart-track: #e8eaec;
-  --color-trend-up: #38a336;
-  --color-trend-down: #e53e3e;
-  
-  /* Knowledge gaps colors */
-  --color-bubble-bg: #fee3e5;
-  --color-bubble-primary: #cd3642;
-  --color-bubble-text: #cd3642;
-  --color-muted-icon: #b0b8be;
-  --color-table-footer-bg: #f8f9f9;
-  
-  /* Azure (blue) */
-  --color-azure-600: #1f73b7;
-  --color-azure-700: #22527a;
+  --color-sla-green: #daeee6;      /* green.200 */
+  --color-sla-green-text: #037f52; /* green.700 */
+  --color-sla-yellow: #ffe6cb;     /* yellow.200 */
+  --color-sla-yellow-text: #ac5918;/* yellow.700 */
+  --color-sla-red: #cd3642;        /* red.700 */
+
+  /* Chart/KPI colors - Garden royal palette */
+  --color-chart-blue: #acb4e7;       /* royal.400 */
+  --color-chart-blue-medium: #d8dcf4;/* royal.300 */
+  --color-chart-blue-light: #f4f5fc; /* royal.100 */
+  --color-chart-green: #94c1b0;      /* green.400 */
+  --color-chart-red: #cd3642;        /* red.700 */
+  --color-chart-track: #e8eaec;      /* grey.200 */
+  --color-trend-up: #037f52;         /* green.700 */
+  --color-trend-down: #cd3642;       /* red.700 */
+
+  /* Knowledge gaps / bubble colors */
+  --color-bubble-bg: #fee3e5;     /* red.200 */
+  --color-bubble-primary: #cd3642;/* red.700 */
+  --color-bubble-text: #cd3642;   /* red.700 */
+  --color-muted-icon: #b0b8be;    /* grey.400 */
+  --color-table-footer-bg: #f8f9f9;/* grey.100 */
+
+  /* Azure palette - Garden azure.100–800 (corrected from blue alias) */
+  --color-azure-100: #eff7fe; /* azure.100 */
+  --color-azure-200: #d9ecfc; /* azure.200 */
+  --color-azure-600: #3191ea; /* azure.600 */
+  --color-azure-700: #2770c3; /* azure.700 */
+  --color-azure-800: #23446b; /* azure.800 */
+
+  /* Indicator / notification colors */
+  --color-indicator-online: #00a656;       /* product.support */
+  --color-indicator-notification: #e85c41; /* red.600 approx */
+
+  /* Relevance badge colors */
+  --color-relevance-medium: #3b82f6;                /* blue external / royal.600 approx */
+  --color-relevance-medium-bg: rgba(59, 130, 246, 0.1);
+
+  /* Icon / UI utility colors */
+  --color-icon-default: #68737d;      /* Zendesk legacy grey, commonly used for default icons/helpers */
+  --color-warning-icon: #c38f00;      /* lemon.600 approx — used for warning validation icons */
+
+  /* Semantic surface colors */
+  --color-success-bg: #eef8f4;        /* green.100 — success/enabled panel background */
+  --color-success-border: #b8e6d4;    /* between green.200 and green.300 — success border */
+  --color-input-bg-disabled: #e9ebed; /* tag/badge/suffix background (grey.200 adjacent) */
+  --color-tag-text: #49545c;          /* grey between 800 and 700 — tag label text */
+
+  /* Primary action hover — used for darken-on-hover of blue buttons */
+  --color-primary-hover: #144a75;     /* blue.800–900 range, button hover fallback */
   
   /* Shadows */
   --shadow-xs: 0px 0px 4px 0px rgba(10, 13, 14, 0.16);
@@ -87,36 +172,64 @@
   --spacing-lg: 20px;
   --spacing-xl: 24px;
   
-  /* Fonts */
-  --font-display: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-system: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Fonts - Zendesk Garden system font stack */
+  --font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+  /* Typography Scale - Zendesk Garden */
+  --font-size-sm: 12px;      /* SM - small text */
+  --font-size-md: 14px;      /* MD - base/body */
+  --font-size-lg: 18px;      /* LG - large text */
+  --font-size-xl: 26px;      /* XL - heading */
+  --font-size-xxl: 36px;     /* XXL - large heading */
+  --font-size-xxxl: 42px;    /* XXXL - hero heading */
+
+  /* Line Heights - Garden ratios */
+  --line-height-sm: 16px;    /* 1.333 ratio for 12px */
+  --line-height-md: 20px;    /* 1.428 ratio for 14px */
+  --line-height-lg: 28px;    /* 1.555 ratio for 18px */
+  --line-height-xl: 32px;    /* 1.230 ratio for 26px */
+  --line-height-xxl: 44px;   /* 1.222 ratio for 36px */
+  --line-height-xxxl: 52px;  /* 1.238 ratio for 42px */
+
+  /* Font Weights - Garden standard */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Letter Spacing - Garden standard */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.01em;
   
-  /* Hover/Active overlays */
-  --color-hover-overlay: rgba(0, 0, 0, 0.03);
-  --color-hover-overlay-strong: rgba(0, 0, 0, 0.05);
-  --color-active-overlay: rgba(0, 0, 0, 0.08);
+  /* Hover/Active overlays - Garden Grey */
+  --color-hover-overlay: rgba(92, 105, 112, 0.08);
+  --color-hover-overlay-strong: rgba(92, 105, 112, 0.12);
+  --color-active-overlay: rgba(92, 105, 112, 0.16);
   
-  /* Widget colors */
-  --color-schedule-item-bg: #f5f3eb;
-  --color-stat-card-bg: #f5f3eb;
-  --color-stat-card-border: #e8e5d8;
+  /* Widget colors - Garden neutral */
+  --color-schedule-item-bg: #f8f9f9;
+  --color-stat-card-bg: #f8f9f9;
+  --color-stat-card-border: #e8eaec;
   
-  /* Button colors */
+  /* Button colors - Garden Blue primary */
   --btn-ghost-bg: transparent;
   --btn-ghost-hover-bg: rgba(92, 105, 112, 0.08);
   --btn-ghost-active-bg: rgba(92, 105, 112, 0.16);
-  --btn-ghost-text: #141413;
+  --btn-ghost-text: #39434b;
   
-  --btn-primary-bg: #d0d33f;
-  --btn-primary-hover-bg: #b7b936;
-  --btn-primary-active-bg: #3b3c07;
-  --btn-primary-text: #0e0e02;
-  --btn-primary-active-text: #fefee2;
+  --btn-primary-bg: #1f73b7;
+  --btn-primary-hover-bg: #2694d6;
+  --btn-primary-active-bg: #13456d;
+  --btn-primary-text: #ffffff;
+  --btn-primary-active-text: #ffffff;
   
-  --btn-outline-border: #d0d33f;
-  --btn-outline-hover-border: #b7b936;
-  --btn-outline-active-border: #3b3c07;
+  --btn-outline-border: #1f73b7;
+  --btn-outline-hover-border: #2694d6;
+  --btn-outline-active-border: #13456d;
 }
 
 /* Dark Theme */
@@ -125,6 +238,8 @@
   --color-bg-primary: #191902;
   --color-bg-white: #1f1f0a;
   --color-bg-subtle: #252512;
+  --color-bg-secondary: #252512;   /* elevated surface — same as subtle */
+  --color-bg-tertiary: #2a2a18;    /* deeper elevated surface */
   
   /* Lime/Yellow-green accent palette - dark mode */
   --color-lime-primary: #d0d33f;
@@ -211,16 +326,36 @@
   --btn-ghost-hover-bg: rgba(254, 254, 226, 0.08);
   --btn-ghost-active-bg: rgba(254, 254, 226, 0.16);
   --btn-ghost-text: #fefee2;
-  
+
   --btn-primary-bg: #d0d33f;
   --btn-primary-hover-bg: #b7b936;
   --btn-primary-active-bg: #3b3c07;
   --btn-primary-text: #0e0e02;
   --btn-primary-active-text: #fefee2;
-  
+
   --btn-outline-border: #d0d33f;
   --btn-outline-hover-border: #b7b936;
   --btn-outline-active-border: #3b3c07;
+
+  /* Indicator / relevance overrides for dark mode */
+  --color-indicator-online: #4aba8c;
+  --color-indicator-notification: #f25c4e;
+  --color-relevance-medium: #7a88d9;               /* royal.600 */
+  --color-relevance-medium-bg: rgba(122, 136, 217, 0.15);
+
+  /* Semantic color overrides for dark mode */
+  --color-success: #4aba8c;            /* bright teal-green for dark mode */
+  --color-warning: #ffc67a;            /* warm amber for dark mode */
+  --color-danger: #f25c4e;             /* bright red for dark mode */
+  --color-warning-icon: #f1c40f;       /* bright yellow for dark warning icons */
+
+  /* Surface overrides */
+  --color-success-bg: rgba(3, 129, 83, 0.1);    /* dark success panel */
+  --color-success-border: rgba(3, 129, 83, 0.3); /* dark success border */
+  --color-icon-default: var(--color-text-muted);  /* dim icons in dark theme */
+  --color-input-bg-disabled: var(--color-grey-300);
+  --color-tag-text: var(--color-text-primary);
+  --color-primary-hover: var(--color-azure-700);
 }
 
 * {
@@ -246,10 +381,10 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Selection */
+/* Selection - Garden Blue */
 ::selection {
-  background: var(--color-lime-primary);
-  color: var(--color-lime-dark);
+  background: var(--color-primary-200);
+  color: var(--color-primary-800);
 }
 
 /* Scrollbar */
@@ -274,9 +409,16 @@ body {
 /* Typography utilities */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
+h1 { font-size: var(--font-size-xxxl); line-height: var(--line-height-xxxl); }
+h2 { font-size: var(--font-size-xxl); line-height: var(--line-height-xxl); }
+h3 { font-size: var(--font-size-xl); line-height: var(--line-height-xl); }
+h4 { font-size: var(--font-size-lg); line-height: var(--line-height-lg); }
+h5 { font-size: var(--font-size-md); line-height: var(--line-height-md); }
+h6 { font-size: var(--font-size-sm); line-height: var(--line-height-sm); }
 
 button {
   font-family: inherit;
@@ -286,139 +428,8 @@ button {
 }
 
 /* ========================================
-   Base Button System (Figma Design)
+   Removed: Base Button System replaced by Garden Design System Buttons
    ======================================== */
-
-/* Common button styles */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-  height: 32px;
-  padding: 6px 12px;
-  border-radius: var(--radius-lg);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: -0.25px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  border: none;
-  outline: none;
-}
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Ghost Button (text-only, transparent background) */
-.btn--ghost {
-  background: var(--btn-ghost-bg);
-  color: var(--btn-ghost-text);
-}
-
-.btn--ghost:hover:not(:disabled) {
-  background: var(--btn-ghost-hover-bg);
-}
-
-.btn--ghost:active:not(:disabled) {
-  background: var(--btn-ghost-active-bg);
-}
-
-/* Primary Button (lime/yellow filled) */
-.btn--primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-}
-
-.btn--primary:hover:not(:disabled) {
-  background: var(--btn-primary-hover-bg);
-}
-
-.btn--primary:active:not(:disabled) {
-  background: var(--btn-primary-active-bg);
-  color: var(--btn-primary-active-text);
-}
-
-/* Outline Button (lime border) */
-.btn--outline {
-  background: transparent;
-  color: var(--btn-primary-text);
-  border: 2px solid var(--btn-outline-border);
-  padding: 4px 10px; /* Adjust for border width */
-}
-
-.btn--outline:hover:not(:disabled) {
-  background: var(--btn-primary-hover-bg);
-  border-color: var(--btn-outline-hover-border);
-}
-
-.btn--outline:active:not(:disabled) {
-  background: var(--btn-primary-active-bg);
-  border-color: var(--btn-outline-active-border);
-  color: var(--btn-primary-active-text);
-}
-
-/* Secondary Button (subtle gray background) */
-.btn--secondary {
-  background: var(--color-bg-white);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-grey-300);
-  padding: 5px 11px; /* Adjust for border */
-}
-
-.btn--secondary:hover:not(:disabled) {
-  background: var(--btn-ghost-hover-bg);
-  border-color: var(--color-grey-600);
-}
-
-.btn--secondary:active:not(:disabled) {
-  background: var(--btn-ghost-active-bg);
-}
-
-/* Icon-only button */
-.btn--icon {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-}
-
-.btn--icon-sm {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-}
-
-/* Button sizes */
-.btn--sm {
-  height: 28px;
-  padding: 4px 10px;
-  font-size: 13px;
-}
-
-.btn--lg {
-  height: 40px;
-  padding: 10px 16px;
-  font-size: 15px;
-}
-
-/* Dark theme button text adjustments */
-[data-theme="dark"] .btn--outline {
-  color: var(--color-text-primary);
-}
-
-[data-theme="dark"] .btn--secondary {
-  background: var(--color-bg-subtle);
-  border-color: var(--color-grey-300);
-}
-
-[data-theme="dark"] .btn--secondary:hover:not(:disabled) {
-  background: var(--btn-ghost-hover-bg);
-}
 
 a {
   color: inherit;
@@ -478,3 +489,54 @@ img {
 .material-symbols-rounded.icon-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
 }
+
+/* ========================================
+   Typography Components - Zendesk Garden
+   ======================================== */
+
+/* Typography Scale Utilities */
+.text-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.text-md {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+}
+
+.text-xxl {
+  font-size: var(--font-size-xxl);
+  line-height: var(--line-height-xxl);
+}
+
+.text-xxxl {
+  font-size: var(--font-size-xxxl);
+  line-height: var(--line-height-xxxl);
+}
+
+/* Font Weight Utilities */
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* Font Family Utilities */
+.font-body { font-family: var(--font-body); }
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Letter Spacing Utilities */
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }

@@ -4,6 +4,20 @@
   background: var(--color-bg-primary);
 }
 
+/* Support page wrapper — TopBar + ResizableLayout stacked */
+.support-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.support-page .resizable-layout {
+  flex: 1;
+  overflow: hidden;
+}
+
 /* Navigation Panel Container */
 .nav-panel {
   display: flex;
@@ -42,7 +56,11 @@
 .nav-top-bar__logo-icon {
   width: 24px;
   height: 24px;
-  color: var(--color-text-primary);
+  object-fit: contain;
+}
+
+[data-theme="dark"] .nav-top-bar__logo-icon {
+  filter: invert(1);
 }
 
 .nav-top-bar__product-selector {
@@ -191,9 +209,9 @@
   flex-direction: row;
   height: 100%;
   overflow: hidden;
-  padding: var(--spacing-xs);
-  padding-left: 0;
-  gap: 0;
+  padding: 20px;
+  gap: 24px;
+  border-radius: 12px 0px 0px 0px;
 }
 
 .main-content__ticket-list {
@@ -217,6 +235,14 @@
   height: 100%;
   overflow: hidden;
   animation: conversationSlideIn 0.3s ease;
+  padding-right: var(--spacing-xs);
+}
+
+.main-content__widgets {
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-right: var(--spacing-xs);
 }
 

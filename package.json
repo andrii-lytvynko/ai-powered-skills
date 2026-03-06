@@ -12,19 +12,41 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@zendeskgarden/react-avatars": "^9.15.0",
+    "@zendeskgarden/react-buttons": "^9.15.0",
+    "@zendeskgarden/react-dropdowns": "^9.15.0",
+    "@zendeskgarden/react-forms": "^9.15.0",
+    "@zendeskgarden/react-loaders": "^9.15.0",
+    "@zendeskgarden/react-modals": "^9.15.0",
+    "@zendeskgarden/react-notifications": "^9.15.0",
+    "@zendeskgarden/react-pagination": "^9.15.0",
+    "@zendeskgarden/react-tables": "^9.15.0",
+    "@zendeskgarden/react-tabs": "^9.15.0",
+    "@zendeskgarden/react-tags": "^9.15.0",
+    "@zendeskgarden/react-theming": "^9.15.0",
+    "@zendeskgarden/react-tooltips": "^9.15.0",
+    "@zendeskgarden/react-typography": "^9.15.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "styled-components": "^6.3.11",
+    "uifork": "^0.0.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.58.2",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@zendeskgarden/tailwindcss": "^4.0.2",
+    "agentation": "^2.2.1",
+    "autoprefixer": "^10.4.27",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
     "vite": "^7.2.4"
   }
 }

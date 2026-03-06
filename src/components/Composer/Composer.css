@@ -1,0 +1,308 @@
+/* ========================================
+   Composer — wrapper
+   ======================================== */
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-grey-300);
+  background: var(--color-bg-white);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Channel header row
+   ======================================== */
+
+.composer__channel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.composer__channel-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.composer__channel-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  width: fit-content;
+  height: fit-content;
+  line-height: 24px;
+  /* Prevent Garden from wrapping in a styled button */
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.composer__channel-select:hover {
+  color: var(--color-text-primary);
+}
+
+.composer__channel-select:focus-visible {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.composer__channel-select--static {
+  cursor: default;
+  pointer-events: none;
+}
+
+.composer__channel-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color-text-secondary);
+}
+
+.composer__channel-label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  letter-spacing: -0.154px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.composer__channel-chevron {
+  width: 12px;
+  height: 12px;
+  color: var(--color-text-secondary);
+  visibility: hidden;
+}
+
+.composer__channel-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--color-grey-300);
+  flex-shrink: 0;
+}
+
+.composer__channel-menu-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Reset any Garden button wrapper the Menu component may inject around the trigger */
+.composer__channel-left [data-garden-id="dropdowns.menu"] button.composer__channel-select,
+.composer__channel-left button.composer__channel-select {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  width: fit-content;
+  height: fit-content;
+  line-height: 24px;
+}
+
+.composer__channel-left [data-garden-container-id="containers.menu.trigger"] {
+  background-color: unset;
+  background: unset;
+  border-width: 0;
+  border-color: transparent;
+  border-style: none;
+  border-image: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.composer__channel-left [data-garden-container-id="containers.menu.item"],
+.composer__channel-left [data-garden-id="dropdowns.menu.item"] {
+  height: fit-content;
+}
+
+.composer__channel-left [data-garden-id="dropdowns.menu.item.content"] {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.composer__channel-left button.composer__channel-select:focus-visible {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── To: tag ─────────────────────────────────────────────────────────────── */
+
+.composer__recipients {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.composer__to-label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: -0.154px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.composer__requester-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 2px 8px 2px 3px !important;
+  height: auto !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.composer__avatar {
+  flex-shrink: 0;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  font-size: 9px !important;
+  border-radius: 50%;
+  background-color: var(--color-primary-600) !important;
+  color: var(--color-bg-white) !important;
+}
+
+.composer__avatar span {
+  font-size: 9px;
+  font-weight: var(--font-weight-semibold);
+  color: inherit !important;
+}
+
+.composer__requester-name {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: inherit;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: unset;
+  width: fit-content;
+  min-width: fit-content;
+  flex: 0 0 auto;
+}
+
+.composer__requester-tag .composer__requester-name {
+  width: fit-content !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+
+.composer__edit-icon {
+  width: fit-content;
+  height: 11px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  margin-left: 1px;
+}
+
+.composer__requester-tag .composer__edit-icon {
+  width: fit-content !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+}
+
+.composer__cc-btn {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-primary-600);
+}
+
+/* ========================================
+   Textarea body
+   ======================================== */
+
+.composer__input {
+  flex: 1;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  letter-spacing: -0.154px;
+  line-height: 20px;
+  resize: none;
+  outline: none;
+  min-height: 80px;
+}
+
+.composer__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   Footer — toolbar only
+   ======================================== */
+
+.composer__footer {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  flex-shrink: 0;
+}
+
+.composer__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.composer__toolbar-btn {
+  color: var(--color-text-secondary);
+}
+
+.composer__toolbar-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.composer__toolbar-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ========================================
+   Dark theme
+   ======================================== */
+
+[data-theme="dark"] .composer {
+  background: var(--color-bg-secondary);
+}

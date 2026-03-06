@@ -51,7 +51,7 @@
   flex-shrink: 0;
 }
 
-/* Content Area (Main + Widgets) */
+/* Content Area */
 .resizable-layout__content {
   display: flex;
   flex: 1;
@@ -79,18 +79,6 @@
 }
 
 .resizable-layout.dragging .resizable-layout__action-panel {
-  transition: none;
-}
-
-/* Widgets Panel */
-.resizable-layout__widgets {
-  height: 100%;
-  overflow: hidden;
-  flex-shrink: 0;
-  transition: width 0.15s ease;
-}
-
-.resizable-layout.dragging .resizable-layout__widgets {
   transition: none;
 }
 
@@ -174,41 +162,9 @@
   );
 }
 
-/* Expand button for collapsed widgets */
-.resizable-layout__expand-btn {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 48px;
-  background: var(--color-bg-white);
-  border: 1px solid var(--color-grey-300);
-  border-radius: var(--radius-md);
-  color: var(--color-grey-icon);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: var(--shadow-xs);
-  z-index: 20;
-}
-
-.resizable-layout__expand-btn:hover {
-  background: var(--color-bg-subtle);
-  color: var(--color-text-primary);
-  border-color: var(--color-green-light);
-}
-
 /* Responsive behavior */
 @media (max-width: 900px) {
-  .resizable-layout__widgets,
   .resizable-layout__content > .resizable-layout__resizer {
-    display: none;
-  }
-  
-  .resizable-layout__expand-btn {
     display: none;
   }
 }

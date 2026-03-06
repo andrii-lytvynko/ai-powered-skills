@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { FilterIcon, PhoneIcon, ChatIcon, EmailIcon, SparkleIcon, ChevronDownSmallIcon, CheckIcon, TagIcon, CircleDotIcon, ClockAlertIcon } from '../Icons';
+import { FilterIcon, SparkleIcon, CheckIcon, TagIcon, CircleDotIcon, ClockAlertIcon, SortIcon } from '../Icons';
 import './TicketList.css';
 
 // Parse SLA value to minutes for sorting (negative values = breached)
@@ -39,91 +39,92 @@ const sortFunctions = {
 
 const tickets = [
   {
-    id: '25245',
-    type: 'call',
-    title: 'Call with Caller +1 (123) 456-7890',
-    status: 'open',
-    time: '< 1 min ago',
-    sla: null,
-    hasOnlineIndicator: true,
-  },
-  {
     id: '54988',
     type: 'chat',
-    title: "I can't access my account",
+    title: "Riley Green | I can't access my account",
     status: 'open',
-    time: '4:13 PM',
+    timestamp: 'Today at 4:13 PM',
     sla: { value: '5m', type: 'warning' },
-    lastMessage: { name: 'Rebecca Wells', text: 'Can you help?' },
+    preview: 'Can you help?',
     hasOnlineIndicator: true,
   },
   {
     id: '54264',
     type: 'chat',
-    title: "Can't find discount code for beef",
+    title: "Dwight Torff | Can't find discount code for beef",
     status: 'open',
-    time: '4:10 PM',
+    timestamp: 'Today at 4:10 PM',
     sla: { value: '18m', type: 'success' },
-    lastMessage: { name: 'Dwight Torff', text: 'Typing...' },
+    preview: 'Typing...',
     hasOnlineIndicator: true,
   },
   {
     id: '25245',
     type: 'email',
-    title: 'Discount code disactivated',
+    title: 'Kevin Smith',
     status: 'open',
-    time: '3:40 PM',
+    timestamp: 'Today at 3:40 PM',
     sla: { value: '-3m', type: 'danger' },
-    lastMessage: { name: 'Kevin Smith', text: 'Hi there, Can you assist me with this.' },
+    preview: 'Hi there, Can you assist me with this.',
   },
   {
-    id: '25245',
+    id: '54988',
     type: 'email',
-    title: 'Discount code',
+    title: 'Angela Martin | Discount code',
     status: 'pending',
-    time: '4:13 PM',
+    timestamp: 'Today at 4:13 PM',
     sla: { value: '1h', type: 'success' },
-    lastMessage: { name: 'Angela Martin', text: "Hi I'm looking for the discount code for paper" },
+    preview: "Hi I'm looking for the discount code for paper",
   },
   {
     id: '54988',
     type: 'chat',
-    title: 'Need help with emails',
+    title: 'Mike Vaccaro | Need help with emails',
     status: 'on-hold',
-    time: '3:30 PM',
-    sla: { value: '45m', type: 'success' },
-    lastMessage: { name: 'Mike Vaccaro', text: 'Badabing badaboom' },
+    timestamp: 'Today at 3:30 PM',
+    sla: null,
+    preview: 'Badabing badaboom',
     hasNotificationIndicator: true,
   },
   {
     id: '54988',
     type: 'chat',
-    title: 'Need help with hamster tubes',
+    title: 'Mike Vaccaro | Need help with hamster tubes',
     status: 'on-hold',
-    time: '3:28 PM',
-    sla: { value: '52m', type: 'success' },
-    lastMessage: { name: 'Mike Vaccaro', text: 'I need more tubes' },
+    timestamp: 'Today at 2:50 PM',
+    sla: null,
+    preview: 'I need more tubes',
     hasNotificationIndicator: true,
   },
   {
-    id: '25245',
+    id: '87251',
     type: 'email',
-    title: 'Discount code',
+    title: 'Oscar Rosser | Switch to Spanish language',
     status: 'pending',
-    time: '4:13 PM',
-    sla: { value: '1h', type: 'success' },
-    lastMessage: { name: 'Angela Martin', text: "Hi I'm looking for the discount code for paper" },
+    timestamp: 'Today at 2:30 PM',
+    sla: null,
+    preview: 'How do I switch your app to Spanish?',
   },
 ];
 
+const ticketIconSrc = {
+  call: '/assets/Phone in.svg',
+  chat: '/assets/Bubble.svg',
+  email: '/assets/Email.svg',
+};
+
 function TicketIcon({ type }) {
-  const iconMap = {
-    call: PhoneIcon,
-    chat: ChatIcon,
-    email: EmailIcon,
-  };
-  const Icon = iconMap[type] || ChatIcon;
-  return <Icon className="ticket-item__channel-icon" />;
+  const src = ticketIconSrc[type] || ticketIconSrc.chat;
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      className="ticket-item__channel-icon"
+      width={16}
+      height={16}
+    />
+  );
 }
 
 function StatusBadge({ status }) {
@@ -158,6 +159,84 @@ const sortOptions = [
   { id: 'sla', label: 'Closest to SLA breach', icon: ClockAlertIcon },
 ];
 
+const channelFilterOptions = [
+  { id: 'all', label: 'All channels' },
+  { id: 'email', label: 'Email' },
+  { id: 'message', label: 'Message' },
+  { id: 'voice', label: 'Voice' },
+];
+
+const statusFilterOptions = [
+  { id: 'all', label: 'All statuses' },
+  { id: 'open', label: 'Open' },
+  { id: 'on-hold', label: 'On-hold' },
+  { id: 'pending', label: 'Pending' },
+  { id: 'solved', label: 'Solved' },
+];
+
+const channelTypeMap = {
+  email: 'email',
+  message: 'chat',
+  voice: 'call',
+};
+
+function FilterDropdown({ options, selectedValue, onSelectValue, buttonLabel }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find((option) => option.id === selectedValue) || options[0];
+  const isDefaultSelection = selectedOption.id === 'all';
+
+  return (
+    <div className="filter-dropdown" ref={dropdownRef}>
+      <button
+        className={`ticket-list__filter-btn ${isOpen ? 'ticket-list__filter-btn--active' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+      >
+        <span className="ticket-list__filter-label">
+          {isDefaultSelection ? buttonLabel : selectedOption.label}
+        </span>
+        <FilterIcon className="ticket-list__filter-icon" />
+      </button>
+
+      {isOpen && (
+        <div className="filter-dropdown__menu">
+          <div className="filter-dropdown__header">{buttonLabel}</div>
+          {options.map((option) => {
+            const isSelected = option.id === selectedValue;
+            return (
+              <button
+                key={option.id}
+                className={`filter-dropdown__item ${isSelected ? 'filter-dropdown__item--selected' : ''}`}
+                onClick={() => {
+                  onSelectValue(option.id);
+                  setIsOpen(false);
+                }}
+                type="button"
+              >
+                <span className="filter-dropdown__item-label">{option.label}</span>
+                {isSelected && <CheckIcon className="filter-dropdown__check-icon" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SortDropdown({ selectedSort, onSelectSort }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -173,15 +252,16 @@ function SortDropdown({ selectedSort, onSelectSort }) {
   }, []);
 
   const selectedOption = sortOptions.find(opt => opt.id === selectedSort) || sortOptions[0];
-  const SelectedIcon = selectedOption.icon;
 
   return (
     <div className="sort-dropdown" ref={dropdownRef}>
-      <button 
-        className={`ticket-list__action-btn ticket-list__action-btn--icon-only ticket-list__action-btn--sort ${isOpen ? 'ticket-list__action-btn--active' : ''}`}
+      <button
+        className={`ticket-list__filter-btn ${isOpen ? 'ticket-list__filter-btn--active' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
+        type="button"
       >
-        <SelectedIcon className="ticket-list__action-icon ticket-list__sparkle-icon" />
+        <span className="ticket-list__filter-label">{selectedOption.label}</span>
+        <SortIcon className="ticket-list__filter-icon" />
       </button>
       
       {isOpen && (
@@ -211,11 +291,10 @@ function SortDropdown({ selectedSort, onSelectSort }) {
   );
 }
 
-function TicketItem({ ticket, index, isSelected, onSelect }) {
+function TicketItem({ ticket, isSelected, onSelect }) {
   return (
     <div 
       className={`ticket-item ${isSelected ? 'ticket-item--selected' : ''}`}
-      style={{ animationDelay: `${index * 40}ms` }}
       onClick={() => onSelect?.(ticket)}
     >
       <div className="ticket-item__icon-container">
@@ -231,29 +310,21 @@ function TicketItem({ ticket, index, isSelected, onSelect }) {
       </div>
       
       <div className="ticket-item__content">
-        <div className="ticket-item__header">
-          <div className="ticket-item__title-row">
-            <h4 className="ticket-item__title">{ticket.title}</h4>
-            {ticket.sla && <SLATag sla={ticket.sla} />}
-          </div>
-          <span className="ticket-item__time">{ticket.time}</span>
+        <div className="ticket-item__title-row">
+          <h4 className="ticket-item__title">{ticket.title}</h4>
+          {ticket.sla && <SLATag sla={ticket.sla} />}
         </div>
         
-        <div className="ticket-item__meta">
+        <div className="ticket-item__subheader">
           <StatusBadge status={ticket.status} />
-          <span className="ticket-item__id">#{ticket.id}</span>
+          {ticket.preview && (
+            <span className="ticket-item__preview">{ticket.preview}</span>
+          )}
         </div>
         
-        {ticket.lastMessage && (
-          <div className="ticket-item__message">
-            <div className="ticket-item__avatar">
-              <div className="avatar-placeholder" />
-            </div>
-            <span className="ticket-item__message-text">
-              <span className="ticket-item__sender-name">{ticket.lastMessage.name}:</span> {ticket.lastMessage.text}
-            </span>
-          </div>
-        )}
+        <span className="ticket-item__timestamp">
+          {ticket.timestamp} | #{ticket.id}
+        </span>
       </div>
     </div>
   );
@@ -263,6 +334,8 @@ export { tickets };
 
 export default function TicketList({ selectedTicket, onSelectTicket }) {
   const [selectedSort, setSelectedSort] = useState('recommended');
+  const [selectedChannel, setSelectedChannel] = useState('all');
+  const [selectedStatus, setSelectedStatus] = useState('all');
 
   // Create a map to preserve original order for "recommended" sort
   const originalIndexMap = useMemo(() => {
@@ -271,9 +344,19 @@ export default function TicketList({ selectedTicket, onSelectTicket }) {
     return map;
   }, []);
 
+  const filteredTickets = useMemo(() => {
+    return tickets.filter((ticket) => {
+      const channelMatches =
+        selectedChannel === 'all' || ticket.type === channelTypeMap[selectedChannel];
+      const statusMatches = selectedStatus === 'all' || ticket.status === selectedStatus;
+
+      return channelMatches && statusMatches;
+    });
+  }, [selectedChannel, selectedStatus]);
+
   // Sort tickets based on selected option
   const sortedTickets = useMemo(() => {
-    const sorted = [...tickets];
+    const sorted = [...filteredTickets];
     const sortFn = sortFunctions[selectedSort];
     
     if (selectedSort === 'recommended') {
@@ -283,7 +366,7 @@ export default function TicketList({ selectedTicket, onSelectTicket }) {
     }
     
     return sorted;
-  }, [selectedSort, originalIndexMap]);
+  }, [selectedSort, filteredTickets, originalIndexMap]);
 
   // Generate unique key for each ticket
   const getTicketKey = (ticket, index) => `${ticket.id}-${ticket.title}-${index}`;
@@ -292,11 +375,20 @@ export default function TicketList({ selectedTicket, onSelectTicket }) {
     <div className="ticket-list">
       {/* Header */}
       <div className="ticket-list__header">
-        <span className="ticket-list__count">{tickets.length} tickets</span>
+        <span className="ticket-list__count">{sortedTickets.length} tickets</span>
         <div className="ticket-list__actions">
-          <button className="ticket-list__action-btn ticket-list__action-btn--icon-only">
-            <FilterIcon className="ticket-list__action-icon" />
-          </button>
+          <FilterDropdown
+            options={channelFilterOptions}
+            selectedValue={selectedChannel}
+            onSelectValue={setSelectedChannel}
+            buttonLabel="Channel"
+          />
+          <FilterDropdown
+            options={statusFilterOptions}
+            selectedValue={selectedStatus}
+            onSelectValue={setSelectedStatus}
+            buttonLabel="Status"
+          />
           <SortDropdown 
             selectedSort={selectedSort} 
             onSelectSort={setSelectedSort} 
@@ -304,15 +396,12 @@ export default function TicketList({ selectedTicket, onSelectTicket }) {
         </div>
       </div>
       
-      <div className="ticket-list__divider" />
-      
       {/* Ticket items */}
       <div className="ticket-list__items" key={selectedSort}>
         {sortedTickets.map((ticket, index) => (
           <TicketItem 
             key={getTicketKey(ticket, index)} 
             ticket={ticket} 
-            index={index}
             isSelected={selectedTicket && getTicketKey(selectedTicket, tickets.indexOf(selectedTicket)) === getTicketKey(ticket, index)}
             onSelect={onSelectTicket}
           />

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { IconButton } from '@zendeskgarden/react-buttons';
 import { ChevronDownIcon, Icon } from '../Icons';
 import './WFMSummary.css';
 
@@ -24,9 +25,9 @@ function SummaryHeader({ title, onClose }) {
   return (
     <div className="wfm-summary__header">
       <h2 className="wfm-summary__title">{title}</h2>
-      <button className="wfm-summary__close" onClick={onClose} title="Close">
+      <IconButton aria-label="Close" isBasic className="wfm-summary__close" onClick={onClose}>
         <Icon name="close" className="wfm-summary__close-icon" size="sm" />
-      </button>
+      </IconButton>
     </div>
   );
 }
@@ -36,9 +37,9 @@ function AgentInfo({ agent }) {
     <div className="wfm-summary__agent">
       <div className="wfm-summary__agent-header">
         <span className="wfm-summary__agent-name">{agent?.name || 'Anne Hicks'}</span>
-        <button className="wfm-summary__agent-menu" title="More options">
+        <IconButton aria-label="More options" isBasic className="wfm-summary__agent-menu">
           <Icon name="more_horiz" className="wfm-summary__menu-icon" size="sm" />
-        </button>
+        </IconButton>
       </div>
       <div className="wfm-summary__schedule">
         <div className="wfm-summary__schedule-row">

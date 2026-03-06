@@ -29,11 +29,14 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, var(--color-lime-primary) 0%, #a5a82e 100%);
-  color: var(--color-lime-dark);
-  font-size: 10px;
-  font-weight: 600;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-menu__avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Dropdown Menu */
@@ -75,9 +78,9 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--color-lime-primary) 0%, #a5a82e 100%);
+  background: linear-gradient(135deg, var(--color-lime-primary) 0%, var(--color-primary-600) 100%);
   color: var(--color-lime-dark);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   font-weight: 600;
   border-radius: 50%;
   flex-shrink: 0;
@@ -92,7 +95,7 @@
 
 .profile-menu__info-name {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   font-weight: 600;
   color: var(--color-text-primary);
   letter-spacing: -0.2px;
@@ -100,7 +103,7 @@
 
 .profile-menu__info-email {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -124,7 +127,7 @@
 
 .profile-menu__theme-label {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   color: var(--color-text-primary);
 }
 
@@ -215,7 +218,7 @@
   height: 36px;
   padding: 6px var(--spacing-md);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   font-weight: 500;
   color: var(--color-text-primary);
   text-align: left;

@@ -1,20 +1,22 @@
-# Severance - Resizable 3-Column Layout
+# ZenBox — Zendesk Product Prototype
 
-A React application featuring a responsive, drag-to-resize 3-column layout with Instrument Sans and Inter fonts.
+A high-fidelity React prototype of the Zendesk Support suite, built with the Zendesk Garden design system. Simulates multiple product areas including Support, Admin Center, Workforce Management, and Queues.
 
 ## Features
 
-- **Resizable Columns**: Drag the dividers between columns to adjust their widths
-- **Responsive Design**: Layout adapts based on screen width
-  - Desktop (≥1024px): Full 3-column resizable layout
-  - Tablet (768-1023px): 2-column layout with third column as overlay
-  - Mobile (<768px): Stacked single-column layout
-- **Modern Typography**: Uses Instrument Sans for headings and Inter for body text
-- **Dark Theme**: Elegant dark corporate aesthetic
-- **Smooth Animations**: Subtle CSS animations for enhanced UX
-- **Touch Support**: Resizing works on both mouse and touch devices
+- **Multi-product navigation** — Switch between Support, Admin Center, and Workforce Management via the TopBar product switcher
+- **Resizable layout** — Drag dividers to adjust the width of the nav, ticket list, and conversation panel columns
+- **Support page** — Ticket list with conversation panel, inline status changes, and ticket navigation
+- **Ticket detail page** — Full-screen conversation view with sidebar actions
+- **Admin Center** — Settings and configuration pages
+- **Workforce Management (WFM)** — Schedule and staffing overview
+- **Queues** — Queue list and queue edit page with predictive routing support
+- **AI Agent panel** — Embedded AI assistant panel in the conversation view
+- **Command palette** — Keyboard-accessible command search
+- **Theme context** — Per-product color theming via React context
+- **Page transitions** — Animated page-level transitions between products
 
-## Getting Started
+## Getting started
 
 ```bash
 # Install dependencies
@@ -25,74 +27,54 @@ npm run dev
 
 # Build for production
 npm run build
+
+# Deploy to GitHub Pages
+npm run deploy
 ```
 
-## Usage
-
-### ResizableLayout Component
-
-The main component that provides the resizable 3-column layout:
-
-```jsx
-import ResizableLayout from './components/ResizableLayout';
-
-<ResizableLayout>
-  <div>Column 1 content</div>
-  <div>Column 2 content</div>
-  <div>Column 3 content</div>
-</ResizableLayout>
-```
-
-### Customization
-
-Column behavior can be adjusted through CSS variables in `src/index.css`:
-
-```css
-:root {
-  --resizer-width: 6px;      /* Visual width of the resizer */
-  --resizer-hit-area: 12px;  /* Clickable area for easier dragging */
-}
-```
-
-Minimum column width is set in the component (default: 150px).
-
-### Panel Component
-
-A styled container component for panel content:
-
-```jsx
-import Panel from './components/Panel';
-
-<Panel title="Title" icon="◉" variant="primary">
-  Content goes here
-</Panel>
-```
-
-Variants: `default`, `primary`, `success`, `warning`
-
-## Project Structure
+## Project structure
 
 ```
 src/
 ├── components/
-│   ├── ResizableLayout/
-│   │   ├── ResizableLayout.jsx  # Main resizable layout logic
-│   │   ├── ResizableLayout.css  # Layout styles
-│   │   └── index.js
-│   └── Panel/
-│       ├── Panel.jsx            # Panel container component
-│       ├── Panel.css
-│       └── index.js
-├── App.jsx          # Main application with sample content
-├── App.css          # App-level styles
-├── index.css        # Global styles, CSS variables, fonts
-├── content.css      # Styles for sample content components
-└── main.jsx         # Entry point
+│   ├── AIAgentPanel/        # Inline AI assistant panel
+│   ├── AdminCenterPage/     # Admin Center product page
+│   ├── CommandPalette/      # Keyboard command search overlay
+│   ├── ConversationPanel/   # Ticket conversation thread
+│   ├── ExplorePage/         # Explore product page
+│   ├── Header/              # Top header bar
+│   ├── Icons/               # Shared icon components
+│   ├── PageSidebarNav/      # Page-level sidebar navigation
+│   ├── PageTransition/      # Animated route transitions
+│   ├── Panel/               # Generic panel container
+│   ├── ProfileMenu/         # User profile dropdown
+│   ├── QueuesPage/          # Queues list and queue edit pages
+│   ├── ResizableLayout/     # Drag-to-resize 3-column layout
+│   ├── Sidebar/             # Primary and secondary sidebars
+│   ├── TicketDetailPage/    # Full-screen ticket detail view
+│   ├── TicketList/          # Ticket list with selection
+│   ├── TopBar/              # Product switcher top bar
+│   ├── WFMPage/             # Workforce Management product page
+│   └── Widgets/             # Dashboard widgets for Support home
+├── contexts/                # React contexts (theme, etc.)
+├── App.jsx                  # Root app with product routing logic
+├── App.css
+├── index.css                # Global styles and CSS design tokens
+└── main.jsx                 # Entry point with GardenThemeProvider
 ```
 
-## Tech Stack
+## Tech stack
 
-- React 19
-- Vite 7
-- CSS (no framework dependencies)
-- Google Fonts (Instrument Sans & Inter)
+| | |
+|---|---|
+| Framework | React 19 |
+| Build tool | Vite 7 |
+| Design system | Zendesk Garden (`@zendeskgarden/*` v9.15) |
+| Styling | CSS modules + Tailwind CSS + `styled-components` |
+| Testing | Playwright |
+| UI versioning | uifork |
+| Deployment | GitHub Pages (`gh-pages`) |
+
+## Design system
+
+All UI components use [Zendesk Garden](https://garden.zendesk.com/components). Garden's `ThemeProvider` is configured once in `src/main.jsx` and wraps the entire app. CSS design tokens are defined in `src/index.css` and map to Garden's token system.

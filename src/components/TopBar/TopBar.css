@@ -1,0 +1,391 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: var(--spacing-xs);
+  gap: var(--spacing-xs);
+  background: var(--color-grey-100);
+  flex-shrink: 0;
+}
+
+/* Left section */
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.topbar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.topbar__logo-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Product selector dropdown */
+.topbar__product-wrapper {
+  position: relative;
+}
+
+.topbar__product-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 6px var(--spacing-sm);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.topbar__product-selector:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.topbar__product-selector--active {
+  background: var(--btn-ghost-active-bg);
+}
+
+.topbar__product-name {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: #293239;
+  white-space: nowrap;
+}
+
+.topbar__chevron {
+  width: 16px;
+  height: 16px;
+  color: #5c6970;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.topbar__chevron--rotated {
+  transform: rotate(180deg);
+}
+
+.topbar__dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-xxs));
+  left: 0;
+  min-width: 240px;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.topbar__dropdown-list {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-xs);
+}
+
+.topbar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+
+.topbar__dropdown-item:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.topbar__dropdown-item--selected {
+  background: #2f3941;
+}
+
+.topbar__dropdown-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-grey-icon);
+  flex-shrink: 0;
+}
+
+.topbar__dropdown-item--selected .topbar__dropdown-icon {
+  color: #ffffff;
+  filter: brightness(0) invert(1);
+}
+
+.topbar__dropdown-name {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-text-primary);
+}
+
+.topbar__dropdown-item--selected .topbar__dropdown-name {
+  color: #ffffff;
+}
+
+.topbar__dropdown-check {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Vertical divider between product selector and page title */
+.topbar__divider {
+  width: 1px;
+  height: 23px;
+  background: #d8dcde;
+  flex-shrink: 0;
+}
+
+/* Page title button */
+.topbar__page-title-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 6px var(--spacing-sm);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.topbar__page-title-btn:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.topbar__page-title {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  color: #293239;
+  white-space: nowrap;
+}
+
+/* Center section — ticket tabs */
+.topbar__center {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxs);
+  flex: 1;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0 var(--spacing-xs);
+}
+
+/* Base ticket tab */
+.topbar__ticket-tab {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  max-width: 220px;
+  min-width: 140px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: background 0.15s ease, opacity 0.15s ease;
+  text-align: left;
+  padding: 0;
+}
+
+/* Active tab — Figma dark state */
+.topbar__ticket-tab--active {
+  background: #2f3941;
+}
+
+.topbar__ticket-tab--active:hover {
+  background: #3a4750;
+}
+
+/* Inactive tab */
+.topbar__ticket-tab--inactive {
+  background: transparent;
+  border: 1px solid var(--color-grey-300);
+}
+
+.topbar__ticket-tab--inactive:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+/* Left icon area */
+.topbar__ticket-tab__icon-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.topbar__ticket-tab__channel-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.topbar__ticket-tab--active .topbar__ticket-tab__channel-icon {
+  filter: brightness(0) invert(1);
+}
+
+.topbar__ticket-tab--inactive .topbar__ticket-tab__channel-icon {
+  opacity: 0.7;
+}
+
+/* Online status dot */
+.topbar__ticket-tab__status-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 100px;
+  background: #00a656;
+  border: 1.5px solid #f8f9f9;
+  flex-shrink: 0;
+}
+
+.topbar__ticket-tab--active .topbar__ticket-tab__status-dot {
+  border-color: #2f3941;
+}
+
+/* Text content */
+.topbar__ticket-tab__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  gap: 1px;
+}
+
+.topbar__ticket-tab__primary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.topbar__ticket-tab--active .topbar__ticket-tab__primary {
+  color: #ffffff;
+}
+
+.topbar__ticket-tab--inactive .topbar__ticket-tab__primary {
+  color: var(--color-text-primary);
+}
+
+.topbar__ticket-tab__secondary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.topbar__ticket-tab--active .topbar__ticket-tab__secondary {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.topbar__ticket-tab--inactive .topbar__ticket-tab__secondary {
+  color: var(--color-text-secondary);
+}
+
+/* Close button */
+.topbar__ticket-tab__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 0 8px 8px 0;
+  transition: background 0.12s ease;
+  cursor: pointer;
+}
+
+.topbar__ticket-tab--active .topbar__ticket-tab__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.topbar__ticket-tab--inactive .topbar__ticket-tab__close:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.topbar__ticket-tab--active .topbar__ticket-tab__close img {
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+}
+
+.topbar__ticket-tab--inactive .topbar__ticket-tab__close img {
+  opacity: 0.5;
+}
+
+/* Right section */
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+  padding-right: var(--spacing-xxs);
+}
+
+
+/* Icon button */
+.topbar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #68737d;
+  transition: background 0.15s ease;
+  flex-shrink: 0;
+}
+
+.topbar__icon-btn:hover {
+  background: var(--btn-ghost-hover-bg);
+}
+
+.topbar__icon {
+  width: 20px;
+  height: 20px;
+}

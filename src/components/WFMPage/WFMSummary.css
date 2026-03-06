@@ -18,8 +18,8 @@
 
 .wfm-summary__title {
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0;
 }
@@ -67,8 +67,8 @@
 
 .wfm-summary__agent-name {
   font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
 }
 
@@ -108,15 +108,15 @@
 
 .wfm-summary__schedule-label {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   color: var(--color-text-secondary);
   width: 70px;
   flex-shrink: 0;
 }
 
 .wfm-summary__schedule-value {
-  font-family: "Geist Mono", monospace;
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-md);
   color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -150,9 +150,9 @@
 }
 
 .wfm-summary__section-title {
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0;
 }
@@ -202,14 +202,14 @@
 
 .wfm-summary__item-label {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   color: var(--color-text-primary);
 }
 
 .wfm-summary__item-value {
-  font-family: "Geist Mono", monospace;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
 }
 

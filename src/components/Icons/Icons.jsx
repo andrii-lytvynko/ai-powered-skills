@@ -55,7 +55,7 @@ export function GearIcon({ className }) {
 }
 
 export function SidebarIcon({ className }) {
-  return <Icon name="view_sidebar" className={className} outlined />;
+  return <img src="/assets/Primary Nav Item/Sidebar.svg" alt="" className={className} width={20} height={20} />;
 }
 
 // ========================================
@@ -194,6 +194,22 @@ export function DisplayIcon({ className }) {
   return <Icon name="tune" className={className} size="sm" />;
 }
 
+export function EditNoteIcon({ className }) {
+  return <Icon name="edit_note" className={className} size="sm" />;
+}
+
+export function FormatTextIcon({ className }) {
+  return <Icon name="format_size" className={className} size="sm" />;
+}
+
+export function EmojiIcon({ className }) {
+  return <Icon name="mood" className={className} size="sm" />;
+}
+
+export function LinkIcon({ className }) {
+  return <Icon name="link" className={className} size="sm" />;
+}
+
 export function TrendUpIcon({ className }) {
   return <Icon name="trending_up" className={className} size="sm" />;
 }
@@ -235,82 +251,6 @@ export function ZendeskLogo({ className }) {
 }
 
 // ========================================
-// QA Page Icons
-// ========================================
-
-export function QALogoIcon({ className }) {
-  return <Icon name="task_alt" className={className} size="lg" />;
-}
-
-export function QADashboardIcon({ className, active }) {
-  return <Icon name="dashboard" className={className} outlined={!active} />;
-}
-
-export function QAConversationsIcon({ className, active }) {
-  return <Icon name="forum" className={className} outlined={!active} />;
-}
-
-export function QAAssignmentsIcon({ className, active }) {
-  return <Icon name="assignment_turned_in" className={className} outlined={!active} />;
-}
-
-export function QADisputesIcon({ className, active }) {
-  return <Icon name="warning" className={className} outlined={!active} />;
-}
-
-export function QACalibrationIcon({ className, active }) {
-  return <Icon name="target" className={className} outlined={!active} />;
-}
-
-export function QASettingsIcon({ className }) {
-  return <Icon name="settings" className={className} outlined />;
-}
-
-// ========================================
-// AI Agents Page Icons
-// ========================================
-
-export function AIAgentsLogoIcon({ className }) {
-  return <Icon name="smart_toy" className={className} size="lg" />;
-}
-
-export function AIAgentsDashboardIcon({ className, active }) {
-  return <Icon name="space_dashboard" className={className} outlined={!active} />;
-}
-
-export function AIAgentsContentIcon({ className }) {
-  return <Icon name="article" className={className} outlined />;
-}
-
-export function AIAgentsConversationsIcon({ className }) {
-  return <Icon name="chat" className={className} outlined />;
-}
-
-export function AIAgentsSettingsIcon({ className }) {
-  return <Icon name="settings" className={className} outlined />;
-}
-
-export function AIAgentsToolsIcon({ className }) {
-  return <Icon name="build" className={className} outlined />;
-}
-
-export function AIAgentsUsersIcon({ className }) {
-  return <Icon name="group" className={className} outlined />;
-}
-
-export function AIAgentsDatabaseIcon({ className }) {
-  return <Icon name="database" className={className} outlined />;
-}
-
-export function AIAgentsIntegrationsIcon({ className }) {
-  return <Icon name="hub" className={className} outlined />;
-}
-
-export function AIAgentsPlugIcon({ className }) {
-  return <Icon name="electric_bolt" className={className} outlined />;
-}
-
-// ========================================
 // WFM Page Icons
 // ========================================
 
@@ -328,4 +268,24 @@ export function WFMSchedulingIcon({ className, active }) {
 
 export function WFMForecastingIcon({ className, active }) {
   return <Icon name="timeline" className={className} outlined={!active} />;
+}
+
+export function WFMSettingsIcon({ className, active }) {
+  return <Icon name="settings" className={className} outlined={!active} />;
+}
+
+export function AdminCenterProductIcon({ className }) {
+  return <img src="/assets/admin center.svg" alt="" className={className} aria-hidden="true" />;
+}
+
+export function SupportProductIcon({ className }) {
+  return <img src="/assets/Product support.svg" alt="" className={className} aria-hidden="true" />;
+}
+
+export function WFMProductIcon({ className }) {
+  return <img src="/assets/Product workforce management.svg" alt="" className={className} aria-hidden="true" />;
+}
+
+export function ExploreProductIcon({ className }) {
+  return <Icon name="explore" className={className} size="lg" />;
 }

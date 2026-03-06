@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@zendeskgarden/react-buttons';
 import { 
   PhoneIcon, 
   ChatIcon, 
@@ -242,9 +243,9 @@ export default function ActionPanel({ ticket, onClose, onStatusChange }) {
           <p className="action-panel__ai-text">
             This ticket appears to be about account access. Consider checking the customer's recent login attempts and password reset history.
           </p>
-          <button className="action-panel__ai-apply btn btn--sm btn--outline">
+          <Button size="small" className="action-panel__ai-apply">
             Apply suggestion
-          </button>
+          </Button>
         </div>
 
         <div className="action-panel__divider" />

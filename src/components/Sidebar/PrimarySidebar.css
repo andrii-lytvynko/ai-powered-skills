@@ -5,7 +5,7 @@
   padding: var(--spacing-sm) 0;
   width: 56px;
   height: 100%;
-  background: linear-gradient(180deg, transparent 68%, rgba(92, 105, 112, 0.08) 100%);
+  background: var(--color-grey-100);
 }
 
 .primary-sidebar__nav {
@@ -49,22 +49,35 @@
 }
 
 .primary-sidebar__icon-wrapper.active {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-}
-
-.primary-sidebar__icon-wrapper.active:hover {
-  background: var(--btn-primary-hover-bg);
-}
-
-.primary-sidebar__icon-wrapper.active:active {
-  background: var(--btn-primary-active-bg);
-  color: var(--btn-primary-active-text);
+  background: #2f3941;
 }
 
 .primary-sidebar__icon {
   width: 20px;
   height: 20px;
+  object-fit: contain;
+  pointer-events: none;
+  /* match Admin Center inactive icon colour (#5c6970) via opacity */
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.primary-sidebar__item:hover .primary-sidebar__icon {
+  opacity: 0.85;
+}
+
+.primary-sidebar__icon-wrapper.active .primary-sidebar__icon {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+/* Dark theme */
+[data-theme="dark"] .primary-sidebar__icon-wrapper.active {
+  background: var(--color-text-primary);
+}
+
+[data-theme="dark"] .primary-sidebar__icon-wrapper.active .primary-sidebar__icon {
+  filter: brightness(0);
 }
 
 .primary-sidebar__spacer {
@@ -79,11 +92,10 @@
   height: 32px;
   margin-bottom: var(--spacing-sm);
   background: var(--color-bg-white);
-  border-radius: var(--radius-xl);
-  color: var(--color-grey-icon);
+  border-radius: 50%;
+  border: none;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: var(--shadow-xs);
 }
 
 .primary-sidebar__expand-btn:hover {
@@ -97,13 +109,19 @@
 .primary-sidebar__expand-icon {
   width: 20px;
   height: 20px;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.primary-sidebar__expand-btn:hover .primary-sidebar__expand-icon {
+  opacity: 0.85;
 }
 
 /* Dark theme adjustments */
 [data-theme="dark"] .primary-sidebar__expand-btn {
   background: var(--color-grey-600);
-  color: var(--color-text-primary);
-  box-shadow: none;
 }
 
 [data-theme="dark"] .primary-sidebar__expand-btn:hover {

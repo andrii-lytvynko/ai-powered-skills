@@ -16,18 +16,6 @@ function AIAssistantIcon({ className }) {
 }
 
 // Product icons for different contexts
-function AIAgentsIcon({ className }) {
-  return (
-    <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="6" width="12" height="10" rx="2" fill="currentColor"/>
-      <circle cx="7.5" cy="10" r="1" fill="var(--color-bg-white)"/>
-      <circle cx="12.5" cy="10" r="1" fill="var(--color-bg-white)"/>
-      <rect x="8" y="4" width="4" height="3" rx="1" fill="currentColor"/>
-      <path d="M7 13h6" stroke="var(--color-bg-white)" strokeWidth="1" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
 function AnalyticsIcon({ className }) {
   return (
     <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,22 +118,6 @@ const pageRecommendations = {
     ]
   },
   
-  // Quality Assurance page
-  quality: {
-    title: 'QA actions',
-    favorites: [
-      { id: 'start-review', label: 'Start new review session', icon: ChecklistIcon },
-      { id: 'view-scorecard', label: 'View agent scorecard', icon: AnalyticsIcon },
-      { id: 'export-report', label: 'Export QA report', icon: DocumentIcon },
-      { id: 'calibration-session', label: 'Schedule calibration session', icon: UserIcon },
-    ],
-    suggestions: [
-      { id: 'analyze-scores', label: 'Analyze quality score trends for this period', query: true },
-      { id: 'identify-coaching', label: 'Identify agents needing coaching', query: true },
-      { id: 'compare-categories', label: 'Compare performance across categories', query: true },
-    ]
-  },
-  
   // Admin Center page
   admin: {
     title: 'Admin actions',
@@ -159,38 +131,6 @@ const pageRecommendations = {
       { id: 'optimize-triggers', label: 'Suggest trigger optimizations', query: true },
       { id: 'review-permissions', label: 'Review user permissions for compliance', query: true },
       { id: 'analyze-rules', label: 'Analyze business rule conflicts', query: true },
-    ]
-  },
-  
-  // Knowledge page
-  knowledge: {
-    title: 'Knowledge actions',
-    favorites: [
-      { id: 'create-article', label: 'Create new article', icon: DocumentIcon },
-      { id: 'search-articles', label: 'Search knowledge base', icon: SearchDocIcon },
-      { id: 'review-drafts', label: 'Review pending drafts', icon: ChecklistIcon },
-      { id: 'publish-article', label: 'Publish article', icon: DocumentIcon },
-    ],
-    suggestions: [
-      { id: 'identify-gaps', label: 'Identify knowledge gaps from tickets', query: true },
-      { id: 'suggest-updates', label: 'Suggest articles needing updates', query: true },
-      { id: 'generate-article', label: 'Generate article from recent tickets', query: true },
-    ]
-  },
-  
-  // AI Agents page
-  'ai-agents': {
-    title: 'AI Agents actions',
-    favorites: [
-      { id: 'create-procedure', label: 'Create new procedure', icon: AIAgentsIcon },
-      { id: 'test-bot', label: 'Test bot responses', icon: AIAgentsIcon },
-      { id: 'view-analytics', label: 'View bot analytics', icon: AnalyticsIcon },
-      { id: 'train-model', label: 'Train on new intents', icon: AIAgentsIcon },
-    ],
-    suggestions: [
-      { id: 'analyze-handoffs', label: 'Analyze bot-to-human handoff patterns', query: true },
-      { id: 'improve-responses', label: 'Suggest response improvements', query: true },
-      { id: 'identify-intents', label: 'Identify missing intents from conversations', query: true },
     ]
   },
   
@@ -230,10 +170,8 @@ const pageRecommendations = {
 // Global commands available on all pages
 const globalCommands = [
   { id: 'go-support', label: 'Go to Support', icon: TicketIcon, action: 'navigate', target: 'support' },
-  { id: 'go-qa', label: 'Go to Quality Assurance', icon: ChecklistIcon, action: 'navigate', target: 'quality' },
   { id: 'go-admin', label: 'Go to Admin Center', icon: GearIcon, action: 'navigate', target: 'admin' },
-  { id: 'go-knowledge', label: 'Go to Knowledge', icon: DocumentIcon, action: 'navigate', target: 'knowledge' },
-  { id: 'go-ai-agents', label: 'Go to AI Agents', icon: AIAgentsIcon, action: 'navigate', target: 'ai-agents' },
+  { id: 'go-workforce', label: 'Go to Workforce management', icon: WorkforceIcon, action: 'navigate', target: 'workforce' },
 ];
 
 // Recent history (would typically come from localStorage or API)

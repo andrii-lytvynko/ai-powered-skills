@@ -1,0 +1,29 @@
+/* ========================================
+   Ticket Detail Page — Full-page layout
+   ======================================== */
+
+.ticket-detail-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ticket-detail-page__body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ticket-detail-page__content {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Remove border-radius and box-shadow from ConversationPanel when used full-page */
+.ticket-detail-page__content .conversation-panel {
+  border-radius: 0;
+  box-shadow: none;
+}

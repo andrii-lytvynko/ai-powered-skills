@@ -1,93 +1,31 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Agentation } from 'agentation';
 import Header from './components/Header';
 import { PrimarySidebar, SecondarySidebar } from './components/Sidebar';
 import TicketList, { tickets } from './components/TicketList';
 import ConversationPanel from './components/ConversationPanel';
-import Widgets from './components/Widgets';
 import ResizableLayout from './components/ResizableLayout';
-import QAPage from './components/QAPage';
 import AdminCenterPage from './components/AdminCenterPage';
-import KnowledgePage from './components/KnowledgePage';
-import AIAgentsPage from './components/AIAgentsPage';
 import WFMPage from './components/WFMPage';
+import TicketDetailPage from './components/TicketDetailPage';
 import PageTransition from './components/PageTransition';
-import { CommandPalette } from './components/CommandPalette';
-import { ZendeskLogo, ChevronDownIcon, CheckIcon, SparkleIcon, GearIcon, InboxIcon, ShapesIcon, ContactsIcon, QALogoIcon, AIAgentsLogoIcon, WFMLogoIcon } from './components/Icons';
+import TopBar from './components/TopBar/TopBar';
+import Widgets from './components/Widgets/Widgets';
+import { AdminCenterProductIcon, SupportProductIcon, WFMProductIcon } from './components/Icons';
+import { useTheme } from './contexts';
 import './App.css';
 
 const products = [
-  { id: 'quality', name: 'Quality assurance', icon: QALogoIcon },
-  { id: 'workforce', name: 'Workforce management', icon: WFMLogoIcon },
-  { id: 'support', name: 'Support', icon: InboxIcon, current: true },
-  { id: 'admin', name: 'Admin center', icon: GearIcon },
-  { id: 'ai-agents', name: 'AI agents', icon: AIAgentsLogoIcon },
-  { id: 'knowledge', name: 'Knowledge', icon: ShapesIcon },
+  { id: 'workforce', name: 'Workforce management', icon: WFMProductIcon },
+  { id: 'support', name: 'Support', icon: SupportProductIcon, current: true },
+  { id: 'admin', name: 'Admin center', icon: AdminCenterProductIcon },
 ];
 
-function NavTopBar({ onProductChange, selectedProduct }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+const getTicketKey = (ticket) => `${ticket.id}__${ticket.title}`;
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [isOpen]);
-
-  const handleProductSelect = (product) => {
-    onProductChange(product);
-    setIsOpen(false);
-  };
-
-  return (
-    <div className="nav-top-bar" ref={dropdownRef}>
-      <div className="nav-top-bar__logo">
-        <ZendeskLogo className="nav-top-bar__logo-icon" />
-      </div>
-      <button 
-        className={`nav-top-bar__product-selector ${isOpen ? 'active' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span className="nav-top-bar__product-name">{selectedProduct?.name}</span>
-        <ChevronDownIcon className={`nav-top-bar__chevron ${isOpen ? 'rotated' : ''}`} />
-      </button>
-      
-      {isOpen && (
-        <div className="nav-top-bar__dropdown">
-          <div className="nav-top-bar__dropdown-list">
-            {products.map((product) => {
-              const Icon = product.icon;
-              const isSelected = selectedProduct?.id === product.id;
-              return (
-                <button
-                  key={product.id}
-                  className={`nav-top-bar__dropdown-item ${isSelected ? 'selected' : ''}`}
-                  onClick={() => handleProductSelect(product)}
-                >
-                  <Icon className="nav-top-bar__dropdown-icon" />
-                  <span className="nav-top-bar__dropdown-name">{product.name}</span>
-                  {isSelected && <CheckIcon className="nav-top-bar__dropdown-check" />}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function NavPanel({ onToggleNav, isNavCollapsed, onProductChange, selectedProduct }) {
+function NavPanel({ onToggleNav, isNavCollapsed }) {
   return (
     <div className="nav-panel">
-      <NavTopBar onProductChange={onProductChange} selectedProduct={selectedProduct} />
       <div className="nav-panel__content">
         <PrimarySidebar isNavCollapsed={isNavCollapsed} onToggleNav={onToggleNav} />
         {!isNavCollapsed && <SecondarySidebar onToggle={onToggleNav} />}
@@ -102,7 +40,7 @@ function MainContent({ selectedTicket, onSelectTicket, onCloseConversation, onSt
       <div className={`main-content__ticket-list ${selectedTicket ? 'main-content__ticket-list--narrow' : ''}`}>
         <TicketList selectedTicket={selectedTicket} onSelectTicket={onSelectTicket} />
       </div>
-      {selectedTicket && (
+      {selectedTicket ? (
         <div className="main-content__conversation">
           <ConversationPanel 
             ticket={selectedTicket} 
@@ -114,36 +52,52 @@ function MainContent({ selectedTicket, onSelectTicket, onCloseConversation, onSt
             onNextTicket={onNextTicket}
           />
         </div>
+      ) : (
+        <div className="main-content__widgets">
+          <Widgets />
+        </div>
       )}
-    </div>
-  );
-}
-
-function WidgetsPanel() {
-  return (
-    <div className="widgets-panel">
-      <Widgets />
     </div>
   );
 }
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(products.find(p => p.current));
-  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [openTicketTabs, setOpenTicketTabs] = useState([]);
+  const { setCurrentProduct } = useTheme();
+
+  // Initialize current product on mount and sync when selectedProduct changes
+  useEffect(() => {
+    setCurrentProduct(selectedProduct?.id || 'support');
+  }, [selectedProduct, setCurrentProduct]);
 
   const handleProductChange = (product) => {
     setSelectedProduct(product);
+    setCurrentProduct(product.id); // Update theme context with new product
     // Clear selected ticket when changing pages
     setSelectedTicket(null);
   };
 
   const handleSelectTicket = useCallback((ticket) => {
+    setOpenTicketTabs(prev => {
+      const alreadyOpen = prev.some(t => getTicketKey(t) === getTicketKey(ticket));
+      return alreadyOpen ? prev : [...prev, ticket];
+    });
     setSelectedTicket(ticket);
   }, []);
 
   const handleCloseActionPanel = useCallback(() => {
     setSelectedTicket(null);
+  }, []);
+
+  const handleTicketTabClick = useCallback((ticket) => {
+    setSelectedTicket(ticket);
+  }, []);
+
+  const handleTicketTabClose = useCallback((ticket) => {
+    setOpenTicketTabs(prev => prev.filter(t => getTicketKey(t) !== getTicketKey(ticket)));
+    setSelectedTicket(prev => prev && getTicketKey(prev) === getTicketKey(ticket) ? null : prev);
   }, []);
 
   const handleStatusChange = useCallback((newStatus) => {
@@ -169,90 +123,18 @@ function App() {
     }
   }, [currentTicketIndex]);
 
-  // Global keyboard shortcut for Command Palette (⌘+K / Ctrl+K)
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-        event.preventDefault();
-        setIsCommandPaletteOpen(prev => !prev);
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const handleCommandSelect = useCallback((command) => {
-    console.log('Command selected:', command);
-    // Handle navigation or action based on command
-    // You can add logic here to navigate to different pages or trigger actions
-  }, []);
-
-  const handleAIQuery = useCallback((query) => {
-    console.log('AI Query:', query);
-    // Handle AI query - could open a chat or process the request
-  }, []);
-
-  const handleNavigate = useCallback((targetPage) => {
-    const targetProduct = products.find(p => p.id === targetPage);
-    if (targetProduct) {
-      setSelectedProduct(targetProduct);
-    }
-  }, []);
-
-  const openCommandPalette = useCallback(() => {
-    setIsCommandPaletteOpen(true);
-  }, []);
-
   // Determine which page to render
-  const isQAPage = selectedProduct?.id === 'quality';
   const isAdminPage = selectedProduct?.id === 'admin';
-  const isKnowledgePage = selectedProduct?.id === 'knowledge';
-  const isAIAgentsPage = selectedProduct?.id === 'ai-agents';
   const isWFMPage = selectedProduct?.id === 'workforce';
   const pageKey = selectedProduct?.id || 'support';
 
   const renderPageContent = () => {
-    if (isQAPage) {
-      return (
-        <QAPage 
-          onProductChange={handleProductChange} 
-          selectedProduct={selectedProduct} 
-          products={products}
-          onOpenCommandPalette={openCommandPalette}
-        />
-      );
-    }
-
     if (isAdminPage) {
       return (
         <AdminCenterPage 
           onProductChange={handleProductChange} 
           selectedProduct={selectedProduct} 
           products={products}
-          onOpenCommandPalette={openCommandPalette}
-        />
-      );
-    }
-
-    if (isKnowledgePage) {
-      return (
-        <KnowledgePage 
-          onProductChange={handleProductChange} 
-          selectedProduct={selectedProduct} 
-          products={products}
-          onOpenCommandPalette={openCommandPalette}
-        />
-      );
-    }
-
-    if (isAIAgentsPage) {
-      return (
-        <AIAgentsPage 
-          onProductChange={handleProductChange} 
-          selectedProduct={selectedProduct} 
-          products={products}
-          onOpenCommandPalette={openCommandPalette}
         />
       );
     }
@@ -263,28 +145,57 @@ function App() {
           onProductChange={handleProductChange} 
           selectedProduct={selectedProduct} 
           products={products}
-          onOpenCommandPalette={openCommandPalette}
+        />
+      );
+    }
+
+    if (selectedTicket) {
+      return (
+        <TicketDetailPage
+          ticket={selectedTicket}
+          onBack={handleCloseActionPanel}
+          onNavigateHome={handleCloseActionPanel}
+          onProductChange={handleProductChange}
+          selectedProduct={selectedProduct}
+          products={products}
+          onStatusChange={handleStatusChange}
+          currentTicketIndex={currentTicketIndex}
+          totalTickets={tickets.length}
+          onPrevTicket={handlePrevTicket}
+          onNextTicket={handleNextTicket}
+          openTicketTabs={openTicketTabs}
+          onTicketTabClick={handleTicketTabClick}
+          onTicketTabClose={handleTicketTabClose}
         />
       );
     }
 
     return (
-      <ResizableLayout
-        navPanel={<NavPanel onProductChange={handleProductChange} selectedProduct={selectedProduct} />}
-        topBar={<Header onOpenCommandPalette={openCommandPalette} />}
-        mainContent={
-          <MainContent 
-            selectedTicket={selectedTicket} 
-            onSelectTicket={handleSelectTicket} 
-            onCloseConversation={handleCloseActionPanel} 
-            onStatusChange={handleStatusChange}
-            currentTicketIndex={currentTicketIndex}
-            onPrevTicket={handlePrevTicket}
-            onNextTicket={handleNextTicket}
-          />
-        }
-        widgetsPanel={<WidgetsPanel />}
-      />
+      <div className="support-page">
+        <TopBar
+          selectedProduct={selectedProduct}
+          products={products}
+          onProductChange={handleProductChange}
+          openTicketTabs={openTicketTabs}
+          selectedTicket={selectedTicket}
+          onTicketTabClick={handleTicketTabClick}
+          onTicketTabClose={handleTicketTabClose}
+        />
+        <ResizableLayout
+          navPanel={<NavPanel />}
+          mainContent={
+            <MainContent 
+              selectedTicket={selectedTicket} 
+              onSelectTicket={handleSelectTicket} 
+              onCloseConversation={handleCloseActionPanel} 
+              onStatusChange={handleStatusChange}
+              currentTicketIndex={currentTicketIndex}
+              onPrevTicket={handlePrevTicket}
+              onNextTicket={handleNextTicket}
+            />
+          }
+        />
+      </div>
     );
   };
 
@@ -294,14 +205,7 @@ function App() {
         {renderPageContent()}
       </PageTransition>
       
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        currentPage={selectedProduct?.id || 'support'}
-        onCommandSelect={handleCommandSelect}
-        onAIQuery={handleAIQuery}
-        onNavigate={handleNavigate}
-      />
+      <Agentation />
     </div>
   );
 }

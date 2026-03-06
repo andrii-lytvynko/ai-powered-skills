@@ -3,8 +3,8 @@
   flex-direction: column;
   width: 232px;
   height: 100%;
-  padding: var(--spacing-xs);
   position: relative;
+  background: var(--color-grey-100);
 }
 
 .secondary-sidebar__content {
@@ -12,34 +12,26 @@
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
+  padding: var(--spacing-xs);
 }
 
-/* Main heading */
-.secondary-sidebar__heading {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  padding: 16px var(--spacing-xxs);
-  letter-spacing: -0.45px;
-  line-height: 24px;
-}
+/* ── Section ───────────────────────────────────────────────────── */
 
-/* Section styles */
 .sidebar-section {
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--spacing-sm);
 }
 
 .sidebar-section__header {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  padding: var(--spacing-sm) var(--spacing-xs) var(--spacing-sm) var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-xxs);
 }
 
 .sidebar-section__title {
-  font-family: var(--font-display);
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: var(--color-text-secondary);
@@ -54,146 +46,142 @@
   background: var(--color-grey-300);
 }
 
-/* Navigation styles */
+/* ── Nav items ─────────────────────────────────────────────────── */
+
 .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-bottom: var(--spacing-sm);
 }
 
 .sidebar-nav__item {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  padding: 6px 12px;
-  border-radius: var(--radius-lg);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  position: relative;
   height: 32px;
-  line-height: 20px;
-  letter-spacing: -0.25px;
-  background: var(--btn-ghost-bg);
+  padding: 0 var(--spacing-sm);
+  border-radius: var(--radius-lg);
+  border: none;
+  background: transparent;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .sidebar-nav__item:hover {
   background: var(--btn-ghost-hover-bg);
 }
 
-.sidebar-nav__item:active {
-  background: var(--btn-ghost-active-bg);
-}
-
 .sidebar-nav__item--active {
-  background: var(--btn-primary-bg);
-  font-weight: 600;
-  color: var(--btn-primary-text);
+  background: var(--color-grey-900);
 }
 
 .sidebar-nav__item--active:hover {
-  background: var(--btn-primary-hover-bg);
+  background: var(--color-grey-900);
 }
 
-.sidebar-nav__item--active:active {
-  background: var(--btn-primary-active-bg);
-  color: var(--btn-primary-active-text);
-}
+/* ── Icons ─────────────────────────────────────────────────────── */
 
 .sidebar-nav__icon {
   width: 16px;
   height: 16px;
-  color: var(--color-lime-dark);
   flex-shrink: 0;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
 }
+
+.sidebar-nav__item:hover .sidebar-nav__icon {
+  opacity: 0.85;
+}
+
+.sidebar-nav__item--active .sidebar-nav__icon {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+/* ── Label ─────────────────────────────────────────────────────── */
 
 .sidebar-nav__label {
-  flex: 1;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-grey-900);
+  text-align: left;
+  letter-spacing: -0.154px;
+  line-height: 20px;
 }
 
-/* Badge count (small gray) */
-.sidebar-nav__badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 3px;
-  background: var(--color-grey-icon);
-  color: white;
-  font-size: 10px;
-  font-weight: 600;
-  border-radius: var(--radius-md);
+.sidebar-nav__item--active .sidebar-nav__label {
+  color: var(--color-bg-white);
 }
 
-/* Badge tag (lime styled like in Figma) */
-.sidebar-nav__badge-tag {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 24px;
-  padding: 2px var(--spacing-xs);
-  background: rgba(255, 255, 255, 0.24);
-  color: var(--color-text-primary);
-  font-family: 'Geist Mono', 'SF Mono', 'Monaco', monospace;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: var(--radius-lg);
-  letter-spacing: -0.25px;
-  line-height: 16px;
-}
+/* ── Collapse button ───────────────────────────────────────────── */
 
-/* Collapse button */
 .sidebar-collapse-btn {
   position: absolute;
-  bottom: var(--spacing-sm);
-  left: -47px;
+  bottom: calc(var(--spacing-sm) * 2);
+  left: -44px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
   background: var(--color-bg-white);
-  border-radius: var(--radius-xl);
-  color: var(--color-grey-icon);
+  border-radius: 50%;
+  border: none;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: var(--shadow-xs);
 }
 
 .sidebar-collapse-btn:hover {
   background: var(--btn-ghost-hover-bg);
 }
 
-.sidebar-collapse-btn:active {
-  background: var(--btn-ghost-active-bg);
-}
-
 .sidebar-collapse-btn__icon {
   width: 20px;
   height: 20px;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
 }
 
-/* Dark theme adjustments */
+.sidebar-collapse-btn:hover .sidebar-collapse-btn__icon {
+  opacity: 0.85;
+}
+
+/* ── Dark theme ────────────────────────────────────────────────── */
+
+[data-theme="dark"] .sidebar-section__title {
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .sidebar-section__line {
+  background: var(--color-grey-300);
+}
+
+[data-theme="dark"] .sidebar-nav__label {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .sidebar-nav__item--active {
+  background: var(--color-text-primary);
+}
+
+[data-theme="dark"] .sidebar-nav__item--active .sidebar-nav__label {
+  color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .sidebar-nav__item--active .sidebar-nav__icon {
+  filter: brightness(0);
+}
+
 [data-theme="dark"] .sidebar-collapse-btn {
   background: var(--color-grey-600);
-  color: var(--color-text-primary);
-  box-shadow: none;
 }
 
 [data-theme="dark"] .sidebar-collapse-btn:hover {
   background: var(--color-olive);
-}
-
-[data-theme="dark"] .sidebar-nav__item--active {
-  color: #0e0e02;
-}
-
-[data-theme="dark"] .sidebar-nav__badge-tag {
-  color: #0e0e02;
 }

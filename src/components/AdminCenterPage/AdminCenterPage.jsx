@@ -1,20 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
-import ProfileMenu from '../ProfileMenu';
+import { useState } from 'react';
+import { Anchor, Button } from '@zendeskgarden/react-buttons';
+import TopBar from '../TopBar/TopBar';
 import { 
-  ZendeskLogo, 
   ChevronDownIcon, 
-  CheckIcon, 
-  SearchIcon, 
-  BellIcon,
   HomeIcon,
   BuildingIcon,
   ContactsIcon,
   SparkleIcon,
   ShapesIcon,
-  SidebarIcon,
   PlusIcon,
   GearIcon
 } from '../Icons';
+import PageSidebarNav from '../PageSidebarNav';
+import QueuesPage from '../QueuesPage';
 import './AdminCenterPage.css';
 
 // Admin Center specific icons
@@ -71,13 +69,7 @@ function GripIcon({ className }) {
 }
 
 function ExternalLinkIcon({ className }) {
-  return (
-    <svg className={className} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 6.5V9.5C9 9.76522 8.89464 10.0196 8.70711 10.2071C8.51957 10.3946 8.26522 10.5 8 10.5H2.5C2.23478 10.5 1.98043 10.3946 1.79289 10.2071C1.60536 10.0196 1.5 9.76522 1.5 9.5V4C1.5 3.73478 1.60536 3.48043 1.79289 3.29289C1.98043 3.10536 2.23478 3 2.5 3H5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M7.5 1.5H10.5V4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M5 7L10.5 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
+  return <span className={className} aria-hidden="true" />;
 }
 
 function AdminCenterLogo({ className }) {
@@ -105,34 +97,30 @@ const primaryNavItems = [
 // Secondary Navigation Data
 const secondaryNavSections = [
   {
-    title: 'Tickets',
-    items: [
-      { id: 'forms', label: 'Forms' },
-      { id: 'fields', label: 'Fields' },
-      { id: 'tags', label: 'Tags' },
-      { id: 'ticket-statuses', label: 'Ticket statuses' },
-      { id: 'settings', label: 'Settings' },
-    ]
-  },
-  {
     title: 'Custom objects',
     items: [
       { id: 'objects', label: 'Objects' },
-      { id: 'relationship', label: 'Relationship' },
-      { id: 'display-settings', label: 'Display settings' },
+      { id: 'relationships', label: 'Relationships' },
+    ]
+  },
+  {
+    title: 'Omnichannel routing',
+    items: [
+      { id: 'routing-config', label: 'Routing configurations' },
+      { id: 'queues', label: 'Queues' },
+      { id: 'capacity-rules', label: 'Capacity rules' },
+      { id: 'agent-statuses', label: 'Agent statuses' },
+      { id: 'status-timeout', label: 'Status timeout' },
     ]
   },
   {
     title: 'Business rules',
     items: [
-      { id: 'triggers', label: 'Triggers', active: true },
-      { id: 'chat-triggers', label: 'Chat triggers' },
-      { id: 'automations', label: 'Automations' },
+      { id: 'triggers', label: 'Triggers' },
       { id: 'skills', label: 'Skills' },
-      { id: 'chat-routing', label: 'Chat routing' },
-      { id: 'sla', label: 'Service legal agreements' },
+      { id: 'automations', label: 'Automations' },
+      { id: 'sla', label: 'Service level agreement' },
       { id: 'schedules', label: 'Schedules' },
-      { id: 'rule-analysis', label: 'Rule analysis' },
     ]
   }
 ];
@@ -152,156 +140,7 @@ const sampleConditions = [
   },
 ];
 
-// Navigation Header Component (in nav column)
-function NavHeader({ onProductChange, selectedProduct, products = [], isCollapsed }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [isOpen]);
-
-  const handleProductSelect = (product) => {
-    if (onProductChange) {
-      onProductChange(product);
-    }
-    setIsOpen(false);
-  };
-
-  return (
-    <div className={`admin-nav-header ${isCollapsed ? 'admin-nav-header--collapsed' : ''}`} ref={dropdownRef}>
-      <div className="admin-nav-header__logo">
-        <AdminCenterLogo className="admin-nav-header__logo-icon" />
-      </div>
-      {!isCollapsed && (
-        <>
-          <button 
-            className={`admin-nav-header__product-selector ${isOpen ? 'active' : ''}`}
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span className="admin-nav-header__product-name">{selectedProduct?.name || 'Admin Center'}</span>
-            <ChevronDownIcon className={`admin-nav-header__chevron ${isOpen ? 'rotated' : ''}`} />
-          </button>
-          
-          {isOpen && products.length > 0 && (
-            <div className="admin-nav-header__dropdown">
-              <div className="admin-nav-header__dropdown-list">
-                {products.map((product) => {
-                  const Icon = product.icon;
-                  const isSelected = selectedProduct?.id === product.id;
-                  return (
-                    <button
-                      key={product.id}
-                      className={`admin-nav-header__dropdown-item ${isSelected ? 'selected' : ''}`}
-                      onClick={() => handleProductSelect(product)}
-                    >
-                      <Icon className="admin-nav-header__dropdown-icon" />
-                      <span className="admin-nav-header__dropdown-name">{product.name}</span>
-                      {isSelected && <CheckIcon className="admin-nav-header__dropdown-check" />}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </>
-      )}
-    </div>
-  );
-}
-
-// Content Header Component (in content column)
-function ContentHeader({ onOpenCommandPalette }) {
-  return (
-    <div className="admin-content-header">
-      <button 
-        className="admin-content-header__search"
-        onClick={onOpenCommandPalette}
-        type="button"
-      >
-        <SearchIcon className="admin-content-header__search-icon" />
-        <span className="admin-content-header__search-text">Search for apps and commands or ask AI...</span>
-        <span className="admin-content-header__search-shortcut">⌘ + K</span>
-      </button>
-      
-      <div className="admin-content-header__right">
-        <button className="admin-content-header__icon-btn" title="Notifications">
-          <BellIcon className="admin-content-header__icon" />
-        </button>
-        <ProfileMenu />
-      </div>
-    </div>
-  );
-}
-
-function AdminPrimaryNav({ isCollapsed, onToggleCollapse }) {
-  return (
-    <nav className="admin-primary-nav">
-      <div className="admin-primary-nav__items">
-        {primaryNavItems.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.id}
-              className={`admin-primary-nav__item ${item.active ? 'active' : ''}`}
-              title={item.label}
-            >
-              <div className={`admin-primary-nav__icon-wrapper ${item.active ? 'active' : ''}`}>
-                <Icon className="admin-primary-nav__icon" />
-              </div>
-            </button>
-          );
-        })}
-      </div>
-      <div className="admin-primary-nav__spacer" />
-      <button 
-        className="admin-primary-nav__collapse-btn" 
-        title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-        onClick={onToggleCollapse}
-      >
-        <SidebarIcon className={`admin-primary-nav__collapse-icon ${isCollapsed ? 'rotated' : ''}`} />
-      </button>
-    </nav>
-  );
-}
-
-function AdminSecondaryNav() {
-  return (
-    <aside className="admin-secondary-nav">
-      <div className="admin-secondary-nav__content">
-        <h2 className="admin-secondary-nav__heading">Objects and rules</h2>
-        
-        {secondaryNavSections.map((section) => (
-          <div key={section.title} className="admin-secondary-nav__section">
-            <div className="admin-secondary-nav__section-header">
-              <span className="admin-secondary-nav__section-title">{section.title}</span>
-              <span className="admin-secondary-nav__section-line" />
-            </div>
-            <div className="admin-secondary-nav__items">
-              {section.items.map((item) => (
-                <button
-                  key={item.id}
-                  className={`admin-secondary-nav__item ${item.active ? 'active' : ''}`}
-                >
-                  <span className="admin-secondary-nav__item-label">{item.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </aside>
-  );
-}
 
 function ConditionTag({ type, children, icon }) {
   return (
@@ -338,51 +177,69 @@ function ConditionAndOr({ nested }) {
   return (
     <div className={`condition-andor ${nested ? 'condition-andor--nested' : ''}`}>
       {nested && <div className="condition-andor__bracket" />}
-      <a href="#" className="condition-andor__link">AND</a>
+      <Anchor href="#" className="condition-andor__link">AND</Anchor>
     </div>
   );
 }
 
-export default function AdminCenterPage({ onProductChange, selectedProduct, products, onOpenCommandPalette }) {
+export default function AdminCenterPage({ onProductChange, selectedProduct, products }) {
   const [triggerName, setTriggerName] = useState('B2B Routing NZ');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('Routing');
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
+  const [activeSubPage, setActiveSubPage] = useState('queues'); // Default to queues as per Figma design
 
   const handleToggleNav = () => {
     setIsNavCollapsed(!isNavCollapsed);
   };
 
+  const handleSubPageSelect = (itemId) => {
+    setActiveSubPage(itemId);
+  };
+
+  // Render the Queues page when selected
+  if (activeSubPage === 'queues') {
+    return (
+      <QueuesPage 
+        onProductChange={onProductChange}
+        selectedProduct={selectedProduct}
+        products={products}
+      />
+    );
+  }
+
   return (
     <div className="admin-page">
+      <TopBar
+        selectedProduct={selectedProduct}
+        products={products}
+        onProductChange={onProductChange}
+        isNavCollapsed={isNavCollapsed}
+      />
       <div className="admin-page__body">
         {/* Navigation Column */}
-        <div className={`admin-page__nav-column ${isNavCollapsed ? 'admin-page__nav-column--collapsed' : ''}`}>
-          <NavHeader 
-            onProductChange={onProductChange} 
-            selectedProduct={selectedProduct} 
-            products={products}
-            isCollapsed={isNavCollapsed}
-          />
-          <div className="admin-page__nav-content">
-            <AdminPrimaryNav isCollapsed={isNavCollapsed} onToggleCollapse={handleToggleNav} />
-            {!isNavCollapsed && <AdminSecondaryNav />}
-          </div>
-        </div>
+        <PageSidebarNav
+          primaryItems={primaryNavItems}
+          secondaryHeading="Objects and rules"
+          secondarySections={secondaryNavSections}
+          activeItem={activeSubPage}
+          onItemSelect={handleSubPageSelect}
+          isCollapsed={isNavCollapsed}
+          onToggleCollapse={handleToggleNav}
+        />
         
         {/* Content Column */}
         <div className="admin-page__content-column">
-          <ContentHeader onOpenCommandPalette={onOpenCommandPalette} />
         
           <main className="admin-page__main">
           <div className="admin-page__content">
             {/* Breadcrumbs */}
             <div className="admin-breadcrumbs">
-              <a href="#" className="admin-breadcrumbs__link">Objects and rules</a>
+              <Anchor href="#" className="admin-breadcrumbs__link">Objects and rules</Anchor>
               <ChevronDownIcon className="admin-breadcrumbs__separator" />
-              <a href="#" className="admin-breadcrumbs__link">Business rules</a>
+              <Anchor href="#" className="admin-breadcrumbs__link">Business rules</Anchor>
               <ChevronDownIcon className="admin-breadcrumbs__separator" />
-              <a href="#" className="admin-breadcrumbs__link">Triggers</a>
+              <Anchor href="#" className="admin-breadcrumbs__link">Triggers</Anchor>
               <ChevronDownIcon className="admin-breadcrumbs__separator" />
               <span className="admin-breadcrumbs__current">Create ticket trigger</span>
             </div>
@@ -392,10 +249,10 @@ export default function AdminCenterPage({ onProductChange, selectedProduct, prod
               <h1 className="admin-page-header__title">Create ticket trigger</h1>
               <p className="admin-page-header__description">
                 Set up event-based rules that run every time ticket is created or updated.{' '}
-                <a href="#" className="admin-page-header__link">
+                <Anchor href="#" className="admin-page-header__link">
                   Learn about ticket triggers
                   <ExternalLinkIcon className="admin-page-header__link-icon" />
-                </a>
+                </Anchor>
               </p>
             </div>
 
@@ -435,10 +292,10 @@ export default function AdminCenterPage({ onProductChange, selectedProduct, prod
               <h2 className="admin-section__title">Conditions</h2>
               <p className="admin-section__description">
                 Conditions that must be met for the trigger to run.{' '}
-                <a href="#" className="admin-section__link">
+                <Anchor href="#" className="admin-section__link">
                   Learn about conditions and nested conditions
                   <ExternalLinkIcon className="admin-section__link-icon" />
-                </a>
+                </Anchor>
               </p>
 
               {/* Condition Key */}
@@ -501,17 +358,17 @@ export default function AdminCenterPage({ onProductChange, selectedProduct, prod
               <p className="admin-section__description">
                 Actions that will occur if global conditions are satisfied.
               </p>
-              <button className="btn btn--outline admin-section__add-btn">
+              <Button className="admin-section__add-btn">
                 Add action
-              </button>
+              </Button>
             </section>
           </div>
 
           {/* Footer */}
           <div className="admin-page__footer">
             <div className="admin-page__footer-actions">
-              <button className="btn btn--ghost">Cancel</button>
-              <button className="btn btn--primary">Save</button>
+              <Button isBasic>Cancel</Button>
+              <Button isPrimary>Save</Button>
             </div>
           </div>
           </main>

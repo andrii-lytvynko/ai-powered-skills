@@ -4,7 +4,7 @@ import { SunIcon, MoonIcon } from '../Icons';
 import './ProfileMenu.css';
 
 export default function ProfileMenu({ className = '' }) {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isDarkModeAllowed } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -27,7 +27,7 @@ export default function ProfileMenu({ className = '' }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="profile-menu__avatar-img">
-          <span>JD</span>
+          <img src="/assets/Avatar.png" alt="Profile avatar" />
         </div>
       </button>
 
@@ -43,23 +43,27 @@ export default function ProfileMenu({ className = '' }) {
             </div>
           </div>
           
-          <div className="profile-menu__divider" />
-          
-          <div className="profile-menu__theme">
-            <span className="profile-menu__theme-label">Theme</span>
-            <button 
-              className="profile-menu__theme-toggle" 
-              title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              onClick={toggleTheme}
-            >
-              <div className="profile-menu__theme-track">
-                <SunIcon className="profile-menu__theme-icon profile-menu__theme-icon--sun" />
-                <MoonIcon className="profile-menu__theme-icon profile-menu__theme-icon--moon" />
-                <div className={`profile-menu__theme-thumb ${theme === 'dark' ? 'profile-menu__theme-thumb--dark' : ''}`} />
+          {isDarkModeAllowed && (
+            <>
+              <div className="profile-menu__divider" />
+
+              <div className="profile-menu__theme">
+                <span className="profile-menu__theme-label">Theme</span>
+                <button 
+                  className="profile-menu__theme-toggle" 
+                  title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                  onClick={toggleTheme}
+                >
+                  <div className="profile-menu__theme-track">
+                    <SunIcon className="profile-menu__theme-icon profile-menu__theme-icon--sun" />
+                    <MoonIcon className="profile-menu__theme-icon profile-menu__theme-icon--moon" />
+                    <div className={`profile-menu__theme-thumb ${theme === 'dark' ? 'profile-menu__theme-thumb--dark' : ''}`} />
+                  </div>
+                </button>
               </div>
-            </button>
-          </div>
-          
+            </>
+          )}
+
           <div className="profile-menu__divider" />
           
           <button className="profile-menu__item">

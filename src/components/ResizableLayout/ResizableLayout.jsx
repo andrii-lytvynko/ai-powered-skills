@@ -5,23 +5,17 @@ const MIN_NAV_WIDTH = 56;
 const MAX_NAV_WIDTH = 400;
 const DEFAULT_NAV_WIDTH = 288;
 
-const MIN_WIDGETS_WIDTH = 260;
-const MAX_WIDGETS_WIDTH = 360;
-const DEFAULT_WIDGETS_WIDTH = 268;
-
 const MIN_ACTION_PANEL_WIDTH = 280;
 const MAX_ACTION_PANEL_WIDTH = 400;
 const DEFAULT_ACTION_PANEL_WIDTH = 320;
 
-export default function ResizableLayout({ navPanel, topBar, mainContent, widgetsPanel, actionPanel }) {
+export default function ResizableLayout({ navPanel, topBar, mainContent, actionPanel }) {
   const containerRef = useRef(null);
   const contentRef = useRef(null);
   const [navWidth, setNavWidth] = useState(DEFAULT_NAV_WIDTH);
-  const [widgetsWidth, setWidgetsWidth] = useState(DEFAULT_WIDGETS_WIDTH);
   const [actionPanelWidth, setActionPanelWidth] = useState(DEFAULT_ACTION_PANEL_WIDTH);
-  const [isDragging, setIsDragging] = useState(null); // 'nav' | 'widgets' | 'action' | null
+  const [isDragging, setIsDragging] = useState(null); // 'nav' | 'action' | null
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
-  const [isWidgetsCollapsed, setIsWidgetsCollapsed] = useState(false);
 
   // Handle mouse/touch drag
   const handleDrag = useCallback((clientX) => {
@@ -34,12 +28,6 @@ export default function ResizableLayout({ navPanel, topBar, mainContent, widgets
       const clampedWidth = Math.max(MIN_NAV_WIDTH, Math.min(newWidth, MAX_NAV_WIDTH));
       setNavWidth(clampedWidth);
       setIsNavCollapsed(clampedWidth <= MIN_NAV_WIDTH + 20);
-    } else if (isDragging === 'widgets' && contentRef.current) {
-      const contentRect = contentRef.current.getBoundingClientRect();
-      const newWidth = contentRect.right - clientX;
-      const clampedWidth = Math.max(MIN_WIDGETS_WIDTH, Math.min(newWidth, MAX_WIDGETS_WIDTH));
-      setWidgetsWidth(clampedWidth);
-      setIsWidgetsCollapsed(false);
     } else if (isDragging === 'action' && contentRef.current) {
       const mainEl = contentRef.current.querySelector('.resizable-layout__main');
       if (mainEl) {
@@ -112,28 +100,8 @@ export default function ResizableLayout({ navPanel, topBar, mainContent, widgets
     }
   };
 
-  const handleWidgetsDoubleClick = () => {
-    if (isWidgetsCollapsed) {
-      setWidgetsWidth(DEFAULT_WIDGETS_WIDTH);
-      setIsWidgetsCollapsed(false);
-    } else {
-      setWidgetsWidth(0);
-      setIsWidgetsCollapsed(true);
-    }
-  };
-
   const handleActionPanelDoubleClick = () => {
     setActionPanelWidth(DEFAULT_ACTION_PANEL_WIDTH);
-  };
-
-  const toggleWidgets = () => {
-    if (isWidgetsCollapsed) {
-      setWidgetsWidth(DEFAULT_WIDGETS_WIDTH);
-      setIsWidgetsCollapsed(false);
-    } else {
-      setWidgetsWidth(0);
-      setIsWidgetsCollapsed(true);
-    }
   };
 
   const toggleNav = () => {
@@ -174,7 +142,7 @@ export default function ResizableLayout({ navPanel, topBar, mainContent, widgets
         {/* Top Bar - spans full width */}
         {topBar && (
           <div className="resizable-layout__topbar">
-            {cloneElement(topBar, { onToggleWidgets: toggleWidgets, isWidgetsVisible: !isWidgetsCollapsed })}
+            {topBar}
           </div>
         )}
 
@@ -207,43 +175,6 @@ export default function ResizableLayout({ navPanel, topBar, mainContent, widgets
             </div>
           )}
 
-          {/* Widgets Resizer */}
-          {!isWidgetsCollapsed && (
-            <div
-              className={`resizable-layout__resizer ${isDragging === 'widgets' ? 'active' : ''}`}
-              onMouseDown={handleMouseDown('widgets')}
-              onTouchStart={handleTouchStart('widgets')}
-              onDoubleClick={handleWidgetsDoubleClick}
-            >
-              <div className="resizable-layout__resizer-line" />
-            </div>
-          )}
-
-          {/* Widgets Panel */}
-          {!isWidgetsCollapsed && (
-            <div 
-              className="resizable-layout__widgets"
-              style={{ width: widgetsWidth }}
-            >
-              {widgetsPanel}
-            </div>
-          )}
-
-          {/* Collapsed widgets toggle */}
-          {isWidgetsCollapsed && (
-            <button 
-              className="resizable-layout__expand-btn"
-              onClick={() => {
-                setWidgetsWidth(DEFAULT_WIDGETS_WIDTH);
-                setIsWidgetsCollapsed(false);
-              }}
-              title="Show widgets"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          )}
         </div>
       </div>
     </div>

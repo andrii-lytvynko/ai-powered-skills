@@ -24,11 +24,11 @@
   padding: 6px 12px;
   border-radius: var(--radius-lg);
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   color: var(--btn-ghost-text);
-  letter-spacing: -0.25px;
-  line-height: 20px;
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-md);
   background: var(--btn-ghost-bg);
   transition: all 0.15s ease;
 }
@@ -47,71 +47,17 @@
   color: var(--color-text-primary);
 }
 
-/* Search bar */
-.header__search-bar {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  flex: 1;
-  max-width: 684px;
-  height: 38px;
-  padding: 0 var(--spacing-sm);
-  background: var(--color-bg-white);
-  border: 1px solid var(--color-grey-300);
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  font-family: inherit;
-  text-align: left;
-  transition: all 0.15s ease;
-}
-
-.header__search-bar:hover {
-  border-color: var(--color-grey-600);
-}
-
-.header__search-bar:focus {
-  outline: none;
-  border-color: var(--color-lime-primary);
-  box-shadow: 0 0 0 3px var(--color-lime-light);
-}
-
-.header__search-bar-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--color-grey-600);
-  flex-shrink: 0;
-}
-
-.header__search-bar-text {
-  display: flex;
-  flex: 1;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  color: var(--color-text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.header__search-bar-shortcut {
-  padding: 2px var(--spacing-xxs);
-  background: var(--color-bg-subtle);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 18px;
-  color: var(--color-text-secondary);
-  flex-shrink: 0;
-}
-
 /* Right section */
 .header__right {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+}
+
+/* Icon button wrapper (for notification badge positioning) */
+.header__icon-btn-wrapper {
+  position: relative;
+  display: inline-flex;
 }
 
 /* Icon buttons */
@@ -168,10 +114,10 @@
   border: 1px solid var(--color-grey-300);
   border-radius: 9999px;
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
-  letter-spacing: -0.25px;
+  letter-spacing: var(--letter-spacing-tight);
   transition: all 0.15s ease;
 }
 
@@ -194,9 +140,84 @@
   padding: 0 6px;
   background: var(--color-lime-primary);
   color: var(--color-lime-dark);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   border-radius: 9999px;
+}
+
+/* Chat status indicator */
+.header__chat-status {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header__chat-status-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #03c752;
+  border: 2px solid var(--color-bg-primary);
+  z-index: 1;
+}
+
+/* Call timer */
+.header__call-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  background: #fff0f0;
+  border: 1px solid #ffd5d5;
+  border-radius: var(--radius-lg);
+}
+
+.header__call-timer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cc3340;
+  flex-shrink: 0;
+  animation: callTimerPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes callTimerPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.header__call-timer-text {
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: #cc3340;
+  letter-spacing: 0.5px;
+}
+
+.header__call-timer-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: #cc3340;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.header__call-timer-icon {
+  width: 12px;
+  height: 12px;
+  color: white;
+}
+
+.header__conversations-icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* Notification badge */
@@ -212,8 +233,8 @@
   padding: 0 3px;
   background: var(--color-sla-red);
   color: white;
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-lg);
   border: 2px solid var(--color-bg-primary);
 }
@@ -329,10 +350,10 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, var(--color-lime-primary) 0%, #a5a82e 100%);
+  background: linear-gradient(135deg, var(--color-lime-primary) 0%, var(--color-primary-600) 100%);
   color: var(--color-lime-dark);
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   border-radius: 50%;
 }
 
@@ -374,10 +395,10 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--color-lime-primary) 0%, #a5a82e 100%);
+  background: linear-gradient(135deg, var(--color-lime-primary) 0%, var(--color-primary-600) 100%);
   color: var(--color-lime-dark);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -391,15 +412,15 @@
 
 .header__profile-name {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  letter-spacing: -0.2px;
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .header__profile-email {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -421,7 +442,7 @@
 
 .header__profile-theme-label {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--font-size-md);
   color: var(--color-text-primary);
 }
 
@@ -432,11 +453,11 @@
   height: 36px;
   padding: 6px var(--spacing-md);
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
   text-align: left;
-  letter-spacing: -0.25px;
+  letter-spacing: var(--letter-spacing-tight);
   background: transparent;
   transition: all 0.15s ease;
 }
@@ -475,7 +496,3 @@
   background: #0e0e02;
 }
 
-[data-theme="dark"] .header__search-bar {
-  background: var(--color-bg-white);
-  border-color: var(--color-grey-300);
-}
