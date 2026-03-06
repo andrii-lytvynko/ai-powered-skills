@@ -4,17 +4,11 @@ A high-fidelity React prototype of the Zendesk Support suite, built with the Zen
 
 ## Features
 
-- **Multi-product navigation** — Switch between Support, Admin Center, and Workforce Management via the TopBar product switcher
-- **Resizable layout** — Drag dividers to adjust the width of the nav, ticket list, and conversation panel columns
+- **Multi-product navigation** — Switch between Product pages via the TopBar product switcher
 - **Support page** — Ticket list with conversation panel, inline status changes, and ticket navigation
 - **Ticket detail page** — Full-screen conversation view with sidebar actions
 - **Admin Center** — Settings and configuration pages
 - **Workforce Management (WFM)** — Schedule and staffing overview
-- **Queues** — Queue list and queue edit page with predictive routing support
-- **AI Agent panel** — Embedded AI assistant panel in the conversation view
-- **Command palette** — Keyboard-accessible command search
-- **Theme context** — Per-product color theming via React context
-- **Page transitions** — Animated page-level transitions between products
 
 ## Getting started
 
