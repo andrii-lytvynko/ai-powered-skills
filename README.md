@@ -72,3 +72,17 @@ src/
 ## Design system
 
 All UI components use [Zendesk Garden](https://garden.zendesk.com/components). Garden's `ThemeProvider` is configured once in `src/main.jsx` and wraps the entire app. CSS design tokens are defined in `src/index.css` and map to Garden's token system.
+
+## AI assistant compatibility
+
+This project is configured to work with multiple AI coding assistants:
+
+- **Cursor IDE** — Rules and skills are in `.cursor/rules/` and `.cursor/skills/`
+- **Claude Code** — Instructions consolidated in `CLAUDE.md` at project root
+
+Both assistants can work on this project without conflicts. The configuration files enforce:
+- Zendesk Garden design system usage
+- Zendesk Content Design guidelines for all UI copy
+- Consistent project structure and naming conventions
+
+When cloning this repository, both Cursor and Claude Code users will have access to the same guidelines through their respective configuration files.
