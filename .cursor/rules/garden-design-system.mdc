@@ -8,6 +8,15 @@ alwaysApply: true
 
 All UI must be built with Zendesk Garden components. Reference: https://garden.zendesk.com/components
 
+## Garden MCP lookup — required
+
+A Garden MCP server is registered for this project and exposes authoritative component data. You MUST use it before introducing any UI element:
+
+1. Call `search_garden_components("{ui need}")` to check whether a Garden component already covers the pattern (e.g. "dropdown", "loading spinner", "date input", "notification").
+2. If a match is returned, call `get_garden_component("{name}")` to retrieve exact prop names, required ARIA attributes, theming tokens, constraints, and code examples before writing any code.
+3. Never create a custom component, raw HTML element, or custom CSS class for any pattern that a Garden component already covers. The MCP result is the source of truth — not training data.
+4. Only build a custom component when `search_garden_components` returns no matching result.
+
 ## ThemeProvider
 
 `GardenThemeProvider` is already configured in `src/main.jsx` and wraps the entire app. Do NOT add it again per page or component.
