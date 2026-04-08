@@ -1,0 +1,153 @@
+/* ============================================================
+   Queue Notifications — fixed bottom-right overlay
+   Emil Kowalski principles:
+   - Enter: scale(0.97) + translateY(12px), 250ms strong ease-out
+   - Exit:  scale(0.97) + translateY(8px),  160ms ease-out (asymmetric — faster)
+   - Nothing from scale(0); always start 0.95–0.97
+   - prefers-reduced-motion: opacity only
+   ============================================================ */
+
+.queue-notifications-container {
+  position: fixed;
+  top: 56px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+
+.queue-notification {
+  pointer-events: all;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: 360px;
+  padding: 20px 40px 20px 40px;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-grey-300);
+  border-radius: 4px;
+  box-shadow: 0 20px 28px rgba(4, 68, 77, 0.15);
+
+  /* Entry state */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 250ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 250ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* @starting-style: initial state before element is painted */
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+  }
+}
+
+/* Exit state: applied via JS class */
+.queue-notification--exiting {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+  transition:
+    opacity 160ms ease-out,
+    transform 160ms ease-out;
+}
+
+/* ── Icon ─────────────────────────────────────────────────── */
+
+.queue-notification__icon {
+  position: absolute;
+  left: 15px;
+  top: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+
+.queue-notification__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.queue-notification__title {
+  font-size: var(--font-size-md, 14px);
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  margin: 0 0 0 0;
+}
+
+.queue-notification--warning .queue-notification__title {
+  color: var(--color-yellow-700, #ac5918);
+}
+
+.queue-notification--success .queue-notification__title {
+  color: var(--color-success, #038153);
+}
+
+.queue-notification__body {
+  font-size: var(--font-size-md, 14px);
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: var(--color-text-primary, #2f3941);
+  margin: 0;
+}
+
+/* ── Dismiss button ───────────────────────────────────────── */
+
+.queue-notification__dismiss {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--color-text-secondary, #68737d);
+  transition: transform 120ms ease-out, background 120ms ease-out;
+}
+
+.queue-notification__dismiss:hover {
+  background: var(--color-grey-100, #f8f9f9);
+}
+
+.queue-notification__dismiss:active {
+  transform: scale(0.97);
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .queue-notification {
+    transition: opacity 200ms ease;
+    transform: none;
+
+    @starting-style {
+      opacity: 0;
+      transform: none;
+    }
+  }
+
+  .queue-notification--exiting {
+    opacity: 0;
+    transform: none;
+    transition: opacity 150ms ease;
+  }
+}

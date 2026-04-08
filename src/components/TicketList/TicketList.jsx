@@ -105,6 +105,35 @@ const tickets = [
     sla: null,
     preview: 'How do I switch your app to Spanish?',
   },
+  {
+    id: '61042',
+    type: 'chat',
+    title: '지수 Kim | 주문이 도착하지 않았어요',
+    status: 'open',
+    timestamp: 'Today at 1:55 PM',
+    sla: { value: '12m', type: 'warning' },
+    preview: '주문한 상품이 아직 도착하지 않았어요.',
+    hasOnlineIndicator: true,
+  },
+  {
+    id: '61198',
+    type: 'email',
+    title: '민준 Park | 환불 요청드립니다',
+    status: 'pending',
+    timestamp: 'Today at 1:20 PM',
+    sla: null,
+    preview: '구매한 상품에 문제가 있어 환불을 요청합니다.',
+  },
+  {
+    id: '61303',
+    type: 'chat',
+    title: '서연 Choi | 비밀번호를 잊어버렸어요',
+    status: 'open',
+    timestamp: 'Today at 12:48 PM',
+    sla: { value: '25m', type: 'success' },
+    preview: '비밀번호를 잊어버려서 로그인이 안 돼요.',
+    hasOnlineIndicator: true,
+  },
 ];
 
 const ticketIconSrc = {

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Agentation } from 'agentation';
 import Header from './components/Header';
 import { PrimarySidebar, SecondarySidebar } from './components/Sidebar';
 import TicketList, { tickets } from './components/TicketList';
@@ -13,12 +12,14 @@ import TopBar from './components/TopBar/TopBar';
 import Widgets from './components/Widgets/Widgets';
 import { AdminCenterProductIcon, SupportProductIcon, WFMProductIcon } from './components/Icons';
 import { useTheme } from './contexts';
+import { QueueNotification, QueueNotificationsContainer } from './components/QueueNotifications/QueueNotifications';
+import { VoiceCallWidget } from './components/VoiceCallWidget/VoiceCallWidget';
 import './App.css';
 
 const products = [
   { id: 'workforce', name: 'Workforce management', icon: WFMProductIcon },
-  { id: 'support', name: 'Support', icon: SupportProductIcon, current: true },
-  { id: 'admin', name: 'Admin center', icon: AdminCenterProductIcon },
+  { id: 'support', name: 'Support', icon: SupportProductIcon },
+  { id: 'admin', name: 'Admin center', icon: AdminCenterProductIcon, current: true },
 ];
 
 const getTicketKey = (ticket) => `${ticket.id}__${ticket.title}`;
@@ -62,20 +63,52 @@ function MainContent({ selectedTicket, onSelectTicket, onCloseConversation, onSt
 }
 
 function App() {
-  const [selectedProduct, setSelectedProduct] = useState(products.find(p => p.current));
+  const [selectedProductId, setSelectedProductId] = useState(products.find(p => p.current)?.id ?? 'admin');
+  const selectedProduct = products.find(p => p.id === selectedProductId) ?? products.find(p => p.current);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [openTicketTabs, setOpenTicketTabs] = useState([]);
-  const { setCurrentProduct } = useTheme();
+  const { setCurrentProduct, setAgentStatus } = useTheme();
+
+  // ── Demo sequence state ──────────────────────────────────
+  // Sequence: 15s → notif1 → 15s → notif2 + status update → exit → voice widget
+  const [notif1Visible, setNotif1Visible] = useState(false);
+  const [notif2Visible, setNotif2Visible] = useState(false);
+  const [voiceWidgetVisible, setVoiceWidgetVisible] = useState(false);
+  const sequenceStartedRef = useRef(false);
 
   // Initialize current product on mount and sync when selectedProduct changes
   useEffect(() => {
     setCurrentProduct(selectedProduct?.id || 'support');
   }, [selectedProduct, setCurrentProduct]);
 
+  // Demo sequence — runs once when the support main view is visible (no ticket open)
+  useEffect(() => {
+    const isMainSupportView = selectedProductId === 'support' && !selectedTicket;
+    if (!isMainSupportView || sequenceStartedRef.current) return;
+
+    sequenceStartedRef.current = true;
+
+    // t=15s: first notification
+    const t1 = setTimeout(() => {
+      setNotif1Visible(true);
+    }, 15_000);
+
+    // t=30s: dismiss first, show second, update agent status
+    const t2 = setTimeout(() => {
+      setNotif1Visible(false);
+      setNotif2Visible(true);
+      setAgentStatus('available');
+    }, 30_000);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [selectedProductId, selectedTicket, setAgentStatus]);
+
   const handleProductChange = (product) => {
-    setSelectedProduct(product);
-    setCurrentProduct(product.id); // Update theme context with new product
-    // Clear selected ticket when changing pages
+    setSelectedProductId(product.id);
+    setCurrentProduct(product.id);
     setSelectedTicket(null);
   };
 
@@ -105,6 +138,27 @@ function App() {
       setSelectedTicket({ ...selectedTicket, status: newStatus });
     }
   }, [selectedTicket]);
+
+  const handleVoiceCallAccept = useCallback(() => {
+    setVoiceWidgetVisible(false);
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const hour12 = hours % 12 || 12;
+    const voiceTicket = {
+      id: '1237',
+      type: 'call',
+      title: 'Rachel Adams | Incoming call',
+      status: 'open',
+      timestamp: `Today at ${hour12}:${minutes} ${ampm}`,
+      preview: 'Incoming voice call',
+      lastMessage: { name: 'Rachel Adams' },
+      phoneNumber: '+1 415 555 0182',
+    };
+    setSelectedProductId('support');
+    handleSelectTicket(voiceTicket);
+  }, [handleSelectTicket]);
 
   // Calculate current ticket index
   const currentTicketIndex = selectedTicket 
@@ -204,8 +258,36 @@ function App() {
       <PageTransition pageKey={pageKey}>
         {renderPageContent()}
       </PageTransition>
-      
-      <Agentation />
+
+      {/* Demo sequence overlays — rendered outside PageTransition so they float above everything */}
+      <QueueNotificationsContainer>
+        {notif1Visible && (
+          <QueueNotification
+            type="warning"
+            title="You've been reassigned to Contact Center queue"
+            body="Your schedule changed at 2:00 PM. Incoming tickets will now be from the Billing Support queue."
+            autoDismissMs={6000}
+            onDismiss={() => setNotif1Visible(false)}
+          />
+        )}
+        {notif2Visible && (
+          <QueueNotification
+            type="success"
+            title="Status updated to Online – Voice calls"
+            body="Changed automatically based on your schedule"
+            autoDismissMs={4000}
+            onDismiss={() => setNotif2Visible(false)}
+            onExited={() => setVoiceWidgetVisible(true)}
+          />
+        )}
+      </QueueNotificationsContainer>
+
+      {voiceWidgetVisible && (
+        <VoiceCallWidget
+          onAccept={handleVoiceCallAccept}
+          onDecline={() => setVoiceWidgetVisible(false)}
+        />
+      )}
     </div>
   );
 }

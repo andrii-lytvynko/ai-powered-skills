@@ -297,6 +297,12 @@
   flex: 1;
   overflow-y: auto;
   padding: var(--spacing-xl) 40px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.queues-page__content::-webkit-scrollbar {
+  display: none;
 }
 
 /* Navigation Header (in nav column) */
@@ -2091,4 +2097,51 @@
 
 [data-theme="dark"] .queue-performance__dashboard-btn:hover {
   background: rgba(31, 115, 183, 0.15);
+}
+
+/* ===== Recommendations Banner ===== */
+/* ===== Success Notification ===== */
+
+.queues-notification-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+
+  /* Slide in from right */
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 250ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 250ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateX(110%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .queues-notification-wrapper {
+    transition: opacity 150ms ease-out;
+
+    @starting-style {
+      transform: none;
+      opacity: 0;
+    }
+  }
+}
+
+/* ── Numbered list variant for next steps ─────────────────── */
+.recco-detail__accordion-list--numbered {
+  list-style-type: decimal;
+}
+
+/* ── Insights link (WFM "View related tickets") ───────────── */
+.recco-detail__insights-link {
+  display: inline-block;
+  font-size: var(--font-size-md);
+  padding: 0 20px 4px 20px;
 }

@@ -1,45 +1,78 @@
-/* Profile Menu Component */
+/* ============================================================
+   Profile Menu — trigger button
+   ============================================================ */
 .profile-menu {
   position: relative;
 }
 
-/* Avatar Button */
-.profile-menu__avatar {
+.profile-menu__trigger {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
   padding: 0;
-  cursor: pointer;
-  border-radius: 50%;
   border: none;
   background: transparent;
-  transition: box-shadow 0.15s ease;
+  cursor: pointer;
+  border-radius: 50%;
+  /* Scale feedback on press */
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.profile-menu__avatar:hover,
-.profile-menu__avatar--active {
-  box-shadow: 0 0 0 2px var(--color-lime-primary);
+.profile-menu__trigger:active {
+  transform: scale(0.93);
 }
 
-.profile-menu__avatar-img {
+/* Status ring around trigger avatar */
+.profile-menu__trigger-ring {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  padding: 2px;
   border-radius: 50%;
-  overflow: hidden;
+  /* Transparent by default; JS injects --pm-ring-color on support page */
+  box-shadow: 0 0 0 2px var(--pm-ring-color, transparent);
+  transition: box-shadow 0.2s ease;
 }
 
-.profile-menu__avatar-img img {
+.profile-menu__trigger--active .profile-menu__trigger-ring,
+.profile-menu__trigger:hover .profile-menu__trigger-ring {
+  box-shadow: 0 0 0 2px var(--pm-ring-color, var(--color-primary-600));
+}
+
+.profile-menu__trigger-inner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-bg-white);
+}
+
+.profile-menu__trigger-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-/* Dropdown Menu */
+/* Status badge on trigger — bottom-right */
+.profile-menu__trigger-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid transparent;
+  border-image: none;
+  border-radius: 50%;
+  background: var(--color-bg-white);
+}
+
+
+/* ============================================================
+   Dropdown container
+   ============================================================ */
 .profile-menu__dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -47,205 +80,273 @@
   width: 260px;
   background: var(--color-bg-white);
   border: 1px solid var(--color-grey-300);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg, 8px);
+  box-shadow: 0px 16px 24px 0px rgba(10, 13, 14, 0.16);
   z-index: 1000;
-  animation: profileMenuFadeIn 0.15s ease;
-}
-
-@keyframes profileMenuFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* User Info Section */
-.profile-menu__info {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
-}
-
-.profile-menu__info-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--color-lime-primary) 0%, var(--color-primary-600) 100%);
-  color: var(--color-lime-dark);
-  font-size: var(--font-size-md);
-  font-weight: 600;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.profile-menu__info-details {
+  padding: 4px;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-width: 0;
+
+  /* Entry animation — scale from top-right (where the trigger lives) */
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: top right;
+  transition:
+    opacity 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 150ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
 
-.profile-menu__info-name {
-  font-family: var(--font-display);
-  font-size: var(--font-size-md);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  letter-spacing: -0.2px;
+@media (prefers-reduced-motion: reduce) {
+  .profile-menu__dropdown {
+    transition: none;
+  }
 }
 
-.profile-menu__info-email {
-  font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-/* Divider */
-.profile-menu__divider {
-  height: 1px;
-  background: var(--color-grey-300);
-  margin: 0;
-}
-
-/* Theme Toggle Section */
-.profile-menu__theme {
+/* ============================================================
+   Profile header
+   ============================================================ */
+.profile-menu__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 4px;
 }
 
-.profile-menu__theme-label {
-  font-family: var(--font-body);
-  font-size: var(--font-size-md);
-  color: var(--color-text-primary);
-}
-
-.profile-menu__theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: background 0.15s ease;
-  border: none;
-  background: transparent;
-}
-
-.profile-menu__theme-toggle:hover {
-  background: var(--color-hover-overlay-strong);
-}
-
-.profile-menu__theme-track {
+/* Avatar ring in header */
+.profile-menu__header-ring {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 48px;
-  height: 24px;
-  padding: 2px 4px;
-  background: var(--color-grey-300);
-  border-radius: 12px;
-  transition: background 0.3s ease;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: 50%;
+  border: 2px solid var(--pm-ring-color, transparent);
 }
 
-[data-theme="dark"] .profile-menu__theme-track {
-  background: var(--color-lime-primary);
+.profile-menu__header-inner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-bg-white);
 }
 
-.profile-menu__theme-icon {
+.profile-menu__header-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Status badge on header avatar — bottom-right */
+.profile-menu__header-badge {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-bg-white);
+  border-radius: 50%;
+  background: var(--color-bg-white);
+}
+
+.profile-menu__header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.profile-menu__header-name {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-menu__header-status {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+   Separator
+   ============================================================ */
+.profile-menu__sep {
+  height: 1px;
+  background: #e9ebed;
+  margin: 2px 8px;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   Status items
+   ============================================================ */
+
+/*
+  Layout alignment (text always starts at 56px from left):
+  Selected:   [12px pad] [16px check] [8px gap] [12px dot] [8px gap] text
+  Unselected: [          36px pad           ]   [12px dot] [8px gap] text
+*/
+.profile-menu__status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 36px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease-out, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.profile-menu__status-item:hover {
+  background: var(--color-grey-100);
+}
+
+.profile-menu__status-item:active {
+  transform: scale(0.97);
+  background: var(--color-grey-200);
+}
+
+/* Selected item: override left padding to make room for check icon */
+.profile-menu__status-item--active {
+  padding-left: 12px;
+}
+
+.profile-menu__status-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--color-text-primary);
+}
+
+/* When not active, check space is occupied by the outer padding (handled by padding-left) */
+.profile-menu__status-item:not(.profile-menu__status-item--active) .profile-menu__status-check {
+  display: none;
+}
+
+.profile-menu__status-label {
+  flex: 1;
+  min-width: 0;
+}
+
+
+/* ============================================================
+   Status dot indicators — SVG images
+   ============================================================ */
+.pm-status-dot {
+  display: block;
   width: 14px;
   height: 14px;
-  z-index: 1;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
 }
 
-.profile-menu__theme-icon--sun {
-  color: var(--color-sla-yellow-text);
-  opacity: 1;
-}
 
-.profile-menu__theme-icon--moon {
-  color: var(--color-grey-600);
-  opacity: 0.5;
-}
-
-[data-theme="dark"] .profile-menu__theme-icon--sun {
-  color: var(--color-grey-600);
-  opacity: 0.5;
-}
-
-[data-theme="dark"] .profile-menu__theme-icon--moon {
-  color: var(--color-text-primary);
-  opacity: 1;
-}
-
-.profile-menu__theme-thumb {
-  position: absolute;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  background: var(--color-bg-white);
-  border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.profile-menu__theme-thumb--dark {
-  transform: translateX(24px);
-}
-
-[data-theme="dark"] .profile-menu__theme-thumb {
-  background: #0e0e02;
-}
-
-/* Menu Items */
+/* ============================================================
+   General menu items
+   ============================================================ */
 .profile-menu__item {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 36px;
-  padding: 6px var(--spacing-md);
+  padding: 8px 12px;
   font-family: var(--font-body);
-  font-size: var(--font-size-md);
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
   color: var(--color-text-primary);
-  text-align: left;
-  letter-spacing: -0.25px;
   background: transparent;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  text-align: left;
+  transition: background 120ms ease-out, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .profile-menu__item:hover {
-  background: var(--btn-ghost-hover-bg);
+  background: var(--color-grey-100);
 }
 
 .profile-menu__item:active {
-  background: var(--btn-ghost-active-bg);
+  transform: scale(0.97);
+  background: var(--color-grey-200);
 }
 
+/* Indented item: 36px left padding, no leading icon */
+.profile-menu__item--indented {
+  padding-left: 36px;
+}
+
+/* Item with leading icon placeholder + trailing chevron */
+.profile-menu__item--with-icon {
+  gap: 8px;
+  padding-left: 12px;
+}
+
+.profile-menu__item-indicator {
+  /* 16px placeholder to align with status-check width */
+  display: inline-block;
+  width: 16px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.profile-menu__item-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-menu__item-theme-hint {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.profile-menu__item-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.profile-menu__chevron-icon {
+  font-size: 16px !important;
+}
+
+/* Danger variant */
 .profile-menu__item--danger {
-  color: var(--color-sla-red);
+  color: var(--color-danger, #cc3340);
 }
-
-.profile-menu__item:last-child {
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-}
-
-
-
-
-

@@ -1,10 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
-import { Anchor, Button } from '@zendeskgarden/react-buttons';
-import { SearchIcon } from '../Icons';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Anchor, Button, IconButton } from '@zendeskgarden/react-buttons';
+import { Field, Label, Input } from '@zendeskgarden/react-forms';
+import { Tag } from '@zendeskgarden/react-tags';
+import { Notification, Title, Close } from '@zendeskgarden/react-notifications';
+import { SearchIcon, SparkleIcon, ChevronDownIcon } from '../Icons';
 import TopBar from '../TopBar/TopBar';
 import PageSidebarNav from '../PageSidebarNav';
 import QueuesTable from './QueuesTable';
 import QueueEditPage from './QueueEditPage';
+import DataWidget from '../DataWidget';
+import CopilotSidebar from '../CopilotSidebar/CopilotSidebar';
+import {
+  RecommendationsBanner,
+  RecommendationCard,
+  RecommendationDetailView,
+  RecommendationsDrawer,
+} from '../RoutingRecommendations';
 import './QueuesPage.css';
 
 // Admin Center specific icons
@@ -158,116 +170,106 @@ const secondaryNavSections = [
   }
 ];
 
-// Sample queues data aligned with the current list design
+// Sample queues data matching Figma design
 const sampleQueues = [
   {
     id: 1,
-    name: 'Billing',
-    description: 'Billing related tickets',
+    name: 'VIP / Escalations',
+    description: 'VIP and escalation tickets',
     subqueue: null,
-    priority: { main: '4', more: 0, items: ['4'] },
-    primaryGroups: { main: 'Payroll', more: 3, items: ['Payroll', 'Billing Team', 'Finance Ops', 'Payroll Specialists'] },
-    secondaryGroups: { main: 'Sales', more: 30, items: ['Sales', 'Support', 'Finance', 'Success'] },
+    priority: { main: '1', more: 0, items: ['1'] },
+    primaryGroups: { main: 'VIP, Escalations', more: 0, items: ['VIP, Escalations'] },
+    secondaryGroups: { main: 'Billing, Payments', more: 0, items: ['Billing, Payments'] },
     assignmentMethod: 'Initial routing configuration',
     conditions: { all: [], any: [] },
     distributeSubqueues: false
   },
   {
     id: 2,
-    name: 'VIP customers - Live',
-    description: 'Live VIP customers queue',
+    name: 'Technical Support \u2014 Tier 1',
+    description: 'Tier 1 technical support tickets',
     subqueue: null,
     priority: { main: '1', more: 0, items: ['1'] },
-    primaryGroups: { main: 'Payroll, Sales', more: 0, items: ['Payroll, Sales'] },
-    secondaryGroups: { main: 'HR', more: 3, items: ['HR', 'Success', 'Sales Ops', 'Support'] },
+    primaryGroups: { main: 'Advanced Technical', more: 0, items: ['Advanced Technical'] },
+    secondaryGroups: { main: 'Technical Support', more: 0, items: ['Technical Support'] },
     assignmentMethod: 'Predictive routing',
     conditions: { all: [], any: [] },
-    distributeSubqueues: true,
-    subqueues: [
-      { id: 1, name: 'Simplibill', percentage: 60, priority: 1, predictiveRouting: true },
-      { id: 2, name: 'Billsend', percentage: 40, priority: 2, predictiveRouting: true },
-    ]
+    distributeSubqueues: false
   },
   {
     id: 3,
-    name: 'VIP customers - Async',
-    description: 'Async VIP customers queue',
+    name: 'Technical Support \u2014 Tier 2',
+    description: 'Tier 2 technical support tickets',
     subqueue: null,
     priority: { main: '2', more: 0, items: ['2'] },
-    primaryGroups: { main: 'Payroll, Sales', more: 0, items: ['Payroll, Sales'] },
-    secondaryGroups: { main: 'HR', more: 3, items: ['HR', 'Success', 'Sales Ops', 'Support'] },
-    assignmentMethod: 'Initial routing configuration',
+    primaryGroups: { main: 'Technical Support', more: 0, items: ['Technical Support'] },
+    secondaryGroups: { main: 'Advanced Technical', more: 0, items: ['Advanced Technical'] },
+    assignmentMethod: 'Predictive routing',
     conditions: { all: [], any: [] },
     distributeSubqueues: false
   },
   {
     id: 4,
-    name: 'Finance',
-    description: 'Finance queue',
+    name: 'Billing',
+    description: 'Billing related tickets',
+    subqueue: null,
+    priority: { main: '2', more: 0, items: ['2'] },
+    primaryGroups: { main: 'Billing, Payments', more: 0, items: ['Billing, Payments'] },
+    secondaryGroups: { main: 'Customer Experience', more: 0, items: ['Customer Experience'] },
+    assignmentMethod: 'Predictive routing',
+    conditions: { all: [], any: [] },
+    distributeSubqueues: false
+  },
+  {
+    id: 5,
+    name: 'Order Management',
+    description: 'Order management tickets',
     subqueue: null,
     priority: { main: '3', more: 0, items: ['3'] },
-    primaryGroups: { main: 'Payroll, Sales', more: 0, items: ['Payroll, Sales'] },
-    secondaryGroups: { main: 'HR', more: 3, items: ['HR', 'Success', 'Sales Ops', 'Support'] },
+    primaryGroups: { main: 'Order Operations', more: 0, items: ['Order Operations'] },
+    secondaryGroups: { main: 'Billing, Payments', more: 0, items: ['Billing, Payments'] },
+    assignmentMethod: 'Predictive routing',
+    conditions: { all: [], any: [] },
+    distributeSubqueues: false
+  },
+  {
+    id: 6,
+    name: 'Refunds & Returns',
+    description: 'Refund and return tickets',
+    subqueue: null,
+    priority: { main: '3', more: 0, items: ['3'] },
+    primaryGroups: { main: 'Customer Experience', more: 0, items: ['Customer Experience'] },
+    secondaryGroups: { main: 'Order Operations', more: 0, items: ['Order Operations'] },
+    assignmentMethod: 'Initial routing configuration',
+    conditions: { all: [], any: [] },
+    distributeSubqueues: false
+  },
+  {
+    id: 7,
+    name: 'Sales Inquiries',
+    description: 'Sales inquiry tickets',
+    subqueue: null,
+    priority: { main: '3', more: 0, items: ['3'] },
+    primaryGroups: { main: 'Sales, Retention', more: 0, items: ['Sales, Retention'] },
+    secondaryGroups: { main: 'Onboarding Specialists', more: 0, items: ['Onboarding Specialists'] },
+    assignmentMethod: 'Predictive routing',
+    conditions: { all: [], any: [] },
+    distributeSubqueues: false
+  },
+  {
+    id: 8,
+    name: 'Onboarding & Activation',
+    description: 'Onboarding and activation tickets',
+    subqueue: null,
+    priority: { main: '4', more: 0, items: ['4'] },
+    primaryGroups: { main: 'Onboarding Specialists', more: 0, items: ['Onboarding Specialists'] },
+    secondaryGroups: { main: 'Sales, Retention', more: 0, items: ['Sales, Retention'] },
     assignmentMethod: 'Initial routing configuration',
     conditions: { all: [], any: [] },
     distributeSubqueues: false
   }
 ];
 
-function QueuesPromoCard() {
-  const [isDismissed, setIsDismissed] = useState(false);
-
-  if (isDismissed) {
-    return null;
-  }
-
-  return (
-    <section className="queues-promo" aria-label="Predictive routing promo">
-      <div className="queues-promo__content">
-        <h2 className="queues-promo__title">New AI-powered ticket routing for messaging is now available</h2>
-        <p className="queues-promo__text">
-          Match tickets to agents based on their skills and capacity to reduce wait times.
-        </p>
-        <div className="queues-promo__links">
-          <Anchor href="#" className="queues-promo__link">
-            Learn about Predictive routing
-            <ExternalLinkIcon className="queues-promo__link-icon" />
-          </Anchor>
-          <Anchor href="#" className="queues-promo__link">
-            Learn about Predictive routing A/B tests
-            <ExternalLinkIcon className="queues-promo__link-icon" />
-          </Anchor>
-        </div>
-      </div>
-      <button
-        type="button"
-        className="queues-promo__dismiss"
-        aria-label="Dismiss promo"
-        onClick={() => setIsDismissed(true)}
-      >
-        <PromoCloseIcon className="queues-promo__dismiss-icon" />
-      </button>
-      <div className="queues-promo__media" aria-hidden="true">
-        <div className="queues-promo__media-panel">
-          <div className="queues-promo__media-tooltip">
-            Route tickets more efficiently with the help of AI
-          </div>
-          <div className="queues-promo__media-stat">
-            <span className="queues-promo__media-stat-label">Average handle time (AHT) decrease</span>
-            <span className="queues-promo__media-stat-value">~10%</span>
-            <span className="queues-promo__media-stat-sublabel">of your messaging tickets</span>
-          </div>
-          <div className="queues-promo__media-bot">
-            <div className="queues-promo__media-bot__texture" aria-hidden="true">
-              <img src="/assets/bot-texture.png" alt="" />
-            </div>
-            <img className="queues-promo__media-bot__eyes" src="/assets/bot-eyes.png" alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // Book open icon image path
 const bookOpenIconSrc = "/assets/Book_open-706cd137-7b94-449e-afad-ba613a78f0d9.png";
@@ -328,6 +330,7 @@ function ChevronRightIcon({ className }) {
     </svg>
   );
 }
+
 
 // Info icon for metrics cards
 function MetricsInfoIcon({ className }) {
@@ -1151,15 +1154,142 @@ function QueueEvaluationPanel({
   );
 }
 
+// ─── Recommendations Drawer ───────────────────────────────────────────────────
+
+function SparkleFeatureIcon({ className }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 1.5L8.73 5.51L12 4L9.83 7.27L14 8L9.83 8.73L12 12L8.73 10.49L8 14.5L7.27 10.49L4 12L6.17 8.73L2 8L6.17 7.27L4 4L7.27 5.51L8 1.5Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function FlowFeatureIcon({ className }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.00016 1C7.17936 1 6.51221 1.63364 6.44597 2.43973C5.38913 2.87981 4.56163 3.75905 4.19933 4.85323C4.12406 5.08112 4.2497 5.32667 4.47759 5.40194C4.70547 5.47721 4.9511 5.35157 5.02638 5.12369C5.29427 4.32295 5.8898 3.67736 6.64046 3.31196C6.90629 3.78605 7.41553 4.10834 8.00016 4.10834C8.84388 4.10834 9.52516 3.42706 9.52516 2.58334C9.52516 1.73962 8.84388 1 8.00016 1Z" fill="currentColor"/>
+      <path d="M11.0636 3.81772C10.9021 3.63406 10.6271 3.61437 10.4434 3.77584C10.2598 3.9373 10.2401 4.21231 10.4016 4.396C10.8767 4.93587 11.167 5.64189 11.167 6.41672C11.167 6.49193 11.1644 6.5667 11.1594 6.64089C10.6104 6.63196 10.0789 6.90706 9.7964 7.40454C9.36596 8.15516 9.61597 9.10527 10.3666 9.5357C11.1172 9.96613 12.0673 9.71611 12.4977 8.96549C12.8969 8.26885 12.6902 7.39737 12.0554 6.94671C12.0768 6.77234 12.0836 6.5949 12.0836 6.41672C12.0836 5.41321 11.7355 4.49346 11.0636 3.81772Z" fill="currentColor"/>
+      <path d="M4.40053 7.40449C3.97009 6.65386 3.01997 6.40385 2.26935 6.83428C1.51872 7.26471 1.26871 8.21483 1.69914 8.96545C2.09982 9.66255 3.00368 9.93775 3.74473 9.56698C4.43535 10.0804 5.29136 10.3889 6.21682 10.3889C6.47657 10.3889 6.73173 10.3652 6.97952 10.3196C7.21669 10.2753 7.37219 10.0469 7.32783 9.80972C7.28348 9.57251 7.05506 9.41705 6.81789 9.46141C6.62713 9.49746 6.43017 9.51672 6.21682 9.51672C5.55284 9.51672 4.93431 9.31616 4.42138 8.96471C4.70153 8.50956 4.72636 7.91819 4.40053 7.40449Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function RocketFeatureIcon({ className }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 1.5C7.33333 1.5 6.5 2.5 6 4C5.5 5.5 5.5 7 5.5 7L9 7C9 7 9 5.5 8.5 4C8 2.5 8.66667 1.5 8 1.5Z" fill="currentColor"/>
+      <path d="M5.5 7C5.5 7 4 7.5 3 9C2 10.5 2 12 2 12H5.5V7Z" fill="currentColor"/>
+      <path d="M9 7V12H12.5C12.5 12 12.5 10.5 11.5 9C10.5 7.5 9 7 9 7Z" fill="currentColor"/>
+      <path d="M5.5 12H9V14.5H5.5V12Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+const INITIAL_RECOMMENDATIONS = [
+  {
+    id: 'predictive-routing',
+    title: 'Activate predictive routing for remaining queues',
+    subtitle: 'Agent handle time could improve by 22%',
+    featureColor: '#f7e6f1',
+    featureTextColor: '#8b3f7a',
+    FeatureIcon: SparkleFeatureIcon,
+    tag: 'Optimization',
+    rationale: null, // computed from inactiveQueues.length at render time
+    showQueues: true,
+    supportingInsightsType: 'widgets',
+    supportingInsightsContent: [
+      { label: 'Agent handle time', value: '22%', trendDirection: 'down', valueVariant: 'success', annotation: '11.1 min predicted', footnote: 'vs. 14.2 min (30-day avg)' },
+      { label: 'Requester wait time', value: '24%', trendDirection: 'down', valueVariant: 'success', annotation: '2.4 min predicted', footnote: 'vs. 3.2 min (30-day avg)' },
+      { label: 'Estimated time saved', value: '~42 hrs/wk', valueVariant: 'success', annotation: 'Based on 30-day avg volume' },
+      { label: 'Confidence score', value: '92%', valueVariant: 'success', annotation: 'High', footnote: 'Strong patterns • 48,200 tickets' },
+    ],
+    nextStepsType: 'bullets',
+    nextStepsContent: [
+      'Predictive routing will be activated for VIP / Escalations, Refunds & Returns, and Onboarding & Activation queues immediately.',
+      'No changes to groups or priority. Primary and secondary group assignments, queue priority, and SLA policies will remain as configured.',
+    ],
+    ctaLabel: 'Apply recommendation',
+  },
+  {
+    id: 'skills-based',
+    title: 'Activate Skills-Based routing',
+    subtitle: 'Assignment quality and CSAT could improve',
+    featureColor: '#e7e9f8',
+    featureTextColor: '#3b44a9',
+    FeatureIcon: FlowFeatureIcon,
+    tag: 'Automation',
+    rationale: "We've identified patterns in your routing data that suggest skills-based routing would significantly improve your assignment quality and overall CSAT.",
+    showQueues: false,
+    supportingInsightsType: 'bullets',
+    supportingInsightsContent: {
+      items: [
+        [{ bold: true, text: '34%' }, { text: ' of tickets are reassigned at least once before resolution' }],
+        [{ text: 'Tickets assigned to non-specialist agents score ' }, { bold: true, text: '18 pts' }, { text: ' lower in ' }, { bold: true, text: 'CSAT' }],
+        [{ bold: true, text: '22%' }, { text: ' of Tier 1 tickets escalate to the same 5 agents in Tier 2' }],
+        [{ text: 'We detected 6 distinct ticket intent clusters with ' }, { bold: true, text: '>90%' }, { text: ' classification confidence' }],
+      ],
+      link: 'View related tickets',
+    },
+    nextStepsType: 'bullets',
+    nextStepsContent: [
+      'We will analyze historical assignments to understand who handled what',
+      "We will analyze agent performance to find each agent's strengths",
+      'We will classify ticket intents to define meaningful skills',
+      'We will generate a skills matrix mapping agents to skills',
+      'You review and adjust before anything goes live',
+    ],
+    nextStepsLink: 'Learn about skill-based routing',
+    ctaLabel: 'Apply recommendation',
+  },
+  {
+    id: 'wfm-data',
+    title: 'Integrate Workforce Management data',
+    subtitle: 'Schedule adherence could improve by up to 39%',
+    featureGradient: 'linear-gradient(87deg, #eef8f4 8.88%, #d9ecfc 100%)',
+    featureTextColor: '#186146',
+    FeatureIcon: RocketFeatureIcon,
+    tag: 'Automation',
+    rationale: "We've identified significant gaps between agent scheduled activities and their actual routing status. Syncing your WFM schedule with Omnichannel Routing would reduce idle time, improve adherence, and ensure the right agents are available in the right queues at the right times.",
+    showQueues: false,
+    supportingInsightsType: 'bullets',
+    supportingInsightsContent: {
+      items: [
+        [{ bold: true, text: 'Schedule adherence rate: 61%' }, { text: ' — agents are active outside their scheduled windows 39% of the time.' }],
+        [{ bold: true, text: '3.2 hrs/day average idle time' }, { text: ' per agent during scheduled online hours across your top 5 queues.' }],
+        [{ bold: true, text: '14 understaffed intervals per week' }, { text: ' concentrated between 9–11 AM, when ticket volume peaks.' }],
+        [{ bold: true, text: 'Avg 4.7 min delay' }, { text: ' between a scheduled status change and the agent\'s actual status update in Agent Workspace.' }],
+      ],
+      link: 'View adherence report',
+    },
+    nextStepsType: 'numbered',
+    nextStepsContent: [
+      { heading: 'Sync agent schedules to routing', body: 'Agents will be automatically assigned to the correct queue based on their WFM schedule. No manual moves needed.' },
+      { heading: 'Auto-update agent status', body: 'Agent status in Agent Workspace will change automatically when their scheduled activity changes — Online, Away, Break, Focus.' },
+      { heading: 'Enforce break windows', body: 'Agents will be set to Away during scheduled breaks and returned to Online when the break ends.' },
+      { heading: 'Enable overflow handling', body: 'If a queue is understaffed relative to the schedule, eligible agents from secondary groups will be automatically pulled in.' },
+    ],
+    ctaLabel: 'Activate integration',
+  },
+];
 
 
-export default function QueuesPage({ onProductChange, selectedProduct, products }) {
+
+export default function QueuesPage({ onProductChange, selectedProduct, products, onSubPageChange, appliedRecommendationIds, onRecommendationApplied }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
-  const [queues, setQueues] = useState(sampleQueues);
+  const [queues, setQueues] = useLocalStorage('zenbox:queues', sampleQueues);
   const [selectedQueue, setSelectedQueue] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
   const [evaluatingQueue, setEvaluatingQueue] = useState(null);
+  const [isRecommendationsOpen, setIsRecommendationsOpen] = useState(false);
+  const [selectedRecommendation, setSelectedRecommendation] = useState(null);
+  const [showNotification, setShowNotification] = useState(false);
+  const [recommendations, setRecommendations] = useState(() =>
+    appliedRecommendationIds
+      ? INITIAL_RECOMMENDATIONS.filter(r => !appliedRecommendationIds.has(r.id))
+      : INITIAL_RECOMMENDATIONS
+  );
+  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   
   // Track all queues that are currently being evaluated (persists after closing sidebar)
   const [queuesInEvaluation, setQueuesInEvaluation] = useState(new Set());
@@ -1194,6 +1324,20 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
 
   const handleToggleNav = () => {
     setIsNavCollapsed(!isNavCollapsed);
+  };
+
+  const handleToggleCopilot = () => {
+    if (!isCopilotOpen) {
+      setEvaluatingQueue(null);
+      setIsRecommendationsOpen(false);
+      setSelectedRecommendation(null);
+    }
+    setIsCopilotOpen(prev => !prev);
+  };
+
+  const handleOpenRecommendations = () => {
+    setIsCopilotOpen(false);
+    setIsRecommendationsOpen(true);
   };
 
   const handleReorderQueues = (fromIndex, toIndex) => {
@@ -1402,6 +1546,46 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
     setEvaluationPhase('intro');
   };
 
+  // Apply a recommendation
+  const handleApplyRecommendation = () => {
+    if (selectedRecommendation?.id === 'wfm-data') {
+      // WFM: navigate to Routing Config and trigger Copilot activation flow
+      setRecommendations(prev => prev.filter(r => r.id !== selectedRecommendation.id));
+      onRecommendationApplied?.('wfm-data');
+      setIsRecommendationsOpen(false);
+      setSelectedRecommendation(null);
+      onSubPageChange('routing-config', { copilotFlow: 'wfm-activation' });
+      return;
+    }
+
+    if (selectedRecommendation?.id === 'skills-based') {
+      // Skills: navigate to Routing Config and trigger skills Copilot flow
+      setRecommendations(prev => prev.filter(r => r.id !== selectedRecommendation.id));
+      onRecommendationApplied?.('skills-based');
+      setIsRecommendationsOpen(false);
+      setSelectedRecommendation(null);
+      onSubPageChange('routing-config', { copilotFlow: 'skills-activation' });
+      return;
+    }
+
+    // Default: activate predictive routing for all inactive queues
+    setQueues(prev =>
+      prev.map(q =>
+        q.assignmentMethod !== 'Predictive routing'
+          ? { ...q, assignmentMethod: 'Predictive routing' }
+          : q
+      )
+    );
+    if (selectedRecommendation) {
+      setRecommendations(prev => prev.filter(r => r.id !== selectedRecommendation.id));
+      onRecommendationApplied?.(selectedRecommendation.id);
+    }
+    setIsRecommendationsOpen(false);
+    setSelectedRecommendation(null);
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 5000);
+  };
+
   // Navigation column component to share with QueueEditPage
   const navColumn = (
     <PageSidebarNav
@@ -1409,6 +1593,7 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
       secondaryHeading="Objects and rules"
       secondarySections={secondaryNavSections}
       activeItem="queues"
+      onItemSelect={onSubPageChange}
       isCollapsed={isNavCollapsed}
       onToggleCollapse={handleToggleNav}
     />
@@ -1434,11 +1619,13 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
   return (
     <div className="queues-page">
       <TopBar
-        pageTitle="Predictive routing"
+        pageTitle="Omnichannel routing"
         selectedProduct={selectedProduct}
         products={products}
         onProductChange={onProductChange}
         isNavCollapsed={isNavCollapsed}
+        isCopilotOpen={isCopilotOpen}
+        onToggleCopilot={handleToggleCopilot}
       />
       <div className="queues-page__body">
         {/* Navigation Column */}
@@ -1471,14 +1658,6 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
                           <ExternalLinkIcon className="queues-page-header__link-icon" />
                         </Anchor>
                       </p>
-                      <p>
-                        All queues use the{' '}
-                        <Anchor href="#" className="queues-page-header__link">
-                          Initial routing configuration
-                          <ExternalLinkIcon className="queues-page-header__link-icon" />
-                        </Anchor>
-                        {' '}by default, with Predictive routing available per queue.
-                      </p>
                     </div>
                   </div>
                   <div className="queues-page-header__actions">
@@ -1487,23 +1666,22 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
                   </div>
                 </div>
 
-                {/* Search and Table */}
-                <QueuesPromoCard />
+                {/* Recommendations Banner */}
+                <RecommendationsBanner
+                  onViewRecommendations={handleOpenRecommendations}
+                  count={recommendations.length}
+                />
 
                 <div className="queues-search-section">
-                  <div className="queues-search-section__field">
-                    <label className="queues-search-section__label">Find a queue</label>
-                    <div className="queues-search-section__input-wrapper">
-                      <SearchIcon className="queues-search-section__input-icon" />
-                      <input 
-                        type="text" 
-                        className="queues-search-section__input"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder=""
-                      />
-                    </div>
-                  </div>
+                  <Field className="queues-search-section__field">
+                    <Label>Find a queue</Label>
+                    <Input
+                      start={<SearchIcon />}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder=""
+                    />
+                  </Field>
                 </div>
 
                 <div className="queues-table-section">
@@ -1536,9 +1714,37 @@ export default function QueuesPage({ onProductChange, selectedProduct, products 
                 onCloseEnabled={handleCloseEnabledState}
               />
             )}
+
+            <RecommendationsDrawer
+              isOpen={isRecommendationsOpen}
+              onClose={() => {
+                setIsRecommendationsOpen(false);
+                setSelectedRecommendation(null);
+              }}
+              selectedRecommendation={selectedRecommendation}
+              onSelectRecommendation={setSelectedRecommendation}
+              onApplyRecommendation={handleApplyRecommendation}
+              inactiveQueues={queues.filter(q => q.assignmentMethod !== 'Predictive routing')}
+              recommendations={recommendations}
+            />
+
+            <CopilotSidebar
+              isOpen={isCopilotOpen}
+              onClose={() => setIsCopilotOpen(false)}
+            />
           </div>
         </div>
       </div>
+
+      {showNotification && (
+        <div className="queues-notification-wrapper">
+          <Notification type="success">
+            <Title>Predictive routing activated</Title>
+            Predictive routing is now active for all queues.
+            <Close aria-label="Dismiss notification" onClick={() => setShowNotification(false)} />
+          </Notification>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,1136 @@
+/* ============================================================
+   Copilot Sidebar
+   ============================================================ */
+
+/* Custom easing curves (Emil Kowalski) */
+:root {
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ── Outer wrapper — only width animates (takes/releases flex space) ── */
+.copilot-sidebar {
+  flex-shrink: 0;
+  width: 0;
+  overflow: hidden;
+  /* Exit: faster — system responds instantly */
+  transition: width 180ms var(--ease-drawer);
+  background: var(--color-grey-100);
+  display: flex;
+  align-items: stretch;
+}
+
+.copilot-sidebar[data-open="true"] {
+  width: 380px;
+  padding: 0 12px 12px 12px;
+  /* Enter: slightly slower — content appears deliberately */
+  transition: width 260ms var(--ease-drawer);
+}
+
+/* ── White card shell — visual slide (GPU, no layout impact) ── */
+.copilot-sidebar__shell {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 4px 0 rgba(10, 13, 14, 0.16);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  /* Exit/closed state */
+  transform: translateX(20px);
+  opacity: 0;
+  transition:
+    transform 180ms var(--ease-drawer),
+    opacity 140ms ease-out;
+}
+
+.copilot-sidebar[data-open="true"] .copilot-sidebar__shell {
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    transform 260ms var(--ease-drawer),
+    opacity 220ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copilot-sidebar__shell,
+  .copilot-sidebar[data-open="true"] .copilot-sidebar__shell {
+    transform: none;
+    transition: opacity 150ms ease-out;
+  }
+}
+
+/* ── Decorative blob — faint purple glow ── */
+.copilot-sidebar__blob {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 10000px;
+  left: 50%;
+  top: calc(50% + 332px);
+  transform: translate(-50%, -50%);
+  background: linear-gradient(88.91deg, #dac9ff 9.36%, #a33fe1 36.32%, #6743e1 99.29%);
+  filter: blur(98px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header — 56px tall ── */
+.copilot-sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px 12px 12px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  min-height: 56px;
+}
+
+/* Back button slot — fixed width so label doesn't jump */
+.copilot-sidebar__header-back {
+  display: flex;
+  align-items: center;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.copilot-sidebar__back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #5c6970;
+  transition:
+    background 130ms ease-out,
+    color 130ms ease-out,
+    transform 130ms ease-out;
+  animation: copilot-fade-up 180ms var(--ease-out-strong) both;
+}
+
+.copilot-sidebar__back-btn:hover {
+  background: #f3f4f5;
+  color: #293239;
+}
+
+.copilot-sidebar__back-btn:active {
+  transform: scale(0.93);
+}
+
+.copilot-sidebar__header-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Static header title (history mode) */
+.copilot-sidebar__header-title {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: #293239;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copilot-sidebar__header-title--history {
+  animation: copilot-fade-up 200ms var(--ease-out-strong) both;
+}
+
+.copilot-sidebar__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Conversation title in header */
+.copilot-sidebar__conv-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: copilot-fade-up 220ms var(--ease-out-strong) both;
+}
+
+.copilot-sidebar__conv-title-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: #293239;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.copilot-sidebar__conv-chevron {
+  display: flex;
+  align-items: center;
+  color: #848f99;
+  flex-shrink: 0;
+}
+
+/* ── Body — page-stack container ── */
+.copilot-sidebar__body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Content area — fills remaining space ── */
+.copilot-sidebar__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Page-push: slide left when history opens */
+  transition:
+    transform 260ms var(--ease-out-strong),
+    opacity 220ms ease-out;
+  will-change: transform, opacity;
+}
+
+.copilot-sidebar__content[data-phase="welcome"] {
+  justify-content: center;
+}
+
+/* Pushed aside by history panel */
+.copilot-sidebar__content[data-pushed="true"] {
+  transform: translateX(-20px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Welcome block ── */
+.copilot-sidebar__welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.copilot-sidebar__welcome-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.copilot-sidebar__sparkle-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.copilot-sidebar__sparkle {
+  font-size: 16px;
+  color: #6743e1;
+}
+
+.copilot-sidebar__heading {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -0.2px;
+  color: #11110d;
+  margin: 0;
+}
+
+/* ── Prompt suggestions ── */
+.copilot-sidebar__prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.copilot-sidebar__prompt {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    opacity 150ms ease-out,
+    transform 150ms ease-out,
+    background 150ms ease-out;
+  border: none;
+  background: transparent;
+}
+
+.copilot-sidebar__prompt:active {
+  transform: scale(0.97);
+}
+
+.copilot-sidebar__prompt--default {
+  background: #ffffff;
+  border: 1px solid #b0b8be;
+}
+
+.copilot-sidebar__prompt--default:hover {
+  background: var(--color-bg-subtle, #f3f4f5);
+}
+
+.copilot-sidebar__prompt--featured {
+  background:
+    linear-gradient(82.42deg, rgba(218, 201, 255, 0.04) 9.36%, rgba(163, 63, 225, 0.04) 36.32%, rgba(103, 67, 225, 0.04) 99.29%),
+    #ffffff;
+  border: 1px solid #dac9ff;
+  width: 100%;
+}
+
+.copilot-sidebar__prompt--featured:hover {
+  background:
+    linear-gradient(82.42deg, rgba(218, 201, 255, 0.10) 9.36%, rgba(163, 63, 225, 0.10) 36.32%, rgba(103, 67, 225, 0.10) 99.29%),
+    #ffffff;
+}
+
+.copilot-sidebar__prompt [class*="c-PJLV"],
+.copilot-sidebar__prompt span,
+.copilot-sidebar__prompt p {
+  color: #2f3941;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+}
+
+/* ── Disclaimer footer ── */
+.copilot-sidebar__disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 20px 20px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.copilot-sidebar__disclaimer-text {
+  color: #848f99;
+  white-space: nowrap;
+}
+
+.copilot-sidebar__disclaimer-icon {
+  font-size: 12px;
+  color: #848f99;
+  flex-shrink: 0;
+}
+
+/* ── Input area ── */
+.copilot-sidebar__input-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 16px 16px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.copilot-sidebar__input-outline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #b0b8be;
+  border-radius: 20px;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+
+.copilot-sidebar__input-placeholder {
+  flex: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  color: #848f99;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copilot-sidebar__send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #293239;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition:
+    background 150ms ease-out,
+    transform 150ms ease-out;
+}
+
+.copilot-sidebar__send-btn:hover {
+  background: #3a4750;
+}
+
+.copilot-sidebar__send-btn:active {
+  transform: scale(0.93);
+}
+
+/* ============================================================
+   Conversation area
+   ============================================================ */
+
+.copilot-conv {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 16px;
+  /* Fade-out gradient at bottom */
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
+  mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
+}
+
+/* ── User message bubble ── */
+.copilot-conv__user-bubble-wrap {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px 4px 40px;
+  animation: copilot-bubble-in 220ms var(--ease-out-strong) both;
+}
+
+.copilot-conv__user-bubble {
+  background: #ecf9f9; /* kale-100 */
+  border-radius: 12px 12px 12px 12px;
+  /* Flat top-right matches Figma (user messages) */
+  border-top-right-radius: 2px;
+  padding: 8px 12px;
+  max-width: 272px;
+}
+
+.copilot-conv__user-bubble p,
+.copilot-conv__user-bubble [class*="c-PJLV"] {
+  color: #293239;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+}
+
+/* ── Thinking steps ── */
+.copilot-conv__thinking {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 20px 0;
+}
+
+.copilot-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: copilot-step-in 180ms ease-out both;
+}
+
+.copilot-step--done .copilot-step__indicator {
+  color: #037f52; /* fg/success */
+}
+
+.copilot-step__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #848f99;
+  transition: color 200ms ease-out;
+}
+
+.copilot-step__text {
+  color: #5c6970;
+}
+
+/* Thinking spinner — 3 bouncing dots */
+.copilot-step__spinner {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.copilot-step__dot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: copilot-dot-bounce 1s ease-in-out infinite;
+}
+
+.copilot-step__dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.copilot-step__dot:nth-child(3) {
+  animation-delay: 0.30s;
+}
+
+/* ── Response ── */
+.copilot-conv__response {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Response text paragraphs */
+.copilot-resp__text {
+  padding: 12px 20px;
+}
+
+.copilot-resp__text p,
+.copilot-resp__text [class*="c-PJLV"] {
+  color: #293239;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+}
+
+.copilot-resp__text strong {
+  font-weight: 600;
+}
+
+.copilot-resp__text--1 {
+  animation: copilot-fade-up 250ms ease-out 0ms both;
+}
+
+.copilot-resp__text--2 {
+  animation: copilot-fade-up 250ms ease-out 280ms both;
+}
+
+/* Metric cards container */
+.copilot-resp__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 20px;
+}
+
+/* Individual metric card */
+.copilot-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #d8dcde;
+  border-radius: 8px;
+  animation: copilot-card-in 220ms var(--ease-out-strong) both;
+  animation-delay: calc(80ms + var(--card-index) * 60ms);
+}
+
+.copilot-metric-card__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copilot-metric-card__info-icon {
+  display: flex;
+  align-items: center;
+  color: #848f99;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.copilot-metric-card__label {
+  color: #293239;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.copilot-metric-card__value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.copilot-metric-card__chevron {
+  display: flex;
+  align-items: center;
+  color: #037f52;
+  self-align: center;
+  margin-top: 2px;
+}
+
+.copilot-metric-card__value {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.45px;
+  color: #037f52;
+  white-space: nowrap;
+}
+
+.copilot-metric-card__subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5c6970;
+  white-space: nowrap;
+}
+
+/* Action pills */
+.copilot-resp__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 20px 12px;
+  animation: copilot-fade-up 220ms ease-out 360ms both;
+}
+
+.copilot-resp__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  background: #ffffff;
+  border: 1px solid #d8dcde;
+  border-radius: 20px;
+  cursor: pointer;
+  transition:
+    background 140ms ease-out,
+    transform 140ms ease-out,
+    border-color 140ms ease-out;
+}
+
+.copilot-resp__pill:hover {
+  background: #f3f4f5;
+  border-color: #b0b8be;
+}
+
+.copilot-resp__pill:active {
+  transform: scale(0.97);
+}
+
+.copilot-resp__pill p,
+.copilot-resp__pill [class*="c-PJLV"],
+.copilot-resp__pill span {
+  color: #2f3941;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.154px;
+  white-space: nowrap;
+}
+
+/* ── WFM response label ── */
+.copilot-resp__text--wfm-label {
+  padding: 4px 20px 4px;
+  animation: copilot-fade-up 250ms ease-out 260ms both;
+}
+
+/* ── WFM "What changed" list ── */
+.copilot-resp__wfm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 20px 4px;
+}
+
+.copilot-wfm-item {
+  padding: 8px 0 8px 12px;
+  border-left: 2px solid #d1f5ea;
+  margin-bottom: 6px;
+  animation: copilot-fade-up 220ms var(--ease-out-strong) both;
+  /* Stagger: starts after label (300ms) + 50ms per item */
+  animation-delay: calc(300ms + var(--wfm-item-index) * 50ms);
+}
+
+.copilot-wfm-item [class*="c-PJLV"],
+.copilot-wfm-item span {
+  color: #293239;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.1px;
+}
+
+.copilot-wfm-item strong {
+  font-weight: 600;
+}
+
+/* ============================================================
+   History panel
+   ============================================================ */
+
+.copilot-history {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  /* Resting state: pushed right, invisible */
+  transform: translateX(24px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 260ms var(--ease-out-strong),
+    opacity 220ms ease-out;
+  will-change: transform, opacity;
+}
+
+.copilot-history[data-visible="true"] {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.copilot-history__list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px 24px;
+  gap: 2px;
+}
+
+/* Individual session row */
+.copilot-history__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background 130ms ease-out,
+    transform 130ms ease-out;
+  /* Stagger in */
+  animation: copilot-fade-up 200ms var(--ease-out-strong) both;
+  animation-delay: calc(var(--item-index) * 50ms);
+}
+
+.copilot-history__item:hover {
+  background: #f3f4f5;
+}
+
+.copilot-history__item:active {
+  transform: scale(0.98);
+  background: #edf0f2;
+}
+
+.copilot-history__item--active {
+  background: #f8f9fa;
+}
+
+.copilot-history__item--active:hover {
+  background: #f0f2f4;
+}
+
+/* Icon column */
+.copilot-history__item-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #f3f4f5;
+  color: #5c6970;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.copilot-history__item--active .copilot-history__item-icon {
+  background: #e8f7f4;
+  color: #037f52;
+}
+
+/* Active indicator dot */
+.copilot-history__active-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #037f52;
+  border: 1.5px solid #ffffff;
+}
+
+/* Text body */
+.copilot-history__item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.copilot-history__item-top {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.copilot-history__item-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #293239;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.copilot-history__item-time {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 11px;
+  line-height: 16px;
+  color: #848f99;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.copilot-history__item-preview {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: #68737d;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+
+@keyframes copilot-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes copilot-step-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes copilot-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes copilot-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes copilot-dot-bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Skills activation flow
+   ============================================================ */
+
+/* Header block: large title + subtitle */
+.copilot-resp__skills-header {
+  padding: 4px 20px 4px;
+  animation: copilot-fade-up 250ms ease-out 60ms both;
+}
+
+.copilot-resp__skills-title {
+  font-size: var(--font-size-md, 14px);
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--color-text-primary, #293239);
+  margin: 0 0 2px;
+}
+
+.copilot-resp__skills-header [class*="c-PJLV"],
+.copilot-resp__skills-header span {
+  color: var(--color-text-secondary, #49545c);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* Skill description list */
+.copilot-resp__skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 20px;
+}
+
+.copilot-skills-desc-item {
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid #d4c5f0;
+  animation: copilot-fade-up 220ms var(--ease-out-strong) both;
+  animation-delay: calc(180ms + var(--skills-desc-index) * 45ms);
+}
+
+.copilot-skills-desc-item [class*="c-PJLV"],
+.copilot-skills-desc-item span {
+  color: #293239;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.1px;
+}
+
+.copilot-skills-desc-item strong {
+  font-weight: 600;
+}
+
+.copilot-skills-desc-item__list {
+  margin: 2px 0 0;
+  padding-left: 16px;
+}
+
+.copilot-skills-desc-item__list li {
+  margin: 0;
+}
+
+/* Note text below skill list */
+.copilot-resp__text--skills-note {
+  padding: 4px 20px 4px;
+  animation: copilot-fade-up 250ms ease-out calc(180ms + 6 * 45ms + 60ms) both;
+}
+
+.copilot-resp__text--skills-note [class*="c-PJLV"],
+.copilot-resp__text--skills-note span {
+  color: var(--color-text-secondary, #49545c);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* Skill matrix cards — lavender wrapper */
+.copilot-skill-card {
+  margin: 8px 20px 0;
+  background: #f2e7f6;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: copilot-skill-card-in 280ms var(--ease-out-strong) both;
+  animation-delay: calc(600ms + var(--skill-card-index) * 120ms);
+}
+
+.copilot-skill-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 20px 6px;
+  cursor: pointer;
+}
+
+.copilot-skill-card__header-label {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  color: var(--color-text-primary, #293239);
+}
+
+.copilot-skill-card__header-icon {
+  color: var(--color-text-secondary, #49545c);
+  display: flex;
+  align-items: center;
+}
+
+/* White inner card */
+.copilot-skill-card__content {
+  background: #ffffff;
+  border: 1px solid #d8dcde;
+  border-radius: 12px;
+  padding: 12px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Title row (first skill — styled differently in Figma) */
+.copilot-skill-card__title-row {
+  display: flex;
+  align-items: baseline;
+  padding: 2px 20px;
+}
+
+.copilot-skill-card__title-row [class*="c-PJLV"],
+.copilot-skill-card__title-row span {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #2f3941;
+  letter-spacing: -0.154px;
+}
+
+/* Each data row */
+.copilot-skill-card__row {
+  display: flex;
+  align-items: baseline;
+  padding: 2px 20px;
+  animation: copilot-fade-up 160ms ease-out both;
+  animation-delay: calc(var(--skill-card-index) * 120ms + var(--skill-row-index) * 30ms + 680ms);
+}
+
+.copilot-skill-card__row [class*="c-PJLV"],
+.copilot-skill-card__row span {
+  font-size: 14px;
+  line-height: 20px;
+  color: #2f3941;
+  letter-spacing: -0.154px;
+}
+
+.copilot-skill-card__row strong {
+  font-weight: 600;
+}
+
+/* Blue agent-count value */
+.copilot-skill-card__agent-count {
+  color: #1f73b7 !important;
+  font-weight: 400 !important;
+}
+
+@keyframes copilot-skill-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Confirmation response after Approve */
+.copilot-resp__text--skills-approved-note {
+  animation: copilot-fade-up 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: 80ms;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .copilot-sidebar,
+  .copilot-sidebar[data-open="true"] {
+    transition: none;
+  }
+
+  .copilot-sidebar__content,
+  .copilot-history {
+    transition: none;
+  }
+
+  .copilot-conv__user-bubble-wrap,
+  .copilot-step,
+  .copilot-resp__text--1,
+  .copilot-resp__text--2,
+  .copilot-resp__text--wfm-label,
+  .copilot-wfm-item,
+  .copilot-metric-card,
+  .copilot-resp__actions,
+  .copilot-sidebar__conv-title,
+  .copilot-sidebar__header-title--history,
+  .copilot-sidebar__back-btn,
+  .copilot-history__item,
+  .copilot-resp__skills-header,
+  .copilot-skills-desc-item,
+  .copilot-resp__text--skills-note,
+  .copilot-skill-card,
+  .copilot-skill-card__row,
+  .copilot-resp__text--skills-approved-note {
+    animation: copilot-fade-only 1ms both;
+  }
+
+  .copilot-step__dot {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+@keyframes copilot-fade-only {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Touch devices: suppress hover transforms */
+@media (hover: none) {
+  .copilot-sidebar__prompt:hover {
+    background: transparent;
+  }
+
+  .copilot-sidebar__prompt--default:hover {
+    background: #ffffff;
+  }
+
+  .copilot-sidebar__prompt--featured:hover {
+    background:
+      linear-gradient(82.42deg, rgba(218, 201, 255, 0.04) 9.36%, rgba(163, 63, 225, 0.04) 36.32%, rgba(103, 67, 225, 0.04) 99.29%),
+      #ffffff;
+  }
+}

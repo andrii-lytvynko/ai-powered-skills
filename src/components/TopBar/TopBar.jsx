@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDownIcon } from '../Icons';
+import { IconButton } from '@zendeskgarden/react-buttons';
+import { Tooltip } from '@zendeskgarden/react-tooltips';
+import { ChevronDownIcon, Icon } from '../Icons';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import './TopBar.css';
 
@@ -86,6 +88,8 @@ export default function TopBar({
   selectedTicket = null,
   onTicketTabClick,
   onTicketTabClose,
+  onToggleCopilot,
+  isCopilotOpen = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -105,6 +109,13 @@ export default function TopBar({
   const handleProductSelect = (product) => {
     if (onProductChange) onProductChange(product);
     setIsOpen(false);
+  };
+
+  const handleReset = () => {
+    Object.keys(localStorage)
+      .filter(k => k.startsWith('zenbox:'))
+      .forEach(k => localStorage.removeItem(k));
+    window.location.reload();
   };
 
   return (
@@ -178,6 +189,21 @@ export default function TopBar({
 
       {/* Right section */}
       <div className="topbar__right">
+        <Tooltip content="Reset prototype">
+          <IconButton aria-label="Reset prototype" isBasic onClick={handleReset}>
+            <Icon name="restart_alt" />
+          </IconButton>
+        </Tooltip>
+
+        <button
+          className={`topbar__icon-btn${isCopilotOpen ? ' topbar__icon-btn--active' : ''}`}
+          title="AI Copilot"
+          aria-pressed={isCopilotOpen}
+          onClick={onToggleCopilot}
+        >
+          <img src="/Copilot.svg" alt="" className="topbar__icon topbar__icon--copilot" aria-hidden="true" />
+        </button>
+
         <button className="topbar__icon-btn" title="Help">
           <img src="/assets/help.svg" alt="" className="topbar__icon" aria-hidden="true" />
         </button>

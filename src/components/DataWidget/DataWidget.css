@@ -1,0 +1,110 @@
+/* ─── DataWidget ──────────────────────────────────────────────────────────────
+   Reusable metric card. Displays a single KPI with an optional trend chevron
+   and muted comparison footnote.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.data-widget {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-grey-300);
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* ── Header row ── */
+.data-widget__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.data-widget__info-icon {
+  flex-shrink: 0;
+  color: var(--color-grey-700);
+}
+
+.data-widget__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  color: var(--color-grey-900);
+  white-space: nowrap;
+}
+
+/* ── Value row ── */
+.data-widget__value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+/* Chevron inherits color from the variant class on the sibling value element
+   so both chevron and value share the same color. Achieved via flex parent. */
+.data-widget__chevron {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.data-widget__value {
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 24px;
+  letter-spacing: -0.45px;
+  white-space: nowrap;
+}
+
+/* Variant: success (green) — default for positive metrics */
+.data-widget__value--success {
+  color: var(--color-success);
+}
+
+/* Chevron color is driven by the parent flex row; we colour it via the row */
+.data-widget__value-row:has(.data-widget__value--success) .data-widget__chevron {
+  color: var(--color-success);
+}
+
+/* Variant: warning (yellow/amber) */
+.data-widget__value--warning {
+  color: var(--color-warning);
+}
+
+.data-widget__value-row:has(.data-widget__value--warning) .data-widget__chevron {
+  color: var(--color-warning);
+}
+
+/* Variant: danger (red) */
+.data-widget__value--danger {
+  color: var(--color-danger);
+}
+
+.data-widget__value-row:has(.data-widget__value--danger) .data-widget__chevron {
+  color: var(--color-danger);
+}
+
+/* Variant: default (grey) */
+.data-widget__value--default {
+  color: var(--color-text-primary);
+}
+
+.data-widget__annotation {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  color: var(--color-grey-700);
+  white-space: nowrap;
+}
+
+/* ── Footnote row ── */
+.data-widget__footnote {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.0004px;
+  color: var(--color-grey-700);
+  white-space: nowrap;
+}

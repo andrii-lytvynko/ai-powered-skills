@@ -442,8 +442,7 @@ function PredictiveRoutingCell({ queue, onStartQueueEvaluation, isEvaluating, ha
         style={{ cursor: 'pointer' }}
         onClick={() => onStartQueueEvaluation && onStartQueueEvaluation(queue)}
       >
-        <BarChartIcon className="queues-table__predictive-badge-chart" />
-        On
+        Active
       </Tag>
     );
 
@@ -496,7 +495,7 @@ function PredictiveRoutingCell({ queue, onStartQueueEvaluation, isEvaluating, ha
       style={{ cursor: 'pointer' }}
       onClick={() => onStartQueueEvaluation && onStartQueueEvaluation(queue)}
     >
-      Off
+      Inactive
     </Tag>
   );
 }

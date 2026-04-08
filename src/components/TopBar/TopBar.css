@@ -377,7 +377,7 @@
   border: none;
   cursor: pointer;
   color: #68737d;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 100ms ease-out;
   flex-shrink: 0;
 }
 
@@ -388,4 +388,22 @@
 .topbar__icon {
   width: 20px;
   height: 20px;
+}
+
+.topbar__icon--copilot {
+  width: 24px;
+  height: 24px;
+}
+
+.topbar__icon-btn--active {
+  background: var(--btn-ghost-active-bg, rgba(41, 50, 57, 0.12));
+}
+
+.topbar__icon-btn--active:hover {
+  background: var(--btn-ghost-active-bg, rgba(41, 50, 57, 0.12));
+}
+
+.topbar__icon-btn:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
 }

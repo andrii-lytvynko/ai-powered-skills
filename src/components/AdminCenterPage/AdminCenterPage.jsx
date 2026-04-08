@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { Anchor, Button } from '@zendeskgarden/react-buttons';
 import TopBar from '../TopBar/TopBar';
 import { 
@@ -13,6 +14,7 @@ import {
 } from '../Icons';
 import PageSidebarNav from '../PageSidebarNav';
 import QueuesPage from '../QueuesPage';
+import RoutingConfigPage from '../RoutingConfigPage';
 import './AdminCenterPage.css';
 
 // Admin Center specific icons
@@ -187,23 +189,53 @@ export default function AdminCenterPage({ onProductChange, selectedProduct, prod
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('Routing');
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
-  const [activeSubPage, setActiveSubPage] = useState('queues'); // Default to queues as per Figma design
+  const [activeSubPage, setActiveSubPage] = useLocalStorage('zenbox:admin:activeSubPage', 'queues');
+  const [routingConfigFlow, setRoutingConfigFlow] = useState(null);
+
+  // Shared set of recommendation IDs that have been applied across pages.
+  // Serialized as an array in localStorage; reconstructed as a Set at runtime.
+  const [appliedIdsArray, setAppliedIdsArray] = useLocalStorage('zenbox:admin:appliedRecommendationIds', []);
+  const appliedRecommendationIds = new Set(appliedIdsArray);
+
+  const handleRecommendationApplied = useCallback((id) => {
+    setAppliedIdsArray(prev => {
+      if (prev.includes(id)) return prev;
+      return [...prev, id];
+    });
+  }, [setAppliedIdsArray]);
 
   const handleToggleNav = () => {
     setIsNavCollapsed(!isNavCollapsed);
   };
 
-  const handleSubPageSelect = (itemId) => {
+  const handleSubPageSelect = (itemId, options = {}) => {
     setActiveSubPage(itemId);
+    setRoutingConfigFlow(options.copilotFlow ?? null);
   };
 
-  // Render the Queues page when selected
   if (activeSubPage === 'queues') {
     return (
-      <QueuesPage 
+      <QueuesPage
         onProductChange={onProductChange}
         selectedProduct={selectedProduct}
         products={products}
+        onSubPageChange={handleSubPageSelect}
+        appliedRecommendationIds={appliedRecommendationIds}
+        onRecommendationApplied={handleRecommendationApplied}
+      />
+    );
+  }
+
+  if (activeSubPage === 'routing-config') {
+    return (
+      <RoutingConfigPage
+        onProductChange={onProductChange}
+        selectedProduct={selectedProduct}
+        products={products}
+        onSubPageChange={handleSubPageSelect}
+        initialCopilotFlow={routingConfigFlow}
+        appliedRecommendationIds={appliedRecommendationIds}
+        onRecommendationApplied={handleRecommendationApplied}
       />
     );
   }

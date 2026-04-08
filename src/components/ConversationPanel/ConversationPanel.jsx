@@ -331,7 +331,18 @@ const conversationsData = {
   "Riley Green | I can't access my account": {
     category: 'Account access',
     sentiment: 'Frustrated',
+    language: 'Korean',
     messages: [
+      { id: 1, sender: 'customer', name: 'Riley Green', text: '안녕하세요, 오늘 아침 보안 프롬프트에서 비밀번호를 재설정하라고 해서 했는데 계정에 접근이 안 돼요.', time: '4:05 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: '문의해 주셔서 감사합니다, Riley. 도와드릴게요. 잘못된 이메일 또는 비밀번호 오류가 나오나요, 아니면 인증 오류인가요?', time: '4:06 PM' },
+      { id: 3, sender: 'customer', name: 'Riley Green', text: "두 번 재설정했는데도 '이메일 또는 비밀번호가 올바르지 않습니다'라고 나와요.", time: '4:07 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: '알겠습니다. Google로 로그인하시나요, 아니면 이메일과 비밀번호로 로그인하시나요?', time: '4:08 PM' },
+      { id: 5, sender: 'customer', name: 'Riley Green', text: '이메일과 비밀번호요. 모바일에서는 로그인하자마자 바로 로그아웃돼요.', time: '4:09 PM' },
+      { id: 6, sender: 'agent', name: 'You', text: '감사합니다. 계정을 확인했는데 정지 표시는 없네요. 이 링크를 한 번 시도해 보시고, 프라이빗 브라우저 탭에서 열어보세요: https://app.example.com/login?fresh=true', time: '4:10 PM' },
+      { id: 7, sender: 'customer', name: 'Riley Green', text: '프라이빗 모드에서는 됐어요. 일반 Chrome에서는 여전히 안 돼요.', time: '4:11 PM' },
+      { id: 8, sender: 'agent', name: 'You', text: '좋아요, 캐시된 토큰 문제로 좁혀졌네요. app.example.com의 사이트 데이터를 지우고 다시 로그인하시면 해결될 거예요.', time: '4:13 PM' },
+    ],
+    translatedMessages: [
       { id: 1, sender: 'customer', name: 'Riley Green', text: "Hi, I can't access my account after your security prompt asked me to reset my password this morning.", time: '4:05 PM' },
       { id: 2, sender: 'agent', name: 'You', text: "Thanks for reaching out, Riley. I can help. Are you seeing an incorrect password error or a verification error?", time: '4:06 PM' },
       { id: 3, sender: 'customer', name: 'Riley Green', text: "It says 'incorrect email or password' even after I reset it twice.", time: '4:07 PM' },
@@ -395,8 +406,69 @@ const conversationsData = {
   "Oscar Rosser | Switch to Spanish language": {
     category: 'Localization request',
     sentiment: 'Neutral',
+    language: 'Spanish',
     messages: [
+      { id: 1, sender: 'customer', name: 'Oscar Rosser', text: "Hola, necesito cambiar el idioma de la aplicación a español para mi equipo en México. Revisé Configuración y Perfil, pero solo aparece inglés. Estamos en el plan Pro con 14 puestos. Si el español está limitado por el plan, por favor confirme qué actualización se necesita. Si ya debería estar disponible, comparta los pasos exactos porque lo necesitamos antes de la sesión de incorporación del lunes.", time: '2:30 PM' },
+    ],
+    translatedMessages: [
       { id: 1, sender: 'customer', name: 'Oscar Rosser', text: "Hello, I need to switch the app interface to Spanish for my team in Mexico. I checked Settings and Profile, but only English appears. We are on the Pro plan with 14 seats. If Spanish is plan-limited, please confirm what upgrade is required. If it should already be available, please share exact steps because we need this before Monday's onboarding session.", time: '2:30 PM' },
+    ],
+  },
+  "지수 Kim | 주문이 도착하지 않았어요": {
+    category: 'Order issue',
+    sentiment: 'Frustrated',
+    language: 'Korean',
+    messages: [
+      { id: 1, sender: 'customer', name: '지수 Kim', text: '안녕하세요, 5일 전에 주문한 상품이 아직도 도착하지 않았어요. 주문 번호는 KR-88421입니다.', time: '1:55 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: '안녕하세요, 지수님. 불편을 드려서 죄송합니다. 주문 번호를 확인해 드릴게요.', time: '1:57 PM' },
+      { id: 3, sender: 'customer', name: '지수 Kim', text: '배송 추적을 확인했는데 3일째 업데이트가 없어요. 도대체 어디 있는 건가요?', time: '1:58 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: '확인해 보니 배송 중에 지연이 발생했습니다. 물류 파트너에게 확인 요청을 넣었습니다. 24시간 이내에 업데이트 드리겠습니다.', time: '2:01 PM' },
+      { id: 5, sender: 'customer', name: '지수 Kim', text: '알겠어요. 빨리 해결됐으면 좋겠네요. 선물로 주문한 건데 일정이 있거든요.', time: '2:02 PM' },
+    ],
+    translatedMessages: [
+      { id: 1, sender: 'customer', name: '지수 Kim', text: "Hello, I ordered a product 5 days ago and it still hasn't arrived. My order number is KR-88421.", time: '1:55 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: "Hello, Jisoo. I'm sorry for the inconvenience. Let me look up your order number.", time: '1:57 PM' },
+      { id: 3, sender: 'customer', name: '지수 Kim', text: "I checked the delivery tracking and there's been no update for 3 days. Where is it?", time: '1:58 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: "I've checked and there's been a delay during shipping. I've submitted a confirmation request to our logistics partner. I'll update you within 24 hours.", time: '2:01 PM' },
+      { id: 5, sender: 'customer', name: '지수 Kim', text: "I see. I hope this gets resolved quickly. I ordered it as a gift and I have a deadline.", time: '2:02 PM' },
+    ],
+  },
+  "민준 Park | 환불 요청드립니다": {
+    category: 'Refund request',
+    sentiment: 'Frustrated',
+    language: 'Korean',
+    messages: [
+      { id: 1, sender: 'customer', name: '민준 Park', text: '안녕하세요, 지난주에 구매한 블루투스 스피커에 결함이 있어서 환불을 요청드립니다. 충전이 전혀 안 돼요. 주문 번호는 KR-77305입니다.', time: '1:20 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: '안녕하세요, 민준님. 불편을 드려 정말 죄송합니다. 주문 내역을 확인했습니다. 환불 처리를 도와드릴게요.', time: '1:23 PM' },
+      { id: 3, sender: 'customer', name: '민준 Park', text: '감사합니다. 언제쯤 환불이 되나요?', time: '1:24 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: '제품 반송 후 3-5 영업일 이내에 결제 수단으로 환불됩니다. 반송 레이블은 이메일로 보내 드릴게요.', time: '1:26 PM' },
+    ],
+    translatedMessages: [
+      { id: 1, sender: 'customer', name: '민준 Park', text: "Hello, I'd like to request a refund for the Bluetooth speaker I purchased last week. It has a defect — it won't charge at all. My order number is KR-77305.", time: '1:20 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: "Hello, Minjun. I'm really sorry for the trouble. I've confirmed your order. I'll help you process the refund.", time: '1:23 PM' },
+      { id: 3, sender: 'customer', name: '민준 Park', text: 'Thank you. How long will the refund take?', time: '1:24 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: "The refund will be returned to your original payment method within 3-5 business days after we receive the returned product. I'll send you a return label by email.", time: '1:26 PM' },
+    ],
+  },
+  "서연 Choi | 비밀번호를 잊어버렸어요": {
+    category: 'Account access',
+    sentiment: 'Neutral',
+    language: 'Korean',
+    messages: [
+      { id: 1, sender: 'customer', name: '서연 Choi', text: '안녕하세요, 비밀번호를 잊어버려서 로그인을 못하고 있어요. 비밀번호 재설정 이메일을 받지 못했어요.', time: '12:48 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: '안녕하세요, 서연님. 도와드릴게요. 가입하신 이메일 주소를 확인해 드릴까요?', time: '12:50 PM' },
+      { id: 3, sender: 'customer', name: '서연 Choi', text: 'seoyeon.choi@example.kr 이메일로 가입했어요.', time: '12:51 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: '확인했습니다. 스팸 폴더도 확인해 보셨나요? 지금 재설정 이메일을 다시 발송해 드릴게요.', time: '12:53 PM' },
+      { id: 5, sender: 'customer', name: '서연 Choi', text: '스팸 폴더에도 없었어요. 다시 보내주시면 감사하겠어요.', time: '12:54 PM' },
+      { id: 6, sender: 'agent', name: 'You', text: '방금 발송했습니다. 5분 이내에 도착하지 않으면 다시 알려주세요.', time: '12:55 PM' },
+    ],
+    translatedMessages: [
+      { id: 1, sender: 'customer', name: '서연 Choi', text: "Hello, I forgot my password and can't log in. I haven't received a password reset email.", time: '12:48 PM' },
+      { id: 2, sender: 'agent', name: 'You', text: "Hello, Seoyeon. I'll help you out. Can you confirm the email address you registered with?", time: '12:50 PM' },
+      { id: 3, sender: 'customer', name: '서연 Choi', text: 'I registered with seoyeon.choi@example.kr.', time: '12:51 PM' },
+      { id: 4, sender: 'agent', name: 'You', text: "I've confirmed it. Did you check your spam folder? I'll resend the reset email now.", time: '12:53 PM' },
+      { id: 5, sender: 'customer', name: '서연 Choi', text: "It wasn't in spam either. I'd appreciate it if you could send it again.", time: '12:54 PM' },
+      { id: 6, sender: 'agent', name: 'You', text: "I've just sent it. If it doesn't arrive within 5 minutes, please let me know.", time: '12:55 PM' },
     ],
   },
 };
@@ -420,14 +492,22 @@ const getConversationForTicket = (ticket) => {
     sentiment: conversationData.sentiment,
     channel: conversationData.channel || null,
     intent: conversationData.intent || null,
-    phoneNumber: conversationData.phoneNumber || null,
+    phoneNumber: conversationData.phoneNumber || ticket.phoneNumber || null,
     location: conversationData.location || null,
+    language: conversationData.language || null,
     totalMessages: conversationData.messages.length,
     messages: conversationData.messages.map(msg => ({
       ...msg,
       name: msg.sender === 'customer' && !msg.type ? (ticket.lastMessage?.name || ticket.title.split(' | ')[0] || msg.name) : msg.name,
       avatar: null,
     })),
+    translatedMessages: conversationData.translatedMessages
+      ? conversationData.translatedMessages.map(msg => ({
+          ...msg,
+          name: msg.sender === 'customer' && !msg.type ? (ticket.lastMessage?.name || ticket.title.split(' | ')[0] || msg.name) : msg.name,
+          avatar: null,
+        }))
+      : null,
   };
 };
 
@@ -511,6 +591,123 @@ function SecondaryNavBar({ ticket, onNextTicket, currentIndex, totalTickets }) {
       >
         Next →
       </button>
+    </div>
+  );
+}
+
+// ========================================
+// Translation Banner
+// ========================================
+
+const LANGUAGE_OPTIONS = [
+  'Arabic', 'Chinese', 'Dutch', 'English', 'French', 'German',
+  'Italian', 'Japanese', 'Korean', 'Polish', 'Portuguese',
+  'Russian', 'Spanish', 'Turkish',
+];
+
+function TranslationIcon({ className }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="8.5" width="7" height="6" rx="1" fill="#1F73B7" opacity="0.15"/>
+      <path d="M2 5H8M5 2V5M3.5 5C3.5 6.5 4.5 8 6 8.5" stroke="#1F73B7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M9 10.5H13.5M11.25 8.5L13.5 13.5" stroke="#49545C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M9 13.5L11.25 8.5" stroke="#49545C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function ChevronDownTinyIcon({ className }) {
+  return (
+    <svg className={className} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function TranslationBanner({
+  detectedLanguage,
+  sourceLanguage,
+  targetLanguage,
+  onSourceChange,
+  onTargetChange,
+  onTranslate,
+  onDismiss,
+  isTranslating,
+}) {
+  const [sourceOpen, setSourceOpen] = useState(false);
+  const [targetOpen, setTargetOpen] = useState(false);
+
+  return (
+    <div className="translation-banner">
+      <div className="translation-banner__left">
+        <TranslationIcon className="translation-banner__icon" />
+
+        <div className="translation-banner__select-wrapper">
+          <button
+            className="translation-banner__lang-btn"
+            onClick={() => { setSourceOpen(o => !o); setTargetOpen(false); }}
+            aria-haspopup="listbox"
+            aria-expanded={sourceOpen}
+          >
+            <span>{sourceLanguage || detectedLanguage}</span>
+            <ChevronDownTinyIcon className="translation-banner__chevron" />
+          </button>
+          {sourceOpen && (
+            <ul className="translation-banner__dropdown" role="listbox">
+              {LANGUAGE_OPTIONS.map(lang => (
+                <li
+                  key={lang}
+                  role="option"
+                  aria-selected={lang === (sourceLanguage || detectedLanguage)}
+                  className={`translation-banner__dropdown-item ${lang === (sourceLanguage || detectedLanguage) ? 'translation-banner__dropdown-item--selected' : ''}`}
+                  onClick={() => { onSourceChange(lang); setSourceOpen(false); }}
+                >
+                  {lang}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <span className="translation-banner__arrow" aria-hidden="true">→</span>
+
+        <div className="translation-banner__select-wrapper">
+          <button
+            className="translation-banner__lang-btn"
+            onClick={() => { setTargetOpen(o => !o); setSourceOpen(false); }}
+            aria-haspopup="listbox"
+            aria-expanded={targetOpen}
+          >
+            <span>{targetLanguage}</span>
+            <ChevronDownTinyIcon className="translation-banner__chevron" />
+          </button>
+          {targetOpen && (
+            <ul className="translation-banner__dropdown" role="listbox">
+              {LANGUAGE_OPTIONS.map(lang => (
+                <li
+                  key={lang}
+                  role="option"
+                  aria-selected={lang === targetLanguage}
+                  className={`translation-banner__dropdown-item ${lang === targetLanguage ? 'translation-banner__dropdown-item--selected' : ''}`}
+                  onClick={() => { onTargetChange(lang); setTargetOpen(false); }}
+                >
+                  {lang}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <Button isBasic size="small" className="translation-banner__translate-btn" onClick={onTranslate}>
+          {isTranslating ? 'Show original' : 'Translate'}
+        </Button>
+      </div>
+
+      <IconButton isBasic size="small" aria-label="Dismiss translation banner" className="translation-banner__dismiss" onClick={onDismiss}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      </IconButton>
     </div>
   );
 }
@@ -1128,6 +1325,10 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
   const [messages, setMessages] = useState([]);
   const [conversationMeta, setConversationMeta] = useState(null);
   const [composerMessage, setComposerMessage] = useState('');
+  const [translationDismissed, setTranslationDismissed] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [sourceLanguage, setSourceLanguage] = useState('');
+  const [targetLanguage, setTargetLanguage] = useState('English');
 
   useEffect(() => {
     if (ticket) {
@@ -1143,10 +1344,15 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
           intent: conversation.intent,
           phoneNumber: conversation.phoneNumber,
           location: conversation.location,
+          language: conversation.language,
+          translatedMessages: conversation.translatedMessages,
           totalMessages: conversation.totalMessages,
         });
+        setSourceLanguage(conversation.language || '');
       }
       setComposerMessage('');
+      setTranslationDismissed(false);
+      setIsTranslating(false);
     }
   }, [ticket]);
 
@@ -1158,6 +1364,11 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
     ...conversationMeta,
     messages,
   };
+
+  const showTranslationBanner =
+    !translationDismissed &&
+    conversation.language &&
+    conversation.language !== targetLanguage;
 
   const fullRequesterNameFromConversation = conversation.messages.find(
     (msg) => msg.sender === 'customer' && msg.name && msg.name.trim().length > 2
@@ -1218,6 +1429,20 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
         </div>
 
         <div className="conversation-panel__main">
+          {/* Translation banner — shown when ticket language differs from agent's language */}
+          {showTranslationBanner && (
+            <TranslationBanner
+              detectedLanguage={conversation.language}
+              sourceLanguage={sourceLanguage}
+              targetLanguage={targetLanguage}
+              onSourceChange={setSourceLanguage}
+              onTargetChange={setTargetLanguage}
+              onTranslate={() => setIsTranslating(v => !v)}
+              onDismiss={() => setTranslationDismissed(true)}
+              isTranslating={isTranslating}
+            />
+          )}
+
           {/* Conversation header (2 rows) */}
           <ConversationHeader
             conversation={conversation}
@@ -1225,7 +1450,13 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
           />
 
           {/* Message list */}
-          <MessageList messages={conversation.messages} />
+          <MessageList
+            messages={
+              isTranslating && conversation.translatedMessages
+                ? conversation.translatedMessages
+                : conversation.messages
+            }
+          />
 
           {/* Composer area */}
           <Composer
@@ -1233,6 +1464,8 @@ export default function ConversationPanel({ ticket, onClose, onStatusChange, cur
             requesterName={requesterName}
             value={composerMessage}
             onChange={setComposerMessage}
+            isTranslating={isTranslating}
+            customerLanguage={sourceLanguage}
           />
         </div>
 

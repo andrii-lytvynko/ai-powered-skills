@@ -270,12 +270,13 @@
 }
 
 /* ========================================
-   Footer — toolbar only
+   Footer — toolbar + send button
    ======================================== */
 
 .composer__footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 4px 12px;
   flex-shrink: 0;
 }
@@ -299,10 +300,38 @@
   height: 16px;
 }
 
+/* Translation toggle in toolbar */
+.composer__translation-toggle {
+  color: var(--color-text-secondary);
+}
+
+.composer__translation-toggle--active {
+  background-color: rgba(31, 115, 183, 0.16);
+  border-radius: 4px;
+  color: var(--color-primary-600);
+}
+
+.composer__translation-toggle--active:hover {
+  background-color: rgba(31, 115, 183, 0.24);
+  color: var(--color-primary-600);
+}
+
+/* Send button */
+.composer__send-btn {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-600);
+  white-space: nowrap;
+}
+
 /* ========================================
    Dark theme
    ======================================== */
 
 [data-theme="dark"] .composer {
   background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .composer__translation-toggle--active {
+  background-color: rgba(31, 115, 183, 0.24);
 }
