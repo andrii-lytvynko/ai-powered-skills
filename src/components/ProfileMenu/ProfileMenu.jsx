@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../../contexts';
 import { CheckIcon, Icon } from '../Icons';
+import { assetUrl } from '../../utils/assetUrl';
 import './ProfileMenu.css';
 
 const STATUSES = [
@@ -18,10 +19,10 @@ const STATUS_RING_COLOR = {
 };
 
 const STATUS_ICON = {
-  available:       '/online.svg',
-  away:            '/away.svg',
-  'transfers-only': '/transfers.svg',
-  offline:         '/offline.svg',
+  available:       assetUrl('/online.svg'),
+  away:            assetUrl('/away.svg'),
+  'transfers-only': assetUrl('/transfers.svg'),
+  offline:         assetUrl('/offline.svg'),
 };
 
 function StatusDot({ value }) {
@@ -72,7 +73,7 @@ export default function ProfileMenu({ className = '' }) {
           style={isSupport ? { '--pm-ring-color': ringColor } : {}}
         >
           <div className="profile-menu__trigger-inner">
-            <img src="/assets/Avatar.png" alt="Profile avatar" className="profile-menu__trigger-img" />
+            <img src={assetUrl('/assets/Avatar.png')} alt="Profile avatar" className="profile-menu__trigger-img" />
           </div>
           {isSupport && (
             <div className="profile-menu__trigger-badge">
@@ -92,7 +93,7 @@ export default function ProfileMenu({ className = '' }) {
               style={isSupport ? { '--pm-ring-color': ringColor } : { '--pm-ring-color': 'transparent' }}
             >
               <div className="profile-menu__header-inner">
-                <img src="/assets/Avatar.png" alt="Profile avatar" />
+                <img src={assetUrl('/assets/Avatar.png')} alt="Profile avatar" />
               </div>
               {isSupport && (
                 <div className="profile-menu__header-badge">

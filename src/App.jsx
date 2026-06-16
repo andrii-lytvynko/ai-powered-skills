@@ -70,7 +70,7 @@ function App() {
   const { setCurrentProduct, setAgentStatus } = useTheme();
 
   // ── Demo sequence state ──────────────────────────────────
-  // Sequence: 15s → notif1 → 15s → notif2 + status update → exit → voice widget
+  // Sequence: 3s → notif1 (11s) → 15s → notif2 + status update → exit → voice widget
   const [notif1Visible, setNotif1Visible] = useState(false);
   const [notif2Visible, setNotif2Visible] = useState(false);
   const [voiceWidgetVisible, setVoiceWidgetVisible] = useState(false);
@@ -88,17 +88,17 @@ function App() {
 
     sequenceStartedRef.current = true;
 
-    // t=15s: first notification
+    // t=3s: first notification
     const t1 = setTimeout(() => {
       setNotif1Visible(true);
-    }, 15_000);
+    }, 3_000);
 
-    // t=30s: dismiss first, show second, update agent status
+    // t=15s: dismiss first, show second, update agent status
     const t2 = setTimeout(() => {
       setNotif1Visible(false);
       setNotif2Visible(true);
       setAgentStatus('available');
-    }, 30_000);
+    }, 15_000);
 
     return () => {
       clearTimeout(t1);
@@ -265,8 +265,8 @@ function App() {
           <QueueNotification
             type="warning"
             title="You've been reassigned to Contact Center queue"
-            body="Your schedule changed at 2:00 PM. Incoming tickets will now be from the Billing Support queue."
-            autoDismissMs={6000}
+            body="Your schedule changed at 2:00 PM. Incoming tickets will now be routed from the Contact Center queue."
+            autoDismissMs={11000}
             onDismiss={() => setNotif1Visible(false)}
           />
         )}

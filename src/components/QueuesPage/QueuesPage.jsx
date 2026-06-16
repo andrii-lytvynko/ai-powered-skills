@@ -17,6 +17,7 @@ import {
   RecommendationDetailView,
   RecommendationsDrawer,
 } from '../RoutingRecommendations';
+import { assetUrl } from '../../utils/assetUrl';
 import './QueuesPage.css';
 
 // Admin Center specific icons
@@ -272,7 +273,7 @@ const sampleQueues = [
 
 
 // Book open icon image path
-const bookOpenIconSrc = "/assets/Book_open-706cd137-7b94-449e-afad-ba613a78f0d9.png";
+const bookOpenIconSrc = assetUrl('/assets/Book_open-706cd137-7b94-449e-afad-ba613a78f0d9.png');
 
 function BookOpenIcon({ className }) {
   return (
@@ -306,7 +307,7 @@ function SparkleHeaderIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/Sparkle-063d706a-c098-4781-a5bc-a30e5b22cedf.png" 
+      src={assetUrl('/assets/Sparkle-063d706a-c098-4781-a5bc-a30e5b22cedf.png')} 
       alt="" 
       width="40" 
       height="40"
@@ -337,7 +338,7 @@ function MetricsInfoIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/info-18f1df92-474a-4b7f-9d28-76109bee24c9.png" 
+      src={assetUrl('/assets/info-18f1df92-474a-4b7f-9d28-76109bee24c9.png')} 
       alt="" 
       width="16" 
       height="16"
@@ -690,7 +691,7 @@ function RocketIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/Rocket-ad39e3fa-c92b-4207-a15a-c01e01d35d5c.png" 
+      src={assetUrl('/assets/Rocket-ad39e3fa-c92b-4207-a15a-c01e01d35d5c.png')} 
       alt="" 
       width="40" 
       height="40"
@@ -1559,12 +1560,11 @@ export default function QueuesPage({ onProductChange, selectedProduct, products,
     }
 
     if (selectedRecommendation?.id === 'skills-based') {
-      // Skills: navigate to Routing Config and trigger skills Copilot flow
       setRecommendations(prev => prev.filter(r => r.id !== selectedRecommendation.id));
       onRecommendationApplied?.('skills-based');
       setIsRecommendationsOpen(false);
       setSelectedRecommendation(null);
-      onSubPageChange('routing-config', { copilotFlow: 'skills-activation' });
+      onSubPageChange('skills', { copilotFlow: 'skills-activation' });
       return;
     }
 

@@ -3,12 +3,13 @@ import { IconButton } from '@zendeskgarden/react-buttons';
 import { Tooltip } from '@zendeskgarden/react-tooltips';
 import { ChevronDownIcon, Icon } from '../Icons';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import { assetUrl } from '../../utils/assetUrl';
 import './TopBar.css';
 
 const ticketIconSrc = {
-  call: '/assets/Phone in.svg',
-  chat: '/assets/Bubble.svg',
-  email: '/assets/Email.svg',
+  call: assetUrl('/assets/Phone in.svg'),
+  chat: assetUrl('/assets/Bubble.svg'),
+  email: assetUrl('/assets/Email.svg'),
 };
 
 function parseTicketTitle(title = '') {
@@ -72,7 +73,7 @@ function TicketTab({ ticket, isActive, onTabClick, onTabClose }) {
         onClick={handleCloseClick}
         onKeyDown={(e) => e.key === 'Enter' && handleCloseClick(e)}
       >
-        <img src="/assets/X small.svg" alt="" aria-hidden="true" width={12} height={12} />
+        <img src={assetUrl('/assets/X small.svg')} alt="" aria-hidden="true" width={12} height={12} />
       </div>
     </button>
   );
@@ -123,7 +124,7 @@ export default function TopBar({
       {/* Left section */}
       <div className="topbar__left">
         <div className="topbar__logo">
-          <img src="/assets/Logo zendesk.svg" alt="Zendesk" className="topbar__logo-icon" />
+          <img src={assetUrl('/assets/Logo zendesk.svg')} alt="Zendesk" className="topbar__logo-icon" />
         </div>
 
         <div className="topbar__product-wrapper" ref={dropdownRef}>
@@ -196,16 +197,21 @@ export default function TopBar({
         </Tooltip>
 
         <button
-          className={`topbar__icon-btn${isCopilotOpen ? ' topbar__icon-btn--active' : ''}`}
+          className="topbar__icon-btn"
           title="AI Copilot"
           aria-pressed={isCopilotOpen}
           onClick={onToggleCopilot}
         >
-          <img src="/Copilot.svg" alt="" className="topbar__icon topbar__icon--copilot" aria-hidden="true" />
+          <img
+            src={assetUrl(isCopilotOpen ? '/Copilot-active.svg' : '/Copilot.svg')}
+            alt=""
+            className="topbar__icon topbar__icon--copilot"
+            aria-hidden="true"
+          />
         </button>
 
         <button className="topbar__icon-btn" title="Help">
-          <img src="/assets/help.svg" alt="" className="topbar__icon" aria-hidden="true" />
+          <img src={assetUrl('/assets/help.svg')} alt="" className="topbar__icon" aria-hidden="true" />
         </button>
 
         <ProfileMenu />

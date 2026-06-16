@@ -8,6 +8,7 @@ import {
   CheckIcon
 } from '../Icons';
 import TopBar from '../TopBar/TopBar';
+import { assetUrl } from '../../utils/assetUrl';
 import './QueueEditPage.css';
 
 // External link icon
@@ -87,7 +88,7 @@ function SparkleHeaderIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/Sparkle-063d706a-c098-4781-a5bc-a30e5b22cedf.png" 
+      src={assetUrl('/assets/Sparkle-063d706a-c098-4781-a5bc-a30e5b22cedf.png')} 
       alt="" 
       width="40" 
       height="40"
@@ -109,7 +110,7 @@ function MetricsInfoIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/info-18f1df92-474a-4b7f-9d28-76109bee24c9.png" 
+      src={assetUrl('/assets/info-18f1df92-474a-4b7f-9d28-76109bee24c9.png')} 
       alt="" 
       width="16" 
       height="16"
@@ -131,7 +132,7 @@ function RocketIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/Rocket-ad39e3fa-c92b-4207-a15a-c01e01d35d5c.png" 
+      src={assetUrl('/assets/Rocket-ad39e3fa-c92b-4207-a15a-c01e01d35d5c.png')} 
       alt="" 
       width="40" 
       height="40"
@@ -144,7 +145,7 @@ function BookOpenIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/Book_open-706cd137-7b94-449e-afad-ba613a78f0d9.png" 
+      src={assetUrl('/assets/Book_open-706cd137-7b94-449e-afad-ba613a78f0d9.png')} 
       alt="Book open" 
       width="40" 
       height="40"
@@ -1225,7 +1226,7 @@ export default function QueueEditPage({
                         onClick={() => setEnableSecondaryGroups(!enableSecondaryGroups)}
                       >
                         {enableSecondaryGroups ? (
-                          <img src="/assets/Check square.svg" alt="" width="20" height="20" />
+                          <img src={assetUrl('/assets/Check square.svg')} alt="" width="20" height="20" />
                         ) : (
                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="3" y="3" width="14" height="14" rx="3" stroke="#5C6970" strokeWidth="1.5"/>

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { IconButton } from '@zendeskgarden/react-buttons';
 import { SM, MD } from '@zendeskgarden/react-typography';
 import { ClockIcon, EditNoteIcon, CloseIcon, SparkleIcon, InfoIcon } from '../Icons';
+import { useSkillsMatrix } from '../../hooks/useSkillsMatrix';
+import AgentSkillModal from '../AgentSkillModal';
 import './CopilotSidebar.css';
 
 // ─── Static data ────────────────────────────────────────────
@@ -36,34 +38,8 @@ const WFM_CHANGED_ITEMS = [
 const SKILLS_THINKING_STEPS = [
   { id: 1, text: 'Analyzing historical ticket assignments...', duration: 1000 },
   { id: 2, text: 'Analyzing agent performance data...', duration: 900 },
-  { id: 3, text: 'Classifying ticket intents and defining skills...', duration: 1200 },
-  { id: 4, text: 'Generating skills matrix...', duration: 800 },
-];
-
-const SKILLS_DESCRIPTIONS = [
-  { skill: 'Billing Disputes', tickets: '1,240', intents: 'Charge disputes, invoice errors, payment failures, double charges' },
-  { skill: 'Product Configuration', tickets: '980', intents: 'Setup, integrations, feature config, API questions' },
-  { skill: 'Refund Processing', tickets: '870', intents: 'Return requests, refund eligibility, policy exceptions, prorated credits' },
-  { skill: 'Account Migration', tickets: '420', intents: 'Platform migration, data transfer, onboarding from competitor' },
-  { skill: 'Subscription Management', tickets: '1,560', intents: 'Plan changes, renewals, cancellations, trial conversions' },
-  { skill: 'Compliance & Security', tickets: '310', intents: 'Data requests (GDPR/CCPA), security incidents, access control' },
-];
-
-const SKILLS_MATRIX = [
-  { skill: 'Billing Disputes', agents: 8 },
-  { skill: 'Product Configuration', agents: 8 },
-  { skill: 'Refund Processing', agents: 7 },
-  { skill: 'Account Migration', agents: 5 },
-  { skill: 'Subscription Management', agents: 9 },
-  { skill: 'Compliance & Security', agents: 4 },
-];
-
-const SKILLS_SUMMARY = [
-  { label: 'Total skills', value: '6 skills' },
-  { label: 'Total assignments', value: '41 agent-skill pairs' },
-  { label: 'Agents covered', value: '136 of 139' },
-  { label: 'Avg confidence', value: '89.4%' },
-  { label: 'Agents with 0 skills', value: '3 agents' },
+  { id: 3, text: 'Classifying ticket intents and defining skill categories...', duration: 1200 },
+  { id: 4, text: 'Generating product and language skills matrix...', duration: 800 },
 ];
 
 const SKILLS_ACTIVATING_STEPS = [
@@ -170,11 +146,32 @@ function SessionIcon() {
 
 // ─── Main component ──────────────────────────────────────────
 
-export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActivated, onSkillsActivated }) {
+export default function CopilotSidebar({
+  isOpen,
+  onClose,
+  initialFlow,
+  onWfmActivated,
+  onSkillsActivated,
+  skillsCategories: skillsCategoriesProp,
+  skillsSummary: skillsSummaryProp,
+  onSetProficiency: onSetProficiencyProp,
+  onRemoveAgentFromSkill: onRemoveAgentFromSkillProp,
+  onSyncSkillAgents: onSyncSkillAgentsProp,
+  getSkillById: getSkillByIdProp,
+}) {
+  const internalMatrix = useSkillsMatrix();
+  const categories = skillsCategoriesProp ?? internalMatrix.categories;
+  const summary = skillsSummaryProp ?? internalMatrix.summary;
+  const setProficiency = onSetProficiencyProp ?? internalMatrix.setProficiency;
+  const removeAgentFromSkill = onRemoveAgentFromSkillProp ?? internalMatrix.removeAgentFromSkill;
+  const syncSkillAgents = onSyncSkillAgentsProp ?? internalMatrix.syncSkillAgents;
+  const getSkillById = getSkillByIdProp ?? internalMatrix.getSkillById;
+
   const [phase, setPhase] = useState('welcome');
   const [thinkingStep, setThinkingStep] = useState(0);
   const [showHistory, setShowHistory] = useState(false);
   const [sessions, setSessions] = useState(SESSIONS);
+  const [selectedSkillId, setSelectedSkillId] = useState(null);
   const timersRef = useRef([]);
   const hasAutoStartedWfm = useRef(false);
   const wfmSessionAdded = useRef(false);
@@ -182,6 +179,17 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
   const skillsSessionAdded = useRef(false);
   const hasAutoStartedApproval = useRef(false);
   const approvedSessionAdded = useRef(false);
+
+  const selectedSkill = selectedSkillId ? getSkillById(selectedSkillId) : null;
+
+  const skillsSummaryRows = [
+    { label: 'Total skills', value: `${summary.totalSkills} skills` },
+    { label: 'Categories', value: `${summary.totalCategories} categories` },
+    { label: 'Total assignments', value: `${summary.totalAssignments} agent-skill pairs` },
+    { label: 'Agents covered', value: `${summary.agentsCovered} of ${summary.totalAgents}` },
+    { label: 'Avg confidence', value: `${summary.avgConfidence}%` },
+    { label: 'Agents with 0 skills', value: `${summary.agentsWithZeroSkills} agents` },
+  ];
 
   const clearAllTimers = () => {
     timersRef.current.forEach(clearTimeout);
@@ -226,6 +234,7 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
       setThinkingStep(0);
       setShowHistory(false);
       setSessions(SESSIONS);
+      setSelectedSkillId(null);
       hasAutoStartedWfm.current = false;
       wfmSessionAdded.current = false;
       hasAutoStartedSkills.current = false;
@@ -325,7 +334,7 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
           {
             id: 'skills-activation',
             title: 'Skill-based routing activation',
-            preview: '6 skills identified, 41 agent-skill pairs, 136 of 139 agents covered',
+            preview: `${summary.totalSkills} skills in ${summary.totalCategories} categories, ${summary.totalAssignments} agent-skill pairs`,
             timestamp: 'Just now',
             isActive: true,
           },
@@ -345,7 +354,7 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
         approvedSessionAdded.current = true;
         setSessions(prev => prev.map(s =>
           s.id === 'skills-activation'
-            ? { ...s, preview: 'AI skill matching active — 6 skills, 41 agent-skill pairs' }
+            ? { ...s, preview: `AI skill matching active — ${summary.totalSkills} skills, ${summary.totalAssignments} agent-skill pairs` }
             : s
         ));
       }
@@ -667,26 +676,33 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
                 {['skills-response', 'skills-activating', 'skills-activated'].includes(phase) && (
                   <div className="copilot-conv__response" aria-live="polite">
                     <div className="copilot-resp__skills-header copilot-resp__text--1">
-                      <p className="copilot-resp__skills-title">Skills Matrix · Generated · Ready for review</p>
-                      <MD>6 skills identified from 34,120 tickets across 90 days</MD>
+                      <p className="copilot-resp__skills-title">Skills matrix · Generated · Ready for review</p>
+                      <MD>
+                        {summary.totalSkills} skills in {summary.totalCategories} categories identified from 34,120 tickets across 90 days. Adjust agent proficiency or remove assignments before you approve.
+                      </MD>
                     </div>
 
-                    <div className="copilot-resp__skills-list">
-                      {SKILLS_DESCRIPTIONS.map((item, i) => (
-                        <div key={i} className="copilot-skills-desc-item" style={{ '--skills-desc-index': i }}>
-                          <SM>
-                            <strong>{item.skill} · {item.tickets} tickets (90 days)</strong>
-                          </SM>
-                          <ul className="copilot-skills-desc-item__list">
-                            <li><SM>{item.intents} — intents</SM></li>
-                          </ul>
+                    {categories.map((category, catIndex) => (
+                      <div key={category.id} className="copilot-skills-category" style={{ '--skills-cat-index': catIndex }}>
+                        <SM isBold className="copilot-skills-category__title">{category.name}</SM>
+                        <div className="copilot-resp__skills-list">
+                          {category.skills.map((item, i) => (
+                            <div key={item.id} className="copilot-skills-desc-item" style={{ '--skills-desc-index': i }}>
+                              <SM>
+                                <strong>{item.name} · {item.tickets} tickets (90 days)</strong>
+                              </SM>
+                              <ul className="copilot-skills-desc-item__list">
+                                <li><SM>{item.intents} — intents</SM></li>
+                              </ul>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
 
                     <div className="copilot-resp__text copilot-resp__text--skills-note">
                       <MD>
-                        Review your skill matrix to ensure accuracy. Incoming tickets will be automatically tagged with the matching skill using AI intent detection. No triggers needed.
+                        Review your skill matrix to ensure accuracy. Click an agent count to adjust proficiency or remove a skill from an agent. Incoming tickets will be automatically tagged with the matching skill using AI intent detection.
                       </MD>
                     </div>
 
@@ -701,15 +717,23 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
                         </span>
                       </div>
                       <div className="copilot-skill-card__content">
-                        <div className="copilot-skill-card__title-row">
-                          <SM isBold>Billing Disputes</SM>
-                          <SM>&nbsp;·&nbsp;</SM>
-                          <SM className="copilot-skill-card__agent-count">8 agents assigned</SM>
-                        </div>
-                        {SKILLS_MATRIX.slice(1).map((row, i) => (
-                          <div key={i} className="copilot-skill-card__row" style={{ '--skill-row-index': i }}>
-                            <SM><strong>{row.skill}</strong>{' · '}</SM>
-                            <SM className="copilot-skill-card__agent-count">{row.agents} agents assigned</SM>
+                        {categories.map((category) => (
+                          <div key={category.id} className="copilot-skill-card__category">
+                            <SM isBold className="copilot-skill-card__category-label">{category.name}</SM>
+                            {category.skills.map((row, i) => (
+                              <div key={row.id} className="copilot-skill-card__row" style={{ '--skill-row-index': i }}>
+                                <SM><strong>{row.name}</strong>{' · '}</SM>
+                                <button
+                                  type="button"
+                                  className="copilot-skill-card__agent-count-btn"
+                                  onClick={() => setSelectedSkillId(row.id)}
+                                >
+                                  <SM className="copilot-skill-card__agent-count">
+                                    {row.agents.length} agents assigned
+                                  </SM>
+                                </button>
+                              </div>
+                            ))}
                           </div>
                         ))}
                       </div>
@@ -726,7 +750,7 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
                         </span>
                       </div>
                       <div className="copilot-skill-card__content">
-                        {SKILLS_SUMMARY.map((row, i) => (
+                        {skillsSummaryRows.map((row, i) => (
                           <div key={i} className="copilot-skill-card__row" style={{ '--skill-row-index': i }}>
                             <SM><strong>{row.label}</strong>{' · '}</SM>
                             <SM className="copilot-skill-card__agent-count">{row.value}</SM>
@@ -782,7 +806,7 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
                       <div className="copilot-conv__response" aria-live="polite">
                         <div className="copilot-resp__text copilot-resp__text--skills-approved-note">
                           <MD>
-                            AI skill matching is now active. The skill matrix has been added below — 6 skills defined, 41 agent-skill pairs established.
+                            AI skill matching is now active. {summary.totalSkills} skills in {summary.totalCategories} categories defined, {summary.totalAssignments} agent-skill pairs established.
                           </MD>
                         </div>
                       </div>
@@ -827,6 +851,17 @@ export default function CopilotSidebar({ isOpen, onClose, initialFlow, onWfmActi
           </div>
 
         </div>{/* /body */}
+
+        {selectedSkill && (
+          <AgentSkillModal
+            skill={selectedSkill}
+            editable={phase === 'skills-response'}
+            onClose={() => setSelectedSkillId(null)}
+            onSetProficiency={(agentId, level) => setProficiency(selectedSkillId, agentId, level)}
+            onRemoveAgent={(agentId) => removeAgentFromSkill(selectedSkillId, agentId)}
+            onSyncAgents={(agentIds) => syncSkillAgents(selectedSkillId, agentIds)}
+          />
+        )}
 
         {/* Disclaimer — only in welcome state, not in history */}
         {phase === 'welcome' && !showHistory && (

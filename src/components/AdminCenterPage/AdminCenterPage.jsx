@@ -15,6 +15,7 @@ import {
 import PageSidebarNav from '../PageSidebarNav';
 import QueuesPage from '../QueuesPage';
 import RoutingConfigPage from '../RoutingConfigPage';
+import SkillsPage from '../SkillsPage';
 import './AdminCenterPage.css';
 
 // Admin Center specific icons
@@ -236,6 +237,18 @@ export default function AdminCenterPage({ onProductChange, selectedProduct, prod
         initialCopilotFlow={routingConfigFlow}
         appliedRecommendationIds={appliedRecommendationIds}
         onRecommendationApplied={handleRecommendationApplied}
+      />
+    );
+  }
+
+  if (activeSubPage === 'skills') {
+    return (
+      <SkillsPage
+        onProductChange={onProductChange}
+        selectedProduct={selectedProduct}
+        products={products}
+        onSubPageChange={handleSubPageSelect}
+        initialCopilotFlow={routingConfigFlow}
       />
     );
   }

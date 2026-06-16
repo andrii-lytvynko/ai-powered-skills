@@ -1,5 +1,6 @@
 // Icon components using Google Material Symbols (Rounded, Filled)
 // https://fonts.google.com/icons?icon.style=Rounded
+import { assetUrl } from '../../utils/assetUrl';
 
 /**
  * Base Icon component for Material Symbols
@@ -55,7 +56,7 @@ export function GearIcon({ className }) {
 }
 
 export function SidebarIcon({ className }) {
-  return <img src="/assets/Primary Nav Item/Sidebar.svg" alt="" className={className} width={20} height={20} />;
+  return <img src={assetUrl('/assets/Primary Nav Item/Sidebar.svg')} alt="" className={className} width={20} height={20} />;
 }
 
 // ========================================
@@ -275,15 +276,15 @@ export function WFMSettingsIcon({ className, active }) {
 }
 
 export function AdminCenterProductIcon({ className }) {
-  return <img src="/assets/admin center.svg" alt="" className={className} aria-hidden="true" />;
+  return <img src={assetUrl('/assets/admin center.svg')} alt="" className={className} aria-hidden="true" />;
 }
 
 export function SupportProductIcon({ className }) {
-  return <img src="/assets/Product support.svg" alt="" className={className} aria-hidden="true" />;
+  return <img src={assetUrl('/assets/Product support.svg')} alt="" className={className} aria-hidden="true" />;
 }
 
 export function WFMProductIcon({ className }) {
-  return <img src="/assets/Product workforce management.svg" alt="" className={className} aria-hidden="true" />;
+  return <img src={assetUrl('/assets/Product workforce management.svg')} alt="" className={className} aria-hidden="true" />;
 }
 
 export function ExploreProductIcon({ className }) {

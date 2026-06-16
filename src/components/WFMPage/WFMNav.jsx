@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import PageSidebarNav from '../PageSidebarNav';
+import { assetUrl } from '../../utils/assetUrl';
 import './WFMNav.css';
 
 const navItems = [
-  { id: 'reporting', iconSrc: '/assets/Bar chart square.svg', label: 'Reporting' },
-  { id: 'scheduling', iconSrc: '/assets/Calendar.svg', label: 'Scheduling' },
-  { id: 'forecasting', iconSrc: '/assets/Line graph square.svg', label: 'Forecasting' },
-  { id: 'settings', iconSrc: '/assets/Gear.svg', label: 'Settings' },
+  { id: 'reporting', iconSrc: assetUrl('/assets/Bar chart square.svg'), label: 'Reporting' },
+  { id: 'scheduling', iconSrc: assetUrl('/assets/Calendar.svg'), label: 'Scheduling' },
+  { id: 'forecasting', iconSrc: assetUrl('/assets/Line graph square.svg'), label: 'Forecasting' },
+  { id: 'settings', iconSrc: assetUrl('/assets/Gear.svg'), label: 'Settings' },
 ];
 
 const subNavItems = {

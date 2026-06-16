@@ -1049,8 +1049,44 @@
 
 /* Blue agent-count value */
 .copilot-skill-card__agent-count {
-  color: #1f73b7 !important;
+  color: var(--color-primary-600) !important;
   font-weight: 400 !important;
+}
+
+.copilot-skill-card__agent-count-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.copilot-skill-card__agent-count-btn:hover .copilot-skill-card__agent-count {
+  text-decoration: underline;
+}
+
+.copilot-skill-card__category {
+  margin-bottom: var(--spacing-sm);
+}
+
+.copilot-skill-card__category:last-child {
+  margin-bottom: 0;
+}
+
+.copilot-skill-card__category-label {
+  display: block;
+  padding: 0 20px;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-secondary);
+}
+
+.copilot-skills-category {
+  margin-bottom: var(--spacing-md);
+}
+
+.copilot-skills-category__title {
+  display: block;
+  margin-bottom: var(--spacing-xs);
 }
 
 @keyframes copilot-skill-card-in {

@@ -1,13 +1,14 @@
+import { assetUrl } from '../../utils/assetUrl';
 import './PrimarySidebar.css';
 
 const navItems = [
-  { id: 'home',     src: '/assets/home.svg',              label: 'Home',           active: true },
-  { id: 'inbox',    src: '/assets/Inbox.svg',             label: 'Views' },
-  { id: 'contacts', src: '/assets/people.svg',            label: 'Customer lists' },
-  { id: 'orgs',     src: '/assets/account.svg',           label: 'Organizations' },
-  { id: 'objects',  src: '/assets/objects.svg',           label: 'Custom objects' },
-  { id: 'reports',  src: '/assets/Bar chart square.svg',  label: 'Reporting' },
-  { id: 'settings', src: '/assets/Gear.svg',              label: 'Admin' },
+  { id: 'home',     src: assetUrl('/assets/home.svg'),              label: 'Home',           active: true },
+  { id: 'inbox',    src: assetUrl('/assets/Inbox.svg'),             label: 'Views' },
+  { id: 'contacts', src: assetUrl('/assets/people.svg'),            label: 'Customer lists' },
+  { id: 'orgs',     src: assetUrl('/assets/account.svg'),           label: 'Organizations' },
+  { id: 'objects',  src: assetUrl('/assets/objects.svg'),           label: 'Custom objects' },
+  { id: 'reports',  src: assetUrl('/assets/Bar chart square.svg'),  label: 'Reporting' },
+  { id: 'settings', src: assetUrl('/assets/Gear.svg'),              label: 'Admin' },
 ];
 
 export default function PrimarySidebar({ isNavCollapsed, onToggleNav, onNavigateHome }) {
@@ -47,7 +48,7 @@ export default function PrimarySidebar({ isNavCollapsed, onToggleNav, onNavigate
           onClick={onToggleNav}
         >
           <img
-            src="/assets/Primary Nav Item/Sidebar.svg"
+            src={assetUrl('/assets/Primary Nav Item/Sidebar.svg')}
             alt=""
             aria-hidden="true"
             className="primary-sidebar__expand-icon"

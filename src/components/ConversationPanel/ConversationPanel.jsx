@@ -6,6 +6,7 @@ import { Avatar } from '@zendeskgarden/react-avatars';
 import { Menu, Item, Separator, ItemGroup } from '@zendeskgarden/react-dropdowns';
 import { ChatIcon, SparkleIcon, PhoneIcon, EmailIcon, Icon } from '../Icons';
 import Composer from '../Composer';
+import { assetUrl } from '../../utils/assetUrl';
 import './ConversationPanel.css';
 
 // ========================================
@@ -92,7 +93,7 @@ function MacroIcon({ className }) {
   return (
     <img
       className={className}
-      src="/assets/Input/Start icon.svg"
+      src={assetUrl('/assets/Input/Start icon.svg')}
       alt=""
       aria-hidden="true"
     />

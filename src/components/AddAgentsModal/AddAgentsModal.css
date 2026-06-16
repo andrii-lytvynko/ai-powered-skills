@@ -1,0 +1,150 @@
+.add-agents-modal {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  max-width: calc(100vw - var(--spacing-xl));
+}
+
+.add-agents-modal__layout {
+  display: flex;
+  gap: var(--spacing-xl);
+  min-height: 460px;
+}
+
+.add-agents-modal__main {
+  flex: 1 1 64%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.add-agents-modal__search {
+  margin: 0;
+}
+
+.add-agents-modal__table-wrap {
+  flex: 1;
+  overflow: auto;
+}
+
+.add-agents-modal__table {
+  margin: 0;
+}
+
+.add-agents-modal__row {
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.add-agents-modal__row > [role="cell"],
+.add-agents-modal__row td {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  vertical-align: middle;
+}
+
+.add-agents-modal__checkbox-cell {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.add-agents-modal__avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .add-agents-modal__row:hover {
+    background-color: var(--color-bg-subtle);
+  }
+}
+
+.add-agents-modal__row--selected {
+  background-color: var(--color-bg-subtle);
+}
+
+.add-agents-modal__agent-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.add-agents-modal__agent-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.add-agents-modal__groups {
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  max-width: 240px;
+}
+
+.add-agents-modal__sidebar {
+  flex: 0 0 30%;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-left: var(--spacing-xl);
+  border-left: 1px solid var(--color-grey-200);
+}
+
+.add-agents-modal__sidebar-title {
+  flex-shrink: 0;
+}
+
+.add-agents-modal__chips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  overflow-y: auto;
+}
+
+.add-agents-modal__chip {
+  align-self: flex-start;
+  max-width: 100%;
+  opacity: 0;
+  transform: translateY(4px);
+  animation: add-agents-chip-enter 180ms var(--ease-out) forwards;
+  animation-delay: calc(var(--chip-index, 0) * 40ms);
+  transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out);
+}
+
+.add-agents-modal__chip:active {
+  transform: scale(0.97);
+}
+
+.add-agents-modal__chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 160px;
+}
+
+.add-agents-modal__empty {
+  color: var(--color-text-secondary);
+}
+
+@keyframes add-agents-chip-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .add-agents-modal__chip {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .add-agents-modal__row {
+    transition: none;
+  }
+}

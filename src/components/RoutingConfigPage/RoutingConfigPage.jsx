@@ -1,13 +1,12 @@
 import { useState, useRef, useCallback } from 'react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { Anchor, Button, IconButton } from '@zendeskgarden/react-buttons';
+import { Anchor, Button } from '@zendeskgarden/react-buttons';
 import { Field, Input, Select, Label, Toggle } from '@zendeskgarden/react-forms';
 import { Tag } from '@zendeskgarden/react-tags';
-import { Table, Head, HeaderRow, HeaderCell, Body, Row, Cell } from '@zendeskgarden/react-tables';
 import TopBar from '../TopBar/TopBar';
 import PageSidebarNav from '../PageSidebarNav';
 import CopilotSidebar from '../CopilotSidebar/CopilotSidebar';
-import { ChevronDownIcon, InfoIcon } from '../Icons';
+import { ChevronDownIcon } from '../Icons';
 import {
   RecommendationsBanner,
   RecommendationsDrawer,
@@ -183,15 +182,6 @@ const INITIAL_PRIORITIES = [
   'First contact resolution',
 ];
 
-const SKILL_MATRIX_ROWS = [
-  { name: 'Billing Disputes',        agents: 8, confidence: 89 },
-  { name: 'Product Configuration',   agents: 8, confidence: 90 },
-  { name: 'Refund Processing',        agents: 7, confidence: 90 },
-  { name: 'Account Migration',        agents: 5, confidence: 89 },
-  { name: 'Subscription Management',  agents: 9, confidence: 88 },
-  { name: 'Compliance and Security',  agents: 4, confidence: 88 },
-];
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function RoutingConfigPage({ onProductChange, selectedProduct, products, onSubPageChange, initialCopilotFlow, appliedRecommendationIds, onRecommendationApplied }) {
@@ -202,7 +192,7 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
   const [wfmEnabled, setWfmEnabled] = useLocalStorage('zenbox:routing:wfmEnabled', false);
   const [qaEnabled, setQaEnabled] = useLocalStorage('zenbox:routing:qaEnabled', false);
   const [aiSkillEnabled, setAiSkillEnabled] = useLocalStorage('zenbox:routing:aiSkillEnabled', false);
-  const [showSkillMatrix, setShowSkillMatrix] = useLocalStorage('zenbox:routing:showSkillMatrix', false);
+  const [, setSkillsApproved] = useLocalStorage('zenbox:routing:showSkillMatrix', false);
   const [assignmentMethod, setAssignmentMethod] = useLocalStorage('zenbox:routing:assignmentMethod', 'highest-spare');
   const [isCopilotOpen, setIsCopilotOpen] = useState(!!initialCopilotFlow);
   const [activeCopilotFlow, setActiveCopilotFlow] = useState(initialCopilotFlow || null);
@@ -215,7 +205,6 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
   );
 
   const wfmCardRef = useRef(null);
-  const skillCardRef = useRef(null);
 
   const handleToggleNav = () => setIsNavCollapsed(!isNavCollapsed);
   const handleSubPageSelect = (itemId) => {
@@ -227,14 +216,6 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
     setWfmEnabled(true);
     requestAnimationFrame(() => {
       wfmCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  }, []);
-
-  const handleSkillsActivated = useCallback(() => {
-    setAiSkillEnabled(true);
-    setShowSkillMatrix(true);
-    requestAnimationFrame(() => {
-      skillCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   }, []);
 
@@ -251,8 +232,7 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
       onRecommendationApplied?.('skills-based');
       setIsRecommendationsOpen(false);
       setSelectedRecommendation(null);
-      setActiveCopilotFlow('skills-activation');
-      setIsCopilotOpen(true);
+      onSubPageChange?.('skills', { copilotFlow: 'skills-activation' });
       return;
     } else if (selectedRecommendation.id === 'wfm-data') {
       setRecommendations(prev => prev.filter(r => r.id !== selectedRecommendation.id));
@@ -530,7 +510,6 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
                 <div className="rc-integration-cards">
                   <div
                     className="rc-integration-card"
-                    ref={skillCardRef}
                     data-activated={aiSkillEnabled ? 'true' : 'false'}
                   >
                     <div className="rc-integration-card__body">
@@ -554,11 +533,10 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
                             if (e.target.checked) {
                               setRecommendations(prev => prev.filter(r => r.id !== 'skills-based'));
                               onRecommendationApplied?.('skills-based');
-                              setActiveCopilotFlow('skills-activation');
-                              setIsCopilotOpen(true);
+                              onSubPageChange?.('skills', { copilotFlow: 'skills-activation' });
                             } else {
                               setAiSkillEnabled(false);
-                              setShowSkillMatrix(false);
+                              setSkillsApproved(false);
                             }
                           }}
                         >
@@ -567,51 +545,18 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
                       </Field>
                     </div>
                   </div>
-                </div>
 
-                {showSkillMatrix && (
-                  <div className="rc-skill-matrix">
-                    <div className="rc-skill-matrix__header">
-                      <div className="rc-skill-matrix__title-row">
-                        <span className="rc-skill-matrix__title">Skills matrix</span>
-                        <InfoIcon className="rc-skill-matrix__info-icon" />
-                      </div>
-                      <Anchor href="#" className="rc-inline-link">Manage agent skills</Anchor>
+                  {aiSkillEnabled && (
+                    <div className="rc-skill-manage">
+                      <SM className="rc-skill-manage__status">
+                        AI skill matching is active. Skills are grouped by product and language categories.
+                      </SM>
+                      <Button isBasic onClick={() => onSubPageChange?.('skills')}>
+                        Manage agent skills
+                      </Button>
                     </div>
-                    <Table className="rc-skill-matrix__table">
-                      <Head>
-                        <HeaderRow>
-                          <HeaderCell className="rc-skill-matrix__col-name">Skill name</HeaderCell>
-                          <HeaderCell className="rc-skill-matrix__col-agents">Agents assigned</HeaderCell>
-                          <HeaderCell className="rc-skill-matrix__col-conf">Avg confidence</HeaderCell>
-                          <HeaderCell className="rc-skill-matrix__col-actions" />
-                        </HeaderRow>
-                      </Head>
-                      <Body>
-                        {SKILL_MATRIX_ROWS.map((row, i) => (
-                          <Row key={row.name} style={{ '--row-index': i }}>
-                            <Cell className="rc-skill-matrix__cell-name">{row.name}</Cell>
-                            <Cell className="rc-skill-matrix__cell-agents">{row.agents}</Cell>
-                            <Cell className="rc-skill-matrix__cell-conf">{row.confidence}%</Cell>
-                            <Cell className="rc-skill-matrix__cell-actions">
-                              <IconButton
-                                aria-label={`More options for ${row.name}`}
-                                isBasic
-                                size="small"
-                              >
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                  <circle cx="8" cy="3" r="1.25" fill="currentColor"/>
-                                  <circle cx="8" cy="8" r="1.25" fill="currentColor"/>
-                                  <circle cx="8" cy="13" r="1.25" fill="currentColor"/>
-                                </svg>
-                              </IconButton>
-                            </Cell>
-                          </Row>
-                        ))}
-                      </Body>
-                    </Table>
-                  </div>
-                )}
+                  )}
+                </div>
               </section>
 
               {/* ── Section 5: Predictive routing resources ──────────── */}
@@ -667,7 +612,6 @@ export default function RoutingConfigPage({ onProductChange, selectedProduct, pr
           onClose={() => { setIsCopilotOpen(false); setActiveCopilotFlow(null); }}
           initialFlow={activeCopilotFlow}
           onWfmActivated={handleWfmActivated}
-          onSkillsActivated={handleSkillsActivated}
         />
 
         <RecommendationsDrawer

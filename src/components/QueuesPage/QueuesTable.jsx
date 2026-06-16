@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Tag } from '@zendeskgarden/react-tags';
+import { assetUrl } from '../../utils/assetUrl';
 import './QueuesTable.css';
 
 // Grip icon for draggable rows
@@ -347,7 +348,7 @@ function BarChartIcon({ className }) {
   return (
     <img 
       className={className} 
-      src="/assets/Bar_chart_square-3f73cdda-5fa1-4ad8-a82a-593e84e09a2b.png" 
+      src={assetUrl('/assets/Bar_chart_square-3f73cdda-5fa1-4ad8-a82a-593e84e09a2b.png')} 
       alt="" 
       width="12" 
       height="12"

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { FilterIcon, SparkleIcon, CheckIcon, TagIcon, CircleDotIcon, ClockAlertIcon, SortIcon } from '../Icons';
+import { assetUrl } from '../../utils/assetUrl';
 import './TicketList.css';
 
 // Parse SLA value to minutes for sorting (negative values = breached)
@@ -137,9 +138,9 @@ const tickets = [
 ];
 
 const ticketIconSrc = {
-  call: '/assets/Phone in.svg',
-  chat: '/assets/Bubble.svg',
-  email: '/assets/Email.svg',
+  call: assetUrl('/assets/Phone in.svg'),
+  chat: assetUrl('/assets/Bubble.svg'),
+  email: assetUrl('/assets/Email.svg'),
 };
 
 function TicketIcon({ type }) {

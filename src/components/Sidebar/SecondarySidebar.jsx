@@ -1,24 +1,25 @@
+import { assetUrl } from '../../utils/assetUrl';
 import './SecondarySidebar.css';
 
 const sections = [
   {
     title: 'Your work',
     items: [
-      { label: 'Tickets', src: '/assets/Inbox.svg', active: true },
-      { label: 'Auto assist', src: '/assets/Headset sparkle.svg' },
+      { label: 'Tickets', src: assetUrl('/assets/Inbox.svg'), active: true },
+      { label: 'Auto assist', src: assetUrl('/assets/Headset sparkle.svg') },
     ],
   },
   {
     title: 'Shared work',
     items: [
-      { label: "CC'd", src: '/assets/people.svg' },
-      { label: 'Following', src: '/assets/Star.svg' },
+      { label: "CC'd", src: assetUrl('/assets/people.svg') },
+      { label: 'Following', src: assetUrl('/assets/Star.svg') },
     ],
   },
   {
     title: 'Completed work',
     items: [
-      { label: 'Last 30 days', src: '/assets/Calendar.svg' },
+      { label: 'Last 30 days', src: assetUrl('/assets/Calendar.svg') },
     ],
   },
 ];
@@ -55,7 +56,7 @@ export default function SecondarySidebar({ onToggle }) {
 
       <button className="sidebar-collapse-btn" title="Collapse" onClick={onToggle}>
         <img
-          src="/assets/Primary Nav Item/Sidebar.svg"
+          src={assetUrl('/assets/Primary Nav Item/Sidebar.svg')}
           alt=""
           className="sidebar-collapse-btn__icon"
           aria-hidden="true"
