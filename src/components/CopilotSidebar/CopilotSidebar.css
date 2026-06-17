@@ -608,7 +608,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 0 20px 12px;
+  padding: 12px 20px 12px;
   animation: copilot-fade-up 220ms ease-out 360ms both;
 }
 
@@ -1087,6 +1087,7 @@
 .copilot-skills-category__title {
   display: block;
   margin-bottom: var(--spacing-xs);
+  padding-left: 16px;
 }
 
 @keyframes copilot-skill-card-in {

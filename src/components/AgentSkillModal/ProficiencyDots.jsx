@@ -1,7 +1,12 @@
-import { SM } from '@zendeskgarden/react-typography';
-import './ProficiencyDots.css';
+import { SM } from "@zendesk-ui/react-components";
+import "./ProficiencyDots.css";
 
-export default function ProficiencyDots({ level, editable = false, onChange, agentName }) {
+export default function ProficiencyDots({
+  level,
+  editable = false,
+  onChange,
+  agentName,
+}) {
   const label = agentName
     ? `Proficiency ${level} of 5 for ${agentName}`
     : `Proficiency ${level} of 5`;
@@ -12,7 +17,7 @@ export default function ProficiencyDots({ level, editable = false, onChange, age
         {[1, 2, 3, 4, 5].map((dot) => (
           <span
             key={dot}
-            className={`proficiency-dots__dot${dot <= level ? ' proficiency-dots__dot--filled' : ''}`}
+            className={`proficiency-dots__dot${dot <= level ? " proficiency-dots__dot--filled" : ""}`}
             aria-hidden="true"
           />
         ))}
@@ -21,12 +26,16 @@ export default function ProficiencyDots({ level, editable = false, onChange, age
   }
 
   return (
-    <div className="proficiency-dots proficiency-dots--editable" role="group" aria-label={label}>
+    <div
+      className="proficiency-dots proficiency-dots--editable"
+      role="group"
+      aria-label={label}
+    >
       {[1, 2, 3, 4, 5].map((dot) => (
         <button
           key={dot}
           type="button"
-          className={`proficiency-dots__dot-btn${dot <= level ? ' proficiency-dots__dot-btn--filled' : ''}`}
+          className={`proficiency-dots__dot-btn${dot <= level ? " proficiency-dots__dot-btn--filled" : ""}`}
           aria-label={`Set proficiency to ${dot} of 5`}
           aria-pressed={dot === level}
           onClick={() => onChange?.(dot)}

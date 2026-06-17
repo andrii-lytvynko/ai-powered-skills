@@ -203,7 +203,7 @@ export default function TopBar({
           onClick={onToggleCopilot}
         >
           <img
-            src={assetUrl(isCopilotOpen ? '/Copilot-active.svg' : '/Copilot.svg')}
+            src={assetUrl(isCopilotOpen ? '/Copilot trigger-active.svg' : '/Copilot trigger.svg')}
             alt=""
             className="topbar__icon topbar__icon--copilot"
             aria-hidden="true"

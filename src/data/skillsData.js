@@ -242,3 +242,21 @@ export function getInitials(name) {
     .slice(0, 2)
     .toUpperCase();
 }
+
+export function uniqueSlug(name, categories) {
+  const base = name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const allIds = new Set(
+    categories.flatMap((cat) => [cat.id, ...cat.skills.map((s) => s.id)])
+  );
+
+  if (!allIds.has(base)) return base;
+
+  let counter = 2;
+  while (allIds.has(`${base}-${counter}`)) counter += 1;
+  return `${base}-${counter}`;
+}

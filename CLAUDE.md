@@ -11,6 +11,7 @@ ZenBox is a high-fidelity React prototype of the Zendesk Support suite, built wi
 **Tech Stack:**
 - React 19 with Vite 7
 - Zendesk Garden components (`@zendeskgarden/*` v9.15)
+- `@zendesk-ui/react-components` `0.0.1-alpha.1` — unified import bridge for Flora theming (see below)
 - CSS modules + Tailwind CSS + styled-components
 - Playwright for testing
 
@@ -22,7 +23,19 @@ ZenBox is a high-fidelity React prototype of the Zendesk Support suite, built wi
 
 ### ThemeProvider Configuration
 
-`GardenThemeProvider` is already configured in `src/main.jsx` and wraps the entire app. **DO NOT add it again** per page or component.
+The Flora `ThemeProvider` from `@zendesk-ui/react-components` is configured in `src/main.jsx` and wraps the entire app. **DO NOT add it again** per page or component.
+
+### Unified import — alpha bridge package
+
+`@zendesk-ui/react-components` is an early-adopter bridge that re-exports every Garden component from a single entry point and applies Flora design tokens. The **Skills page**, **Queues page**, and **Routing configuration page** (and their owned subcomponents) use this unified import:
+
+```jsx
+import { Button, Tag, Table, MD, SM, Modal, Notification } from '@zendesk-ui/react-components';
+```
+
+Note the v9 → v10 subcomponent API change: deprecated named sub-exports (`Title`, `Close`, `Header`, `Body`) become member properties — e.g. `Notification.Title`, `Modal.Body`, `Modal.Close`.
+
+For all other pages not yet migrated, continue using the per-package `@zendeskgarden/react-*` imports.
 
 ### Component Mapping
 

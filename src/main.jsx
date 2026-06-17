@@ -1,6 +1,7 @@
-import { StrictMode } from 'react'
+import { StrictMode, useMemo } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider as GardenThemeProvider } from '@zendeskgarden/react-theming'
+import { DEFAULT_THEME } from '@zendeskgarden/react-theming'
+import { ThemeProvider as FloraThemeProvider, getTheme } from '@zendesk-ui/react-components'
 import { ThemeProvider, useTheme } from './contexts'
 import './index.css'
 import App from './App.jsx'
@@ -15,10 +16,14 @@ document.documentElement.style.setProperty(
 function GardenThemeWrapper({ children }) {
   const { theme, currentProduct } = useTheme()
   const effectiveTheme = currentProduct === 'support' ? theme : 'light'
+  const floraTheme = useMemo(
+    () => getTheme({ ...DEFAULT_THEME, colors: { ...DEFAULT_THEME.colors, base: effectiveTheme } }),
+    [effectiveTheme]
+  )
   return (
-    <GardenThemeProvider colorScheme={effectiveTheme}>
+    <FloraThemeProvider theme={floraTheme}>
       {children}
-    </GardenThemeProvider>
+    </FloraThemeProvider>
   )
 }
 

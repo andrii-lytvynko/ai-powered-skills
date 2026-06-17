@@ -142,9 +142,7 @@ export const ROUTING_PAGE_RECOMMENDATIONS = [
 // ─── Components ───────────────────────────────────────────────────────────────
 
 export function RecommendationsBanner({ onViewRecommendations, count }) {
-  const [isDismissed, setIsDismissed] = useState(false);
-
-  if (isDismissed || count === 0) {
+  if (count === 0) {
     return null;
   }
 
@@ -153,36 +151,38 @@ export function RecommendationsBanner({ onViewRecommendations, count }) {
     : `Review ${count} new recommendations`;
 
   return (
-    <section className="queues-recco-banner" aria-label="Routing recommendations">
-      <div className="queues-recco-banner__icon" aria-hidden="true">
-        <div className="queues-recco-banner__icon-badge">
-          <img
-            src={`${import.meta.env.BASE_URL}d1.svg`}
-            alt=""
-            width={24}
-            height={24}
-            className="queues-recco-banner__icon-badge-img"
-            aria-hidden
-          />
+    <section className="recco-banner" aria-label="Routing recommendations">
+      <div className="recco-banner__panel">
+        <img
+          src={`${import.meta.env.BASE_URL}recco-banner-bg.svg`}
+          alt=""
+          aria-hidden
+          className="recco-banner__bg"
+        />
+
+        <div className="recco-banner__main">
+          <div className="recco-banner__icon" aria-hidden="true">
+            <img
+              src={`${import.meta.env.BASE_URL}recco-sparkle.svg`}
+              alt=""
+              width={20}
+              height={20}
+              className="recco-banner__icon-img"
+              aria-hidden
+            />
+          </div>
+
+          <div className="recco-banner__text">
+            <span className="recco-banner__title">{title}</span>
+            <span className="recco-banner__subtitle">Add improvements in a few clicks</span>
+          </div>
         </div>
-      </div>
 
-      <div className="queues-recco-banner__body">
-        <span className="queues-recco-banner__title">{title}</span>
-        <span className="queues-recco-banner__subtitle">Optimise your routing with personalized recommendations</span>
-      </div>
-
-      <div className="queues-recco-banner__actions">
-        <Button onClick={onViewRecommendations}>
-          View recommendations
-        </Button>
-        <IconButton
-          aria-label="Dismiss recommendations banner"
-          isBasic
-          onClick={() => setIsDismissed(true)}
-        >
-          <PromoCloseIcon />
-        </IconButton>
+        <div className="recco-banner__action">
+          <Button isPill onClick={onViewRecommendations}>
+            View recommendations
+          </Button>
+        </div>
       </div>
     </section>
   );

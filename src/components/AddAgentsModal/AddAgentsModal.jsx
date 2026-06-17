@@ -1,11 +1,16 @@
 import { useMemo, useState } from 'react';
-import { Modal, Header, Body, Footer, FooterItem, Close } from '@zendeskgarden/react-modals';
-import { Button } from '@zendeskgarden/react-buttons';
-import { Field, MediaInput, Checkbox, Label } from '@zendeskgarden/react-forms';
-import { Table, Head, HeaderRow, HeaderCell, Body as TableBody, Row, Cell } from '@zendeskgarden/react-tables';
-import { SM } from '@zendeskgarden/react-typography';
-import { Avatar } from '@zendeskgarden/react-avatars';
-import { Tag } from '@zendeskgarden/react-tags';
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Field,
+  MD,
+  MediaInput,
+  Modal,
+  SM,
+  Table,
+  Tag,
+} from '@zendesk-ui/react-components';
 import { SearchIcon } from '../Icons';
 import { getInitials } from '../../data/skillsData';
 import './AddAgentsModal.css';
@@ -79,8 +84,10 @@ export default function AddAgentsModal({
       className="add-agents-modal"
       style={{ width: 'min(1040px, calc(100vw - 48px))' }}
     >
-      <Header tag="h2">Add agents to skill &apos;{skill.name}&apos;</Header>
-      <Body>
+      <Modal.Header tag="h2">
+        Add agents — <strong>{skill.name}</strong>
+      </Modal.Header>
+      <Modal.Body>
         <div className="add-agents-modal__layout">
           <div className="add-agents-modal__main">
             <Field className="add-agents-modal__search">
@@ -93,54 +100,62 @@ export default function AddAgentsModal({
             </Field>
 
             <div className="add-agents-modal__table-wrap">
-              <Table size="small" className="add-agents-modal__table">
-                <Head>
-                  <HeaderRow>
-                    <HeaderCell isMinimum />
-                    <HeaderCell>Name</HeaderCell>
-                    <HeaderCell>Groups</HeaderCell>
-                  </HeaderRow>
-                </Head>
-                <TableBody>
-                  {filteredAgents.map((agent) => {
-                    const isSelected = selectedIds.has(agent.id);
-                    return (
-                      <Row
-                        key={agent.id}
-                        className={`add-agents-modal__row${isSelected ? ' add-agents-modal__row--selected' : ''}`}
-                        onClick={() => toggleAgent(agent.id)}
-                      >
-                        <Cell isMinimum className="add-agents-modal__checkbox-cell">
-                          <Field>
-                            <Checkbox
-                              checked={isSelected}
-                              onChange={() => toggleAgent(agent.id)}
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <Label hidden>{`Select ${agent.name}`}</Label>
-                            </Checkbox>
-                          </Field>
-                        </Cell>
-                        <Cell>
-                          <div className="add-agents-modal__agent-cell">
-                            <span className="add-agents-modal__avatar">
-                              <Avatar size="small" backgroundColor={agent.color}>
-                                <span>{getInitials(agent.name)}</span>
-                              </Avatar>
-                            </span>
-                            <SM isBold className="add-agents-modal__agent-name">{agent.name}</SM>
-                          </div>
-                        </Cell>
-                        <Cell>
-                          <SM className="add-agents-modal__groups">
-                            {formatGroups(agent.groups)}
-                          </SM>
-                        </Cell>
-                      </Row>
-                    );
-                  })}
-                </TableBody>
-              </Table>
+              {filteredAgents.length === 0 ? (
+                <div className="add-agents-modal__no-results">
+                  <MD className="add-agents-modal__no-results-text">
+                    No agents match your search.
+                  </MD>
+                </div>
+              ) : (
+                <Table size="small" className="add-agents-modal__table">
+                  <Table.Head>
+                    <Table.HeaderRow>
+                      <Table.HeaderCell isMinimum />
+                      <Table.HeaderCell>Name</Table.HeaderCell>
+                      <Table.HeaderCell>Groups</Table.HeaderCell>
+                    </Table.HeaderRow>
+                  </Table.Head>
+                  <Table.Body>
+                    {filteredAgents.map((agent) => {
+                      const isSelected = selectedIds.has(agent.id);
+                      return (
+                        <Table.Row
+                          key={agent.id}
+                          className={`add-agents-modal__row${isSelected ? ' add-agents-modal__row--selected' : ''}`}
+                          onClick={() => toggleAgent(agent.id)}
+                        >
+                          <Table.Cell isMinimum className="add-agents-modal__checkbox-cell">
+                            <Field>
+                              <Checkbox
+                                checked={isSelected}
+                                onChange={() => toggleAgent(agent.id)}
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Field.Label hidden>{`Select ${agent.name}`}</Field.Label>
+                              </Checkbox>
+                            </Field>
+                          </Table.Cell>
+                          <Table.Cell>
+                            <div className="add-agents-modal__agent-cell">
+                              <span className="add-agents-modal__avatar">
+                                <Avatar size="small" backgroundColor={agent.color}>
+                                  <span>{getInitials(agent.name)}</span>
+                                </Avatar>
+                              </span>
+                              <SM isBold className="add-agents-modal__agent-name">{agent.name}</SM>
+                            </div>
+                          </Table.Cell>
+                          <Table.Cell>
+                            <SM className="add-agents-modal__groups">
+                              {formatGroups(agent.groups)}
+                            </SM>
+                          </Table.Cell>
+                        </Table.Row>
+                      );
+                    })}
+                  </Table.Body>
+                </Table>
+              )}
             </div>
           </div>
 
@@ -174,20 +189,20 @@ export default function AddAgentsModal({
             </div>
           </aside>
         </div>
-      </Body>
-      <Footer>
-        <FooterItem>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.FooterItem>
           <Button isBasic onClick={onClose}>
             Cancel
           </Button>
-        </FooterItem>
-        <FooterItem>
+        </Modal.FooterItem>
+        <Modal.FooterItem>
           <Button isPrimary onClick={handleSave} disabled={!hasChanges}>
             Save
           </Button>
-        </FooterItem>
-      </Footer>
-      <Close aria-label="Close" />
+        </Modal.FooterItem>
+      </Modal.Footer>
+      <Modal.Close aria-label="Close" />
     </Modal>
   );
 }

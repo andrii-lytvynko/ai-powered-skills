@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist --nojekyll"
   },
   "dependencies": {
+    "@zendesk-ui/react-components": "^0.0.1-alpha.1",
     "@zendeskgarden/react-avatars": "^9.15.0",
     "@zendeskgarden/react-buttons": "^9.15.0",
     "@zendeskgarden/react-dropdowns": "^9.15.0",

@@ -19,7 +19,19 @@ A Garden MCP server is registered for this project and exposes authoritative com
 
 ## ThemeProvider
 
-`GardenThemeProvider` is already configured in `src/main.jsx` and wraps the entire app. Do NOT add it again per page or component.
+The Flora `ThemeProvider` from `@zendesk-ui/react-components` is configured in `src/main.jsx` and wraps the entire app. Do NOT add it again per page or component.
+
+## Unified import (alpha bridge package)
+
+`@zendesk-ui/react-components` is installed as an early-adopter bridge package. The **Skills page**, **Queues page**, and **Routing configuration page** (and their owned subcomponents) import Garden components from this single entry point instead of individual `@zendeskgarden/react-*` packages:
+
+```jsx
+import { Button, Tag, Table, MD, SM, Modal, Notification } from '@zendesk-ui/react-components';
+```
+
+Note the v9 → v10 subcomponent API change: deprecated named sub-exports (`Title`, `Close`, `Header`, `Body`) are accessed as member properties, e.g. `Notification.Title`, `Modal.Body`, `Modal.Close`.
+
+For all other pages not yet migrated, continue using the per-package imports listed below.
 
 ## Component Mapping
 

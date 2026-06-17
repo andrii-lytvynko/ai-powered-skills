@@ -1,5 +1,8 @@
-.add-agents-modal {
+:root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.add-agents-modal {
   max-width: calc(100vw - var(--spacing-xl));
 }
 
@@ -14,7 +17,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .add-agents-modal__search {
@@ -30,9 +33,22 @@
   margin: 0;
 }
 
+/* No-results state */
+.add-agents-modal__no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+
+.add-agents-modal__no-results-text {
+  color: var(--color-text-muted);
+}
+
+/* Table rows */
 .add-agents-modal__row {
   cursor: pointer;
-  transition: background-color 160ms var(--ease-out);
+  transition: background-color 140ms var(--ease-out);
 }
 
 .add-agents-modal__row > [role="cell"],
@@ -59,7 +75,13 @@
 }
 
 .add-agents-modal__row--selected {
-  background-color: var(--color-bg-subtle);
+  background-color: var(--color-primary-100);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .add-agents-modal__row--selected:hover {
+    background-color: var(--color-primary-200);
+  }
 }
 
 .add-agents-modal__agent-cell {
@@ -84,6 +106,7 @@
   max-width: 240px;
 }
 
+/* Sidebar */
 .add-agents-modal__sidebar {
   flex: 0 0 30%;
   min-width: 220px;
@@ -105,13 +128,14 @@
   overflow-y: auto;
 }
 
+/* Agent chips */
 .add-agents-modal__chip {
   align-self: flex-start;
   max-width: 100%;
   opacity: 0;
   transform: translateY(4px);
   animation: add-agents-chip-enter 180ms var(--ease-out) forwards;
-  animation-delay: calc(var(--chip-index, 0) * 40ms);
+  animation-delay: calc(var(--chip-index, 0) * 35ms);
   transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out);
 }
 
@@ -124,6 +148,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 160px;
+  padding-left: var(--spacing-xs);
 }
 
 .add-agents-modal__empty {

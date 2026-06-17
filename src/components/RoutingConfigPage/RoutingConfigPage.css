@@ -111,7 +111,7 @@
 }
 
 /* Position the recommendations banner: 40px gap above and below */
-.routing-config-page .queues-recco-banner {
+.routing-config-page .recco-banner {
   margin-top: -24px;
   margin-bottom: 40px;
 }

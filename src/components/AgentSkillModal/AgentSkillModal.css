@@ -1,10 +1,14 @@
-.agent-skill-modal {
+:root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.agent-skill-modal [data-garden-id="modals.header"] {
+  align-items: center;
 }
 
 .agent-skill-modal__header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: var(--spacing-md);
   width: 100%;
@@ -13,7 +17,7 @@
 .agent-skill-modal__subtitle {
   display: block;
   color: var(--color-text-secondary);
-  font-weight: normal;
+  font-weight: var(--font-weight-regular);
   margin-top: var(--spacing-xxs);
 }
 
@@ -27,30 +31,39 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
 }
 
+/* Row */
 .agent-skill-modal__row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-sm) var(--spacing-xs);
   border-bottom: 1px solid var(--color-grey-200);
+  border-radius: var(--radius-md);
   opacity: 0;
   transform: translateY(4px);
   animation: agent-skill-row-enter 180ms var(--ease-out) forwards;
   animation-delay: calc(var(--row-index, 0) * 40ms);
+  transition: background-color 140ms var(--ease-out);
 }
 
 .agent-skill-modal__row:last-child {
   border-bottom: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .agent-skill-modal__row:hover {
+    background-color: var(--color-bg-subtle);
+  }
+}
+
+/* Agent identity */
 .agent-skill-modal__agent {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  flex: 1;
   min-width: 0;
 }
 
@@ -60,18 +73,31 @@
   white-space: nowrap;
 }
 
+/* Proficiency — fixed width so all rows align */
 .agent-skill-modal__proficiency {
   flex-shrink: 0;
 }
 
+/* Remove button */
 .agent-skill-modal__remove {
-  transition: transform 160ms var(--ease-out);
+  flex-shrink: 0;
+  transition:
+    transform 160ms var(--ease-out),
+    color 140ms var(--ease-out);
+  color: var(--color-text-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .agent-skill-modal__remove:hover {
+    color: var(--color-danger);
+  }
 }
 
 .agent-skill-modal__remove:active {
-  transform: scale(0.97);
+  transform: scale(0.92);
 }
 
+/* Enter animation */
 @keyframes agent-skill-row-enter {
   to {
     opacity: 1;
@@ -84,6 +110,7 @@
     animation: none;
     opacity: 1;
     transform: none;
+    transition: none;
   }
 
   .agent-skill-modal__remove {

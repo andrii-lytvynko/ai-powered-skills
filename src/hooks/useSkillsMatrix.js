@@ -5,6 +5,7 @@ import {
   DEFAULT_SKILL_CATEGORIES,
   getCategorySummary,
   findSkill,
+  uniqueSlug,
 } from '../data/skillsData';
 
 const STORAGE_KEY = 'zenbox:skills:matrix';
@@ -133,6 +134,64 @@ export function useSkillsMatrix() {
     [categories]
   );
 
+  const addCategory = useCallback(
+    (name) => {
+      setCategories((prev) => {
+        const id = uniqueSlug(name, prev);
+        return [...prev, { id, name, skills: [] }];
+      });
+    },
+    [setCategories]
+  );
+
+  const addSkill = useCallback(
+    (categoryId, { name, intents }) => {
+      setCategories((prev) => {
+        const id = uniqueSlug(name, prev);
+        const newSkill = { id, name, intents, confidence: 85, tickets: '0', agents: [] };
+        return prev.map((cat) =>
+          cat.id !== categoryId
+            ? cat
+            : { ...cat, skills: [...cat.skills, newSkill] }
+        );
+      });
+    },
+    [setCategories]
+  );
+
+  const updateSkill = useCallback(
+    (skillId, { name, intents, categoryId: newCategoryId }) => {
+      setCategories((prev) => {
+        const sourceCat = prev.find((cat) => cat.skills.some((s) => s.id === skillId));
+        if (!sourceCat) return prev;
+
+        const skill = sourceCat.skills.find((s) => s.id === skillId);
+        const updatedSkill = { ...skill, name, intents };
+        const isCategoryChange = newCategoryId && newCategoryId !== sourceCat.id;
+
+        return prev.map((cat) => {
+          if (cat.id === sourceCat.id && !isCategoryChange) {
+            return {
+              ...cat,
+              skills: cat.skills.map((s) => (s.id === skillId ? updatedSkill : s)),
+            };
+          }
+          if (cat.id === sourceCat.id && isCategoryChange) {
+            return {
+              ...cat,
+              skills: cat.skills.filter((s) => s.id !== skillId),
+            };
+          }
+          if (cat.id === newCategoryId && isCategoryChange) {
+            return { ...cat, skills: [...cat.skills, updatedSkill] };
+          }
+          return cat;
+        });
+      });
+    },
+    [setCategories]
+  );
+
   return {
     categories,
     summary,
@@ -142,5 +201,8 @@ export function useSkillsMatrix() {
     syncSkillAgents,
     resetMatrix,
     getSkillById,
+    addCategory,
+    addSkill,
+    updateSkill,
   };
 }

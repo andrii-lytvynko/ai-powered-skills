@@ -1,107 +1,142 @@
 /* ===== Recommendations Banner ===== */
 
-.queues-recco-banner {
+.recco-banner {
   display: flex;
+  width: 100%;
+  padding: 6px;
+  background: var(--color-bg-white);
+  border: 1px solid #eae9e8;
+  border-radius: 24px;
+  margin-bottom: var(--spacing-md);
+  overflow: hidden;
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 260ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 260ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recco-banner {
+    transition: opacity 150ms ease-out;
+
+    @starting-style {
+      transform: none;
+      opacity: 0;
+    }
+  }
+}
+
+.recco-banner__panel {
+  position: relative;
+  display: flex;
+  flex: 1;
   align-items: center;
   gap: 20px;
-  padding: 16px;
-  background: #f4f5fc;
-  border: 1px solid #d8dcf4;
-  border-radius: 12px;
-  margin-bottom: var(--spacing-md);
+  min-width: 0;
+  padding: 12px 32px 12px 20px;
+  background: rgba(247, 247, 247, 0.6);
+  border-radius: 18px;
+  overflow: hidden;
 }
 
-.queues-recco-banner__icon {
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-.queues-recco-banner__icon-badge {
+.recco-banner__bg {
   position: absolute;
-  inset: 0;
-  height: 24px;
-  border-radius: 4px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 224px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.recco-banner__main {
+  position: relative;
+  z-index: 1;
   display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.recco-banner__icon {
+  display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
 }
 
-.queues-recco-banner__icon-badge-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.recco-banner__icon-img {
   display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
-.queues-recco-banner__icon-dot {
-  position: absolute;
-  border-radius: 50%;
-  background: #8b5cf6;
-}
-
-.queues-recco-banner__icon-dot--top-right {
-  width: 5px;
-  height: 5px;
-  top: -7px;
-  left: 24px;
-  background: #a78bfa;
-}
-
-.queues-recco-banner__icon-dot--bottom-left {
-  width: 4px;
-  height: 4px;
-  top: 25px;
-  left: -4px;
-  background: #c4b5fd;
-}
-
-.queues-recco-banner__icon-dot--top-far {
-  width: 7px;
-  height: 7px;
-  top: -2px;
-  left: 27px;
-  background: #7c3aed;
-}
-
-.queues-recco-banner__body {
+.recco-banner__text {
   display: flex;
-  flex-direction: column;
   flex: 1;
+  flex-direction: column;
   min-width: 0;
-  gap: 2px;
+  padding: 6px 0;
 }
 
-.queues-recco-banner__title {
+.recco-banner__title {
   display: block;
   width: 100%;
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   line-height: 20px;
+  letter-spacing: -0.154px;
   color: var(--color-text-primary);
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.queues-recco-banner__subtitle {
+.recco-banner__subtitle {
   display: block;
   width: 100%;
   font-size: var(--font-size-md);
   font-weight: 400;
   line-height: 20px;
+  letter-spacing: -0.154px;
   color: var(--color-text-secondary);
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.queues-recco-banner__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
+.recco-banner__action {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
+}
+
+.recco-banner__action .c-btn {
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.recco-banner__action .c-btn:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recco-banner__action .c-btn:active {
+    transform: none;
+  }
 }
 
 /* ===== Recommendations Drawer ===== */
