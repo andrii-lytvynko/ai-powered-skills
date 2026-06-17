@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, IconButton } from '@zendeskgarden/react-buttons';
 import { Table, Head, HeaderRow, HeaderCell, Body as TableBody, Row, Cell } from '@zendeskgarden/react-tables';
 import { LG, MD, SM } from '@zendeskgarden/react-typography';
@@ -17,15 +17,6 @@ import {
 } from './agentSkillsData';
 import './AgentSkillsManager.css';
 
-function OverflowIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="8" cy="3" r="1.25" fill="currentColor" />
-      <circle cx="8" cy="8" r="1.25" fill="currentColor" />
-      <circle cx="8" cy="13" r="1.25" fill="currentColor" />
-    </svg>
-  );
-}
 
 function AgentDetailPanel({
   agent,
@@ -126,57 +117,6 @@ function AgentDetailPanel({
   );
 }
 
-function AgentRowMenu({
-  agent,
-  isOpen,
-  menuRef,
-  onToggle,
-  onViewSkills,
-  onRemoveAllSkills,
-}) {
-  return (
-    <div
-      className="agent-skills-manager__menu-wrap"
-      ref={isOpen ? menuRef : null}
-    >
-      <IconButton
-        aria-label={`More options for ${agent.name}`}
-        isBasic
-        size="small"
-        onClick={onToggle}
-      >
-        <OverflowIcon />
-      </IconButton>
-
-      {isOpen && (
-        <div className="agent-skills-manager__actions-menu" role="menu">
-          <Button
-            isBasic
-            className="agent-skills-manager__menu-item"
-            role="menuitem"
-            onClick={(event) => {
-              event.stopPropagation();
-              onViewSkills();
-            }}
-          >
-            View skills
-          </Button>
-          <Button
-            isBasic
-            className="agent-skills-manager__menu-item"
-            role="menuitem"
-            onClick={(event) => {
-              event.stopPropagation();
-              onRemoveAllSkills();
-            }}
-          >
-            Remove all skills
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-}
 
 function useAgentSkillsState({
   controlledAgents,
@@ -186,9 +126,6 @@ function useAgentSkillsState({
 }) {
   const [storedAgents, setStoredAgents] = useLocalStorage('zenbox:agentSkills', INITIAL_AGENTS);
   const [selectedAgentId, setSelectedAgentId] = useState(null);
-  const [openMenuId, setOpenMenuId] = useState(null);
-  const menuRef = useRef(null);
-
   const isControlled = controlledAgents != null && typeof onAgentsChange === 'function';
   const skills = skillsCatalog ?? SKILLS;
   const templateAgents = isControlled ? controlledAgents : INITIAL_AGENTS;
@@ -217,22 +154,8 @@ function useAgentSkillsState({
   useEffect(() => {
     if (!isActive) {
       setSelectedAgentId(null);
-      setOpenMenuId(null);
     }
   }, [isActive]);
-
-  useEffect(() => {
-    if (openMenuId === null) return undefined;
-
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setOpenMenuId(null);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openMenuId]);
 
   const selectedAgent = useMemo(
     () => agents.find((agent) => agent.id === selectedAgentId) ?? null,
@@ -276,18 +199,11 @@ function useAgentSkillsState({
   }, [selectedAgentId, updateAgent]);
 
   const handleRowClick = useCallback((agentId) => {
-    setOpenMenuId(null);
     setSelectedAgentId(agentId);
-  }, []);
-
-  const toggleMenu = useCallback((event, agentId) => {
-    event.stopPropagation();
-    setOpenMenuId((prev) => (prev === agentId ? null : agentId));
   }, []);
 
   const handleViewSkills = useCallback((agentId) => {
     setSelectedAgentId(agentId);
-    setOpenMenuId(null);
   }, []);
 
   return {
@@ -295,17 +211,13 @@ function useAgentSkillsState({
     skills,
     selectedAgentId,
     selectedAgent,
-    openMenuId,
-    menuRef,
     handleRowClick,
-    toggleMenu,
     handleViewSkills,
     handleScoreChange,
     handleRemoveSkill,
     handleAddSkill,
     handleRemoveAllSkills,
     setSelectedAgentId,
-    setOpenMenuId,
   };
 }
 
@@ -314,17 +226,13 @@ function SplitLayoutPanel({
   skills,
   selectedAgentId,
   selectedAgent,
-  openMenuId,
-  menuRef,
   handleRowClick,
-  toggleMenu,
   handleViewSkills,
   handleScoreChange,
   handleRemoveSkill,
   handleAddSkill,
   handleRemoveAllSkills,
   setSelectedAgentId,
-  setOpenMenuId,
 }) {
   const isPreviewOpen = selectedAgentId !== null;
 
@@ -345,7 +253,6 @@ function SplitLayoutPanel({
                   <HeaderCell className="agent-skills-manager__col-skills-assigned">
                     Skills assigned
                   </HeaderCell>
-                  <HeaderCell className="agent-skills-manager__col-actions" />
                 </HeaderRow>
               </Head>
             </Table>
@@ -378,19 +285,6 @@ function SplitLayoutPanel({
                           ? formatSkillsAssignedCompact(agent)
                           : formatSkillsAssigned(agent)}
                       </SM>
-                    </Cell>
-                    <Cell className="agent-skills-manager__cell-actions">
-                      <AgentRowMenu
-                        agent={agent}
-                        isOpen={openMenuId === agent.id}
-                        menuRef={menuRef}
-                        onToggle={(event) => toggleMenu(event, agent.id)}
-                        onViewSkills={() => handleViewSkills(agent.id)}
-                        onRemoveAllSkills={() => {
-                          handleRemoveAllSkills(agent.id);
-                          setOpenMenuId(null);
-                        }}
-                      />
                     </Cell>
                   </Row>
                 ))}

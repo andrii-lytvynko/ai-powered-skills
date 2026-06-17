@@ -49,6 +49,14 @@
   width: 100%;
 }
 
+.skills-page-tabs [data-garden-id="tabs.tab"][aria-selected="true"] {
+  box-shadow: none;
+  border: none;
+  border-bottom: 3px solid currentColor;
+  margin-bottom: -2px;
+  padding-bottom: calc(var(--spacing-xs) + 2px);
+}
+
 .skills-agents-view {
   width: 100%;
   padding-top: var(--spacing-md);
@@ -412,38 +420,6 @@
   text-align: right;
 }
 
-/* ── Edit button hover-reveal ── */
-
-.skills-row-actions {
-  opacity: 0;
-  transition: opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  [data-garden-id="tables.row"]:hover .skills-row-actions,
-  [role="row"]:hover .skills-row-actions {
-    opacity: 1;
-  }
-}
-
-/* Always visible on keyboard focus or touch */
-.skills-row-actions:focus-within,
-[data-garden-id="tables.row"]:focus-within .skills-row-actions,
-[role="row"]:focus-within .skills-row-actions {
-  opacity: 1;
-}
-
-@media (hover: none) {
-  .skills-row-actions {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .skills-row-actions {
-    transition: none;
-  }
-}
 
 /* ── Category table enter animation ── */
 

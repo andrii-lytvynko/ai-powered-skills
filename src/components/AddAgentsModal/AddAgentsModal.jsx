@@ -170,7 +170,7 @@ export default function AddAgentsModal({
                     className="add-agents-modal__chip"
                     style={{ '--chip-index': index }}
                   >
-                    <AgentAvatar agent={agent} size="extrasmall" />
+                    <AgentAvatar agent={agent} size="extrasmall" className="add-agents-modal__chip-avatar" />
                     <span className="add-agents-modal__chip-name">{agent.name}</span>
                     <Tag.Close
                       aria-label={`Remove ${agent.name}`}

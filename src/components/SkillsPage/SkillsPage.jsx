@@ -19,7 +19,7 @@ import SkillFormModal from "../SkillFormModal";
 import CategoryFormModal from "../CategoryFormModal";
 import { AgentSkillsPanel } from "../AgentSkillsManager";
 import { buildAgentsFromMatrix, buildSkillsCatalog } from "../../utils/agentSkillsMatrixBridge";
-import { ChevronDownIcon, EditNoteIcon, PlusIcon, SparkleIcon } from "../Icons";
+import { ChevronDownIcon, PlusIcon, SparkleIcon } from "../Icons";
 
 import {
   adminCenterPrimaryNavItems as primaryNavItems,
@@ -364,27 +364,6 @@ export default function SkillsPage({
                                               : "agents"}{" "}
                                             assigned
                                           </Anchor>
-                                        </Table.Cell>
-                                        <Table.Cell isMinimum>
-                                          <div className="skills-row-actions">
-                                            <IconButton
-                                              aria-label={`Edit ${skill.name}`}
-                                              isBasic
-                                              size="small"
-                                              onClick={() =>
-                                                setSkillForm({
-                                                  mode: "edit",
-                                                  categoryId: category.id,
-                                                  skill: {
-                                                    ...skill,
-                                                    categoryId: category.id,
-                                                  },
-                                                })
-                                              }
-                                            >
-                                              <EditNoteIcon />
-                                            </IconButton>
-                                          </div>
                                         </Table.Cell>
                                       </Table.Row>
                                     ))

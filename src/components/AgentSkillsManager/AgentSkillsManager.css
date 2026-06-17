@@ -34,6 +34,8 @@
 }
 
 .agent-skills-manager__panel {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   width: 100%;
 }
 
@@ -100,6 +102,7 @@
 
 .agent-skills-manager__table-header .agent-skills-manager__table thead > tr > th {
   box-shadow: none !important;
+  font-size: var(--font-size-sm);
 }
 
 .agent-skills-manager__table-body-scroll {
@@ -123,19 +126,19 @@
   table-layout: fixed;
 }
 
-/* Compact mode — skills count column tight on the right, next to more menu */
+.agent-skills-manager__col-skills-assigned {
+  text-align: right !important;
+  white-space: nowrap;
+  padding-right: var(--spacing-md);
+}
+
+/* Compact mode — wide enough to show full header text */
 .agent-skills-manager__table--compact .agent-skills-manager__col-skills-assigned {
-  width: 72px;
-  min-width: 72px;
-  max-width: 72px;
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
   padding-left: var(--spacing-xs);
-  padding-right: var(--spacing-xs);
-  text-align: right;
   vertical-align: middle;
-  white-space: normal;
-  line-height: 1.2;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
 }
 
 .agent-skills-manager__table--compact .agent-skills-manager__skills-count {
@@ -146,20 +149,19 @@
   color: var(--color-text-secondary);
 }
 
-.agent-skills-manager__table--compact .agent-skills-manager__col-actions,
-.agent-skills-manager__table--compact .agent-skills-manager__cell-actions {
-  width: 40px;
-  min-width: 40px;
-  padding-left: 0;
-  padding-right: var(--spacing-sm);
-}
-
-.agent-skills-manager__table:not(.agent-skills-manager__table--compact) .agent-skills-manager__col-skills-assigned {
-  white-space: nowrap;
-}
-
 .agent-skills-manager__row {
   cursor: pointer;
+  transition: background-color 140ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .agent-skills-manager__row:hover {
+    background-color: var(--color-bg-subtle);
+  }
+}
+
+.agent-skills-manager__row:active {
+  background-color: var(--color-hover-overlay-strong);
 }
 
 .agent-skills-manager__agent-cell {
@@ -216,38 +218,6 @@
   border-radius: 50%;
 }
 
-.agent-skills-manager__col-actions,
-.agent-skills-manager__cell-actions {
-  width: 48px;
-  text-align: right;
-}
-
-.agent-skills-manager__menu-wrap {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.agent-skills-manager__actions-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: var(--spacing-xxs);
-  min-width: 200px;
-  background: var(--color-bg-white);
-  border: 1px solid var(--color-grey-300);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  z-index: 1200;
-  overflow: hidden;
-}
-
-.agent-skills-manager__menu-item {
-  display: block;
-  width: 100%;
-  justify-content: flex-start;
-  border-radius: 0;
-}
 
 /* Right panel — fills remaining space */
 .agent-skills-manager__preview {
@@ -258,8 +228,8 @@
   min-width: 0;
   overflow: hidden;
   transition:
-    flex 260ms cubic-bezier(0.32, 0.72, 0, 1),
-    width 260ms cubic-bezier(0.32, 0.72, 0, 1);
+    flex 260ms var(--ease-drawer),
+    width 260ms var(--ease-drawer);
   background: var(--color-bg-white);
 }
 
@@ -280,8 +250,8 @@
   transform: translateX(16px);
   opacity: 0;
   transition:
-    transform 260ms cubic-bezier(0.32, 0.72, 0, 1),
-    opacity 220ms ease-out;
+    transform 260ms var(--ease-drawer),
+    opacity 220ms var(--ease-out);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -332,6 +302,22 @@
 .agent-skills-manager__section {
   padding: var(--spacing-md);
   border-bottom: 1px solid var(--color-grey-200);
+  animation: agent-section-enter 180ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.agent-skills-manager__section:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+@keyframes agent-section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .agent-skills-manager__available-skills-scroll {
@@ -371,13 +357,40 @@
   text-align: center;
 }
 
+.agent-skills-manager__available-skills-table tr {
+  transition: background-color 140ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .agent-skills-manager__available-skills-table tr:hover {
+    background-color: var(--color-bg-subtle);
+  }
+}
+
+.agent-skills-manager__available-skills-table tr:active {
+  background-color: var(--color-hover-overlay-strong);
+}
+
 .agent-skills-manager__add-skill-btn {
   border: 1px solid var(--color-grey-300);
   border-radius: var(--radius-sm);
+  transition: transform 120ms var(--ease-out);
 }
 
 .agent-skills-manager__add-skill-btn:hover {
   border-color: var(--color-primary-600);
+}
+
+.agent-skills-manager__add-skill-btn:active {
+  transform: scale(0.95);
+}
+
+.agent-skills-manager__back-btn {
+  transition: transform 120ms var(--ease-out);
+}
+
+.agent-skills-manager__back-btn:active {
+  transform: scale(0.95);
 }
 
 .agent-skills-manager__available-skills-empty {
@@ -391,6 +404,18 @@
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
+  animation: skill-radar-enter 180ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes skill-radar-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .skill-radar__svg {
@@ -434,15 +459,26 @@
   stroke: var(--color-bg-white);
   stroke-width: 2;
   cursor: grab;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-radar__handle:hover {
+    transform: scale(1.25);
+  }
 }
 
 .skill-radar__handle:focus {
   outline: 2px solid var(--color-primary-600);
   outline-offset: 2px;
+  transform: scale(1.25);
 }
 
 .skill-radar__handle:active {
   cursor: grabbing;
+  transform: scale(1);
 }
 
 .skill-radar__fill--compact {
@@ -490,6 +526,38 @@
 
   .agent-skills-manager__preview[data-open='true'] .agent-skills-manager__preview-shell {
     opacity: 1;
+  }
+
+  .agent-skills-manager__row,
+  .agent-skills-manager__available-skills-table tr {
+    transition: none;
+  }
+
+  .agent-skills-manager__add-skill-btn,
+  .agent-skills-manager__back-btn {
+    transition: none;
+  }
+
+  .agent-skills-manager__add-skill-btn:active,
+  .agent-skills-manager__back-btn:active {
+    transform: none;
+  }
+
+  .skill-radar {
+    animation: none;
+  }
+
+  .skill-radar__handle {
+    transition: none;
+    transform: none;
+  }
+
+  .skill-radar__handle:focus {
+    transform: none;
+  }
+
+  .agent-skills-manager__section {
+    animation: none;
   }
 }
 
