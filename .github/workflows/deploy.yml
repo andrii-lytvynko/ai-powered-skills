@@ -21,10 +21,13 @@ jobs:
           cache: npm
 
       - name: Set up Artifactory credentials
-        run: curl -sS -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_API_KEY}" --fail https://zdrepo.jfrog.io/zdrepo/api/npm/npm/auth/zendesk >> ~/.npmrc
-        env:
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
+        run: |
+          echo "@zendesk:registry=https://zdrepo.jfrog.io/zdrepo/api/npm/npm/" >> ~/.npmrc
+          echo "@zendesk-ui:registry=https://zdrepo.jfrog.io/zdrepo/api/npm/npm/" >> ~/.npmrc
+          echo "//zdrepo.jfrog.io/zdrepo/api/npm/npm/:always-auth=true" >> ~/.npmrc
+          echo "//zdrepo.jfrog.io/zdrepo/api/npm/npm/:username=andrii.lytvynko" >> ~/.npmrc
+          echo "//zdrepo.jfrog.io/zdrepo/api/npm/npm/:email=andrii.lytvynko@zendesk.com" >> ~/.npmrc
+          echo "//zdrepo.jfrog.io/zdrepo/api/npm/npm/:_password=${{ secrets.ARTIFACTORY_AUTH_TOKEN }}" >> ~/.npmrc
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
