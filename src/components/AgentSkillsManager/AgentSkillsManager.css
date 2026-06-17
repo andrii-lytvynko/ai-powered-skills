@@ -207,7 +207,8 @@
   flex-shrink: 0;
 }
 
-.agent-skills-manager__avatar img {
+.agent-skills-manager__avatar img,
+.agent-skills-manager__avatar-image {
   width: 100%;
   height: 100%;
   object-fit: cover;

@@ -1,3 +1,7 @@
+import { assetUrl } from '../utils/assetUrl';
+
+const agentPhoto = (id) => assetUrl(`agents/${id}.jpg`);
+
 const AVATAR_COLORS = [
   '#68737d',
   '#8b5cf6',
@@ -23,18 +27,18 @@ export function getAgentColor(idOrName) {
 }
 
 const AGENT_POOL_RAW = [
-  { id: 'a1', name: 'Alex Chen', groups: ['Support', 'Technical Help _ EMEA'] },
-  { id: 'a2', name: 'Maria Garcia', groups: ['Billing Support', 'Support'] },
-  { id: 'a3', name: 'James Wilson', groups: ['Technical Help _ EMEA', 'Support'] },
-  { id: 'a4', name: 'Sarah Kim', groups: ['Support', 'Refunds'] },
-  { id: 'a5', name: 'David Okonkwo', groups: ['Billing Support', 'Refunds'] },
-  { id: 'a6', name: 'Emma Thompson', groups: ['Support', 'Technical Help _ EMEA'] },
-  { id: 'a7', name: 'Lucas Müller', groups: ['Technical Help _ EMEA'] },
-  { id: 'a8', name: 'Yuki Tanaka', groups: ['Support', 'Billing Support'] },
-  { id: 'a9', name: 'Sofia Rossi', groups: ['Billing Support', 'Support'] },
-  { id: 'a10', name: 'Noah Patel', groups: ['Refunds', 'Support'] },
-  { id: 'a11', name: 'Chloe Martin', groups: ['Technical Help _ EMEA', 'Support'] },
-  { id: 'a12', name: 'Ethan Brown', groups: ['Support'] },
+  { id: 'a1', name: 'Alex Chen', groups: ['Support', 'Technical Help _ EMEA'], photoUrl: agentPhoto('a1') },
+  { id: 'a2', name: 'Maria Garcia', groups: ['Billing Support', 'Support'], photoUrl: agentPhoto('a2') },
+  { id: 'a3', name: 'James Wilson', groups: ['Technical Help _ EMEA', 'Support'], photoUrl: agentPhoto('a3') },
+  { id: 'a4', name: 'Sarah Kim', groups: ['Support', 'Refunds'], photoUrl: agentPhoto('a4') },
+  { id: 'a5', name: 'David Okonkwo', groups: ['Billing Support', 'Refunds'], photoUrl: agentPhoto('a5') },
+  { id: 'a6', name: 'Emma Thompson', groups: ['Support', 'Technical Help _ EMEA'], photoUrl: agentPhoto('a6') },
+  { id: 'a7', name: 'Lucas Müller', groups: ['Technical Help _ EMEA'], photoUrl: agentPhoto('a7') },
+  { id: 'a8', name: 'Yuki Tanaka', groups: ['Support', 'Billing Support'], photoUrl: agentPhoto('a8') },
+  { id: 'a9', name: 'Sofia Rossi', groups: ['Billing Support', 'Support'], photoUrl: agentPhoto('a9') },
+  { id: 'a10', name: 'Noah Patel', groups: ['Refunds', 'Support'], photoUrl: agentPhoto('a10') },
+  { id: 'a11', name: 'Chloe Martin', groups: ['Technical Help _ EMEA', 'Support'], photoUrl: agentPhoto('a11') },
+  { id: 'a12', name: 'Ethan Brown', groups: ['Support'], photoUrl: agentPhoto('a12') },
 ];
 
 export const AGENT_POOL = AGENT_POOL_RAW.map((agent) => ({
@@ -44,6 +48,10 @@ export const AGENT_POOL = AGENT_POOL_RAW.map((agent) => ({
 
 export function getAgentById(id) {
   return AGENT_POOL.find((agent) => agent.id === id) ?? null;
+}
+
+export function getAgentPhotoUrl(id) {
+  return getAgentById(id)?.photoUrl ?? agentPhoto(id);
 }
 
 function assignAgents(indices, proficiencies) {

@@ -1,3 +1,5 @@
+import { getAgentPhotoUrl } from '../../data/skillsData';
+
 export const MAX_SKILLS = 20;
 
 export const SKILLS = [
@@ -246,11 +248,17 @@ export function normalizeAgents(data, { templateAgents = INITIAL_AGENTS, skills 
       ? sanitizeAgentSkills(agent.skills, validSkillIds)
       : sanitizeAgentSkills(fallback.skills, validSkillIds);
 
+    const resolvedPhoto =
+      (typeof agent?.photoUrl === 'string' && agent.photoUrl.trim())
+      || (typeof fallback.photoUrl === 'string' && fallback.photoUrl.trim())
+      || getAgentPhotoUrl(fallback.id)
+      || '';
+
     return {
       id: fallback.id,
       name: typeof agent?.name === 'string' && agent.name.trim() ? agent.name : fallback.name,
       initials: typeof agent?.initials === 'string' && agent.initials.trim() ? agent.initials : fallback.initials,
-      photoUrl: typeof agent?.photoUrl === 'string' && agent.photoUrl.trim() ? agent.photoUrl : fallback.photoUrl,
+      photoUrl: resolvedPhoto,
       skills: nextSkills,
     };
   });

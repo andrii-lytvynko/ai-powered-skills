@@ -1,4 +1,4 @@
-import { AGENT_POOL, getAllSkills, getInitials } from '../data/skillsData';
+import { AGENT_POOL, getAllSkills, getInitials, getAgentPhotoUrl } from '../data/skillsData';
 
 export function buildSkillsCatalog(categories) {
   return getAllSkills(categories).map((skill) => ({
@@ -25,7 +25,7 @@ export function buildAgentsFromMatrix(categories) {
     id: poolAgent.id,
     name: poolAgent.name,
     initials: getInitials(poolAgent.name),
-    photoUrl: '',
+    photoUrl: getAgentPhotoUrl(poolAgent.id),
     skills: skillsByAgent.get(poolAgent.id) ?? {},
   }));
 }
