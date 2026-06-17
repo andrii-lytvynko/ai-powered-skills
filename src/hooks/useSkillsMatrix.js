@@ -7,6 +7,7 @@ import {
   findSkill,
   uniqueSlug,
 } from '../data/skillsData';
+import { applyAgentChangesToMatrix } from '../utils/agentSkillsMatrixBridge';
 
 const STORAGE_KEY = 'zenbox:skills:matrix';
 
@@ -125,6 +126,13 @@ export function useSkillsMatrix() {
     [setCategories]
   );
 
+  const syncAgentAssignments = useCallback(
+    (managerAgents) => {
+      setCategories((prev) => applyAgentChangesToMatrix(prev, managerAgents));
+    },
+    [setCategories]
+  );
+
   const resetMatrix = useCallback(() => {
     setCategories(cloneCategories(DEFAULT_SKILL_CATEGORIES));
   }, [setCategories]);
@@ -199,6 +207,7 @@ export function useSkillsMatrix() {
     removeAgentFromSkill,
     addAgentsToSkill,
     syncSkillAgents,
+    syncAgentAssignments,
     resetMatrix,
     getSkillById,
     addCategory,

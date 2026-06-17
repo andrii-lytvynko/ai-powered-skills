@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useSkillsMatrix } from "../../hooks/useSkillsMatrix";
 import {
@@ -10,17 +10,21 @@ import {
   Table,
   Tag,
 } from "@zendesk-ui/react-components";
+import { Tabs, TabList, Tab, TabPanel } from "@zendeskgarden/react-tabs";
 import TopBar from "../TopBar/TopBar";
 import PageSidebarNav from "../PageSidebarNav";
 import CopilotSidebar from "../CopilotSidebar/CopilotSidebar";
 import AgentSkillModal from "../AgentSkillModal";
 import SkillFormModal from "../SkillFormModal";
 import CategoryFormModal from "../CategoryFormModal";
+import { AgentSkillsPanel } from "../AgentSkillsManager";
+import { buildAgentsFromMatrix, buildSkillsCatalog } from "../../utils/agentSkillsMatrixBridge";
 import { ChevronDownIcon, EditNoteIcon, PlusIcon, SparkleIcon } from "../Icons";
 
 import {
   adminCenterPrimaryNavItems as primaryNavItems,
   adminCenterSecondaryNavSections as secondaryNavSections,
+  PeopleIcon,
 } from "../AdminCenterNav";
 
 import "./SkillsPage.css";
@@ -46,6 +50,8 @@ export default function SkillsPage({
     initialCopilotFlow || null,
   );
   const [selectedSkillId, setSelectedSkillId] = useState(null);
+  const [activeSkillsTab, setActiveSkillsTab] = useState("skills");
+  const [agentsViewStarted, setAgentsViewStarted] = useState(false);
 
   // Collapse state: set of collapsed category ids
   const [collapsedCategories, setCollapsedCategories] = useState(new Set());
@@ -60,6 +66,7 @@ export default function SkillsPage({
     setProficiency,
     removeAgentFromSkill,
     syncSkillAgents,
+    syncAgentAssignments,
     getSkillById,
     addCategory,
     addSkill,
@@ -67,6 +74,24 @@ export default function SkillsPage({
   } = useSkillsMatrix();
 
   const selectedSkill = selectedSkillId ? getSkillById(selectedSkillId) : null;
+
+  const managerAgents = useMemo(
+    () => buildAgentsFromMatrix(categories),
+    [categories],
+  );
+  const skillsCatalog = useMemo(
+    () => buildSkillsCatalog(categories),
+    [categories],
+  );
+
+  const handleManagerAgentsChange = useCallback(
+    (nextAgents) => {
+      syncAgentAssignments(nextAgents);
+    },
+    [syncAgentAssignments],
+  );
+
+  const showAgentsPanel = summary.totalAssignments > 0 || agentsViewStarted;
 
   const handleSubPageSelect = (itemId) => {
     if (onSubPageChange) onSubPageChange(itemId);
@@ -131,7 +156,7 @@ export default function SkillsPage({
 
         <div className="skills-page__content-column">
           <main className="skills-page__main">
-            <div className="skills-page__content">
+            <div className={`skills-page__content${skillsApproved ? " skills-page__content--with-tabs" : ""}`}>
               <nav className="skills-breadcrumbs" aria-label="Breadcrumb">
                 <Anchor href="#" className="skills-breadcrumbs__link">
                   Objects and rules
@@ -199,168 +224,209 @@ export default function SkillsPage({
                   </Button>
                 </div>
               ) : (
-                <div className="skills-matrix-view">
-                  <div className="skills-matrix-view__toolbar">
-                    <SM className="skills-matrix-view__summary">
-                      <strong>{summary.totalSkills} skills</strong>
-                      {" · "}
-                      {summary.totalAssignments} agent-skill pairs
-                      {" · "}
-                      {summary.agentsCovered} of {summary.totalAgents} agents
-                      covered
-                    </SM>
-                    <Button
-                      isBasic
-                      size="small"
-                      onClick={() => setCategoryFormOpen(true)}
-                    >
-                      <Button.StartIcon>
-                        <PlusIcon />
-                      </Button.StartIcon>
-                      Create category
-                    </Button>
-                  </div>
+                <Tabs
+                  selectedItem={activeSkillsTab}
+                  onChange={setActiveSkillsTab}
+                  className="skills-page-tabs"
+                >
+                  <TabList>
+                    <Tab item="skills">Skills</Tab>
+                    <Tab item="agents">Agents</Tab>
+                  </TabList>
+                  <TabPanel item="skills">
+                    <div className="skills-matrix-view">
+                      <div className="skills-matrix-view__toolbar">
+                        <SM className="skills-matrix-view__summary">
+                          <strong>{summary.totalSkills} skills</strong>
+                          {" · "}
+                          {summary.totalAssignments} agent-skill pairs
+                          {" · "}
+                          {summary.agentsCovered} of {summary.totalAgents} agents
+                          covered
+                        </SM>
+                        <Button
+                          isBasic
+                          size="small"
+                          onClick={() => setCategoryFormOpen(true)}
+                        >
+                          <Button.StartIcon>
+                            <PlusIcon />
+                          </Button.StartIcon>
+                          Create category
+                        </Button>
+                      </div>
 
-                  {categories.map((category) => {
-                    const isCollapsed = collapsedCategories.has(category.id);
-                    const headerId = `skills-cat-${category.id}`;
-                    const tableId = `skills-table-${category.id}`;
+                      {categories.map((category) => {
+                        const isCollapsed = collapsedCategories.has(category.id);
+                        const headerId = `skills-cat-${category.id}`;
+                        const tableId = `skills-table-${category.id}`;
 
-                    return (
-                      <section
-                        key={category.id}
-                        className="skills-category"
-                        aria-labelledby={headerId}
-                      >
-                        <div className="skills-category__header">
-                          <button
-                            type="button"
-                            className="skills-category__toggle"
-                            onClick={() => toggleCategory(category.id)}
-                            aria-expanded={!isCollapsed}
-                            aria-controls={tableId}
+                        return (
+                          <section
+                            key={category.id}
+                            className="skills-category"
+                            aria-labelledby={headerId}
                           >
-                            <ChevronDownIcon
-                              className={`skills-category__chevron${isCollapsed ? " skills-category__chevron--collapsed" : ""}`}
-                            />
-                            <h2
-                              id={headerId}
-                              className="skills-category__title"
-                            >
-                              {category.name}
-                            </h2>
-                            <SM className="skills-category__count">
-                              {category.skills.length}{" "}
-                              {category.skills.length === 1 ? "skill" : "skills"}
-                            </SM>
-                          </button>
+                            <div className="skills-category__header">
+                              <button
+                                type="button"
+                                className="skills-category__toggle"
+                                onClick={() => toggleCategory(category.id)}
+                                aria-expanded={!isCollapsed}
+                                aria-controls={tableId}
+                              >
+                                <ChevronDownIcon
+                                  className={`skills-category__chevron${isCollapsed ? " skills-category__chevron--collapsed" : ""}`}
+                                />
+                                <h2
+                                  id={headerId}
+                                  className="skills-category__title"
+                                >
+                                  {category.name}
+                                </h2>
+                                <SM className="skills-category__count">
+                                  {category.skills.length}{" "}
+                                  {category.skills.length === 1 ? "skill" : "skills"}
+                                </SM>
+                              </button>
 
-                          <Button
-                            isBasic
-                            size="small"
-                            className="skills-category__add-skill"
-                            onClick={() =>
-                              setSkillForm({
-                                mode: "create",
-                                categoryId: category.id,
-                              })
-                            }
-                          >
-                            <Button.StartIcon>
-                              <PlusIcon />
-                            </Button.StartIcon>
-                            Add skill
+                              <Button
+                                isBasic
+                                size="small"
+                                className="skills-category__add-skill"
+                                onClick={() =>
+                                  setSkillForm({
+                                    mode: "create",
+                                    categoryId: category.id,
+                                  })
+                                }
+                              >
+                                <Button.StartIcon>
+                                  <PlusIcon />
+                                </Button.StartIcon>
+                                Add skill
+                              </Button>
+                            </div>
+
+                            {!isCollapsed && (
+                              <Table
+                                id={tableId}
+                                className="skills-category__table skills-category__table-enter"
+                              >
+                                <Table.Head>
+                                  <Table.HeaderRow>
+                                    <Table.HeaderCell>Skill name</Table.HeaderCell>
+                                    <Table.HeaderCell>Intents</Table.HeaderCell>
+                                    <Table.HeaderCell>Avg confidence</Table.HeaderCell>
+                                    <Table.HeaderCell>Agents assigned</Table.HeaderCell>
+                                    <Table.HeaderCell isMinimum />
+                                  </Table.HeaderRow>
+                                </Table.Head>
+                                <Table.Body>
+                                  {category.skills.length === 0 ? (
+                                    <Table.Row>
+                                      <Table.Cell colSpan={5}>
+                                        <SM className="skills-category__empty">
+                                          No skills in this category yet. Add a skill to get started.
+                                        </SM>
+                                      </Table.Cell>
+                                    </Table.Row>
+                                  ) : (
+                                    category.skills.map((skill) => (
+                                      <Table.Row key={skill.id}>
+                                        <Table.Cell>
+                                          <SM isBold>{skill.name}</SM>
+                                        </Table.Cell>
+                                        <Table.Cell className="skills-category__intents">
+                                          <SM>{skill.intents}</SM>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                          <div className="skills-confidence-cell">
+                                            <div className="skills-confidence-cell__bar-track">
+                                              <div
+                                                className="skills-confidence-cell__bar-fill"
+                                                style={{ width: `${skill.confidence}%` }}
+                                              />
+                                            </div>
+                                            <SM className="skills-confidence-cell__value">
+                                              {skill.confidence}%
+                                            </SM>
+                                          </div>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                          <Anchor
+                                            as="button"
+                                            onClick={() => handleOpenAgents(skill.id)}
+                                          >
+                                            {skill.agents.length}{" "}
+                                            {skill.agents.length === 1
+                                              ? "agent"
+                                              : "agents"}{" "}
+                                            assigned
+                                          </Anchor>
+                                        </Table.Cell>
+                                        <Table.Cell isMinimum>
+                                          <div className="skills-row-actions">
+                                            <IconButton
+                                              aria-label={`Edit ${skill.name}`}
+                                              isBasic
+                                              size="small"
+                                              onClick={() =>
+                                                setSkillForm({
+                                                  mode: "edit",
+                                                  categoryId: category.id,
+                                                  skill: {
+                                                    ...skill,
+                                                    categoryId: category.id,
+                                                  },
+                                                })
+                                              }
+                                            >
+                                              <EditNoteIcon />
+                                            </IconButton>
+                                          </div>
+                                        </Table.Cell>
+                                      </Table.Row>
+                                    ))
+                                  )}
+                                </Table.Body>
+                              </Table>
+                            )}
+                          </section>
+                        );
+                      })}
+                    </div>
+                  </TabPanel>
+                  <TabPanel item="agents">
+                    <div className="skills-agents-view">
+                      {showAgentsPanel ? (
+                        <AgentSkillsPanel
+                          embedded
+                          agents={managerAgents}
+                          onAgentsChange={handleManagerAgentsChange}
+                          skillsCatalog={skillsCatalog}
+                          isActive={activeSkillsTab === "agents"}
+                        />
+                      ) : (
+                        <div className="skills-agents-empty">
+                          <div className="skills-agents-empty__icon-wrap">
+                            <PeopleIcon className="skills-agents-empty__icon" />
+                          </div>
+                          <MD className="skills-agents-empty__title">
+                            No skills assigned to agents yet
+                          </MD>
+                          <SM className="skills-agents-empty__body">
+                            Assign skills to agents so skill-based routing can match tickets to the
+                            right expertise. Select agents and set proficiency scores for each skill.
+                          </SM>
+                          <Button isPrimary onClick={() => setAgentsViewStarted(true)}>
+                            Assign skills to agents
                           </Button>
                         </div>
-
-                        {!isCollapsed && (
-                          <Table
-                            id={tableId}
-                            className="skills-category__table skills-category__table-enter"
-                          >
-                            <Table.Head>
-                              <Table.HeaderRow>
-                                <Table.HeaderCell>Skill name</Table.HeaderCell>
-                                <Table.HeaderCell>Intents</Table.HeaderCell>
-                                <Table.HeaderCell>Avg confidence</Table.HeaderCell>
-                                <Table.HeaderCell>Agents assigned</Table.HeaderCell>
-                                <Table.HeaderCell isMinimum />
-                              </Table.HeaderRow>
-                            </Table.Head>
-                            <Table.Body>
-                              {category.skills.length === 0 ? (
-                                <Table.Row>
-                                  <Table.Cell colSpan={5}>
-                                    <SM className="skills-category__empty">
-                                      No skills in this category yet. Add a skill to get started.
-                                    </SM>
-                                  </Table.Cell>
-                                </Table.Row>
-                              ) : (
-                                category.skills.map((skill) => (
-                                  <Table.Row key={skill.id}>
-                                    <Table.Cell>
-                                      <SM isBold>{skill.name}</SM>
-                                    </Table.Cell>
-                                    <Table.Cell className="skills-category__intents">
-                                      <SM>{skill.intents}</SM>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                      <div className="skills-confidence-cell">
-                                        <div className="skills-confidence-cell__bar-track">
-                                          <div
-                                            className="skills-confidence-cell__bar-fill"
-                                            style={{ width: `${skill.confidence}%` }}
-                                          />
-                                        </div>
-                                        <SM className="skills-confidence-cell__value">
-                                          {skill.confidence}%
-                                        </SM>
-                                      </div>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                      <Anchor
-                                        as="button"
-                                        onClick={() => handleOpenAgents(skill.id)}
-                                      >
-                                        {skill.agents.length}{" "}
-                                        {skill.agents.length === 1
-                                          ? "agent"
-                                          : "agents"}{" "}
-                                        assigned
-                                      </Anchor>
-                                    </Table.Cell>
-                                    <Table.Cell isMinimum>
-                                      <div className="skills-row-actions">
-                                        <IconButton
-                                          aria-label={`Edit ${skill.name}`}
-                                          isBasic
-                                          size="small"
-                                          onClick={() =>
-                                            setSkillForm({
-                                              mode: "edit",
-                                              categoryId: category.id,
-                                              skill: {
-                                                ...skill,
-                                                categoryId: category.id,
-                                              },
-                                            })
-                                          }
-                                        >
-                                          <EditNoteIcon />
-                                        </IconButton>
-                                      </div>
-                                    </Table.Cell>
-                                  </Table.Row>
-                                ))
-                              )}
-                            </Table.Body>
-                          </Table>
-                        )}
-                      </section>
-                    );
-                  })}
-                </div>
+                      )}
+                    </div>
+                  </TabPanel>
+                </Tabs>
               )}
             </div>
           </main>

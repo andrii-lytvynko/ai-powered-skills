@@ -1,0 +1,533 @@
+.agent-skills-manager__modal {
+  width: min(1200px, calc(100vw - 48px)) !important;
+  max-width: none !important;
+}
+
+/* Unified 12px scrollbars for all scrollable areas in the modal */
+.agent-skills-manager__scroll {
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--color-grey-300) transparent;
+  scrollbar-width: auto;
+}
+
+.agent-skills-manager__scroll::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.agent-skills-manager__scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.agent-skills-manager__scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-grey-300);
+  border-radius: 6px;
+}
+
+.agent-skills-manager__scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-grey-600);
+}
+
+.agent-skills-manager__body {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.agent-skills-manager__panel {
+  width: 100%;
+}
+
+.agent-skills-manager--embedded {
+  width: 100%;
+}
+
+.agent-skills-manager--embedded .agent-skills-manager__layout {
+  min-height: min(70vh, 640px);
+  max-height: none;
+  border: 1px solid var(--color-grey-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.agent-skills-manager__layout {
+  display: flex;
+  align-items: stretch;
+  min-height: 520px;
+  max-height: min(70vh, 640px);
+  background: var(--color-bg-white);
+}
+
+/* Left panel — min 400px, right fills remaining space */
+.agent-skills-manager__table-area {
+  flex: 1 1 auto;
+  min-width: 400px;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-skills-manager__layout[data-preview-open='true'] .agent-skills-manager__table-area {
+  flex: 0 0 400px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  border-right: 1px solid var(--color-grey-200);
+}
+
+.agent-skills-manager__agents-table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.agent-skills-manager__table-header {
+  flex-shrink: 0;
+  overflow: hidden;
+  padding-right: 12px;
+  box-shadow: inset 0 -1px 0 var(--color-grey-300);
+}
+
+.agent-skills-manager__table-header .agent-skills-manager__table thead {
+  background-color: transparent;
+}
+
+.agent-skills-manager__table-header .agent-skills-manager__table thead > tr {
+  border-bottom: none;
+}
+
+.agent-skills-manager__table-header .agent-skills-manager__table thead > tr > th {
+  box-shadow: none !important;
+}
+
+.agent-skills-manager__table-body-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.agent-skills-manager__table-header .agent-skills-manager__table {
+  margin-bottom: 0;
+}
+
+.agent-skills-manager__table-body-scroll .agent-skills-manager__table {
+  margin-top: 0;
+}
+
+.agent-skills-manager__table {
+  background: transparent;
+  border-radius: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Compact mode — skills count column tight on the right, next to more menu */
+.agent-skills-manager__table--compact .agent-skills-manager__col-skills-assigned {
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+  padding-left: var(--spacing-xs);
+  padding-right: var(--spacing-xs);
+  text-align: right;
+  vertical-align: middle;
+  white-space: normal;
+  line-height: 1.2;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.agent-skills-manager__table--compact .agent-skills-manager__skills-count {
+  display: inline-block;
+  min-width: 1.25rem;
+  text-align: right;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.agent-skills-manager__table--compact .agent-skills-manager__col-actions,
+.agent-skills-manager__table--compact .agent-skills-manager__cell-actions {
+  width: 40px;
+  min-width: 40px;
+  padding-left: 0;
+  padding-right: var(--spacing-sm);
+}
+
+.agent-skills-manager__table:not(.agent-skills-manager__table--compact) .agent-skills-manager__col-skills-assigned {
+  white-space: nowrap;
+}
+
+.agent-skills-manager__row {
+  cursor: pointer;
+}
+
+.agent-skills-manager__agent-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.agent-skills-manager__agent-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Fixed-size circular avatars */
+.agent-skills-manager__avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.agent-skills-manager__avatar--table {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+}
+
+.agent-skills-manager__avatar--header {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.agent-skills-manager__avatar > * {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  flex-shrink: 0;
+}
+
+.agent-skills-manager__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+
+.agent-skills-manager__col-actions,
+.agent-skills-manager__cell-actions {
+  width: 48px;
+  text-align: right;
+}
+
+.agent-skills-manager__menu-wrap {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.agent-skills-manager__actions-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--spacing-xxs);
+  min-width: 200px;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 1200;
+  overflow: hidden;
+}
+
+.agent-skills-manager__menu-item {
+  display: block;
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 0;
+}
+
+/* Right panel — fills remaining space */
+.agent-skills-manager__preview {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 0;
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  transition:
+    flex 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    width 260ms cubic-bezier(0.32, 0.72, 0, 1);
+  background: var(--color-bg-white);
+}
+
+.agent-skills-manager__layout[data-preview-open='true'] .agent-skills-manager__preview {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
+.agent-skills-manager__preview-shell {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  min-height: 100%;
+  background: var(--color-bg-white);
+  border-radius: 0;
+  box-shadow: none;
+  transform: translateX(16px);
+  opacity: 0;
+  transition:
+    transform 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 220ms ease-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-skills-manager__preview[data-open='true'] .agent-skills-manager__preview-shell {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.agent-skills-manager__detail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.agent-skills-manager__detail-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-grey-200);
+  flex-shrink: 0;
+}
+
+.agent-skills-manager__back-btn {
+  flex-shrink: 0;
+}
+
+.agent-skills-manager__detail-agent {
+  flex: 1;
+  min-width: 0;
+}
+
+.agent-skills-manager__detail-meta {
+  display: block;
+  color: var(--color-text-secondary);
+}
+
+.agent-skills-manager__detail-body {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-skills-manager__section {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-grey-200);
+}
+
+.agent-skills-manager__available-skills-scroll {
+  display: flex;
+  flex-direction: column;
+  max-height: 220px;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-grey-200);
+  border-radius: var(--radius-sm);
+}
+
+.agent-skills-manager__section:last-child {
+  border-bottom: none;
+}
+
+.agent-skills-manager__section-title {
+  display: block;
+}
+
+.agent-skills-manager__section-description {
+  display: block;
+  margin: var(--spacing-xxs) 0 var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+.agent-skills-manager__available-skills-table {
+  background: transparent;
+  border-radius: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.agent-skills-manager__col-add,
+.agent-skills-manager__cell-add {
+  width: 56px;
+  text-align: center;
+}
+
+.agent-skills-manager__add-skill-btn {
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--radius-sm);
+}
+
+.agent-skills-manager__add-skill-btn:hover {
+  border-color: var(--color-primary-600);
+}
+
+.agent-skills-manager__available-skills-empty {
+  display: block;
+  color: var(--color-text-secondary);
+}
+
+/* Radar chart */
+.skill-radar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.skill-radar__svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  touch-action: none;
+  overflow: visible;
+}
+
+.skill-radar__ring {
+  stroke: var(--color-chart-track);
+  stroke-width: 1;
+}
+
+.skill-radar__axis {
+  stroke: var(--color-grey-300);
+  stroke-width: 1;
+}
+
+.skill-radar__fill {
+  fill: var(--color-chart-blue);
+  fill-opacity: 0.35;
+  stroke: var(--color-primary-600);
+  stroke-width: 2;
+}
+
+.skill-radar__label {
+  fill: var(--color-text-secondary);
+  font-size: 11px;
+  font-family: var(--font-body);
+}
+
+.skill-radar__label-score {
+  fill: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.skill-radar__handle {
+  fill: var(--color-primary-600);
+  stroke: var(--color-bg-white);
+  stroke-width: 2;
+  cursor: grab;
+}
+
+.skill-radar__handle:focus {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+}
+
+.skill-radar__handle:active {
+  cursor: grabbing;
+}
+
+.skill-radar__fill--compact {
+  stroke-width: 1.5;
+}
+
+.skill-radar__legend {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.skill-radar__legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.skill-radar__legend-name {
+  min-width: 0;
+}
+
+.skill-radar__legend-score {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.skill-radar__empty {
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-text-secondary);
+  border: 1px dashed var(--color-grey-300);
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-skills-manager__preview,
+  .agent-skills-manager__preview-shell,
+  .agent-skills-manager__preview[data-open='true'] .agent-skills-manager__preview-shell {
+    transition: none;
+    transform: none;
+  }
+
+  .agent-skills-manager__preview[data-open='true'] .agent-skills-manager__preview-shell {
+    opacity: 1;
+  }
+}
+
+[data-theme='dark'] .agent-skills-manager__scroll {
+  scrollbar-color: var(--color-grey-600) transparent;
+}
+
+[data-theme='dark'] .agent-skills-manager__scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-grey-600);
+}
+
+[data-theme='dark'] .agent-skills-manager__scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-grey-400);
+}
+
+[data-theme='dark'] .agent-skills-manager__table-header {
+  box-shadow: inset 0 -1px 0 var(--color-grey-700);
+}
+
+[data-theme='dark'] .agent-skills-manager__layout,
+[data-theme='dark'] .agent-skills-manager__preview-shell {
+  background: var(--color-bg-subtle);
+}
+
+[data-theme='dark'] .agent-skills-manager__layout[data-preview-open='true'] .agent-skills-manager__table-area,
+[data-theme='dark'] .agent-skills-manager__section,
+[data-theme='dark'] .agent-skills-manager__detail-header {
+  border-color: var(--color-grey-700);
+}
+
+[data-theme='dark'] .agent-skills-manager__actions-menu {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-grey-700);
+}
+
+[data-theme='dark'] .agent-skills-manager__add-skill-btn {
+  border-color: var(--color-grey-600);
+}
+
+[data-theme='dark'] .skill-radar__fill {
+  fill: var(--color-chart-blue-medium);
+}
