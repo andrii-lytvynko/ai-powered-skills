@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Avatar,
   Button,
   IconButton,
   MD,
@@ -8,7 +7,8 @@ import {
   SM,
 } from "@zendesk-ui/react-components";
 import { CloseIcon } from "../Icons";
-import { AGENT_POOL, getInitials, getAgentColor } from "../../data/skillsData";
+import AgentAvatar from "../AgentAvatar";
+import { AGENT_POOL } from "../../data/skillsData";
 import AddAgentsModal from "../AddAgentsModal";
 import ProficiencyDots from "./ProficiencyDots";
 import "./AgentSkillModal.css";
@@ -79,12 +79,7 @@ export default function AgentSkillModal({
                 style={{ "--row-index": index }}
               >
                 <div className="agent-skill-modal__agent">
-                  <Avatar
-                    size="small"
-                    backgroundColor={agent.color ?? getAgentColor(agent.id)}
-                  >
-                    <span>{getInitials(agent.name)}</span>
-                  </Avatar>
+                  <AgentAvatar agent={agent} size="small" />
                   <SM isBold className="agent-skill-modal__name">
                     {agent.name}
                   </SM>

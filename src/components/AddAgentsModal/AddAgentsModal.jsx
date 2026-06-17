@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import {
-  Avatar,
   Button,
   Checkbox,
   Field,
@@ -12,7 +11,7 @@ import {
   Tag,
 } from '@zendesk-ui/react-components';
 import { SearchIcon } from '../Icons';
-import { getInitials } from '../../data/skillsData';
+import AgentAvatar from '../AgentAvatar';
 import './AddAgentsModal.css';
 
 function formatGroups(groups) {
@@ -137,11 +136,7 @@ export default function AddAgentsModal({
                           </Table.Cell>
                           <Table.Cell>
                             <div className="add-agents-modal__agent-cell">
-                              <span className="add-agents-modal__avatar">
-                                <Avatar size="small" backgroundColor={agent.color}>
-                                  <span>{getInitials(agent.name)}</span>
-                                </Avatar>
-                              </span>
+                              <AgentAvatar agent={agent} size="small" />
                               <SM isBold className="add-agents-modal__agent-name">{agent.name}</SM>
                             </div>
                           </Table.Cell>
@@ -175,9 +170,7 @@ export default function AddAgentsModal({
                     className="add-agents-modal__chip"
                     style={{ '--chip-index': index }}
                   >
-                    <Avatar size="extrasmall" backgroundColor={agent.color}>
-                      <span>{getInitials(agent.name)}</span>
-                    </Avatar>
+                    <AgentAvatar agent={agent} size="extrasmall" />
                     <span className="add-agents-modal__chip-name">{agent.name}</span>
                     <Tag.Close
                       aria-label={`Remove ${agent.name}`}

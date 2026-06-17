@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, IconButton } from '@zendeskgarden/react-buttons';
-import { Avatar } from '@zendeskgarden/react-avatars';
 import { Table, Head, HeaderRow, HeaderCell, Body as TableBody, Row, Cell } from '@zendeskgarden/react-tables';
 import { LG, MD, SM } from '@zendeskgarden/react-typography';
-import { getAgentPhotoUrl } from '../../data/skillsData';
+import AgentAvatar from '../AgentAvatar';
 import { PlusIcon } from './icons';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import SkillRadarChart, { getSkillGraphDescription } from './SkillRadarChart';
@@ -11,7 +10,6 @@ import {
   SKILLS,
   INITIAL_AGENTS,
   getAssignedSkillsList,
-  getAvatarColor,
   formatSkillsAssigned,
   formatSkillsAssignedCompact,
   getUnassignedSkills,
@@ -26,40 +24,6 @@ function OverflowIcon() {
       <circle cx="8" cy="8" r="1.25" fill="currentColor" />
       <circle cx="8" cy="13" r="1.25" fill="currentColor" />
     </svg>
-  );
-}
-
-function AgentAvatar({ agent, size = 'table' }) {
-  const [imageError, setImageError] = useState(false);
-  const sizeClass = size === 'header'
-    ? 'agent-skills-manager__avatar--header'
-    : 'agent-skills-manager__avatar--table';
-  const gardenSize = size === 'header' ? 'small' : 'extrasmall';
-  const photoUrl = agent.photoUrl?.trim() || getAgentPhotoUrl(agent.id);
-
-  useEffect(() => {
-    setImageError(false);
-  }, [photoUrl]);
-
-  if (photoUrl && !imageError) {
-    return (
-      <div className={`agent-skills-manager__avatar ${sizeClass}`}>
-        <img
-          src={photoUrl}
-          alt=""
-          className="agent-skills-manager__avatar-image"
-          onError={() => setImageError(true)}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className={`agent-skills-manager__avatar ${sizeClass}`}>
-      <Avatar size={gardenSize} backgroundColor={getAvatarColor(agent.initials)}>
-        <span>{agent.initials}</span>
-      </Avatar>
-    </div>
   );
 }
 
@@ -400,7 +364,7 @@ function SplitLayoutPanel({
                   >
                     <Cell>
                       <div className="agent-skills-manager__agent-cell">
-                        <AgentAvatar agent={agent} size="table" />
+                        <AgentAvatar agent={agent} size="extrasmall" />
                         <SM tag="span" className="agent-skills-manager__agent-name">{agent.name}</SM>
                       </div>
                     </Cell>
