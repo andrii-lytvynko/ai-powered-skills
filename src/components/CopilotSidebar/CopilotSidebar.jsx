@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { IconButton } from '@zendeskgarden/react-buttons';
-import { SM, MD } from '@zendeskgarden/react-typography';
+import { IconButton, SM, MD } from '@zendesk-ui/react-components';
 import { ClockIcon, EditNoteIcon, CloseIcon, SparkleIcon, InfoIcon } from '../Icons';
 import { useSkillsMatrix } from '../../hooks/useSkillsMatrix';
 import AgentSkillModal from '../AgentSkillModal';

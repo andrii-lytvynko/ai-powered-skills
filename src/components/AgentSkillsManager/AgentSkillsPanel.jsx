@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, IconButton } from '@zendeskgarden/react-buttons';
-import { Table, Head, HeaderRow, HeaderCell, Body as TableBody, Row, Cell } from '@zendeskgarden/react-tables';
-import { LG, MD, SM } from '@zendeskgarden/react-typography';
+import { Button, IconButton, Table, LG, MD, SM } from '@zendesk-ui/react-components';
 import AgentAvatar from '../AgentAvatar';
 import { PlusIcon } from './icons';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -73,23 +71,23 @@ function AgentDetailPanel({
             <div className="agent-skills-manager__available-skills-scroll">
               <div className="agent-skills-manager__table-header">
                 <Table className="agent-skills-manager__available-skills-table" size="small">
-                  <Head>
-                    <HeaderRow>
-                      <HeaderCell>Skill name</HeaderCell>
-                      <HeaderCell className="agent-skills-manager__col-add" />
-                    </HeaderRow>
-                  </Head>
+                  <Table.Head>
+                    <Table.HeaderRow>
+                      <Table.HeaderCell>Skill name</Table.HeaderCell>
+                      <Table.HeaderCell className="agent-skills-manager__col-add" />
+                    </Table.HeaderRow>
+                  </Table.Head>
                 </Table>
               </div>
               <div className="agent-skills-manager__table-body-scroll agent-skills-manager__scroll">
                 <Table className="agent-skills-manager__available-skills-table" size="small">
-                  <TableBody>
+                  <Table.Body>
                     {unassignedSkills.map((skill) => (
-                      <Row key={skill.id}>
-                        <Cell>
+                      <Table.Row key={skill.id}>
+                        <Table.Cell>
                           <SM tag="span">{skill.name}</SM>
-                        </Cell>
-                        <Cell className="agent-skills-manager__cell-add">
+                        </Table.Cell>
+                        <Table.Cell className="agent-skills-manager__cell-add">
                           <IconButton
                             isBasic
                             size="small"
@@ -99,10 +97,10 @@ function AgentDetailPanel({
                           >
                             <PlusIcon />
                           </IconButton>
-                        </Cell>
-                      </Row>
+                        </Table.Cell>
+                      </Table.Row>
                     ))}
-                  </TableBody>
+                  </Table.Body>
                 </Table>
               </div>
             </div>
@@ -247,35 +245,35 @@ function SplitLayoutPanel({
             <Table
               className={`agent-skills-manager__table${isPreviewOpen ? ' agent-skills-manager__table--compact' : ''}`}
             >
-              <Head>
-                <HeaderRow>
-                  <HeaderCell>Agent</HeaderCell>
-                  <HeaderCell className="agent-skills-manager__col-skills-assigned">
+              <Table.Head>
+                <Table.HeaderRow>
+                  <Table.HeaderCell>Agent</Table.HeaderCell>
+                  <Table.HeaderCell className="agent-skills-manager__col-skills-assigned">
                     Skills assigned
-                  </HeaderCell>
-                </HeaderRow>
-              </Head>
+                  </Table.HeaderCell>
+                </Table.HeaderRow>
+              </Table.Head>
             </Table>
           </div>
           <div className="agent-skills-manager__table-body-scroll agent-skills-manager__scroll">
             <Table
               className={`agent-skills-manager__table${isPreviewOpen ? ' agent-skills-manager__table--compact' : ''}`}
             >
-              <TableBody>
+              <Table.Body>
                 {agents.map((agent) => (
-                  <Row
+                  <Table.Row
                     key={agent.id}
                     isSelected={selectedAgentId === agent.id}
                     className="agent-skills-manager__row"
                     onClick={() => handleRowClick(agent.id)}
                   >
-                    <Cell>
+                    <Table.Cell>
                       <div className="agent-skills-manager__agent-cell">
                         <AgentAvatar agent={agent} size="extrasmall" />
                         <SM tag="span" className="agent-skills-manager__agent-name">{agent.name}</SM>
                       </div>
-                    </Cell>
-                    <Cell className="agent-skills-manager__col-skills-assigned">
+                    </Table.Cell>
+                    <Table.Cell className="agent-skills-manager__col-skills-assigned">
                       <SM
                         tag="span"
                         className="agent-skills-manager__skills-count"
@@ -285,10 +283,10 @@ function SplitLayoutPanel({
                           ? formatSkillsAssignedCompact(agent)
                           : formatSkillsAssigned(agent)}
                       </SM>
-                    </Cell>
-                  </Row>
+                    </Table.Cell>
+                  </Table.Row>
                 ))}
-              </TableBody>
+              </Table.Body>
             </Table>
           </div>
         </div>

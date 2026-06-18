@@ -8,9 +8,9 @@ import {
   MD,
   SM,
   Table,
+  Tabs,
   Tag,
 } from "@zendesk-ui/react-components";
-import { Tabs, TabList, Tab, TabPanel } from "@zendeskgarden/react-tabs";
 import TopBar from "../TopBar/TopBar";
 import PageSidebarNav from "../PageSidebarNav";
 import CopilotSidebar from "../CopilotSidebar/CopilotSidebar";
@@ -229,11 +229,11 @@ export default function SkillsPage({
                   onChange={setActiveSkillsTab}
                   className="skills-page-tabs"
                 >
-                  <TabList>
-                    <Tab item="skills">Skills</Tab>
-                    <Tab item="agents">Agents</Tab>
-                  </TabList>
-                  <TabPanel item="skills">
+                  <Tabs.TabList>
+                    <Tabs.Tab item="skills">Skills</Tabs.Tab>
+                    <Tabs.Tab item="agents">Agents</Tabs.Tab>
+                  </Tabs.TabList>
+                  <Tabs.TabPanel item="skills">
                     <div className="skills-matrix-view">
                       <div className="skills-matrix-view__toolbar">
                         <SM className="skills-matrix-view__summary">
@@ -375,8 +375,8 @@ export default function SkillsPage({
                         );
                       })}
                     </div>
-                  </TabPanel>
-                  <TabPanel item="agents">
+                  </Tabs.TabPanel>
+                  <Tabs.TabPanel item="agents">
                     <div className="skills-agents-view">
                       {showAgentsPanel ? (
                         <AgentSkillsPanel
@@ -404,7 +404,7 @@ export default function SkillsPage({
                         </div>
                       )}
                     </div>
-                  </TabPanel>
+                  </Tabs.TabPanel>
                 </Tabs>
               )}
             </div>

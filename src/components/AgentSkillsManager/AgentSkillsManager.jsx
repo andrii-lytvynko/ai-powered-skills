@@ -1,5 +1,4 @@
-import { Modal, Header, Body, Close, Footer, FooterItem } from '@zendeskgarden/react-modals';
-import { Button } from '@zendeskgarden/react-buttons';
+import { Modal, Button } from '@zendesk-ui/react-components';
 import AgentSkillsPanel from './AgentSkillsPanel';
 import './AgentSkillsManager.css';
 
@@ -19,23 +18,23 @@ export default function AgentSkillsManager({
       aria-label="Manage agent skills"
       className="agent-skills-manager__modal"
     >
-      <Header>Manage agent skills</Header>
-      <Close aria-label="Close modal" />
-      <Body className="agent-skills-manager__body">
+      <Modal.Header>Manage agent skills</Modal.Header>
+      <Modal.Close aria-label="Close modal" />
+      <Modal.Body className="agent-skills-manager__body">
         <AgentSkillsPanel
           agents={agents}
           onAgentsChange={onAgentsChange}
           skillsCatalog={skillsCatalog}
           isActive={isOpen}
         />
-      </Body>
-      <Footer>
-        <FooterItem>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.FooterItem>
           <Button isPrimary onClick={onClose}>
             Done
           </Button>
-        </FooterItem>
-      </Footer>
+        </Modal.FooterItem>
+      </Modal.Footer>
     </Modal>
   );
 }

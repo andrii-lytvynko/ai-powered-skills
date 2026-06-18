@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Button } from '@zendeskgarden/react-buttons';
-import { SM, MD, Span } from '@zendeskgarden/react-typography';
+import { Button, SM, MD, Span } from '@zendesk-ui/react-components';
 
 const SIZE = 320;
 const CENTER = SIZE / 2;
