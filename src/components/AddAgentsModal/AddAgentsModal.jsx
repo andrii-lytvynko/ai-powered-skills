@@ -106,50 +106,62 @@ export default function AddAgentsModal({
                   </MD>
                 </div>
               ) : (
-                <Table size="small" className="add-agents-modal__table">
-                  <Table.Head>
-                    <Table.HeaderRow>
-                      <Table.HeaderCell isMinimum />
-                      <Table.HeaderCell>Name</Table.HeaderCell>
-                      <Table.HeaderCell>Groups</Table.HeaderCell>
-                    </Table.HeaderRow>
-                  </Table.Head>
-                  <Table.Body>
-                    {filteredAgents.map((agent) => {
-                      const isSelected = selectedIds.has(agent.id);
-                      return (
-                        <Table.Row
-                          key={agent.id}
-                          className={`add-agents-modal__row${isSelected ? ' add-agents-modal__row--selected' : ''}`}
-                          onClick={() => toggleAgent(agent.id)}
-                        >
-                          <Table.Cell isMinimum className="add-agents-modal__checkbox-cell">
-                            <Field>
-                              <Checkbox
-                                checked={isSelected}
-                                onChange={() => toggleAgent(agent.id)}
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <Field.Label hidden>{`Select ${agent.name}`}</Field.Label>
-                              </Checkbox>
-                            </Field>
-                          </Table.Cell>
-                          <Table.Cell>
-                            <div className="add-agents-modal__agent-cell">
-                              <AgentAvatar agent={agent} size="small" />
-                              <SM isBold className="add-agents-modal__agent-name">{agent.name}</SM>
-                            </div>
-                          </Table.Cell>
-                          <Table.Cell>
-                            <SM className="add-agents-modal__groups">
-                              {formatGroups(agent.groups)}
-                            </SM>
-                          </Table.Cell>
-                        </Table.Row>
-                      );
-                    })}
-                  </Table.Body>
-                </Table>
+                <div className="add-agents-modal__table-scroll">
+                  <Table size="small" className="add-agents-modal__table-grid">
+                    <Table.Head>
+                      <Table.HeaderRow>
+                        <Table.HeaderCell
+                          isMinimum
+                          className="add-agents-modal__col-checkbox"
+                        />
+                        <Table.HeaderCell className="add-agents-modal__col-agent">
+                          Agent name
+                        </Table.HeaderCell>
+                        <Table.HeaderCell className="add-agents-modal__col-groups">
+                          Groups
+                        </Table.HeaderCell>
+                      </Table.HeaderRow>
+                    </Table.Head>
+                    <Table.Body>
+                      {filteredAgents.map((agent) => {
+                        const isSelected = selectedIds.has(agent.id);
+                        return (
+                          <Table.Row
+                            key={agent.id}
+                            className={`add-agents-modal__row${isSelected ? ' add-agents-modal__row--selected' : ''}`}
+                            onClick={() => toggleAgent(agent.id)}
+                          >
+                            <Table.Cell
+                              isMinimum
+                              className="add-agents-modal__col-checkbox add-agents-modal__checkbox-cell"
+                            >
+                              <Field>
+                                <Checkbox
+                                  checked={isSelected}
+                                  onChange={() => toggleAgent(agent.id)}
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <Field.Label hidden>{`Select ${agent.name}`}</Field.Label>
+                                </Checkbox>
+                              </Field>
+                            </Table.Cell>
+                            <Table.Cell className="add-agents-modal__col-agent">
+                              <div className="add-agents-modal__agent-cell">
+                                <AgentAvatar agent={agent} size="small" />
+                                <SM isBold className="add-agents-modal__agent-name">{agent.name}</SM>
+                              </div>
+                            </Table.Cell>
+                            <Table.Cell className="add-agents-modal__col-groups">
+                              <SM className="add-agents-modal__groups">
+                                {formatGroups(agent.groups)}
+                              </SM>
+                            </Table.Cell>
+                          </Table.Row>
+                        );
+                      })}
+                    </Table.Body>
+                  </Table>
+                </div>
               )}
             </div>
           </div>

@@ -1,9 +1,22 @@
 :root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --agent-skill-modal-inset: var(--spacing-lg);
+  --agent-skill-modal-table-max-height: 400px;
+  --agent-skill-modal-table-header-height: 48px;
+  --agent-skill-modal-scrollbar-size: 12px;
+  --agent-skill-modal-col-proficiency: 192px;
+  --agent-skill-modal-col-actions: 48px;
+}
+
+/* Garden large modal */
+.agent-skill-modal {
+  width: min(800px, calc(100vw - var(--spacing-xl)));
+  max-width: calc(100vw - var(--spacing-xl));
 }
 
 .agent-skill-modal [data-garden-id="modals.header"] {
   align-items: center;
+  padding: var(--spacing-lg) var(--agent-skill-modal-inset) !important;
 }
 
 .agent-skill-modal__header {
@@ -12,6 +25,28 @@
   justify-content: space-between;
   gap: var(--spacing-md);
   width: 100%;
+  min-width: 0;
+}
+
+.agent-skill-modal__header-text {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.agent-skill-modal__header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.agent-skill-modal__header-actions [data-garden-id="modals.close"] {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .agent-skill-modal__subtitle {
@@ -21,36 +56,167 @@
   margin-top: var(--spacing-xxs);
 }
 
-.agent-skill-modal__empty {
-  color: var(--color-text-secondary);
+.agent-skill-modal__body {
+  padding: 0 !important;
+  overflow: hidden;
 }
 
-.agent-skill-modal__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.agent-skill-modal__empty {
+  color: var(--color-text-secondary);
+  padding: var(--spacing-md) var(--agent-skill-modal-inset);
+}
+
+/* Split table — header fixed, scrollbar on body only */
+.agent-skill-modal__table {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+.agent-skill-modal__table-header {
+  flex-shrink: 0;
+  width: 100%;
+  overflow: hidden;
+  padding-right: var(--agent-skill-modal-scrollbar-size);
+  background: var(--color-bg-white);
+  box-shadow: inset 0 -1px 0 var(--color-grey-300);
+}
+
+.agent-skill-modal__table-body-scroll {
+  flex: 1;
+  min-height: 0;
+  max-height: var(--agent-skill-modal-table-max-height);
+  width: 100%;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--color-grey-300) transparent;
+}
+
+.agent-skill-modal__table-body-scroll::-webkit-scrollbar {
+  width: var(--agent-skill-modal-scrollbar-size);
+}
+
+.agent-skill-modal__table-body-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.agent-skill-modal__table-body-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-grey-300);
+  border-radius: 6px;
+}
+
+.agent-skill-modal__table-body-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-grey-600);
+}
+
+.agent-skill-modal__table-grid {
+  width: 100%;
+  margin: 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.agent-skill-modal__table-header .agent-skill-modal__table-grid {
+  margin-bottom: 0;
+}
+
+.agent-skill-modal__table-body-scroll .agent-skill-modal__table-grid {
+  margin-top: 0;
+}
+
+.agent-skill-modal__table-grid col.agent-skill-modal__col-proficiency {
+  width: var(--agent-skill-modal-col-proficiency);
+}
+
+.agent-skill-modal__table-grid col.agent-skill-modal__col-actions {
+  width: var(--agent-skill-modal-col-actions);
+}
+
+.agent-skill-modal__table-header .agent-skill-modal__table-grid thead {
+  background-color: transparent;
+}
+
+.agent-skill-modal__table-header .agent-skill-modal__table-grid thead > tr {
+  border-bottom: none;
+}
+
+.agent-skill-modal__table-grid thead > tr > th {
+  height: var(--agent-skill-modal-table-header-height);
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-white);
+  box-shadow: none !important;
+}
+
+.agent-skill-modal__table-grid thead > tr > th.agent-skill-modal__col-agent {
+  padding: 0 var(--spacing-md) 0 var(--agent-skill-modal-inset) !important;
+  text-align: left;
+}
+
+.agent-skill-modal__table-grid thead > tr > th.agent-skill-modal__col-proficiency {
+  padding: 0 var(--agent-skill-modal-inset) 0 var(--spacing-md) !important;
+  text-align: right;
+}
+
+.agent-skill-modal__table-grid thead > tr > th.agent-skill-modal__col-actions {
+  padding: 0 var(--agent-skill-modal-inset) 0 0 !important;
+}
+
+.agent-skill-modal__table-grid tbody > tr > td.agent-skill-modal__col-agent {
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--agent-skill-modal-inset) !important;
+  text-align: left;
+}
+
+.agent-skill-modal__table-grid tbody > tr > td.agent-skill-modal__col-proficiency {
+  padding: var(--spacing-sm) var(--agent-skill-modal-inset) var(--spacing-sm) var(--spacing-md) !important;
+  text-align: right;
+}
+
+.agent-skill-modal__table-grid tbody > tr > td.agent-skill-modal__col-actions {
+  padding: var(--spacing-sm) var(--agent-skill-modal-inset) var(--spacing-sm) 0 !important;
+  text-align: center;
+}
+
+.agent-skill-modal__col-agent {
+  text-align: left;
+}
+
+.agent-skill-modal__col-proficiency {
+  width: var(--agent-skill-modal-col-proficiency);
+  min-width: var(--agent-skill-modal-col-proficiency);
+  max-width: var(--agent-skill-modal-col-proficiency);
+  text-align: right;
+}
+
+.agent-skill-modal__col-actions {
+  width: var(--agent-skill-modal-col-actions);
+  min-width: var(--agent-skill-modal-col-actions);
+  max-width: var(--agent-skill-modal-col-actions);
+  text-align: center;
+}
+
+.agent-skill-modal__row > [role="cell"],
+.agent-skill-modal__row td {
+  vertical-align: middle;
+}
+
+.agent-skill-modal__proficiency-cell .proficiency-dots {
+  justify-content: flex-end;
+  width: 100%;
 }
 
 /* Row */
 .agent-skill-modal__row {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-xs);
-  border-bottom: 1px solid var(--color-grey-200);
-  border-radius: var(--radius-md);
   opacity: 0;
   transform: translateY(4px);
   animation: agent-skill-row-enter 180ms var(--ease-out) forwards;
   animation-delay: calc(var(--row-index, 0) * 40ms);
   transition: background-color 140ms var(--ease-out);
-}
-
-.agent-skill-modal__row:last-child {
-  border-bottom: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -73,9 +239,8 @@
   white-space: nowrap;
 }
 
-/* Proficiency — fixed width so all rows align */
-.agent-skill-modal__proficiency {
-  flex-shrink: 0;
+.agent-skill-modal__remove-cell {
+  white-space: nowrap;
 }
 
 /* Remove button */
