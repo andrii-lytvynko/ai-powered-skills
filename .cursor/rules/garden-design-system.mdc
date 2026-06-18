@@ -1,0 +1,117 @@
+---
+description: Enforce Zendesk Garden Design System for all components, styling, tokens, and typography
+globs: src/**/*.{jsx,tsx,js,ts,css}
+alwaysApply: true
+---
+
+# Zendesk Garden Design System
+
+All UI must be built with Zendesk Garden components. Reference: https://garden.zendesk.com/components
+
+## Garden MCP lookup — required
+
+A Garden MCP server is registered for this project and exposes authoritative component data. You MUST use it before introducing any UI element:
+
+1. Call `search_garden_components("{ui need}")` to check whether a Garden component already covers the pattern (e.g. "dropdown", "loading spinner", "date input", "notification").
+2. If a match is returned, call `get_garden_component("{name}")` to retrieve exact prop names, required ARIA attributes, theming tokens, constraints, and code examples before writing any code.
+3. Never create a custom component, raw HTML element, or custom CSS class for any pattern that a Garden component already covers. The MCP result is the source of truth — not training data.
+4. Only build a custom component when `search_garden_components` returns no matching result.
+
+## ThemeProvider
+
+The Flora `ThemeProvider` from `@zendesk-ui/react-components` is configured in `src/main.jsx` and wraps the entire app. Do NOT add it again per page or component.
+
+## Unified import (alpha bridge package)
+
+`@zendesk-ui/react-components` is installed as an early-adopter bridge package. The **Skills page**, **Queues page**, and **Routing configuration page** (and their owned subcomponents) import Garden components from this single entry point instead of individual `@zendeskgarden/react-*` packages:
+
+```jsx
+import { Button, Tag, Table, MD, SM, Modal, Notification } from '@zendesk-ui/react-components';
+```
+
+Note the v9 → v10 subcomponent API change: deprecated named sub-exports (`Title`, `Close`, `Header`, `Body`) are accessed as member properties, e.g. `Notification.Title`, `Modal.Body`, `Modal.Close`.
+
+For all other pages not yet migrated, continue using the per-package imports listed below.
+
+## Component Mapping
+
+Always use the Garden equivalent instead of raw HTML or custom components:
+
+| UI Need | Garden Component | Package |
+|---------|-----------------|---------|
+| Buttons, icon buttons | `Button`, `IconButton` | `@zendeskgarden/react-buttons` |
+| Text body / headings | `Paragraph`, `Span`, `LG`, `MD`, `SM`, `XXL`, `XL` | `@zendeskgarden/react-typography` |
+| Text input, textarea | `Field`, `Input`, `Textarea`, `Label`, `Hint`, `Message` | `@zendeskgarden/react-forms` |
+| Select / combobox | `Field`, `Select` or `Combobox` | `@zendeskgarden/react-forms` |
+| Checkbox, radio, toggle | `Checkbox`, `Radio`, `Toggle` | `@zendeskgarden/react-forms` |
+| Data tables | `Table`, `Head`, `HeaderRow`, `HeaderCell`, `Body`, `Row`, `Cell` | `@zendeskgarden/react-tables` |
+| Inline alerts | `Alert` | `@zendeskgarden/react-notifications` |
+| Toast notifications | `Notification` | `@zendeskgarden/react-notifications` |
+| Info well / callout | `Well` | `@zendeskgarden/react-notifications` |
+| Dialog / modal | `Modal`, `Header`, `Body`, `Footer`, `Close` | `@zendeskgarden/react-modals` |
+| Status tags / labels | `Tag` | `@zendeskgarden/react-tags` |
+| Loading spinner | `Spinner` | `@zendeskgarden/react-loaders` |
+| Skeleton loader | `Skeleton` | `@zendeskgarden/react-loaders` |
+| Progress bar | `Progress` | `@zendeskgarden/react-loaders` |
+| Tab navigation | `Tabs`, `TabList`, `Tab`, `TabPanel` | `@zendeskgarden/react-tabs` |
+| Dropdown menu | `Menu`, `Item`, `Separator` | `@zendeskgarden/react-dropdowns` |
+| Tooltip | `Tooltip` | `@zendeskgarden/react-tooltips` |
+| User avatar | `Avatar` | `@zendeskgarden/react-avatars` |
+| Pagination | `Pagination` | `@zendeskgarden/react-pagination` |
+
+## Import Pattern
+
+```jsx
+import { Button, IconButton } from '@zendeskgarden/react-buttons';
+import { Paragraph, Span, LG, MD, SM } from '@zendeskgarden/react-typography';
+import { Field, Input, Label, Hint, Message, Textarea, Select, Checkbox, Radio, Toggle } from '@zendeskgarden/react-forms';
+import { Table, Head, HeaderRow, HeaderCell, Body, Row, Cell } from '@zendeskgarden/react-tables';
+import { Alert, Notification, Well } from '@zendeskgarden/react-notifications';
+import { Modal, Header, Body, Footer, Close } from '@zendeskgarden/react-modals';
+import { Tag } from '@zendeskgarden/react-tags';
+import { Spinner, Skeleton, Progress } from '@zendeskgarden/react-loaders';
+import { Tabs, TabList, Tab, TabPanel } from '@zendeskgarden/react-tabs';
+import { Menu, Item, Separator } from '@zendeskgarden/react-dropdowns';
+import { Tooltip } from '@zendeskgarden/react-tooltips';
+import { Avatar } from '@zendeskgarden/react-avatars';
+import { Pagination } from '@zendeskgarden/react-pagination';
+```
+
+## Design Tokens & Styling
+
+Use CSS variables from `src/index.css` for class-based styling. These map to Garden's token system:
+
+```css
+/* Spacing */
+var(--spacing-xxs) var(--spacing-xs) var(--spacing-sm) var(--spacing-md) var(--spacing-lg) var(--spacing-xl)
+
+/* Colors */
+var(--color-primary-600)   /* interactive blue */
+var(--color-text-primary) var(--color-text-secondary) var(--color-text-muted)
+var(--color-bg-primary) var(--color-bg-white) var(--color-bg-subtle)
+var(--color-success) var(--color-warning) var(--color-danger) var(--color-info)
+
+/* Typography */
+var(--font-body) var(--font-size-sm) var(--font-size-md) var(--font-weight-semibold)
+
+/* Shape */
+var(--radius-sm) var(--radius-md) var(--shadow-md)
+```
+
+For JS/inline styles, use `useTheme()` from `@zendeskgarden/react-theming`.
+
+## Typography Rules
+
+- Use `<LG>`, `<MD>`, `<SM>` (from `react-typography`) for all body text — never raw `<p>` or `<span>`
+- Page headings can use semantic `<h1>`–`<h3>` wrapped in a typography component or with `font: var(--font-display)`
+- Never apply font-size directly in CSS; use `--font-size-*` tokens
+
+## Never Use
+
+- Raw `<button>` — use `Button` or `IconButton`
+- Raw `<input>`, `<select>`, `<textarea>` — use Garden `Field` + form components
+- Raw `<table>`, `<tr>`, `<td>` — use Garden `Table` components
+- Raw `<p>`, `<span>` for content text — use Garden typography components
+- Custom spinner/loading divs — use `Spinner` or `Skeleton`
+- Hardcoded hex colors or pixel sizes — use design token CSS variables
+- Custom `.btn-*`, `.input-*`, `.modal-*` CSS classes for components covered by Garden

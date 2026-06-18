@@ -1,0 +1,3959 @@
+{
+  "components": [
+    {
+      "component": "Breadcrumb",
+      "category": "navigation",
+      "package": "@zendeskgarden/react-breadcrumbs",
+      "import": {
+        "named": "Breadcrumb",
+        "path": "@zendeskgarden/react-breadcrumbs"
+      },
+      "description": "Semantic navigation wrapper for breadcrumb-style hierarchies.",
+      "intendedUsage": "Indicate the user's location in a navigation hierarchy and allow easy traversal.",
+      "props": {
+        "aria-label": {
+          "type": "string",
+          "default": "Breadcrumb",
+          "description": "Accessible label for the breadcrumb navigation container."
+        },
+        "children": {
+          "type": "node",
+          "description": "The breadcrumb items, typically composed of Anchor or Button components."
+        }
+      },
+      "examples": [
+        {
+          "description": "Basic breadcrumb navigation",
+          "props": {
+            "children": "<Anchor href='/'>Home</Anchor><Anchor href='/settings'>Settings</Anchor><span aria-current='page'>Profile</span>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["space.base", "color.text", "fontSize.sm"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "navigation",
+        "ariaSupport": ["aria-label"],
+        "keyboardSupport": ["Tab"]
+      },
+      "ux": {
+        "separator": "/",
+        "spacing": "4px to 8px between items"
+      },
+      "composedWith": ["Anchor", "Span"],
+      "constraints": [
+        "Only one item should visually indicate the current page.",
+        "Use semantic elements or ARIA to denote current page when needed."
+      ],
+      "useCases": [
+        "Page navigation headers",
+        "E-commerce product paths",
+        "Content hierarchy indicators"
+      ]
+    },
+    {
+      "component": "IconButton",
+      "category": "buttons",
+      "package": "@zendeskgarden/react-buttons",
+      "import": {
+        "named": "IconButton",
+        "path": "@zendeskgarden/react-buttons"
+      },
+      "description": "Button component optimized for icon-only display.",
+      "intendedUsage": "Create interactive icon buttons with proper accessibility.",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Button size."
+        },
+        "isBasic": {
+          "type": "boolean",
+          "default": true,
+          "description": "Basic styling variant."
+        },
+        "isPill": {
+          "type": "boolean",
+          "default": true,
+          "description": "Pill-shaped button."
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "default": false,
+          "description": "Primary styling."
+        },
+        "isNeutral": {
+          "type": "boolean",
+          "default": false,
+          "description": "Neutral styling."
+        },
+        "isDanger": {
+          "type": "boolean",
+          "default": false,
+          "description": "Danger styling."
+        },
+        "isRotated": {
+          "type": "boolean",
+          "default": false,
+          "description": "Rotate icon 90°."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        "focusInset": {
+          "type": "boolean",
+          "default": false,
+          "description": "Inset focus ring."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Icon button with tooltip",
+          "props": {
+            "children": "<CloseIcon />",
+            "aria-label": "Close"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.primary", "borderRadius.md", "space.base"],
+        "darkMode": true,
+        "customizableAreas": ["colors", "borders", "shadows"]
+      },
+      "accessibility": {
+        "role": "button",
+        "ariaSupport": ["aria-label", "aria-pressed", "aria-expanded"],
+        "keyboardSupport": ["Enter", "Space"],
+        "requirements": "Must have aria-label for screen readers"
+      },
+      "ux": {
+        "sizes": {
+          "small": "32px",
+          "medium": "40px",
+          "large": "48px"
+        },
+        "focusRing": "2px offset"
+      },
+      "composedWith": ["Tooltip", "Menu"],
+      "constraints": [
+        "Must include accessible label",
+        "Icon should be centered",
+        "Consider tooltip for context"
+      ],
+      "useCases": [
+        "Close buttons",
+        "Menu triggers",
+        "Toolbar actions",
+        "Navigation icons"
+      ]
+    },
+    {
+      "component": "Stepper",
+      "category": "navigation",
+      "package": "@zendeskgarden/react-accordions",
+      "import": {
+        "named": "Stepper",
+        "path": "@zendeskgarden/react-accordions"
+      },
+      "description": "Step-by-step navigation component for multi-step processes.",
+      "intendedUsage": "Guide users through sequential tasks or processes.",
+      "props": {
+        "activeIndex": {
+          "type": "number",
+          "description": "Current active step."
+        },
+        "isHorizontal": {
+          "type": "boolean",
+          "default": false,
+          "description": "Horizontal orientation."
+        }
+      },
+      "subcomponents": ["Step", "Label", "Content"],
+      "labelProps": {
+        "icon": {
+          "type": "node",
+          "description": "Custom icon in place of number."
+        },
+        "iconProps": {
+          "type": "object",
+          "description": "SVG props for default check icon."
+        },
+        "isHidden": { "type": "boolean", "description": "Hide text label." }
+      },
+      "examples": [
+        {
+          "description": "Multi-step form",
+          "props": {
+            "activeIndex": 1,
+            "children": "<Step><Label>Account</Label></Step><Step><Label>Profile</Label></Step>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.primary", "space.base"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "tablist",
+        "ariaSupport": ["aria-current", "aria-orientation"],
+        "keyboardSupport": ["Arrow keys", "Home", "End"]
+      },
+      "ux": {
+        "layout": "vertical|horizontal",
+        "stepStyles": "numbered circles with connecting lines"
+      },
+      "composedWith": ["Accordion"],
+      "constraints": [
+        "Steps must have labels",
+        "Current step must be highlighted"
+      ],
+      "useCases": [
+        "Checkout processes",
+        "Form wizards",
+        "Onboarding flows",
+        "Task sequences"
+      ]
+    },
+    {
+      "component": "Accordion",
+      "category": "accordions",
+      "package": "@zendeskgarden/react-accordions",
+      "import": {
+        "named": "Accordion",
+        "path": "@zendeskgarden/react-accordions"
+      },
+      "description": "Expandable/collapsible content panels for progressive disclosure and content organization.",
+      "intendedUsage": "Display content in collapsible sections to reduce cognitive load and organize complex information hierarchies.",
+      "props": {
+        "isAnimated": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable smooth expand/collapse animations."
+        },
+        "isCollapsible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow sections to be collapsed after expanding."
+        },
+        "isExpandable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow multiple sections open."
+        },
+        "level": {
+          "type": "number",
+          "description": "Heading level for ARIA compliance (h1-h6)."
+        },
+        "isCompact": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use reduced padding and margins."
+        },
+        "isBare": {
+          "type": "boolean",
+          "default": false,
+          "description": "Remove default styling for custom implementations."
+        },
+        "defaultExpandedSections": {
+          "type": "array",
+          "description": "Array of section keys to be expanded by default."
+        },
+        "expandedSections": {
+          "type": "array",
+          "description": "Controlled expanded sections state."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "Callback when sections expand/collapse state changes."
+        }
+      },
+      "slots": ["Section", "Header", "Label", "Panel"],
+      "examples": [
+        {
+          "description": "Basic accordion with single expansion",
+          "props": {
+            "isCollapsible": true,
+            "children": "<><Section><Header><Label>Section 1</Label></Header><Panel>Content 1</Panel></Section><Section><Header><Label>Section 2</Label></Header><Panel>Content 2</Panel></Section></>"
+          }
+        },
+        {
+          "description": "Multi-expansion accordion",
+          "props": {
+            "isCollapsible": false,
+            "defaultExpandedSections": ["section-1", "section-3"]
+          }
+        },
+        {
+          "description": "Compact accordion for dense interfaces",
+          "props": {
+            "isCompact": true,
+            "isBare": false
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "space.base",
+          "color.border",
+          "lineHeight.md",
+          "transition.duration.medium"
+        ],
+        "darkMode": true,
+        "customizableAreas": [
+          "header background",
+          "border color",
+          "animation timing"
+        ]
+      },
+      "accessibility": {
+        "role": "region",
+        "ariaSupport": [
+          "aria-expanded",
+          "aria-controls",
+          "aria-labelledby",
+          "aria-disabled"
+        ],
+        "keyboardSupport": ["Enter", "Space", "Arrow keys", "Home", "End"],
+        "focusManagement": "Roving tabindex pattern"
+      },
+      "ux": {
+        "headerHeight": {
+          "default": "48px",
+          "compact": "40px"
+        },
+        "spacing": {
+          "default": "16px padding",
+          "compact": "12px padding"
+        },
+        "animation": {
+          "duration": "300ms",
+          "easing": "ease-in-out"
+        },
+        "maxHeight": "none",
+        "minHeight": "header height"
+      },
+      "composedWith": ["Button", "Icon", "Stepper"],
+      "constraints": [
+        "Nested accordions should be limited to 3 levels maximum.",
+        "Always include a visual indicator for expand/collapse state.",
+        "Section headers must be focusable and keyboard operable.",
+        "Panel content should be progressively enhanced for accessibility.",
+        "Avoid using accordions for critical information that users must see."
+      ],
+      "useCases": [
+        "FAQ sections with expandable answers",
+        "Product feature lists with detailed descriptions",
+        "Multi-step forms with collapsible sections",
+        "Settings panels with grouped options",
+        "Help documentation with categorized content",
+        "Mobile navigation menus",
+        "Dashboard widgets with expandable details"
+      ],
+      "bestPractices": [
+        "Use clear, descriptive labels for section headers",
+        "Maintain consistent interaction patterns across accordions",
+        "Consider default expanded state for important content",
+        "Provide visual feedback during state transitions",
+        "Ensure content remains accessible when JavaScript fails"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "category": "avatars",
+      "package": "@zendeskgarden/react-avatars",
+      "import": { "named": "Avatar", "path": "@zendeskgarden/react-avatars" },
+      "description": "Visual representation of users, entities, or systems with support for images, initials, and status indicators.",
+      "intendedUsage": "Display user profile pictures, system avatars, or placeholder representations across the interface.",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": [
+            "extraextrasmall",
+            "extrasmall",
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "description": "Avatar size preset."
+        },
+        "status": {
+          "type": "enum",
+          "values": ["available", "away", "transfers", "offline"],
+          "description": "Status indicator."
+        },
+        "statusLabel": {
+          "type": "string",
+          "description": "Custom accessible label for status."
+        },
+        "badge": {
+          "type": "number|string",
+          "description": "Badge count or text to display."
+        },
+        "isSystem": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use system avatar styling."
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Custom background color."
+        },
+        "foregroundColor": {
+          "type": "string",
+          "description": "Custom text/icon color."
+        },
+        "surfaceColor": {
+          "type": "string",
+          "description": "Surface color for status indicators."
+        },
+        "children": {
+          "type": "node",
+          "description": "Content (image, text, or icon)."
+        }
+      },
+      "slots": ["Text", "StatusIcon", "Badge"],
+      "examples": [
+        {
+          "description": "User avatar with image",
+          "props": {
+            "size": "medium",
+            "children": "<img src='user.jpg' alt='User Name' />"
+          }
+        },
+        {
+          "description": "Avatar with initials and status",
+          "props": {
+            "status": "available",
+            "children": "<Text>JD</Text>"
+          }
+        },
+        {
+          "description": "System avatar with badge",
+          "props": {
+            "isSystem": true,
+            "badge": 5,
+            "children": "<SettingsIcon />"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "avatar.size",
+          "color.avatar",
+          "borderRadius.full",
+          "fontSize.sm"
+        ],
+        "darkMode": true,
+        "customizableAreas": [
+          "background colors",
+          "status colors",
+          "border styles"
+        ]
+      },
+      "accessibility": {
+        "role": "img",
+        "ariaSupport": ["aria-label", "aria-hidden"],
+        "keyboardSupport": [],
+        "requirements": "Must include alt text for images or aria-label for non-text content"
+      },
+      "ux": {
+        "sizes": {
+          "extraextrasmall": "16px",
+          "extrasmall": "24px",
+          "small": "32px",
+          "medium": "40px",
+          "large": "48px"
+        },
+        "statusSize": "25% of avatar size",
+        "badgeSize": "20px",
+        "borderRadius": "50%"
+      },
+      "composedWith": ["StatusIndicator", "Badge", "Tooltip"],
+      "constraints": [
+        "Images should be square for proper circular display.",
+        "Text content limited to 2-3 characters maximum.",
+        "Badge values over 99 should display as '99+'.",
+        "Status indicators must have sufficient contrast."
+      ],
+      "useCases": [
+        "User profiles in navigation headers",
+        "Comment threads and chat interfaces",
+        "Team member lists and directories",
+        "System notifications and alerts",
+        "Contact lists and address books",
+        "Social feeds and activity streams",
+        "Agent assignment in support tickets"
+      ]
+    },
+    {
+      "component": "Button",
+      "category": "buttons",
+      "package": "@zendeskgarden/react-buttons",
+      "import": { "named": "Button", "path": "@zendeskgarden/react-buttons" },
+      "description": "Interactive button component with multiple variants, sizes, and states.",
+      "intendedUsage": "Trigger actions, submit forms, and navigate through the application.",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Button size variation."
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "default": false,
+          "description": "Primary action styling."
+        },
+        "isDanger": {
+          "type": "boolean",
+          "default": false,
+          "description": "Destructive action styling."
+        },
+        "isBasic": {
+          "type": "boolean",
+          "default": false,
+          "description": "Minimal button styling."
+        },
+        "isLink": {
+          "type": "boolean",
+          "default": false,
+          "description": "Link-style button."
+        },
+        "isPill": {
+          "type": "boolean",
+          "default": false,
+          "description": "Pill-shaped button."
+        },
+        "isStretched": {
+          "type": "boolean",
+          "default": false,
+          "description": "Full-width button."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        "focusInset": {
+          "type": "boolean",
+          "default": false,
+          "description": "Inset focus ring."
+        },
+        "type": {
+          "type": "enum",
+          "values": ["button", "submit", "reset"],
+          "default": "button",
+          "description": "HTML button type."
+        }
+      },
+      "slots": ["StartIcon", "EndIcon"],
+      "examples": [
+        {
+          "description": "Primary action button",
+          "props": {
+            "isPrimary": true,
+            "children": "Save Changes"
+          }
+        },
+        {
+          "description": "Danger button with icon",
+          "props": {
+            "isDanger": true,
+            "StartIcon": "<TrashIcon />",
+            "children": "Delete"
+          }
+        },
+        {
+          "description": "Loading button state",
+          "props": {
+            "disabled": true,
+            "EndIcon": "<Spinner />",
+            "children": "Loading..."
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "color.primary",
+          "color.danger",
+          "space.base",
+          "borderRadius.md",
+          "shadow.sm"
+        ],
+        "darkMode": true,
+        "customizableAreas": ["colors", "borders", "shadows", "typography"]
+      },
+      "accessibility": {
+        "role": "button",
+        "ariaSupport": [
+          "aria-pressed",
+          "aria-expanded",
+          "aria-label",
+          "aria-disabled"
+        ],
+        "keyboardSupport": ["Enter", "Space"],
+        "focusIndicator": "2px offset ring"
+      },
+      "ux": {
+        "sizes": {
+          "small": {
+            "height": "32px",
+            "padding": "0 12px",
+            "fontSize": "14px"
+          },
+          "medium": {
+            "height": "40px",
+            "padding": "0 16px",
+            "fontSize": "14px"
+          },
+          "large": { "height": "48px", "padding": "0 20px", "fontSize": "16px" }
+        },
+        "minWidth": "80px",
+        "iconSpacing": "8px",
+        "loadingIndicator": "replace content or append spinner"
+      },
+      "composedWith": ["IconButton", "Tooltip", "Menu"],
+      "constraints": [
+        "Primary buttons limited to one per view/section.",
+        "Danger buttons require confirmation for destructive actions.",
+        "Link buttons should not be used in forms.",
+        "Disabled buttons must communicate why they're disabled.",
+        "Icon-only buttons require tooltip for accessibility."
+      ],
+      "useCases": [
+        "Form submissions",
+        "Modal actions (confirm/cancel)",
+        "Navigation triggers",
+        "Dropdown toggles",
+        "Toolbar actions",
+        "Call-to-action elements",
+        "Pagination controls"
+      ]
+    },
+    {
+      "component": "Modal",
+      "category": "modals",
+      "package": "@zendeskgarden/react-modals",
+      "import": { "named": "Modal", "path": "@zendeskgarden/react-modals" },
+      "description": "Dialog overlay for focused content, confirmations, and complex interactions.",
+      "intendedUsage": "Display content that requires user attention or decision in a layer above the main interface.",
+      "props": {
+        "onClose": {
+          "type": "function",
+          "description": "Callback when modal should close."
+        },
+        "isAnimated": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable open/close animations."
+        },
+        "isCentered": {
+          "type": "boolean",
+          "default": false,
+          "description": "Center modal vertically."
+        },
+        "isLarge": {
+          "type": "boolean",
+          "default": false,
+          "description": "Large modal variant."
+        },
+        "backdropProps": {
+          "type": "object",
+          "description": "Props passed to backdrop element."
+        },
+        "focusOnMount": {
+          "type": "boolean|ref",
+          "default": true,
+          "description": "Element to focus when modal opens."
+        },
+        "restoreFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Restore focus to trigger element on close."
+        },
+        "appendToNode": {
+          "type": "HTMLElement",
+          "description": "DOM node to append modal portal."
+        }
+      },
+      "subcomponents": [
+        "Header",
+        "Title",
+        "Body",
+        "Footer",
+        "FooterItem",
+        "Close"
+      ],
+      "slots": ["Header", "Title", "Body", "Footer", "FooterItem", "Close"],
+      "examples": [
+        {
+          "description": "Confirmation modal",
+          "props": {
+            "isOpen": true,
+            "size": "small",
+            "children": "<><Header><Title>Confirm Delete</Title><Close aria-label='Close modal' /></Header><Body>Are you sure you want to delete this item?</Body><Footer><FooterItem><Button>Cancel</Button></FooterItem><FooterItem><Button isDanger>Delete</Button></FooterItem></Footer></>"
+          }
+        },
+        {
+          "description": "Form modal",
+          "props": {
+            "size": "medium",
+            "isCentered": true,
+            "children": "<><Header><Title>Edit Profile</Title></Header><Body><Form>...</Form></Body><Footer><Button>Save</Button></Footer></>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "shadow.lg",
+          "backgroundColor.base",
+          "zIndex.modal",
+          "space.lg"
+        ],
+        "darkMode": true,
+        "customizableAreas": ["backdrop", "borders", "shadows", "animations"]
+      },
+      "accessibility": {
+        "role": "dialog",
+        "ariaSupport": ["aria-modal", "aria-labelledby", "aria-describedby"],
+        "keyboardSupport": ["Escape", "Tab (focus trap)"],
+        "focusManagement": "Focus trap with first/last focusable elements"
+      },
+      "ux": {
+        "sizes": {
+          "small": "400px",
+          "medium": "600px",
+          "large": "800px",
+          "extraLarge": "1000px"
+        },
+        "maxHeight": "calc(100vh - 80px)",
+        "padding": {
+          "header": "24px",
+          "body": "24px",
+          "footer": "16px 24px"
+        },
+        "animation": {
+          "duration": "200ms",
+          "easing": "ease-out"
+        }
+      },
+      "composedWith": ["Button", "Close", "Form", "Stepper"],
+      "constraints": [
+        "Focus must be trapped within modal while open.",
+        "Must have clear close affordance (X button or Cancel).",
+        "Nested modals are strongly discouraged.",
+        "Critical actions should not rely solely on modals.",
+        "Long content should be scrollable within modal body."
+      ],
+      "useCases": [
+        "Confirmation dialogs",
+        "Complex forms",
+        "Image/media viewers",
+        "Wizards and multi-step processes",
+        "Settings panels",
+        "Quick creation forms",
+        "Error details display"
+      ]
+    },
+    {
+      "component": "Table",
+      "category": "tables",
+      "package": "@zendeskgarden/react-tables",
+      "import": { "named": "Table", "path": "@zendeskgarden/react-tables" },
+      "description": "Data table component for displaying structured information with sorting, selection, and pagination.",
+      "intendedUsage": "Display tabular data with support for interaction patterns like sorting, filtering, and row selection.",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Table density."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable interactive features."
+        }
+      },
+      "subcomponents": [
+        "Head",
+        "Body",
+        "Footer",
+        "HeaderRow",
+        "Row",
+        "HeaderCell",
+        "Cell",
+        "SortableCell",
+        "GroupRow",
+        "Caption",
+        "OverflowButton"
+      ],
+      "cellProps": {
+        "width": {
+          "type": "string|number",
+          "description": "Explicit cell width."
+        },
+        "isTruncated": {
+          "type": "boolean",
+          "description": "Truncate overflowing text."
+        },
+        "hasOverflow": {
+          "type": "boolean",
+          "description": "Reserve space for overflow button."
+        },
+        "isMinimum": { "type": "boolean", "description": "Minimal-width cell." }
+      },
+      "headProps": {
+        "isSticky": { "type": "boolean", "description": "Sticky header." }
+      },
+      "slots": [
+        "Caption",
+        "Head",
+        "HeaderRow",
+        "HeaderCell",
+        "Body",
+        "Row",
+        "Cell",
+        "Footer",
+        "OverflowButton"
+      ],
+      "examples": [
+        {
+          "description": "Sortable data table",
+          "props": {
+            "children": "<><Head><HeaderRow><HeaderCell hasSort onClick={() => {}}>Name</HeaderCell><HeaderCell>Status</HeaderCell></HeaderRow></Head><Body><Row><Cell>Item 1</Cell><Cell>Active</Cell></Row></Body></>"
+          }
+        },
+        {
+          "description": "Selectable table with pagination",
+          "props": {
+            "onSelect": "handleSelect",
+            "children": "<><Head><HeaderRow><HeaderCell><Checkbox /></HeaderCell><HeaderCell>Name</HeaderCell></HeaderRow></Head><Body>...</Body><Footer><Pagination /></Footer></>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "borderColor",
+          "backgroundColor.subtle",
+          "color.text",
+          "space.sm"
+        ],
+        "darkMode": true,
+        "customizableAreas": [
+          "borders",
+          "backgrounds",
+          "hover states",
+          "selection states"
+        ]
+      },
+      "accessibility": {
+        "role": "table",
+        "ariaSupport": [
+          "aria-sort",
+          "aria-selected",
+          "aria-rowcount",
+          "aria-colcount"
+        ],
+        "keyboardSupport": [
+          "Arrow keys",
+          "Space (selection)",
+          "Enter (activation)"
+        ],
+        "screenReaderSupport": "Full table structure announcement"
+      },
+      "ux": {
+        "rowHeight": {
+          "small": "32px",
+          "medium": "40px",
+          "large": "48px"
+        },
+        "cellPadding": {
+          "small": "8px 12px",
+          "medium": "12px 16px",
+          "large": "16px 20px"
+        },
+        "headerStyle": {
+          "fontWeight": "semibold",
+          "borderBottom": "2px solid",
+          "textTransform": "none"
+        },
+        "scrollBehavior": "horizontal scroll with fixed first column option"
+      },
+      "composedWith": [
+        "Checkbox",
+        "Badge",
+        "Tooltip",
+        "Pagination",
+        "Menu",
+        "Avatar"
+      ],
+      "constraints": [
+        "Tables should be responsive on small screens.",
+        "Sortable columns must have visual indicators.",
+        "Selection checkboxes should be in the first column.",
+        "Complex cells should use progressive disclosure.",
+        "Avoid nested tables."
+      ],
+      "useCases": [
+        "Data grids and reports",
+        "User management interfaces",
+        "Product catalogs",
+        "Transaction histories",
+        "Log viewers",
+        "Search results display",
+        "Inventory management"
+      ]
+    },
+    {
+      "component": "Form",
+      "category": "forms",
+      "package": "@zendeskgarden/react-forms",
+      "import": { "named": "Form", "path": "@zendeskgarden/react-forms" },
+      "description": "Form container that provides structure and validation context for form controls.",
+      "intendedUsage": "Wrap form fields to provide semantic structure and validation management.",
+      "props": {
+        "onSubmit": {
+          "type": "function",
+          "description": "Form submission handler."
+        },
+        "isInline": {
+          "type": "boolean",
+          "default": false,
+          "description": "Inline form layout."
+        },
+        "noValidate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable HTML5 validation."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Basic form structure",
+          "props": {
+            "onSubmit": "handleSubmit",
+            "children": "<Field><Label>Email</Label><Input type='email' /></Field>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["space.base"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "form",
+        "ariaSupport": ["aria-labelledby", "aria-describedby"],
+        "keyboardSupport": ["Enter (submit)"]
+      },
+      "ux": {
+        "spacing": "24px between form groups",
+        "layout": "vertical by default"
+      },
+      "composedWith": ["Field", "Input", "Button"],
+      "constraints": [
+        "Forms should have clear submission buttons.",
+        "Required fields must be indicated.",
+        "Error states should be clearly communicated."
+      ],
+      "useCases": [
+        "Login forms",
+        "Registration forms",
+        "Settings pages",
+        "Search interfaces",
+        "Data entry forms"
+      ]
+    },
+    {
+      "component": "Field",
+      "category": "forms",
+      "package": "@zendeskgarden/react-forms",
+      "import": { "named": "Field", "path": "@zendeskgarden/react-forms" },
+      "description": "Form field wrapper that connects labels, inputs, and validation messages.",
+      "intendedUsage": "Group form controls with their labels and help text for accessibility.",
+      "props": {
+        "children": {
+          "type": "function|node",
+          "description": "Render prop or child components."
+        }
+      },
+      "slots": ["Label", "Hint", "Message"],
+      "examples": [
+        {
+          "description": "Text field with validation",
+          "props": {
+            "children": "<><Label>Username</Label><Hint>Enter your username</Hint><Input /><Message validation='error'>Username is required</Message></>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["space.sm", "color.text", "color.danger"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": null,
+        "ariaSupport": [
+          "aria-labelledby",
+          "aria-describedby",
+          "aria-errormessage"
+        ],
+        "keyboardSupport": []
+      },
+      "ux": {
+        "spacing": "8px between elements",
+        "layout": "vertical"
+      },
+      "composedWith": ["Input", "Select", "Textarea", "Checkbox", "Radio"],
+      "constraints": [
+        "Each field should have a label.",
+        "Validation messages should be associated with inputs.",
+        "Fields should maintain consistent spacing."
+      ],
+      "useCases": [
+        "Form input groups",
+        "Search fields",
+        "Filter controls",
+        "Settings inputs"
+      ]
+    },
+    {
+      "component": "Input",
+      "category": "forms",
+      "package": "@zendeskgarden/react-forms",
+      "import": { "named": "Input", "path": "@zendeskgarden/react-forms" },
+      "description": "Text input field for various data types.",
+      "intendedUsage": "Collect text-based user input including text, email, password, etc.",
+      "props": {
+        "type": {
+          "type": "enum",
+          "values": [
+            "text",
+            "password",
+            "email",
+            "number",
+            "tel",
+            "url",
+            "search"
+          ],
+          "default": "text",
+          "description": "Input type."
+        },
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Input size."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Read-only state."
+        },
+        "placeholder": { "type": "string", "description": "Placeholder text." },
+        "validation": {
+          "type": "enum",
+          "values": ["success", "warning", "error"],
+          "description": "Validation state."
+        },
+        "isBare": {
+          "type": "boolean",
+          "default": false,
+          "description": "Remove default styling."
+        },
+        "focusInset": {
+          "type": "boolean",
+          "default": false,
+          "description": "Inset focus style."
+        },
+        "isCompact": {
+          "type": "boolean",
+          "default": false,
+          "description": "Compact styling."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Email input with validation",
+          "props": {
+            "type": "email",
+            "validation": "error",
+            "placeholder": "you@example.com"
+          }
+        },
+        {
+          "description": "Search input",
+          "props": {
+            "type": "search",
+            "placeholder": "Search...",
+            "isCompact": true
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "borderColor",
+          "backgroundColor.input",
+          "color.text",
+          "focusRing"
+        ],
+        "darkMode": true,
+        "customizableAreas": [
+          "borders",
+          "backgrounds",
+          "focus states",
+          "placeholder color"
+        ]
+      },
+      "accessibility": {
+        "role": "textbox",
+        "ariaSupport": [
+          "aria-label",
+          "aria-invalid",
+          "aria-describedby",
+          "aria-required"
+        ],
+        "keyboardSupport": ["Tab", "Arrow keys (number type)"],
+        "requirements": "Must be associated with label"
+      },
+      "ux": {
+        "sizes": {
+          "small": "32px height",
+          "medium": "40px height",
+          "large": "48px height"
+        },
+        "padding": "0 12px",
+        "borderRadius": "4px",
+        "focusRing": "2px offset"
+      },
+      "composedWith": ["Field", "Label", "Hint", "Message", "InputGroup"],
+      "constraints": [
+        "Must have associated label for accessibility.",
+        "Placeholder text should not replace labels.",
+        "Validation feedback must be clear.",
+        "Avoid using readOnly and disabled together."
+      ],
+      "useCases": [
+        "Text entry forms",
+        "Search boxes",
+        "Login credentials",
+        "Data filters",
+        "Configuration values",
+        "Contact information"
+      ]
+    },
+    {
+      "component": "Checkbox",
+      "category": "forms",
+      "package": "@zendeskgarden/react-forms",
+      "import": { "named": "Checkbox", "path": "@zendeskgarden/react-forms" },
+      "description": "Binary toggle control for selecting options.",
+      "intendedUsage": "Allow users to select one or more options from a set.",
+      "props": {
+        "checked": {
+          "type": "boolean",
+          "description": "Controlled checked state."
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "default": false,
+          "description": "Default checked state."
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indeterminate state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "Change event handler."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Basic checkbox with label",
+          "props": {
+            "children": "Accept terms and conditions"
+          }
+        },
+        {
+          "description": "Indeterminate parent checkbox",
+          "props": {
+            "indeterminate": true,
+            "children": "Select all"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.primary", "borderColor", "backgroundColor.base"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "checkbox",
+        "ariaSupport": ["aria-checked", "aria-invalid", "aria-required"],
+        "keyboardSupport": ["Space"]
+      },
+      "ux": {
+        "size": "16px",
+        "labelSpacing": "8px",
+        "focusRing": "2px offset"
+      },
+      "composedWith": ["Field", "Label", "Hint"],
+      "constraints": [
+        "Labels must be clickable to toggle.",
+        "Indeterminate state only for parent checkboxes.",
+        "Group related checkboxes together."
+      ],
+      "useCases": [
+        "Multi-select lists",
+        "Terms acceptance",
+        "Feature toggles",
+        "Filter options",
+        "Batch operations",
+        "Settings preferences"
+      ]
+    },
+    {
+      "component": "Radio",
+      "category": "forms",
+      "package": "@zendeskgarden/react-forms",
+      "import": { "named": "Radio", "path": "@zendeskgarden/react-forms" },
+      "description": "Single selection control within a group of options.",
+      "intendedUsage": "Allow users to select exactly one option from a set.",
+      "props": {
+        "checked": {
+          "type": "boolean",
+          "description": "Controlled checked state."
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "default": false,
+          "description": "Default checked state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        "name": { "type": "string", "description": "Radio group name." },
+        "value": { "type": "string", "description": "Radio value." },
+        "onChange": {
+          "type": "function",
+          "description": "Change event handler."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Radio group",
+          "props": {
+            "name": "plan",
+            "value": "premium",
+            "children": "Premium Plan"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.primary", "borderColor"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "radio",
+        "ariaSupport": ["aria-checked", "aria-invalid"],
+        "keyboardSupport": ["Arrow keys", "Space"]
+      },
+      "ux": {
+        "size": "16px",
+        "labelSpacing": "8px",
+        "focusRing": "2px offset"
+      },
+      "composedWith": ["Field", "Label", "RadioGroup"],
+      "constraints": [
+        "Must be used within radio groups.",
+        "Only one selection per group.",
+        "Labels must be associated and clickable."
+      ],
+      "useCases": [
+        "Option selection",
+        "Preference settings",
+        "Payment methods",
+        "Shipping options",
+        "Survey questions",
+        "Configuration choices"
+      ]
+    },
+    {
+      "component": "Select",
+      "category": "forms",
+      "package": "@zendeskgarden/react-dropdowns",
+      "import": { "named": "Select", "path": "@zendeskgarden/react-dropdowns" },
+      "description": "Dropdown selection component for choosing from predefined options.",
+      "intendedUsage": "Allow users to select one or multiple options from a dropdown list.",
+      "props": {
+        "isOpen": {
+          "type": "boolean",
+          "description": "Control dropdown open state."
+        },
+        "onSelect": {
+          "type": "function",
+          "description": "Selection callback."
+        },
+        "selectedItem": { "type": "any", "description": "Selected option(s)." },
+        "isMulti": {
+          "type": "boolean",
+          "default": false,
+          "description": "Multiple selection mode."
+        },
+        "isCompact": {
+          "type": "boolean",
+          "default": false,
+          "description": "Compact sizing."
+        },
+        "isEditable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow custom input."
+        },
+        "hasArrow": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show dropdown arrow."
+        },
+        "maxHeight": {
+          "type": "string",
+          "default": "400px",
+          "description": "Maximum dropdown height."
+        },
+        "validation": {
+          "type": "enum",
+          "values": ["success", "warning", "error"],
+          "description": "Validation state."
+        }
+      },
+      "slots": [
+        "Field",
+        "Label",
+        "Hint",
+        "Select",
+        "Menu",
+        "Item",
+        "OptGroup",
+        "Tag"
+      ],
+      "examples": [
+        {
+          "description": "Basic select with options",
+          "props": {
+            "placeholder": "Choose option",
+            "children": "<Menu><Item value='1'>Option 1</Item><Item value='2'>Option 2</Item></Menu>"
+          }
+        },
+        {
+          "description": "Multi-select with tags",
+          "props": {
+            "isMulti": true,
+            "children": "<><Tag>Selected 1</Tag><Tag>Selected 2</Tag><Menu>...</Menu></>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "borderColor",
+          "backgroundColor.input",
+          "color.primary",
+          "shadow.sm"
+        ],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "combobox",
+        "ariaSupport": [
+          "aria-expanded",
+          "aria-haspopup",
+          "aria-activedescendant",
+          "aria-multiselectable"
+        ],
+        "keyboardSupport": [
+          "Arrow keys",
+          "Enter",
+          "Escape",
+          "Space",
+          "Home",
+          "End"
+        ]
+      },
+      "ux": {
+        "minWidth": "160px",
+        "height": {
+          "default": "40px",
+          "compact": "32px"
+        },
+        "maxDropdownHeight": "400px",
+        "itemHeight": "36px"
+      },
+      "composedWith": ["Field", "Menu", "Item", "Tag"],
+      "constraints": [
+        "Dropdown should not exceed viewport.",
+        "Selected option should be visible in viewport.",
+        "Long option text should truncate."
+      ],
+      "useCases": [
+        "Country/state selection",
+        "Category filters",
+        "User role assignment",
+        "Date/time pickers",
+        "Language selection",
+        "Sort options"
+      ]
+    },
+    {
+      "component": "Textarea",
+      "category": "forms",
+      "package": "@zendeskgarden/react-forms",
+      "import": { "named": "Textarea", "path": "@zendeskgarden/react-forms" },
+      "description": "Multi-line text input for longer content.",
+      "intendedUsage": "Collect longer text input like comments, descriptions, or messages.",
+      "props": {
+        "rows": {
+          "type": "number",
+          "default": 3,
+          "description": "Number of visible rows."
+        },
+        "minRows": {
+          "type": "number",
+          "description": "Minimum rows for auto-resize."
+        },
+        "maxRows": {
+          "type": "number",
+          "description": "Maximum rows for auto-resize."
+        },
+        "isResizable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow manual resize."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Read-only state."
+        },
+        "validation": {
+          "type": "enum",
+          "values": ["success", "warning", "error"],
+          "description": "Validation state."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Is fixed size textarea",
+          "props": {
+            "minRows": 3,
+            "maxRows": 8,
+            "placeholder": "Enter your message..."
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["borderColor", "backgroundColor.input", "color.text"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "textbox",
+        "ariaSupport": ["aria-label", "aria-invalid", "aria-multiline"],
+        "keyboardSupport": ["Tab", "Enter (new line)"]
+      },
+      "ux": {
+        "minHeight": "80px",
+        "padding": "8px 12px",
+        "lineHeight": "1.5",
+        "resize": "vertical"
+      },
+      "composedWith": ["Field", "Label", "Hint", "Message"],
+      "constraints": [
+        "Must have associated label.",
+        "Character count should be shown for limited input.",
+        "Consider max-length for user-generated content."
+      ],
+      "useCases": [
+        "Comments and feedback",
+        "Message composition",
+        "Description fields",
+        "Notes and annotations",
+        "Code input",
+        "Address entry"
+      ]
+    },
+    {
+      "component": "Tooltip",
+      "category": "overlays",
+      "package": "@zendeskgarden/react-tooltips",
+      "import": { "named": "Tooltip", "path": "@zendeskgarden/react-tooltips" },
+      "description": "Contextual overlay that appears on hover or focus.",
+      "intendedUsage": "Display helpful information about interface elements.",
+      "props": {
+        "content": { "type": "node", "description": "Tooltip content." },
+        "placement": {
+          "type": "enum",
+          "values": ["top", "bottom", "left", "right", "auto"],
+          "default": "top",
+          "description": "Preferred placement."
+        },
+        "delayMS": {
+          "type": "number",
+          "default": 500,
+          "description": "Show delay in milliseconds."
+        },
+        "isVisible": {
+          "type": "boolean",
+          "description": "Controlled visibility."
+        },
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large", "extra-large"],
+          "default": "medium",
+          "description": "Tooltip size."
+        },
+        "type": {
+          "type": "enum",
+          "values": ["light", "dark"],
+          "default": "dark",
+          "description": "Visual style."
+        },
+        "hasArrow": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show arrow pointer."
+        },
+        "zIndex": {
+          "type": "number",
+          "default": 1000,
+          "description": "Stacking order."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Icon with tooltip",
+          "props": {
+            "content": "Click to learn more",
+            "children": "<IconButton><HelpIcon /></IconButton>"
+          }
+        },
+        {
+          "description": "Controlled tooltip",
+          "props": {
+            "isVisible": true,
+            "content": "This action cannot be undone",
+            "placement": "bottom"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "color.tooltip",
+          "shadow.sm",
+          "zIndex.tooltip",
+          "fontSize.sm"
+        ],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "tooltip",
+        "ariaSupport": ["aria-describedby"],
+        "keyboardSupport": ["Escape"],
+        "requirements": "Must be dismissible on mobile"
+      },
+      "ux": {
+        "maxWidth": "200px",
+        "padding": {
+          "small": "4px 8px",
+          "medium": "8px 12px",
+          "large": "12px 16px"
+        },
+        "animation": "fade in 150ms",
+        "offset": "6px from trigger"
+      },
+      "composedWith": ["IconButton", "Button", "Anchor"],
+      "constraints": [
+        "Should not contain interactive elements.",
+        "Content should be brief (under 80 characters).",
+        "Must be dismissible on touch devices.",
+        "Avoid critical information in tooltips."
+      ],
+      "useCases": [
+        "Icon explanations",
+        "Truncated text expansion",
+        "Form field help",
+        "Keyboard shortcut hints",
+        "Status explanations",
+        "Feature discovery"
+      ]
+    },
+    {
+      "component": "Tabs",
+      "category": "navigation",
+      "package": "@zendeskgarden/react-tabs",
+      "import": { "named": "Tabs", "path": "@zendeskgarden/react-tabs" },
+      "description": "Tabbed interface for organizing content into sections.",
+      "intendedUsage": "Switch between related content views within the same context.",
+      "props": {
+        "selectedItem": {
+          "type": "string",
+          "description": "Selected tab key."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "Tab change callback."
+        },
+        "isVertical": {
+          "type": "boolean",
+          "default": false,
+          "description": "Vertical tab orientation."
+        }
+      },
+      "tabProps": {
+        "item": {
+          "type": "string",
+          "description": "Tab identifier.",
+          "required": true
+        },
+        "disabled": { "type": "boolean", "description": "Disable tab." }
+      },
+      "panelProps": {
+        "item": {
+          "type": "string",
+          "description": "Matching identifier.",
+          "required": true
+        }
+      },
+      "slots": ["TabList", "Tab", "TabPanel"],
+      "examples": [
+        {
+          "description": "Basic tabs",
+          "props": {
+            "selectedItem": "overview",
+            "children": "<><TabList><Tab item='overview'>Overview</Tab><Tab item='details'>Details</Tab></TabList><TabPanel item='overview'>Overview content</TabPanel><TabPanel item='details'>Details content</TabPanel></>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.primary", "borderColor", "space.base"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "tablist",
+        "ariaSupport": ["aria-selected", "aria-controls", "aria-orientation"],
+        "keyboardSupport": ["Arrow keys", "Home", "End"]
+      },
+      "ux": {
+        "height": "40px",
+        "indicatorHeight": "3px",
+        "spacing": "8px between tabs",
+        "animation": "slide 200ms"
+      },
+      "composedWith": ["TabList", "Tab", "TabPanel"],
+      "constraints": [
+        "One tab must always be selected.",
+        "Tab panels should load immediately.",
+        "Avoid excessive number of tabs."
+      ],
+      "useCases": [
+        "Settings pages",
+        "Product details",
+        "Dashboard views",
+        "Profile sections",
+        "Analytics reports",
+        "Documentation navigation"
+      ]
+    },
+    {
+      "component": "Menu",
+      "category": "menus",
+      "package": "@zendeskgarden/react-dropdowns",
+      "import": { "named": "Menu", "path": "@zendeskgarden/react-dropdowns" },
+      "description": "Contextual menu for actions and navigation.",
+      "intendedUsage": "Display a list of actions or navigation options.",
+      "props": {
+        "placement": {
+          "type": "enum",
+          "values": ["auto", "top", "bottom", "left", "right"],
+          "default": "bottom-start",
+          "description": "Menu placement."
+        },
+        "hasArrow": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show arrow indicator."
+        },
+        "isCompact": {
+          "type": "boolean",
+          "default": false,
+          "description": "Compact menu styling."
+        },
+        "maxHeight": {
+          "type": "string",
+          "default": "400px",
+          "description": "Maximum menu height."
+        },
+        "isExpanded": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "State change callback."
+        },
+        "button": {
+          "type": "node|function",
+          "description": "Render-prop trigger.",
+          "required": true
+        },
+        "buttonProps": {
+          "type": "object",
+          "description": "Additional trigger props."
+        },
+        "defaultExpanded": {
+          "type": "boolean",
+          "description": "Uncontrolled initial open."
+        },
+        "selectedItems": {
+          "type": "array",
+          "description": "Controlled selection (multi-select)."
+        },
+        "focusedValue": {
+          "type": "string",
+          "description": "Controlled focused item."
+        },
+        "restoreFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Return focus on close."
+        },
+        "appendToNode": {
+          "type": "HTMLElement",
+          "description": "Portal target."
+        },
+        "fallbackPlacements": {
+          "type": "array",
+          "description": "Alt placements for Popper."
+        },
+        "minHeight": { "type": "string", "description": "Min menu height." }
+      },
+      "subcomponents": ["Item", "ItemGroup", "Separator"],
+      "itemProps": {
+        "value": { "type": "string", "required": true },
+        "isDisabled": { "type": "boolean" },
+        "isSelected": { "type": "boolean" },
+        "icon": { "type": "node" },
+        "type": {
+          "type": "enum",
+          "values": ["next", "previous", "add", "danger"]
+        }
+      },
+      "slots": [
+        "Trigger",
+        "Item",
+        "ItemMeta",
+        "MediaItem",
+        "MediaFigure",
+        "MediaBody",
+        "Separator",
+        "HeaderItem",
+        "AddItem",
+        "PreviousItem",
+        "NextItem"
+      ],
+      "examples": [
+        {
+          "description": "Action menu",
+          "props": {
+            "children": "<><Item value='edit'>Edit</Item><Item value='duplicate'>Duplicate</Item><Separator /><Item value='delete' isDanger>Delete</Item></>"
+          }
+        },
+        {
+          "description": "Media menu",
+          "props": {
+            "children": "<MediaItem value='user1'><MediaFigure><Avatar /></MediaFigure><MediaBody>John Doe<br /><ItemMeta>john@example.com</ItemMeta></MediaBody></MediaItem>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["shadow.lg", "backgroundColor.base", "borderRadius.md"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "menu",
+        "ariaSupport": [
+          "aria-haspopup",
+          "aria-expanded",
+          "aria-activedescendant"
+        ],
+        "keyboardSupport": [
+          "Arrow keys",
+          "Enter",
+          "Escape",
+          "Home",
+          "End",
+          "Tab"
+        ]
+      },
+      "ux": {
+        "minWidth": "150px",
+        "itemHeight": {
+          "default": "36px",
+          "compact": "32px"
+        },
+        "padding": "8px 0",
+        "shadow": "0 20px 28px rgba(0,0,0,0.15)"
+      },
+      "composedWith": ["Button", "IconButton", "Item", "Avatar"],
+      "constraints": [
+        "Must be dismissible with Escape key.",
+        "Should close on item selection.",
+        "Nested menus should open on hover/focus.",
+        "Avoid deep nesting (max 2 levels)."
+      ],
+      "useCases": [
+        "Context menus",
+        "Dropdown menus",
+        "Account menus",
+        "Settings menus",
+        "Action menus",
+        "Navigation menus"
+      ]
+    },
+    {
+      "component": "OffsetPagination",
+      "package": "@zendeskgarden/react-pagination",
+      "props": {
+        "totalPages": { "type": "number", "required": true },
+        "currentPage": { "type": "number", "required": true },
+        "onChange": {
+          "type": "function",
+          "description": "Page change handler."
+        },
+        "pagePadding": { "type": "number", "default": 2 },
+        "pageGap": { "type": "number", "default": 2 },
+        "labels": { "type": "function", "description": "i18n label formatter." }
+      }
+    },
+    {
+      "component": "CursorPagination",
+      "package": "@zendeskgarden/react-pagination",
+      "subcomponents": ["First", "Previous", "Next", "Last"]
+    },
+    {
+      "component": "Alert",
+      "category": "notifications",
+      "package": "@zendeskgarden/react-notifications",
+      "import": {
+        "named": "Notification",
+        "path": "@zendeskgarden/react-notifications"
+      },
+      "description": "System messages and alerts with various types and states.",
+      "intendedUsage": "Display system alerts, errors, success messages, and informational notices.",
+      "props": {
+        "type": {
+          "type": "enum",
+          "values": ["success", "warning", "error", "info"],
+          "default": "info"
+        }
+      },
+      "subcomponents": ["Title", "Paragraph", "Close"],
+      "slots": ["Title", "Paragraph", "Close"],
+      "examples": [
+        {
+          "description": "Success notification",
+          "props": {
+            "type": "success",
+            "closable": true,
+            "children": "<Title>Success!</Title><Paragraph>Your changes have been saved.</Paragraph>"
+          }
+        },
+        {
+          "description": "Error alert",
+          "props": {
+            "type": "error",
+            "children": "<Title>Error</Title><Paragraph>Failed to save changes.</Paragraph>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "color.success",
+          "color.warning",
+          "color.error",
+          "color.info",
+          "borderRadius.md"
+        ],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "alert",
+        "ariaSupport": ["aria-live", "aria-atomic"],
+        "keyboardSupport": ["Escape"]
+      },
+      "ux": {
+        "padding": "16px",
+        "iconSize": "16px",
+        "maxWidth": "600px",
+        "animation": "slide-in 200ms"
+      },
+      "composedWith": ["Close", "Icon"],
+      "constraints": [
+        "Important messages should not auto-dismiss.",
+        "Error messages must be dismissible by user.",
+        "Limit concurrent notifications."
+      ],
+      "useCases": [
+        "Form submission feedback",
+        "System status updates",
+        "Error messages",
+        "Success confirmations",
+        "Warning alerts",
+        "Information notices"
+      ]
+    },
+    {
+      "component": "Toast",
+      "category": "notifications",
+      "package": "@zendeskgarden/react-notifications",
+      "import": {
+        "named": "Toast",
+        "path": "@zendeskgarden/react-notifications"
+      },
+      "description": "Temporary notification messages that auto-dismiss.",
+      "intendedUsage": "Display brief, non-critical notifications that don't require user action.",
+      "props": {
+        "placement": {
+          "type": "enum",
+          "values": [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end"
+          ],
+          "default": "top-end",
+          "description": "Toast position."
+        },
+        "zIndex": {
+          "type": "number",
+          "default": 1000,
+          "description": "Stacking order."
+        }
+      },
+      "slots": ["Title", "Message", "Close"],
+      "examples": [
+        {
+          "description": "Success toast",
+          "props": {
+            "placement": "top-end",
+            "children": "<Title>Saved</Title><Message>Your preferences have been updated.</Message>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["shadow.lg", "backgroundColor.base", "borderRadius.md"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "status",
+        "ariaSupport": ["aria-live", "aria-atomic"],
+        "keyboardSupport": ["Escape"]
+      },
+      "ux": {
+        "maxWidth": "400px",
+        "autoDismiss": "5000ms",
+        "animation": "slide-in 200ms"
+      },
+      "composedWith": ["ToastProvider", "Close"],
+      "constraints": [
+        "Auto-dismiss after 5-10 seconds.",
+        "Stack multiple toasts vertically.",
+        "Provide manual dismiss option."
+      ],
+      "useCases": [
+        "Save confirmations",
+        "Background task completion",
+        "Non-critical errors",
+        "Feature announcements",
+        "Social notifications",
+        "Update notifications"
+      ]
+    },
+    {
+      "component": "Tag",
+      "category": "indicators",
+      "package": "@zendeskgarden/react-tags",
+      "import": { "named": "Tag", "path": "@zendeskgarden/react-tags" },
+      "description": "Interactive label component for categorization and filtering.",
+      "intendedUsage": "Display removable labels, filters, or selected items.",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Tag size."
+        },
+        "hue": { "type": "string", "description": "Custom color hue." },
+        "isPill": {
+          "type": "boolean",
+          "default": false,
+          "description": "Pill-shaped tag."
+        },
+        "isRegular": {
+          "type": "boolean",
+          "default": false,
+          "description": "Regular weight text."
+        }
+      },
+      "slots": ["Avatar", "Close"],
+      "examples": [
+        {
+          "description": "Removable tag",
+          "props": {
+            "children": "Category",
+            "Close": "<Tag.Close aria-label='Remove' />"
+          }
+        },
+        {
+          "description": "Avatar tag",
+          "props": {
+            "Avatar": "<Avatar><img src='user.jpg' /></Avatar>",
+            "children": "John Doe"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.tag", "borderRadius.sm", "space.xxs"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "button",
+        "ariaSupport": ["aria-label", "aria-pressed"],
+        "keyboardSupport": ["Enter", "Space", "Delete"]
+      },
+      "ux": {
+        "height": {
+          "small": "20px",
+          "medium": "24px",
+          "large": "32px"
+        },
+        "padding": "0 8px",
+        "closeButtonSize": "16px"
+      },
+      "composedWith": ["Avatar", "Close"],
+      "constraints": [
+        "Close button must have accessible label.",
+        "Group related tags together.",
+        "Provide feedback on tag removal."
+      ],
+      "useCases": [
+        "Filter selections",
+        "Multi-select values",
+        "Category labels",
+        "Search facets",
+        "User assignments",
+        "Skill tags"
+      ]
+    },
+    {
+      "component": "Progress",
+      "category": "indicators",
+      "package": "@zendeskgarden/react-loaders",
+      "import": { "named": "Progress", "path": "@zendeskgarden/react-loaders" },
+      "description": "Visual indicator of task completion or loading state.",
+      "intendedUsage": "Show progress of operations, file uploads, or multi-step processes.",
+      "props": {
+        "value": {
+          "type": "number",
+          "description": "Current progress value (0-100)."
+        },
+        "size": {
+          "type": "enum",
+          "values": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Progress bar size."
+        },
+        "color": {
+          "type": "string",
+          "default": "primary",
+          "description": "Progress bar color."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "File upload progress",
+          "props": {
+            "value": 65,
+            "size": "medium"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": [
+          "color.primary",
+          "borderRadius.sm",
+          "backgroundColor.subtle"
+        ],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "progressbar",
+        "ariaSupport": [
+          "aria-valuenow",
+          "aria-valuemin",
+          "aria-valuemax",
+          "aria-label"
+        ],
+        "keyboardSupport": []
+      },
+      "ux": {
+        "height": {
+          "small": "4px",
+          "medium": "8px",
+          "large": "12px"
+        },
+        "borderRadius": "4px",
+        "animation": "smooth transition"
+      },
+      "composedWith": ["Label"],
+      "constraints": [
+        "Must include accessible label.",
+        "Value must be between 0-100.",
+        "Consider adding text percentage."
+      ],
+      "useCases": [
+        "File uploads",
+        "Form progress",
+        "Loading states",
+        "Installation progress",
+        "Task completion",
+        "Survey progress"
+      ]
+    },
+    {
+      "component": "Spinner",
+      "category": "loaders",
+      "package": "@zendeskgarden/react-loaders",
+      "import": { "named": "Spinner", "path": "@zendeskgarden/react-loaders" },
+      "description": "Animated loading indicator for indeterminate progress.",
+      "intendedUsage": "Indicate loading states when progress cannot be determined.",
+      "props": {
+        "size": {
+          "type": "enum|string",
+          "values": ["small", "medium", "large", "inherit"],
+          "default": "inherit",
+          "description": "Spinner size."
+        },
+        "color": {
+          "type": "string",
+          "default": "inherit",
+          "description": "Spinner color."
+        },
+        "duration": {
+          "type": "number",
+          "default": 1250,
+          "description": "Animation duration in ms."
+        },
+        "delayMS": {
+          "type": "number",
+          "default": 750,
+          "description": "Delay before showing spinner."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Button loading state",
+          "props": {
+            "size": "small",
+            "color": "white"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.primary", "animation.rotate"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "progressbar",
+        "ariaSupport": ["aria-label", "aria-busy"],
+        "keyboardSupport": []
+      },
+      "ux": {
+        "sizes": {
+          "small": "16px",
+          "medium": "32px",
+          "large": "48px"
+        },
+        "strokeWidth": "3px",
+        "animation": "rotate 1.25s linear infinite"
+      },
+      "composedWith": ["Button", "Skeleton"],
+      "constraints": [
+        "Must include accessible label.",
+        "Avoid showing for very quick operations.",
+        "Consider skeleton loading for content."
+      ],
+      "useCases": [
+        "Button loading states",
+        "Content loading",
+        "API requests",
+        "Page transitions",
+        "Background tasks",
+        "Search operations"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "category": "loaders",
+      "package": "@zendeskgarden/react-loaders",
+      "import": { "named": "Skeleton", "path": "@zendeskgarden/react-loaders" },
+      "description": "Placeholder loading pattern that mimics content structure.",
+      "intendedUsage": "Display loading placeholders that match content layout.",
+      "props": {
+        "width": { "type": "string|number", "description": "Skeleton width." },
+        "height": {
+          "type": "string|number",
+          "description": "Skeleton height."
+        },
+        "isAnimated": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable shimmer animation."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Text skeleton",
+          "props": {
+            "width": "100%",
+            "height": "16px"
+          }
+        },
+        {
+          "description": "Avatar skeleton",
+          "props": {
+            "width": "40px",
+            "height": "40px",
+            "style": { "borderRadius": "50%" }
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["color.skeleton", "animation.shimmer"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": "progressbar",
+        "ariaSupport": ["aria-busy", "aria-label"],
+        "keyboardSupport": []
+      },
+      "ux": {
+        "backgroundColor": "rgba(0,0,0,0.1)",
+        "animation": "shimmer 1.5s ease-in-out infinite",
+        "borderRadius": "inherit"
+      },
+      "composedWith": ["Card", "Table", "List"],
+      "constraints": [
+        "Match actual content dimensions.",
+        "Group related skeletons.",
+        "Provide accessible loading context."
+      ],
+      "useCases": [
+        "Content placeholders",
+        "Card loading states",
+        "List item placeholders",
+        "Image placeholders",
+        "Dashboard loading",
+        "Profile loading"
+      ]
+    },
+    {
+      "component": "Grid",
+      "category": "layout",
+      "package": "@zendeskgarden/react-grid",
+      "import": { "named": "Grid", "path": "@zendeskgarden/react-grid" },
+      "description": "Responsive grid system for layout structure.",
+      "intendedUsage": "Create responsive layouts with consistent spacing and alignment.",
+      "props": {
+        "gutters": {
+          "type": "boolean|string",
+          "default": "md",
+          "description": "Gutter spacing between columns."
+        },
+        "debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show debug outlines."
+        }
+      },
+      "slots": ["Row", "Col"],
+      "examples": [
+        {
+          "description": "Responsive grid layout",
+          "props": {
+            "children": "<Row><Col sm={12} md={6} lg={4}>Column 1</Col><Col sm={12} md={6} lg={4}>Column 2</Col></Row>"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["space.base", "breakpoints"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": null,
+        "ariaSupport": [],
+        "keyboardSupport": []
+      },
+      "ux": {
+        "columns": 12,
+        "gutters": {
+          "sm": "8px",
+          "md": "16px",
+          "lg": "24px"
+        },
+        "breakpoints": {
+          "xs": "0px",
+          "sm": "576px",
+          "md": "768px",
+          "lg": "992px",
+          "xl": "1200px"
+        }
+      },
+      "composedWith": ["Row", "Col"],
+      "constraints": [
+        "Column spans must total 12 or less.",
+        "Nest grids carefully to avoid complexity.",
+        "Consider mobile-first approach."
+      ],
+      "useCases": [
+        "Page layouts",
+        "Dashboard grids",
+        "Form layouts",
+        "Card grids",
+        "Responsive designs",
+        "Content sections"
+      ]
+    },
+    {
+      "component": "ThemeProvider",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "ThemeProvider",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Context provider for theming Garden components.",
+      "intendedUsage": "Wrap application to provide theme context to all Garden components.",
+      "props": {
+        "theme": {
+          "type": "object",
+          "description": "Theme configuration object."
+        }
+      },
+      "slots": [],
+      "examples": [
+        {
+          "description": "Custom theme provider",
+          "props": {
+            "theme": "{ ...DEFAULT_THEME, colors: { ...DEFAULT_THEME.colors, primaryHue: 'blue' } }"
+          }
+        }
+      ],
+      "theming": {
+        "tokens": ["all theme tokens"],
+        "darkMode": true
+      },
+      "accessibility": {
+        "role": null,
+        "ariaSupport": [],
+        "keyboardSupport": []
+      },
+      "ux": {
+        "inheritance": "nested providers inherit parent theme",
+        "rtlSupport": "automatic RTL detection and support"
+      },
+      "composedWith": ["all Garden components"],
+      "constraints": [
+        "Must wrap all Garden components.",
+        "Theme object must follow Garden schema.",
+        "Avoid deeply nested providers."
+      ],
+      "useCases": [
+        "Application theming",
+        "Dark mode support",
+        "Brand customization",
+        "RTL support",
+        "Component theming",
+        "White-labeling"
+      ]
+    }
+  ],
+  "designSystem": {
+    "name": "Zendesk Garden",
+    "version": "9.x",
+    "principles": [
+      "Accessible by default",
+      "Composable architecture",
+      "Consistent theming",
+      "Responsive design",
+      "Performance optimized",
+      "Internationalization ready"
+    ],
+    "colorModes": ["light", "dark", "high-contrast"],
+    "breakpoints": {
+      "xs": "0px",
+      "sm": "576px",
+      "md": "768px",
+      "lg": "992px",
+      "xl": "1200px",
+      "xxl": "1400px"
+    },
+    "spacing": {
+      "base": "4px",
+      "scale": [
+        "4px",
+        "8px",
+        "12px",
+        "16px",
+        "20px",
+        "24px",
+        "32px",
+        "40px",
+        "48px",
+        "64px",
+        "80px",
+        "96px"
+      ]
+    },
+    "typography": {
+      "fontFamily": {
+        "system": "'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
+        "mono": "'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace"
+      },
+      "scale": {
+        "xs": "12px",
+        "sm": "14px",
+        "md": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "xxl": "24px",
+        "xxxl": "36px"
+      },
+      "lineHeight": {
+        "sm": 1.2,
+        "md": 1.5,
+        "lg": 1.8
+      },
+      "fontWeight": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      }
+    },
+    "elevation": {
+      "levels": ["0dp", "1dp", "2dp", "4dp", "8dp", "16dp", "24dp"],
+      "shadows": {
+        "xs": "0 1px 3px rgba(0,0,0,0.1)",
+        "sm": "0 4px 8px rgba(0,0,0,0.1)",
+        "md": "0 8px 16px rgba(0,0,0,0.1)",
+        "lg": "0 16px 32px rgba(0,0,0,0.15)",
+        "xl": "0 24px 48px rgba(0,0,0,0.2)"
+      }
+    },
+    "animation": {
+      "duration": {
+        "fast": "100ms",
+        "normal": "200ms",
+        "slow": "300ms",
+        "slower": "400ms"
+      },
+      "easing": {
+        "standard": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "decelerate": "cubic-bezier(0, 0, 0.2, 1)",
+        "accelerate": "cubic-bezier(0.4, 0, 1, 1)",
+        "sharp": "cubic-bezier(0.4, 0, 0.6, 1)"
+      }
+    },
+    "accessibility": {
+      "focusRing": "2px solid currentColor",
+      "minimumContrast": 4.5,
+      "reducedMotion": "@media (prefers-reduced-motion: reduce)",
+      "highContrast": "@media (prefers-contrast: high)"
+    },
+    "internationalization": {
+      "rtlSupport": true,
+      "languages": ["en", "es", "fr", "de", "ja", "ko", "zh"],
+      "dateFormats": "locale-specific",
+      "numberFormats": "locale-specific"
+    }
+  },
+  "patterns": {
+    "forms": {
+      "validation": [
+        "Inline validation on blur",
+        "Summary validation on submit",
+        "Progressive disclosure of errors",
+        "Clear error recovery paths"
+      ],
+      "layout": [
+        "Single column for simple forms",
+        "Multi-column for complex forms",
+        "Grouped sections with headers",
+        "Responsive breakpoints"
+      ]
+    },
+    "navigation": {
+      "types": [
+        "Top navigation bar",
+        "Side navigation",
+        "Breadcrumbs",
+        "Tabs",
+        "Pagination",
+        "Step indicators"
+      ],
+      "behavior": [
+        "Highlight current location",
+        "Keyboard navigation support",
+        "Mobile-responsive patterns",
+        "Predictable hierarchy"
+      ]
+    },
+    "dataDisplay": {
+      "tables": [
+        "Sortable columns",
+        "Filterable data",
+        "Pagination",
+        "Row selection",
+        "Expandable rows",
+        "Responsive behavior"
+      ],
+      "cards": [
+        "Consistent padding",
+        "Clear hierarchy",
+        "Action placement",
+        "Loading states",
+        "Empty states"
+      ]
+    },
+    "feedback": {
+      "types": [
+        "Toast notifications",
+        "Inline alerts",
+        "Modal dialogs",
+        "Progress indicators",
+        "Loading spinners",
+        "Empty states"
+      ],
+      "timing": [
+        "Immediate feedback for user actions",
+        "5-10 second auto-dismiss for toasts",
+        "Persistent display for errors",
+        "Progressive loading indicators"
+      ]
+    }
+  },
+  "utilities": {
+    "hooks": [
+      "useTheme",
+      "useToast",
+      "useColorScheme",
+      "useAccordion",
+      "useFocusJail",
+      "useSchedule",
+      "useSelection",
+      "useTabs",
+      "useTooltip",
+      "usePagination"
+    ],
+    "functions": [
+      "getColor",
+      "mediaQuery",
+      "focusStyles",
+      "menuStyles",
+      "arrowStyles",
+      "getLineHeight",
+      "getCheckeredBackground",
+      "getColorV8",
+      "getFocusBoxShadow"
+    ],
+    "components": [
+      "Portal",
+      "FocusJailContainer",
+      "ScheduleContainer",
+      "SelectionContainer",
+      "ThemeProvider",
+      "ColorSchemeProvider"
+    ]
+  },
+  "hooks": [
+    {
+      "hook": "useColorScheme",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "useColorScheme",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Manage user color scheme preferences (light/dark/system).",
+      "intendedUsage": "Enable theme switching and system preference synchronization.",
+      "parameters": [],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "colorScheme": {
+            "type": "string",
+            "description": "Current color scheme ('light', 'dark', or 'system')"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Use color scheme",
+          "code": "const { colorScheme } = useColorScheme();\nconst theme = { ...DEFAULT_THEME, colors: { ...DEFAULT_THEME.colors, base: colorScheme } };"
+        }
+      ],
+      "dependencies": ["ColorSchemeProvider"],
+      "constraints": ["Must be used within ColorSchemeProvider"],
+      "useCases": [
+        "Dark mode support",
+        "System theme sync",
+        "Theme persistence"
+      ]
+    },
+    {
+      "hook": "useTheme",
+      "category": "theming",
+      "package": "styled-components",
+      "import": { "named": "useTheme", "path": "styled-components" },
+      "description": "Access the current theme object provided by ThemeProvider.",
+      "intendedUsage": "Access theme values within styled components or functional components.",
+      "parameters": [],
+      "returns": {
+        "type": "object",
+        "description": "Theme object from nearest ThemeProvider"
+      },
+      "examples": [
+        {
+          "description": "Access Garden theme values",
+          "code": "import { useTheme } from 'styled-components';\nconst theme = useTheme();\nconst color = theme.colors.base.background;"
+        }
+      ],
+      "dependencies": ["ThemeProvider (styled-components)"],
+      "constraints": [
+        "Must be used within styled-components ThemeProvider",
+        "When using with Garden, wrap app in Garden's ThemeProvider"
+      ],
+      "useCases": [
+        "Custom component styling",
+        "Conditional theming",
+        "Theme-aware logic"
+      ]
+    },
+    {
+      "hook": "useToast",
+      "category": "notifications",
+      "package": "@zendeskgarden/react-notifications",
+      "import": {
+        "named": "useToast",
+        "path": "@zendeskgarden/react-notifications"
+      },
+      "description": "Display toast notifications with programmatic control.",
+      "intendedUsage": "Create temporary notification messages that auto-dismiss.",
+      "parameters": [],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "addToast": {
+            "type": "function",
+            "description": "Function to add a new toast"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Show toast notification",
+          "code": "const { addToast } = useToast();\naddToast(({ close }) => <Notification>Message</Notification>);"
+        }
+      ],
+      "dependencies": ["ToastProvider"],
+      "constraints": ["Must be used within ToastProvider"],
+      "useCases": [
+        "Success confirmations",
+        "Error messages",
+        "Background task notifications"
+      ]
+    },
+    {
+      "hook": "useTooltip",
+      "category": "overlays",
+      "package": "@zendeskgarden/container-tooltip",
+      "import": {
+        "named": "useTooltip",
+        "path": "@zendeskgarden/container-tooltip"
+      },
+      "description": "Manage tooltip state, positioning, and accessibility.",
+      "intendedUsage": "Create custom tooltip components with full control over behavior.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "isVisible": {
+              "type": "boolean",
+              "description": "Controlled visibility state"
+            },
+            "delayMilliseconds": {
+              "type": "number",
+              "description": "Delay before showing tooltip"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "isVisible": {
+            "type": "boolean",
+            "description": "Current visibility state"
+          },
+          "getTooltipProps": {
+            "type": "function",
+            "description": "Props for tooltip element"
+          },
+          "getTriggerProps": {
+            "type": "function",
+            "description": "Props for trigger element"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Basic tooltip implementation",
+          "code": "const { getTooltipProps, getTriggerProps } = useTooltip();\n<button {...getTriggerProps()}>Trigger</button>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": ["Tooltip must not contain interactive elements"],
+      "useCases": [
+        "Custom tooltip components",
+        "Contextual help text",
+        "Icon explanations"
+      ]
+    },
+    {
+      "hook": "useTabs",
+      "category": "navigation",
+      "package": "@zendeskgarden/container-tabs",
+      "import": { "named": "useTabs", "path": "@zendeskgarden/container-tabs" },
+      "description": "Manage tab state, selection, and keyboard navigation.",
+      "intendedUsage": "Create accessible tab interfaces with full keyboard support.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "tabs": { "type": "array", "description": "Array of tab items" },
+            "selectedValue": {
+              "type": "string",
+              "description": "Controlled selected tab"
+            },
+            "onSelect": {
+              "type": "function",
+              "description": "Selection change callback"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "selectedValue": {
+            "type": "string",
+            "description": "Current selected tab"
+          },
+          "getTabProps": {
+            "type": "function",
+            "description": "Props for tab element"
+          },
+          "getTabListProps": {
+            "type": "function",
+            "description": "Props for tab list container"
+          },
+          "getTabPanelProps": {
+            "type": "function",
+            "description": "Props for tab panel"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Custom tab implementation",
+          "code": "const { getTabProps, getTabListProps } = useTabs({ tabs });\n<ul {...getTabListProps()}>...</ul>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Tab IDs must be unique",
+        "One tab must always be selected"
+      ],
+      "useCases": [
+        "Custom tab components",
+        "Settings panels",
+        "Navigation interfaces"
+      ]
+    },
+    {
+      "hook": "useCombobox",
+      "category": "dropdowns",
+      "package": "@zendeskgarden/container-combobox",
+      "import": {
+        "named": "useCombobox",
+        "path": "@zendeskgarden/container-combobox"
+      },
+      "description": "Manage combobox state, filtering, and accessibility.",
+      "intendedUsage": "Create custom autocomplete and combobox components.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "inputValue": {
+              "type": "string",
+              "description": "Controlled input value"
+            },
+            "selectedItem": { "type": "any", "description": "Selected option" },
+            "isOpen": {
+              "type": "boolean",
+              "description": "Dropdown open state"
+            },
+            "onSelect": {
+              "type": "function",
+              "description": "Selection callback"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getInputProps": {
+            "type": "function",
+            "description": "Props for input element"
+          },
+          "getToggleButtonProps": {
+            "type": "function",
+            "description": "Props for toggle button"
+          },
+          "getMenuProps": {
+            "type": "function",
+            "description": "Props for dropdown menu"
+          },
+          "getItemProps": {
+            "type": "function",
+            "description": "Props for menu items"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Custom combobox",
+          "code": "const { getInputProps, getMenuProps } = useCombobox();\n<input {...getInputProps()} />"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Must handle keyboard navigation",
+        "Filtering logic not included"
+      ],
+      "useCases": ["Autocomplete fields", "Search dropdowns", "Tag inputs"]
+    },
+    {
+      "hook": "useModal",
+      "category": "modals",
+      "package": "@zendeskgarden/container-modal",
+      "import": {
+        "named": "useModal",
+        "path": "@zendeskgarden/container-modal"
+      },
+      "description": "Manage modal dialog state, focus, and accessibility.",
+      "intendedUsage": "Create custom modal dialogs with proper focus management.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "onClose": { "type": "function", "description": "Close callback" },
+            "modalRef": {
+              "type": "RefObject",
+              "description": "Modal element reference"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getBackdropProps": {
+            "type": "function",
+            "description": "Props for backdrop element"
+          },
+          "getModalProps": {
+            "type": "function",
+            "description": "Props for modal container"
+          },
+          "getTitleProps": {
+            "type": "function",
+            "description": "Props for modal title"
+          },
+          "getCloseProps": {
+            "type": "function",
+            "description": "Props for close button"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Custom modal dialog",
+          "code": "const { getModalProps, getCloseProps } = useModal({ onClose });\n<div {...getModalProps()}>Content</div>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": ["Must trap focus within modal", "Must handle Escape key"],
+      "useCases": ["Dialog components", "Alert dialogs", "Confirmation modals"]
+    },
+    {
+      "hook": "useMenu",
+      "category": "menus",
+      "package": "@zendeskgarden/container-menu",
+      "import": { "named": "useMenu", "path": "@zendeskgarden/container-menu" },
+      "description": "Manage menu state, keyboard navigation, and accessibility.",
+      "intendedUsage": "Create custom dropdown menus and context menus.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "selectedItem": {
+              "type": "any",
+              "description": "Selected menu item"
+            },
+            "onSelect": {
+              "type": "function",
+              "description": "Item selection callback"
+            },
+            "isOpen": { "type": "boolean", "description": "Menu open state" }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getMenuProps": {
+            "type": "function",
+            "description": "Props for menu container"
+          },
+          "getItemProps": {
+            "type": "function",
+            "description": "Props for menu items"
+          },
+          "getTriggerProps": {
+            "type": "function",
+            "description": "Props for menu trigger"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Custom menu implementation",
+          "code": "const { getMenuProps, getItemProps } = useMenu();\n<ul {...getMenuProps()}>...</ul>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Must handle arrow key navigation",
+        "Must support keyboard shortcuts"
+      ],
+      "useCases": [
+        "Dropdown menus",
+        "Context menus",
+        "Action menus",
+        "Settings menus"
+      ]
+    },
+    {
+      "hook": "useBreadcrumb",
+      "category": "navigation",
+      "package": "@zendeskgarden/container-breadcrumb",
+      "import": {
+        "named": "useBreadcrumb",
+        "path": "@zendeskgarden/container-breadcrumb"
+      },
+      "description": "Manage breadcrumb navigation state and accessibility.",
+      "intendedUsage": "Create custom breadcrumb components with proper semantics.",
+      "parameters": [],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getContainerProps": {
+            "type": "function",
+            "description": "Props for breadcrumb container"
+          },
+          "getItemProps": {
+            "type": "function",
+            "description": "Props for breadcrumb items"
+          },
+          "getCurrentPageProps": {
+            "type": "function",
+            "description": "Props for current page item"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Custom breadcrumb",
+          "code": "const { getContainerProps, getItemProps } = useBreadcrumb();\n<nav {...getContainerProps()}>...</nav>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Must include proper ARIA attributes",
+        "Current page must be indicated"
+      ],
+      "useCases": [
+        "Navigation breadcrumbs",
+        "Location indicators",
+        "Path hierarchies"
+      ]
+    },
+    {
+      "hook": "usePagination",
+      "category": "pagination",
+      "package": "@zendeskgarden/container-pagination",
+      "import": {
+        "named": "usePagination",
+        "path": "@zendeskgarden/container-pagination"
+      },
+      "description": "Manage pagination state and navigation controls.",
+      "intendedUsage": "Create custom pagination interfaces with accessibility.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "selectedItem": {
+              "type": "string|number",
+              "description": "Current selected page"
+            },
+            "onSelect": {
+              "type": "function",
+              "description": "Page selection callback"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "selectedItem": {
+            "type": "string|number",
+            "description": "Current page"
+          },
+          "getPageProps": {
+            "type": "function",
+            "description": "Props for page element"
+          },
+          "getNextPageProps": {
+            "type": "function",
+            "description": "Props for next button"
+          },
+          "getPreviousPageProps": {
+            "type": "function",
+            "description": "Props for previous button"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Custom pagination",
+          "code": "const { getPageProps, getNextPageProps } = usePagination();\n<button {...getNextPageProps()}>Next</button>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Page numbers must be valid",
+        "Navigation must be keyboard accessible"
+      ],
+      "useCases": [
+        "Custom pagination components",
+        "Table pagination",
+        "Content pagination"
+      ]
+    },
+    {
+      "hook": "useFocusJail",
+      "category": "accessibility",
+      "package": "@zendeskgarden/container-focusjail",
+      "import": {
+        "named": "useFocusJail",
+        "path": "@zendeskgarden/container-focusjail"
+      },
+      "description": "Trap focus within a container element for modal dialogs and widgets.",
+      "intendedUsage": "Manage focus trapping for modals, dialogs, and other overlay components.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "containerRef": {
+              "type": "RefObject",
+              "description": "Reference to the container element"
+            },
+            "focusOnMount": {
+              "type": "boolean",
+              "default": true,
+              "description": "Focus first element on mount"
+            },
+            "restoreFocus": {
+              "type": "boolean",
+              "default": true,
+              "description": "Restore focus on unmount"
+            },
+            "environment": {
+              "type": "Document",
+              "description": "Document context (for iframes)"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getContainerProps": {
+            "type": "function",
+            "description": "Props getter for container element"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Focus jail for modal",
+          "code": "const { getContainerProps } = useFocusJail({ containerRef });\n<div {...getContainerProps({ ref: containerRef })}>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Container must have focusable elements",
+        "Must be within document context"
+      ],
+      "useCases": [
+        "Modal dialogs",
+        "Dropdown menus",
+        "Alert dialogs",
+        "Sidebars"
+      ]
+    },
+    {
+      "hook": "useSchedule",
+      "category": "animation",
+      "package": "@zendeskgarden/container-schedule",
+      "import": {
+        "named": "useSchedule",
+        "path": "@zendeskgarden/container-schedule"
+      },
+      "description": "Animation timing hook for smooth transitions.",
+      "intendedUsage": "Create time-based animations and transitions.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "duration": {
+              "type": "number",
+              "description": "Animation duration in milliseconds"
+            },
+            "delayMS": {
+              "type": "number",
+              "optional": true,
+              "description": "Delay before animation"
+            },
+            "loop": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Loop animation"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "number",
+        "description": "Elapsed time as a fraction (0-1)"
+      },
+      "examples": [
+        {
+          "description": "Animate element position",
+          "code": "const elapsed = useSchedule({ duration: 1000 });\nconst styles = { transform: `translateX(${900 * elapsed}px)` };"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Animation frame based timing",
+        "Component must be mounted"
+      ],
+      "useCases": [
+        "Custom animations",
+        "Transitions",
+        "Progress indicators",
+        "Loading animations"
+      ]
+    },
+    {
+      "hook": "useSelection",
+      "category": "selection",
+      "package": "@zendeskgarden/container-selection",
+      "import": {
+        "named": "useSelection",
+        "path": "@zendeskgarden/container-selection"
+      },
+      "description": "Manage keyboard navigation and selection state for lists.",
+      "intendedUsage": "Handle selection logic for menus, lists, and selectable components.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "selectedItem": {
+              "type": "any",
+              "description": "Controlled selected item"
+            },
+            "focusedItem": {
+              "type": "any",
+              "description": "Controlled focused item"
+            },
+            "defaultSelectedIndex": {
+              "type": "number",
+              "description": "Initial selected index"
+            },
+            "rtl": { "type": "boolean", "description": "Right-to-left mode" },
+            "onSelect": {
+              "type": "function",
+              "description": "Selection callback"
+            },
+            "onFocus": { "type": "function", "description": "Focus callback" }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getContainerProps": {
+            "type": "function",
+            "description": "Props for container element"
+          },
+          "getItemProps": {
+            "type": "function",
+            "description": "Props for selectable items"
+          },
+          "selectedItem": { "type": "any", "description": "Current selection" },
+          "focusedItem": { "type": "any", "description": "Current focus" }
+        }
+      },
+      "examples": [
+        {
+          "description": "Selectable list",
+          "code": "const { getContainerProps, getItemProps } = useSelection();\n<ul {...getContainerProps()}>\n  <li {...getItemProps({ item: 'item1' })}>Item 1</li>\n</ul>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Items must have unique keys",
+        "Keyboard navigation patterns must be followed"
+      ],
+      "useCases": [
+        "Dropdown menus",
+        "List boxes",
+        "Tab navigation",
+        "Select components"
+      ]
+    },
+    {
+      "hook": "useAccordion",
+      "category": "accordions",
+      "package": "@zendeskgarden/container-accordion",
+      "import": {
+        "named": "useAccordion",
+        "path": "@zendeskgarden/container-accordion"
+      },
+      "description": "Manage accordion state and keyboard interactions.",
+      "intendedUsage": "Control expansion state and accessibility for accordion components.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "expandedSections": {
+              "type": "array",
+              "description": "Controlled expanded sections"
+            },
+            "defaultExpandedSections": {
+              "type": "array",
+              "description": "Initially expanded sections"
+            },
+            "onChange": {
+              "type": "function",
+              "description": "Expansion change callback"
+            },
+            "collapsible": {
+              "type": "boolean",
+              "description": "Allow collapsing all sections"
+            },
+            "level": {
+              "type": "number",
+              "description": "Heading level for ARIA"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "getHeaderProps": {
+            "type": "function",
+            "description": "Props for section headers"
+          },
+          "getPanelProps": {
+            "type": "function",
+            "description": "Props for section panels"
+          },
+          "expandedSections": {
+            "type": "array",
+            "description": "Current expanded sections"
+          }
+        }
+      },
+      "examples": [
+        {
+          "description": "Accordion section",
+          "code": "const { getHeaderProps, getPanelProps } = useAccordion();\n<div {...getHeaderProps({ section: 'section1' })}>Header</div>\n<div {...getPanelProps({ section: 'section1' })}>Content</div>"
+        }
+      ],
+      "dependencies": [],
+      "constraints": [
+        "Section IDs must be unique",
+        "ARIA patterns must be followed"
+      ],
+      "useCases": [
+        "FAQ sections",
+        "Collapsible panels",
+        "Navigation menus",
+        "Content organization"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "focusStyles",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "focusStyles",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Generate Garden standard focus styling CSS.",
+      "intendedUsage": "Apply consistent focus rings across components.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "theme": {
+              "type": "ThemeObject",
+              "description": "Garden theme object"
+            },
+            "hue": {
+              "type": "string",
+              "optional": true,
+              "description": "Color hue for focus ring"
+            },
+            "shade": {
+              "type": "number",
+              "optional": true,
+              "description": "Color shade"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS focus styles"
+      },
+      "examples": [
+        {
+          "description": "Apply focus styles",
+          "code": "const focusRing = focusStyles({ theme, hue: 'blue' });"
+        }
+      ],
+      "constraints": ["Theme must be provided"],
+      "useCases": [
+        "Custom components",
+        "Focus indicators",
+        "Accessibility styling"
+      ]
+    },
+    {
+      "function": "getLineHeight",
+      "category": "typography",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "getLineHeight",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Calculate optimal line height based on font size and component height.",
+      "intendedUsage": "Generate consistent line heights that work with Garden's typography system.",
+      "parameters": [
+        {
+          "name": "height",
+          "type": "number",
+          "description": "Component height in pixels"
+        },
+        {
+          "name": "fontSize",
+          "type": "number",
+          "description": "Font size in pixels"
+        }
+      ],
+      "returns": {
+        "type": "number",
+        "description": "Unitless line height value"
+      },
+      "examples": [
+        {
+          "description": "Calculate line height",
+          "code": "const lineHeight = getLineHeight(40, 14);"
+        }
+      ],
+      "constraints": ["Height and font size must be positive numbers"],
+      "useCases": ["Custom typography", "Input fields", "Button text alignment"]
+    },
+    {
+      "function": "getCheckeredBackground",
+      "category": "graphics",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "getCheckeredBackground",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Generate CSS for a checkered background pattern.",
+      "intendedUsage": "Create transparency indicators or background patterns.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "number",
+              "description": "Checker size in pixels"
+            },
+            "color": { "type": "string", "description": "Checker color" }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS background properties"
+      },
+      "examples": [
+        {
+          "description": "Create checkered pattern",
+          "code": "const background = getCheckeredBackground({ size: 8, color: '#ccc' });"
+        }
+      ],
+      "constraints": ["Size must be positive"],
+      "useCases": ["Color pickers", "Image editors", "Transparency indicators"]
+    },
+    {
+      "function": "getColorV8",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "getColorV8",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Get color values using Garden v8 color system.",
+      "intendedUsage": "Access legacy v8 color values for backward compatibility.",
+      "parameters": [
+        {
+          "name": "hue",
+          "type": "string",
+          "description": "Color hue name"
+        },
+        {
+          "name": "shade",
+          "type": "number",
+          "description": "Color shade value"
+        },
+        {
+          "name": "theme",
+          "type": "ThemeObject",
+          "description": "Theme object"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS color value"
+      },
+      "examples": [
+        {
+          "description": "Get v8 color",
+          "code": "const color = getColorV8('blue', 600, theme);"
+        }
+      ],
+      "constraints": ["For backward compatibility only"],
+      "useCases": ["Legacy component migration", "Backward compatibility"]
+    },
+    {
+      "function": "getFocusBoxShadow",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "getFocusBoxShadow",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Get box-shadow value for focus states.",
+      "intendedUsage": "Create consistent focus indicators using box-shadow.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "theme": { "type": "ThemeObject", "description": "Theme object" },
+            "hue": {
+              "type": "string",
+              "optional": true,
+              "description": "Color hue"
+            },
+            "shade": {
+              "type": "number",
+              "optional": true,
+              "description": "Color shade"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS box-shadow value"
+      },
+      "examples": [
+        {
+          "description": "Get focus shadow",
+          "code": "const shadow = getFocusBoxShadow({ theme, hue: 'blue' });"
+        }
+      ],
+      "constraints": ["Theme must be provided"],
+      "useCases": [
+        "Custom focus indicators",
+        "Interactive elements",
+        "Accessibility states"
+      ]
+    },
+    {
+      "function": "getColor",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": { "named": "getColor", "path": "@zendeskgarden/react-theming" },
+      "description": "Extract color values from theme with support for color modes.",
+      "intendedUsage": "Retrieve theme colors in styled-components or CSS-in-JS.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "theme": {
+              "type": "ThemeObject",
+              "description": "Garden theme object"
+            },
+            "variable": {
+              "type": "string",
+              "description": "Color variable path"
+            },
+            "hue": {
+              "type": "string",
+              "optional": true,
+              "description": "Color hue name"
+            },
+            "shade": {
+              "type": "number",
+              "optional": true,
+              "description": "Color shade (100-900)"
+            },
+            "transparency": {
+              "type": "number",
+              "optional": true,
+              "description": "Opacity value (0-1)"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS color value"
+      },
+      "examples": [
+        {
+          "description": "Get theme color",
+          "code": "const color = getColor({ theme, variable: 'palette.blue-600' });"
+        }
+      ],
+      "constraints": ["Theme must be provided", "Valid color path required"],
+      "useCases": [
+        "Custom styled components",
+        "Dynamic theming",
+        "Color calculations"
+      ]
+    },
+    {
+      "function": "mediaQuery",
+      "category": "responsive",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "mediaQuery",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Generate CSS media query strings based on theme breakpoints.",
+      "intendedUsage": "Create responsive styles aligned with Garden's breakpoints.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "theme": {
+              "type": "ThemeObject",
+              "description": "Garden theme object"
+            },
+            "query": {
+              "type": "string",
+              "description": "Breakpoint query specifier"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS media query string"
+      },
+      "examples": [
+        {
+          "description": "Responsive query",
+          "code": "const mq = mediaQuery({ theme, query: 'md' });\n// @media (min-width: 768px)"
+        }
+      ],
+      "constraints": [
+        "Valid breakpoint names",
+        "Theme must include breakpoints"
+      ],
+      "useCases": [
+        "Responsive layouts",
+        "Mobile-first design",
+        "Conditional styling"
+      ]
+    },
+    {
+      "function": "arrowStyles",
+      "category": "components",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "arrowStyles",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Generate arrow CSS for tooltips, popovers, and dropdowns.",
+      "intendedUsage": "Create directional arrows for floating UI elements.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "string",
+              "description": "Arrow position (top, bottom, left, right)"
+            },
+            "size": { "type": "string", "description": "Arrow size" },
+            "inset": { "type": "string", "description": "Inset from edge" }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS styles for arrow"
+      },
+      "examples": [
+        {
+          "description": "Tooltip arrow",
+          "code": "const styles = arrowStyles({ position: 'top', size: '6px' });"
+        }
+      ],
+      "constraints": ["Valid position values", "Must be positioned element"],
+      "useCases": ["Tooltips", "Popovers", "Dropdowns", "Speech bubbles"]
+    },
+    {
+      "function": "menuStyles",
+      "category": "components",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "menuStyles",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Generate Garden-consistent menu and dropdown styles.",
+      "intendedUsage": "Style custom menu components consistently.",
+      "parameters": [
+        {
+          "name": "options",
+          "type": "object",
+          "properties": {
+            "position": { "type": "string", "description": "Menu position" },
+            "theme": {
+              "type": "ThemeObject",
+              "description": "Garden theme object"
+            },
+            "hidden": {
+              "type": "boolean",
+              "description": "Hide menu visually"
+            },
+            "animationModifier": {
+              "type": "string",
+              "description": "Animation class"
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "description": "CSS styles for menu"
+      },
+      "examples": [
+        {
+          "description": "Dropdown menu",
+          "code": "const styles = menuStyles({ position: 'bottom', theme });"
+        }
+      ],
+      "constraints": ["Valid position values", "Theme required"],
+      "useCases": [
+        "Dropdown menus",
+        "Context menus",
+        "Select components",
+        "Popovers"
+      ]
+    }
+  ],
+  "utilityComponents": [
+    {
+      "component": "ToastProvider",
+      "category": "notifications",
+      "package": "@zendeskgarden/react-notifications",
+      "import": {
+        "named": "ToastProvider",
+        "path": "@zendeskgarden/react-notifications"
+      },
+      "description": "Context provider for toast notifications.",
+      "intendedUsage": "Enable toast functionality throughout the application.",
+      "props": {
+        "placement": {
+          "type": "enum",
+          "values": [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end"
+          ],
+          "default": "top-end"
+        },
+        "limit": { "type": "number", "default": 4 },
+        "zIndex": { "type": "number", "default": 1000 }
+      },
+      "examples": [
+        {
+          "description": "Wrap application",
+          "props": {
+            "children": "<App />"
+          }
+        }
+      ],
+      "constraints": ["Must wrap components using useToast"],
+      "useCases": ["Application notifications", "Global toast context"]
+    },
+    {
+      "component": "SelectionContainer",
+      "category": "selection",
+      "package": "@zendeskgarden/container-selection",
+      "import": {
+        "named": "SelectionContainer",
+        "path": "@zendeskgarden/container-selection"
+      },
+      "description": "Render-prop wrapper for selection functionality.",
+      "intendedUsage": "Create selectable lists and menus with render props.",
+      "props": {
+        "selectedItem": {
+          "type": "any",
+          "description": "Controlled selection"
+        },
+        "onSelect": { "type": "function", "description": "Selection callback" },
+        "render": { "type": "function", "description": "Render function" }
+      },
+      "examples": [
+        {
+          "description": "Selection render prop",
+          "props": {
+            "render": "({ getItemProps }) => <li {...getItemProps()}>Item</li>"
+          }
+        }
+      ],
+      "constraints": ["Render prop pattern"],
+      "useCases": ["List selection", "Menu components", "Dropdown options"]
+    },
+    {
+      "component": "ColorSchemeProvider",
+      "category": "theming",
+      "package": "@zendeskgarden/react-theming",
+      "import": {
+        "named": "ColorSchemeProvider",
+        "path": "@zendeskgarden/react-theming"
+      },
+      "description": "Manage user color scheme preferences.",
+      "intendedUsage": "Enable light/dark mode switching throughout the application.",
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "description": "Application content"
+        }
+      },
+      "examples": [
+        {
+          "description": "Color scheme provider",
+          "props": {
+            "children": "<ThemeProvider theme={theme}><App /></ThemeProvider>"
+          }
+        }
+      ],
+      "constraints": ["Should wrap ThemeProvider"],
+      "useCases": [
+        "Dark mode support",
+        "System preference sync",
+        "Theme persistence"
+      ]
+    },
+    {
+      "component": "FocusJailContainer",
+      "category": "accessibility",
+      "package": "@zendeskgarden/container-focusjail",
+      "import": {
+        "named": "FocusJailContainer",
+        "path": "@zendeskgarden/container-focusjail"
+      },
+      "description": "Render-prop wrapper for focus trapping functionality.",
+      "intendedUsage": "Create focus-trapped regions for modal interfaces.",
+      "props": {
+        "containerRef": {
+          "type": "RefObject",
+          "description": "Reference to container"
+        },
+        "focusOnMount": {
+          "type": "boolean",
+          "default": true,
+          "description": "Focus on mount"
+        },
+        "restoreFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Restore focus on unmount"
+        },
+        "render": {
+          "type": "function",
+          "description": "Render function receiving props"
+        }
+      },
+      "examples": [
+        {
+          "description": "Focus jail render prop",
+          "props": {
+            "render": "({ getContainerProps }) => <div {...getContainerProps()}>Content</div>"
+          }
+        }
+      ],
+      "constraints": ["Must contain focusable elements", "Render prop pattern"],
+      "useCases": ["Modal dialogs", "Alert dialogs", "Dropdown menus"]
+    },
+    {
+      "component": "ScheduleContainer",
+      "category": "animation",
+      "package": "@zendeskgarden/container-schedule",
+      "import": {
+        "named": "ScheduleContainer",
+        "path": "@zendeskgarden/container-schedule"
+      },
+      "description": "Render-prop wrapper for animation scheduling.",
+      "intendedUsage": "Create time-based animations with render props.",
+      "props": {
+        "duration": { "type": "number", "description": "Animation duration" },
+        "delayMS": {
+          "type": "number",
+          "optional": true,
+          "description": "Animation delay"
+        },
+        "loop": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Loop animation"
+        },
+        "render": {
+          "type": "function",
+          "description": "Render function receiving elapsed time"
+        }
+      },
+      "examples": [
+        {
+          "description": "Animation container",
+          "props": {
+            "duration": 1000,
+            "render": "elapsed => <div style={{ transform: `translateX(${elapsed * 100}px)` }} />"
+          }
+        }
+      ],
+      "constraints": ["Animation frame timing", "Performance considerations"],
+      "useCases": ["Custom animations", "Transitions", "Progress indicators"]
+    }
+  ]
+}

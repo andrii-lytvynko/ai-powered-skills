@@ -1,0 +1,82 @@
+---
+alwaysApply: true
+---
+
+# Zendesk Content Design
+
+All UI copy in this project must follow Zendesk Content Design guidelines. Apply these rules whenever you write or edit any user-visible string: headings, body text, buttons, labels, tooltips, placeholders, empty states, error messages, success messages, menu items, breadcrumbs, and tab labels.
+
+## Voice and Tone
+
+Zendesk has four voice attributes. Dial the right one up depending on context:
+
+- **Distilled** (low-impact, informational) — labels, tooltips, auto-dismiss alerts. Be spare, precise, focused.
+- **Humblident** (high-impact, informational) — warnings, unsaved-changes modals. Be even, calm, knowledgeable. Never ask "Are you sure?"
+- **Real** (high-impact, instructional) — errors, security issues, destructive actions. Be direct, candid, respectful. No jokes or sugar-coating.
+- **Charming** (low-impact, instructional) — onboarding, empty states. Be refreshing, warm, well-timed. Don't overdo it.
+
+## Grammar and Style
+
+- **Sentence case** for all UI text. Never title case.
+- **Present tense + active voice** by default. Past tense for completed actions only. Never use present perfect ("has been sent") or future perfect.
+- **One tense per component** — don't mix.
+- **Address the user as "you"**. Never "me", "my", "mine", "us".
+- **Avoid "we"** unless a specific Zendesk team is the speaker (security/feedback situations only).
+- **Gender-neutral**: they/them/their. Never he/his or she/her.
+- **Contractions**: use common ones (isn't, can't, you're, doesn't) in casual flows. Avoid in billing, security, admin, account recovery. Never use ain't, it'll, that'll, would've.
+- **No emoji** in UI copy.
+- **Bold** for UI element references. Never quotation marks or italics.
+- **Acronyms**: spell out on first use with acronym in parentheses. All-caps for acronyms, lowercase for file extensions.
+- **Skip articles** (a, an, the) in headings and buttons: "Create trigger" not "Create a trigger".
+
+## Punctuation
+
+- No ampersands — write "and"
+- No exclamation points
+- No semi-colons
+- Always use the Oxford comma
+- Periods after complete sentences in descriptions/hints/validation. No periods in headings, buttons, menu labels, breadcrumbs
+- Ellipsis only for loading/saving states ("Loading...")
+- Parentheses: sparingly, never for crucial info. Use for acronym introduction only
+- Bold for group:value pairs, not colons
+- Quotation marks only for quoting text or examples, never for UI references
+
+## CTA Verbs
+
+Use these specific verbs — never the alternatives:
+
+| Action | Use | Not |
+|--------|-----|-----|
+| Pick from options | Select | Choose |
+| Auto-operate | Activate / Deactivate | Enable / Disable |
+| Feature availability | Turn on / Turn off | Enable / Disable |
+| Brand-new item | Create | — |
+| Layer onto existing | Add | — |
+| Modify item | Edit | — |
+| Control large area | Manage | — |
+| Billing/app changes | Update | — |
+| Permanent removal | Delete | Remove |
+| Reversible removal | Remove | Delete |
+| Commit changes | Save | — |
+| Duplicate item | Create copy | Duplicate / Clone |
+| Navigate to info | View {noun} | See |
+| Reveal hidden | Show | See / Unhide |
+| Multi-step back/next | Back / Next | Proceed / Continue |
+| Table pagination | Previous / Next | Back |
+| Discard edits | Cancel | Discard changes |
+| Help article link | Learn about {noun} | Learn more |
+| In-product navigation | Go to {destination} | Go to the {destination} page |
+
+One action per button only.
+
+## Numbers and Formatting
+
+- Numerals, not words: "3 items" not "three items"
+- Decimals, not fractions. Leading zero if < 1: 0.75
+- No space before %: 37%
+- Dates (US): Jan 14, 2020 or January 14, 2020. Never pad day with zero
+- Time (12h): 11:37 PM — space before uppercase AM/PM, no periods
+- Time (24h): 09:44 — leading zero, no AM/PM
+- Phone: E.164 format (+14159671337)
+- Timezones: UTC offset (11:37 UTC -02:30), no letter codes
+- Avoid vague time words: "soon", "later", "in a while"
