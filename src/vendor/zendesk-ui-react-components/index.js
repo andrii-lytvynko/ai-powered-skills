@@ -2,14 +2,8 @@
  * Local dev bridge for @zendesk-ui/react-components when the private
  * Artifactory package is unavailable. Re-exports Garden v9 components
  * with the v10 member-property API used by migrated pages.
- *
- * The ThemeProvider must be Garden's own (the single styled-components instance
- * the re-exported v9 components read from) so they receive a populated theme.
- * getTheme and DEFAULT_THEME are imported via relative path to bypass the vite
- * alias and pull the real Flora theme data and component style overrides.
  */
-import { ThemeProvider } from '@zendeskgarden/react-theming';
-import { getTheme, DEFAULT_THEME } from '../../../node_modules/@zendesk-ui/react-components/dist/esm/theming/elements/theme/index.js';
+import { ThemeProvider, DEFAULT_THEME } from '@zendeskgarden/react-theming';
 import { Anchor, Button as GardenButton, IconButton } from '@zendeskgarden/react-buttons';
 import {
   Field,
@@ -85,13 +79,16 @@ export const Notification = Object.assign(GardenNotification, {
   Close: NotificationClose,
 });
 
+export function getTheme(theme = DEFAULT_THEME) {
+  return theme;
+}
+
 export {
   Anchor,
   Avatar,
   Checkbox,
   DEFAULT_THEME,
   Field,
-  getTheme,
   IconButton,
   Input,
   LG,

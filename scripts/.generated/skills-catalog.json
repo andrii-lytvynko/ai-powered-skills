@@ -1,0 +1,406 @@
+[
+  {
+    "id": "api-authentication",
+    "name": "API Authentication"
+  },
+  {
+    "id": "api-support",
+    "name": "API Support"
+  },
+  {
+    "id": "access-management",
+    "name": "Access Management"
+  },
+  {
+    "id": "account-management",
+    "name": "Account Management"
+  },
+  {
+    "id": "account-migration",
+    "name": "Account Migration"
+  },
+  {
+    "id": "account-ownership-transfer",
+    "name": "Account Ownership Transfer"
+  },
+  {
+    "id": "account-recovery",
+    "name": "Account Recovery"
+  },
+  {
+    "id": "admin-console",
+    "name": "Admin Console"
+  },
+  {
+    "id": "admin-settings",
+    "name": "Admin Settings"
+  },
+  {
+    "id": "administration",
+    "name": "Administration"
+  },
+  {
+    "id": "audit-logging",
+    "name": "Audit Logging"
+  },
+  {
+    "id": "authentication",
+    "name": "Authentication"
+  },
+  {
+    "id": "automated-reminders",
+    "name": "Automated Reminders"
+  },
+  {
+    "id": "automation",
+    "name": "Automation"
+  },
+  {
+    "id": "billing",
+    "name": "Billing"
+  },
+  {
+    "id": "crm-configuration",
+    "name": "CRM Configuration"
+  },
+  {
+    "id": "crm-data-management",
+    "name": "CRM Data Management"
+  },
+  {
+    "id": "crm-integration",
+    "name": "CRM Integration"
+  },
+  {
+    "id": "crm-support",
+    "name": "CRM Support"
+  },
+  {
+    "id": "csv",
+    "name": "CSV"
+  },
+  {
+    "id": "csv-export",
+    "name": "CSV Export"
+  },
+  {
+    "id": "csv-import",
+    "name": "CSV Import"
+  },
+  {
+    "id": "campaign-reporting",
+    "name": "Campaign Reporting"
+  },
+  {
+    "id": "checklist-configuration",
+    "name": "Checklist Configuration"
+  },
+  {
+    "id": "compliance",
+    "name": "Compliance"
+  },
+  {
+    "id": "contact-merge-troubleshooting",
+    "name": "Contact Merge Troubleshooting"
+  },
+  {
+    "id": "custom-fields",
+    "name": "Custom Fields"
+  },
+  {
+    "id": "customer-support",
+    "name": "Customer Support"
+  },
+  {
+    "id": "dashboard-reporting",
+    "name": "Dashboard Reporting"
+  },
+  {
+    "id": "data-deduplication",
+    "name": "Data Deduplication"
+  },
+  {
+    "id": "data-export",
+    "name": "Data Export"
+  },
+  {
+    "id": "data-import",
+    "name": "Data Import"
+  },
+  {
+    "id": "data-integration",
+    "name": "Data Integration"
+  },
+  {
+    "id": "data-management",
+    "name": "Data Management"
+  },
+  {
+    "id": "data-mapping",
+    "name": "Data Mapping"
+  },
+  {
+    "id": "data-migration",
+    "name": "Data Migration"
+  },
+  {
+    "id": "data-recovery",
+    "name": "Data Recovery"
+  },
+  {
+    "id": "data-residency",
+    "name": "Data Residency"
+  },
+  {
+    "id": "email-deliverability",
+    "name": "Email Deliverability"
+  },
+  {
+    "id": "environment-configuration",
+    "name": "Environment Configuration"
+  },
+  {
+    "id": "escalation-management",
+    "name": "Escalation Management"
+  },
+  {
+    "id": "excel",
+    "name": "Excel"
+  },
+  {
+    "id": "feature-configuration",
+    "name": "Feature Configuration"
+  },
+  {
+    "id": "file-organization",
+    "name": "File Organization"
+  },
+  {
+    "id": "form-configuration",
+    "name": "Form Configuration"
+  },
+  {
+    "id": "french",
+    "name": "French"
+  },
+  {
+    "id": "german",
+    "name": "German"
+  },
+  {
+    "id": "google-drive-integration",
+    "name": "Google Drive Integration"
+  },
+  {
+    "id": "hubspot-integration",
+    "name": "HubSpot Integration"
+  },
+  {
+    "id": "identity-management",
+    "name": "Identity Management"
+  },
+  {
+    "id": "incident-management",
+    "name": "Incident Management"
+  },
+  {
+    "id": "jira-integration",
+    "name": "Jira Integration"
+  },
+  {
+    "id": "licensing",
+    "name": "Licensing"
+  },
+  {
+    "id": "login-event-triggers",
+    "name": "Login Event Triggers"
+  },
+  {
+    "id": "microsoft-teams-integration",
+    "name": "Microsoft Teams Integration"
+  },
+  {
+    "id": "multi-factor-authentication",
+    "name": "Multi-Factor Authentication"
+  },
+  {
+    "id": "notification-configuration",
+    "name": "Notification Configuration"
+  },
+  {
+    "id": "oauth-authentication",
+    "name": "OAuth Authentication"
+  },
+  {
+    "id": "oauth-permissions",
+    "name": "OAuth Permissions"
+  },
+  {
+    "id": "okta",
+    "name": "Okta"
+  },
+  {
+    "id": "okta-administration",
+    "name": "Okta Administration"
+  },
+  {
+    "id": "pagination",
+    "name": "Pagination"
+  },
+  {
+    "id": "performance-troubleshooting",
+    "name": "Performance Troubleshooting"
+  },
+  {
+    "id": "polish",
+    "name": "Polish"
+  },
+  {
+    "id": "portuguese",
+    "name": "Portuguese"
+  },
+  {
+    "id": "product-catalog",
+    "name": "Product Catalog"
+  },
+  {
+    "id": "project-archiving",
+    "name": "Project Archiving"
+  },
+  {
+    "id": "project-configuration",
+    "name": "Project Configuration"
+  },
+  {
+    "id": "project-templates",
+    "name": "Project Templates"
+  },
+  {
+    "id": "queue-configuration",
+    "name": "Queue Configuration"
+  },
+  {
+    "id": "rate-limiting",
+    "name": "Rate Limiting"
+  },
+  {
+    "id": "reporting",
+    "name": "Reporting"
+  },
+  {
+    "id": "role-configuration",
+    "name": "Role Configuration"
+  },
+  {
+    "id": "role-mapping",
+    "name": "Role Mapping"
+  },
+  {
+    "id": "scim-provisioning",
+    "name": "SCIM Provisioning"
+  },
+  {
+    "id": "sla-configuration",
+    "name": "SLA Configuration"
+  },
+  {
+    "id": "sla-management",
+    "name": "SLA Management"
+  },
+  {
+    "id": "sso",
+    "name": "SSO"
+  },
+  {
+    "id": "sales-operations",
+    "name": "Sales Operations"
+  },
+  {
+    "id": "sales-training",
+    "name": "Sales Training"
+  },
+  {
+    "id": "salesforce-integration",
+    "name": "Salesforce Integration"
+  },
+  {
+    "id": "sandbox-environment-management",
+    "name": "Sandbox Environment Management"
+  },
+  {
+    "id": "slack-integration",
+    "name": "Slack Integration"
+  },
+  {
+    "id": "spanish",
+    "name": "Spanish"
+  },
+  {
+    "id": "stripe-integration",
+    "name": "Stripe Integration"
+  },
+  {
+    "id": "subscription-management",
+    "name": "Subscription Management"
+  },
+  {
+    "id": "tag-management",
+    "name": "Tag Management"
+  },
+  {
+    "id": "task-management",
+    "name": "Task Management"
+  },
+  {
+    "id": "team-management",
+    "name": "Team Management"
+  },
+  {
+    "id": "team-training",
+    "name": "Team Training"
+  },
+  {
+    "id": "tenant-administration",
+    "name": "Tenant Administration"
+  },
+  {
+    "id": "ticketing-system",
+    "name": "Ticketing System"
+  },
+  {
+    "id": "time-zone-configuration",
+    "name": "Time Zone Configuration"
+  },
+  {
+    "id": "training",
+    "name": "Training"
+  },
+  {
+    "id": "user-management",
+    "name": "User Management"
+  },
+  {
+    "id": "webhook-processing",
+    "name": "Webhook Processing"
+  },
+  {
+    "id": "workflow-administration",
+    "name": "Workflow Administration"
+  },
+  {
+    "id": "workflow-automation",
+    "name": "Workflow Automation"
+  },
+  {
+    "id": "workflow-configuration",
+    "name": "Workflow Configuration"
+  },
+  {
+    "id": "workspace-administration",
+    "name": "Workspace Administration"
+  },
+  {
+    "id": "xero-integration",
+    "name": "Xero Integration"
+  }
+]

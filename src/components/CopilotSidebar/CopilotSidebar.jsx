@@ -677,7 +677,7 @@ export default function CopilotSidebar({
                     <div className="copilot-resp__skills-header copilot-resp__text--1">
                       <p className="copilot-resp__skills-title">Skills matrix · Generated · Ready for review</p>
                       <MD>
-                        {summary.totalSkills} skills in {summary.totalCategories} categories identified from 34,120 tickets across 90 days. Adjust agent proficiency or remove assignments before you approve.
+                        {summary.totalSkills} skills in {summary.totalCategories} categories identified from {summary.totalTickets?.toLocaleString('en-US') ?? '1,000'} tickets across 90 days. Adjust agent proficiency or remove assignments before you approve.
                       </MD>
                     </div>
 

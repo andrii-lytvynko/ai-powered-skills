@@ -1,19 +1,68 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, IconButton, Table, LG, MD, SM } from '@zendesk-ui/react-components';
 import AgentAvatar from '../AgentAvatar';
+import { ChevronDownIcon } from '../Icons';
 import { PlusIcon } from './icons';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import SkillRadarChart, { getSkillGraphDescription } from './SkillRadarChart';
 import {
   SKILLS,
   INITIAL_AGENTS,
-  getAssignedSkillsList,
+  getCategorySkillGroups,
   formatSkillsAssigned,
   formatSkillsAssignedCompact,
-  getUnassignedSkills,
   normalizeAgents,
 } from './agentSkillsData';
 import './AgentSkillsManager.css';
+
+
+function CategoryAvailableSkillsTable({ skills, agentId, onAddSkill }) {
+  if (skills.length === 0) return null;
+
+  return (
+    <div className="agent-skills-manager__category-available">
+      <SM isBold className="agent-skills-manager__category-available-title" tag="span">
+        Available skills
+      </SM>
+      <div className="agent-skills-manager__available-skills-scroll agent-skills-manager__available-skills-scroll--category">
+        <div className="agent-skills-manager__table-header">
+          <Table className="agent-skills-manager__available-skills-table" size="small">
+            <Table.Head>
+              <Table.HeaderRow>
+                <Table.HeaderCell>Skill name</Table.HeaderCell>
+                <Table.HeaderCell className="agent-skills-manager__col-add" />
+              </Table.HeaderRow>
+            </Table.Head>
+          </Table>
+        </div>
+        <div className="agent-skills-manager__table-body-scroll agent-skills-manager__scroll">
+          <Table className="agent-skills-manager__available-skills-table" size="small">
+            <Table.Body>
+              {skills.map((skill) => (
+                <Table.Row key={skill.id}>
+                  <Table.Cell>
+                    <SM tag="span">{skill.name}</SM>
+                  </Table.Cell>
+                  <Table.Cell className="agent-skills-manager__cell-add">
+                    <IconButton
+                      isBasic
+                      size="small"
+                      className="agent-skills-manager__add-skill-btn"
+                      aria-label={`Add ${skill.name}`}
+                      onClick={() => onAddSkill(agentId, skill.id)}
+                    >
+                      <PlusIcon />
+                    </IconButton>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 function AgentDetailPanel({
@@ -24,8 +73,31 @@ function AgentDetailPanel({
   onRemoveSkill,
   onAddSkill,
 }) {
-  const assignedSkills = getAssignedSkillsList(agent, skills);
-  const unassignedSkills = getUnassignedSkills(agent, skills);
+  const categoryGroups = getCategorySkillGroups(agent, skills);
+  const totalAssignedSkills = categoryGroups.reduce(
+    (sum, group) => sum + group.assignedSkills.length,
+    0,
+  );
+  const [collapsedCategories, setCollapsedCategories] = useState(() => new Set());
+
+  useEffect(() => {
+    const groups = getCategorySkillGroups(agent, skills);
+    setCollapsedCategories(
+      new Set(groups.slice(1).map((group) => group.categoryId)),
+    );
+  }, [agent.id]);
+
+  const toggleCategory = useCallback((categoryId) => {
+    setCollapsedCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(categoryId)) {
+        next.delete(categoryId);
+      } else {
+        next.add(categoryId);
+      }
+      return next;
+    });
+  }, []);
 
   return (
     <div className="agent-skills-manager__detail">
@@ -51,63 +123,86 @@ function AgentDetailPanel({
 
       <div className="agent-skills-manager__detail-body agent-skills-manager__scroll">
         <section className="agent-skills-manager__section">
-          <MD isBold className="agent-skills-manager__section-title" tag="span">Skill graph</MD>
+          <MD isBold className="agent-skills-manager__section-title" tag="span">Skills by category</MD>
           <SM className="agent-skills-manager__section-description" tag="span">
-            {getSkillGraphDescription(assignedSkills.length)}
+            {getSkillGraphDescription(totalAssignedSkills)}
           </SM>
-          <SkillRadarChart
-            skills={assignedSkills}
-            onScoreChange={(skillId, score) => onScoreChange(agent.id, skillId, score)}
-            onRemove={(skillId) => onRemoveSkill(agent.id, skillId)}
-          />
-        </section>
-
-        <section className="agent-skills-manager__section">
-          <MD isBold className="agent-skills-manager__section-title" tag="span">Available skills</MD>
-          <SM className="agent-skills-manager__section-description" tag="span">
-            Add skills to include them on the graph for this agent.
-          </SM>
-          {unassignedSkills.length > 0 ? (
-            <div className="agent-skills-manager__available-skills-scroll">
-              <div className="agent-skills-manager__table-header">
-                <Table className="agent-skills-manager__available-skills-table" size="small">
-                  <Table.Head>
-                    <Table.HeaderRow>
-                      <Table.HeaderCell>Skill name</Table.HeaderCell>
-                      <Table.HeaderCell className="agent-skills-manager__col-add" />
-                    </Table.HeaderRow>
-                  </Table.Head>
-                </Table>
-              </div>
-              <div className="agent-skills-manager__table-body-scroll agent-skills-manager__scroll">
-                <Table className="agent-skills-manager__available-skills-table" size="small">
-                  <Table.Body>
-                    {unassignedSkills.map((skill) => (
-                      <Table.Row key={skill.id}>
-                        <Table.Cell>
-                          <SM tag="span">{skill.name}</SM>
-                        </Table.Cell>
-                        <Table.Cell className="agent-skills-manager__cell-add">
-                          <IconButton
-                            isBasic
-                            size="small"
-                            className="agent-skills-manager__add-skill-btn"
-                            aria-label={`Add ${skill.name}`}
-                            onClick={() => onAddSkill(agent.id, skill.id)}
-                          >
-                            <PlusIcon />
-                          </IconButton>
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              </div>
+          {categoryGroups.length === 0 ? (
+            <div className="skill-radar__empty">
+              <MD tag="span">No skills assigned yet. Add a skill to get started.</MD>
             </div>
           ) : (
-            <SM className="agent-skills-manager__available-skills-empty" tag="span">
-              All skills are assigned to this agent.
-            </SM>
+            <div className="agent-skills-manager__skill-graphs">
+              {categoryGroups.map((group, index) => {
+                const isCollapsed = collapsedCategories.has(group.categoryId);
+                const headerId = `agent-skill-cat-${agent.id}-${group.categoryId}`;
+                const panelId = `agent-skill-cat-panel-${agent.id}-${group.categoryId}`;
+
+                return (
+                  <div
+                    key={group.categoryId}
+                    className="agent-skills-manager__graph-category"
+                    data-collapsed={isCollapsed ? 'true' : 'false'}
+                    style={{ '--graph-cat-index': index }}
+                  >
+                    <button
+                      type="button"
+                      id={headerId}
+                      className="agent-skills-manager__graph-category-toggle"
+                      onClick={() => toggleCategory(group.categoryId)}
+                      aria-expanded={!isCollapsed}
+                      aria-controls={panelId}
+                    >
+                      <ChevronDownIcon
+                        className={`agent-skills-manager__graph-category-chevron${
+                          isCollapsed ? ' agent-skills-manager__graph-category-chevron--collapsed' : ''
+                        }`}
+                      />
+                      <span className="agent-skills-manager__graph-category-heading">
+                        <MD isBold className="agent-skills-manager__graph-category-title" tag="span">
+                          {group.categoryName}
+                        </MD>
+                        <SM className="agent-skills-manager__graph-category-meta" tag="span">
+                          {group.assignedSkills.length}{' '}
+                          {group.assignedSkills.length === 1 ? 'skill' : 'skills'} assigned
+                          {group.unassignedSkills.length > 0 && (
+                            <>
+                              {' · '}
+                              {group.unassignedSkills.length} available
+                            </>
+                          )}
+                        </SM>
+                      </span>
+                    </button>
+                    {!isCollapsed && (
+                      <div
+                        id={panelId}
+                        className="agent-skills-manager__graph-category-body"
+                        role="region"
+                        aria-labelledby={headerId}
+                      >
+                        {group.assignedSkills.length > 0 ? (
+                          <SkillRadarChart
+                            skills={group.assignedSkills}
+                            onScoreChange={(skillId, score) => onScoreChange(agent.id, skillId, score)}
+                            onRemove={(skillId) => onRemoveSkill(agent.id, skillId)}
+                          />
+                        ) : (
+                          <SM className="agent-skills-manager__graph-category-empty" tag="span">
+                            No skills assigned in this category.
+                          </SM>
+                        )}
+                        <CategoryAvailableSkillsTable
+                          skills={group.unassignedSkills}
+                          agentId={agent.id}
+                          onAddSkill={onAddSkill}
+                        />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </section>
       </div>
@@ -122,7 +217,7 @@ function useAgentSkillsState({
   skillsCatalog,
   isActive = true,
 }) {
-  const [storedAgents, setStoredAgents] = useLocalStorage('zenbox:agentSkills', INITIAL_AGENTS);
+  const [storedAgents, setStoredAgents] = useLocalStorage('zenbox:agentSkills:v2', INITIAL_AGENTS);
   const [selectedAgentId, setSelectedAgentId] = useState(null);
   const isControlled = controlledAgents != null && typeof onAgentsChange === 'function';
   const skills = skillsCatalog ?? SKILLS;

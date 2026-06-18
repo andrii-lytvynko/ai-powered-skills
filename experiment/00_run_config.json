@@ -1,0 +1,11 @@
+{
+  "model": "openai/gpt-5.4-2026-03-05",
+  "num_agents": 20,
+  "num_tickets": 1000,
+  "num_tickets_per_batch": 100,
+  "tickets_per_combo": 10,
+  "num_combos": 100,
+  "train_fraction": 0.99,
+  "max_skills_per_ticket": 5,
+  "random_seed": 42
+}

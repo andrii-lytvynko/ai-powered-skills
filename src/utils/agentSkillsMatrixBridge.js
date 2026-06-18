@@ -4,6 +4,8 @@ export function buildSkillsCatalog(categories) {
   return getAllSkills(categories).map((skill) => ({
     id: skill.id,
     name: skill.name,
+    categoryId: skill.categoryId,
+    categoryName: skill.categoryName,
   }));
 }
 

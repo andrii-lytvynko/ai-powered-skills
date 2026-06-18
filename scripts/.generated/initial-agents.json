@@ -1,138 +1,28 @@
-import { DEFAULT_SKILL_CATEGORIES, getAgentPhotoUrl } from '../../data/skillsData';
-
-const agentPhoto = (id) => getAgentPhotoUrl(id);
-
-export const MAX_SKILLS = 120;
-
-export const SKILLS = [
-  { id: "api-authentication", name: "API Authentication" },
-  { id: "api-support", name: "API Support" },
-  { id: "access-management", name: "Access Management" },
-  { id: "account-management", name: "Account Management" },
-  { id: "account-migration", name: "Account Migration" },
-  { id: "account-ownership-transfer", name: "Account Ownership Transfer" },
-  { id: "account-recovery", name: "Account Recovery" },
-  { id: "admin-console", name: "Admin Console" },
-  { id: "admin-settings", name: "Admin Settings" },
-  { id: "administration", name: "Administration" },
-  { id: "audit-logging", name: "Audit Logging" },
-  { id: "authentication", name: "Authentication" },
-  { id: "automated-reminders", name: "Automated Reminders" },
-  { id: "automation", name: "Automation" },
-  { id: "billing", name: "Billing" },
-  { id: "crm-configuration", name: "CRM Configuration" },
-  { id: "crm-data-management", name: "CRM Data Management" },
-  { id: "crm-integration", name: "CRM Integration" },
-  { id: "crm-support", name: "CRM Support" },
-  { id: "csv", name: "CSV" },
-  { id: "csv-export", name: "CSV Export" },
-  { id: "csv-import", name: "CSV Import" },
-  { id: "campaign-reporting", name: "Campaign Reporting" },
-  { id: "checklist-configuration", name: "Checklist Configuration" },
-  { id: "compliance", name: "Compliance" },
-  { id: "contact-merge-troubleshooting", name: "Contact Merge Troubleshooting" },
-  { id: "custom-fields", name: "Custom Fields" },
-  { id: "customer-support", name: "Customer Support" },
-  { id: "dashboard-reporting", name: "Dashboard Reporting" },
-  { id: "data-deduplication", name: "Data Deduplication" },
-  { id: "data-export", name: "Data Export" },
-  { id: "data-import", name: "Data Import" },
-  { id: "data-integration", name: "Data Integration" },
-  { id: "data-management", name: "Data Management" },
-  { id: "data-mapping", name: "Data Mapping" },
-  { id: "data-migration", name: "Data Migration" },
-  { id: "data-recovery", name: "Data Recovery" },
-  { id: "data-residency", name: "Data Residency" },
-  { id: "email-deliverability", name: "Email Deliverability" },
-  { id: "environment-configuration", name: "Environment Configuration" },
-  { id: "escalation-management", name: "Escalation Management" },
-  { id: "excel", name: "Excel" },
-  { id: "feature-configuration", name: "Feature Configuration" },
-  { id: "file-organization", name: "File Organization" },
-  { id: "form-configuration", name: "Form Configuration" },
-  { id: "french", name: "French" },
-  { id: "german", name: "German" },
-  { id: "google-drive-integration", name: "Google Drive Integration" },
-  { id: "hubspot-integration", name: "HubSpot Integration" },
-  { id: "identity-management", name: "Identity Management" },
-  { id: "incident-management", name: "Incident Management" },
-  { id: "jira-integration", name: "Jira Integration" },
-  { id: "licensing", name: "Licensing" },
-  { id: "login-event-triggers", name: "Login Event Triggers" },
-  { id: "microsoft-teams-integration", name: "Microsoft Teams Integration" },
-  { id: "multi-factor-authentication", name: "Multi-Factor Authentication" },
-  { id: "notification-configuration", name: "Notification Configuration" },
-  { id: "oauth-authentication", name: "OAuth Authentication" },
-  { id: "oauth-permissions", name: "OAuth Permissions" },
-  { id: "okta", name: "Okta" },
-  { id: "okta-administration", name: "Okta Administration" },
-  { id: "pagination", name: "Pagination" },
-  { id: "performance-troubleshooting", name: "Performance Troubleshooting" },
-  { id: "polish", name: "Polish" },
-  { id: "portuguese", name: "Portuguese" },
-  { id: "product-catalog", name: "Product Catalog" },
-  { id: "project-archiving", name: "Project Archiving" },
-  { id: "project-configuration", name: "Project Configuration" },
-  { id: "project-templates", name: "Project Templates" },
-  { id: "queue-configuration", name: "Queue Configuration" },
-  { id: "rate-limiting", name: "Rate Limiting" },
-  { id: "reporting", name: "Reporting" },
-  { id: "role-configuration", name: "Role Configuration" },
-  { id: "role-mapping", name: "Role Mapping" },
-  { id: "scim-provisioning", name: "SCIM Provisioning" },
-  { id: "sla-configuration", name: "SLA Configuration" },
-  { id: "sla-management", name: "SLA Management" },
-  { id: "sso", name: "SSO" },
-  { id: "sales-operations", name: "Sales Operations" },
-  { id: "sales-training", name: "Sales Training" },
-  { id: "salesforce-integration", name: "Salesforce Integration" },
-  { id: "sandbox-environment-management", name: "Sandbox Environment Management" },
-  { id: "slack-integration", name: "Slack Integration" },
-  { id: "spanish", name: "Spanish" },
-  { id: "stripe-integration", name: "Stripe Integration" },
-  { id: "subscription-management", name: "Subscription Management" },
-  { id: "tag-management", name: "Tag Management" },
-  { id: "task-management", name: "Task Management" },
-  { id: "team-management", name: "Team Management" },
-  { id: "team-training", name: "Team Training" },
-  { id: "tenant-administration", name: "Tenant Administration" },
-  { id: "ticketing-system", name: "Ticketing System" },
-  { id: "time-zone-configuration", name: "Time Zone Configuration" },
-  { id: "training", name: "Training" },
-  { id: "user-management", name: "User Management" },
-  { id: "webhook-processing", name: "Webhook Processing" },
-  { id: "workflow-administration", name: "Workflow Administration" },
-  { id: "workflow-automation", name: "Workflow Automation" },
-  { id: "workflow-configuration", name: "Workflow Configuration" },
-  { id: "workspace-administration", name: "Workspace Administration" },
-  { id: "xero-integration", name: "Xero Integration" },
-];
-
-export const INITIAL_AGENTS = [
+[
   {
-    id: "a1",
-    name: "Alex Chen",
-    initials: "AC",
-    photoUrl: agentPhoto("a1"),
-    skills: {
+    "id": "a1",
+    "name": "Alex Chen",
+    "initials": "AC",
+    "photoUrl": "agentPhoto('a1')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 5,
       "account-recovery": 4,
       "admin-console": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "automation": 4,
       "billing": 4,
-      "campaign-reporting": 2,
-      "contact-merge-troubleshooting": 2,
       "crm-data-management": 4,
       "crm-integration": 4,
       "csv": 2,
       "csv-export": 2,
       "csv-import": 2,
+      "campaign-reporting": 2,
+      "contact-merge-troubleshooting": 2,
       "custom-fields": 4,
       "dashboard-reporting": 2,
       "data-export": 2,
@@ -155,10 +45,10 @@ export const INITIAL_AGENTS = [
       "polish": 4,
       "reporting": 4,
       "role-configuration": 3,
-      "sandbox-environment-management": 3,
       "scim-provisioning": 2,
       "sla-configuration": 2,
       "sso": 4,
+      "sandbox-environment-management": 3,
       "subscription-management": 4,
       "team-management": 3,
       "team-training": 4,
@@ -169,15 +59,17 @@ export const INITIAL_AGENTS = [
       "workflow-administration": 4,
       "workflow-automation": 3,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a2",
-    name: "Maria Garcia",
-    initials: "MG",
-    photoUrl: agentPhoto("a2"),
-    skills: {
+    "id": "a2",
+    "name": "Maria Garcia",
+    "initials": "MG",
+    "photoUrl": "agentPhoto('a2')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 4,
@@ -185,15 +77,13 @@ export const INITIAL_AGENTS = [
       "admin-console": 4,
       "admin-settings": 4,
       "administration": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "authentication": 4,
       "billing": 3,
-      "campaign-reporting": 2,
-      "contact-merge-troubleshooting": 2,
       "crm-configuration": 4,
       "crm-data-management": 4,
       "crm-support": 4,
+      "campaign-reporting": 2,
+      "contact-merge-troubleshooting": 2,
       "custom-fields": 3,
       "dashboard-reporting": 2,
       "data-deduplication": 4,
@@ -209,44 +99,44 @@ export const INITIAL_AGENTS = [
       "polish": 3,
       "reporting": 3,
       "role-configuration": 4,
-      "salesforce-integration": 3,
       "scim-provisioning": 4,
       "sso": 4,
+      "salesforce-integration": 3,
       "subscription-management": 4,
       "training": 4,
       "user-management": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a3",
-    name: "James Wilson",
-    initials: "JW",
-    photoUrl: agentPhoto("a3"),
-    skills: {
+    "id": "a3",
+    "name": "James Wilson",
+    "initials": "JW",
+    "photoUrl": "agentPhoto('a3')",
+    "skills": {
+      "api-authentication": 3,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
       "account-ownership-transfer": 2,
       "account-recovery": 4,
       "admin-settings": 4,
-      "api-authentication": 3,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "automation": 4,
       "billing": 3,
-      "campaign-reporting": 2,
-      "checklist-configuration": 2,
-      "contact-merge-troubleshooting": 2,
       "crm-configuration": 4,
       "crm-data-management": 4,
       "crm-integration": 4,
       "crm-support": 4,
       "csv-export": 4,
       "csv-import": 4,
+      "campaign-reporting": 2,
+      "checklist-configuration": 2,
+      "contact-merge-troubleshooting": 2,
       "custom-fields": 3,
       "dashboard-reporting": 4,
       "data-deduplication": 3,
@@ -279,11 +169,11 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 4,
-      "sandbox-environment-management": 2,
       "scim-provisioning": 3,
       "sla-configuration": 2,
-      "slack-integration": 2,
       "sso": 4,
+      "sandbox-environment-management": 2,
+      "slack-integration": 2,
       "stripe-integration": 2,
       "subscription-management": 3,
       "tag-management": 3,
@@ -295,15 +185,17 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 4,
       "workflow-automation": 3,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a4",
-    name: "Sarah Kim",
-    initials: "SK",
-    photoUrl: agentPhoto("a4"),
-    skills: {
+    "id": "a4",
+    "name": "Sarah Kim",
+    "initials": "SK",
+    "photoUrl": "agentPhoto('a4')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -311,8 +203,6 @@ export const INITIAL_AGENTS = [
       "account-recovery": 4,
       "admin-console": 5,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 3,
       "authentication": 4,
       "billing": 4,
@@ -342,10 +232,10 @@ export const INITIAL_AGENTS = [
       "rate-limiting": 2,
       "reporting": 4,
       "role-configuration": 4,
-      "salesforce-integration": 2,
       "scim-provisioning": 4,
-      "slack-integration": 2,
       "sso": 4,
+      "salesforce-integration": 2,
+      "slack-integration": 2,
       "subscription-management": 4,
       "task-management": 4,
       "team-management": 3,
@@ -355,15 +245,17 @@ export const INITIAL_AGENTS = [
       "workflow-administration": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a5",
-    name: "David Okonkwo",
-    initials: "DO",
-    photoUrl: agentPhoto("a5"),
-    skills: {
+    "id": "a5",
+    "name": "David Okonkwo",
+    "initials": "DO",
+    "photoUrl": "agentPhoto('a5')",
+    "skills": {
+      "api-authentication": 3,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -372,8 +264,6 @@ export const INITIAL_AGENTS = [
       "admin-console": 4,
       "admin-settings": 4,
       "administration": 4,
-      "api-authentication": 3,
-      "api-support": 4,
       "audit-logging": 2,
       "authentication": 4,
       "billing": 4,
@@ -404,9 +294,9 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 5,
       "role-mapping": 4,
-      "salesforce-integration": 5,
       "scim-provisioning": 4,
       "sso": 4,
+      "salesforce-integration": 5,
       "subscription-management": 4,
       "tag-management": 2,
       "tenant-administration": 4,
@@ -416,23 +306,23 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 3,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a6",
-    name: "Emma Thompson",
-    initials: "ET",
-    photoUrl: agentPhoto("a6"),
-    skills: {
+    "id": "a6",
+    "name": "Emma Thompson",
+    "initials": "ET",
+    "photoUrl": "agentPhoto('a6')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 4,
       "account-recovery": 3,
       "admin-console": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "billing": 2,
       "crm-integration": 4,
       "data-import": 2,
@@ -440,26 +330,26 @@ export const INITIAL_AGENTS = [
       "french": 4,
       "polish": 4,
       "reporting": 4,
-      "salesforce-integration": 4,
       "sla-management": 3,
       "sso": 4,
-      "subscription-management": 3,
-    },
+      "salesforce-integration": 4,
+      "subscription-management": 3
+    }
   },
   {
-    id: "a7",
-    name: "Lucas Müller",
-    initials: "LM",
-    photoUrl: agentPhoto("a7"),
-    skills: {
+    "id": "a7",
+    "name": "Lucas Müller",
+    "initials": "LM",
+    "photoUrl": "agentPhoto('a7')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 3,
       "account-recovery": 4,
       "admin-console": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "authentication": 4,
       "automated-reminders": 2,
       "automation": 4,
@@ -497,13 +387,13 @@ export const INITIAL_AGENTS = [
       "project-configuration": 4,
       "reporting": 4,
       "role-configuration": 3,
+      "scim-provisioning": 2,
+      "sso": 2,
       "sales-operations": 3,
       "sales-training": 2,
       "salesforce-integration": 3,
-      "scim-provisioning": 2,
       "slack-integration": 4,
       "spanish": 4,
-      "sso": 2,
       "stripe-integration": 4,
       "subscription-management": 3,
       "ticketing-system": 4,
@@ -512,15 +402,17 @@ export const INITIAL_AGENTS = [
       "user-management": 4,
       "webhook-processing": 3,
       "workflow-automation": 4,
-      "workflow-configuration": 4,
-    },
+      "workflow-configuration": 4
+    }
   },
   {
-    id: "a8",
-    name: "Yuki Tanaka",
-    initials: "YT",
-    photoUrl: agentPhoto("a8"),
-    skills: {
+    "id": "a8",
+    "name": "Yuki Tanaka",
+    "initials": "YT",
+    "photoUrl": "agentPhoto('a8')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -529,13 +421,11 @@ export const INITIAL_AGENTS = [
       "admin-console": 4,
       "admin-settings": 4,
       "administration": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 3,
       "authentication": 4,
       "billing": 4,
-      "compliance": 4,
       "crm-configuration": 4,
+      "compliance": 4,
       "custom-fields": 3,
       "dashboard-reporting": 4,
       "data-deduplication": 4,
@@ -557,10 +447,10 @@ export const INITIAL_AGENTS = [
       "reporting": 2,
       "role-configuration": 4,
       "role-mapping": 4,
-      "sandbox-environment-management": 3,
       "scim-provisioning": 4,
       "sla-configuration": 4,
       "sso": 4,
+      "sandbox-environment-management": 3,
       "subscription-management": 2,
       "task-management": 4,
       "team-management": 2,
@@ -571,15 +461,16 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 4,
       "workflow-automation": 4,
       "workflow-configuration": 5,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a9",
-    name: "Sofia Rossi",
-    initials: "SR",
-    photoUrl: agentPhoto("a9"),
-    skills: {
+    "id": "a9",
+    "name": "Sofia Rossi",
+    "initials": "SR",
+    "photoUrl": "agentPhoto('a9')",
+    "skills": {
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -587,14 +478,13 @@ export const INITIAL_AGENTS = [
       "account-recovery": 3,
       "admin-console": 3,
       "admin-settings": 4,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "automated-reminders": 1,
       "billing": 4,
-      "compliance": 3,
       "crm-configuration": 4,
       "crm-data-management": 4,
+      "compliance": 3,
       "custom-fields": 2,
       "dashboard-reporting": 3,
       "data-deduplication": 4,
@@ -617,9 +507,9 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 4,
-      "salesforce-integration": 2,
       "scim-provisioning": 4,
       "sso": 4,
+      "salesforce-integration": 2,
       "team-management": 3,
       "ticketing-system": 4,
       "time-zone-configuration": 2,
@@ -627,22 +517,22 @@ export const INITIAL_AGENTS = [
       "user-management": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a10",
-    name: "Noah Patel",
-    initials: "NP",
-    photoUrl: agentPhoto("a10"),
-    skills: {
+    "id": "a10",
+    "name": "Noah Patel",
+    "initials": "NP",
+    "photoUrl": "agentPhoto('a10')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 4,
       "account-recovery": 3,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "billing": 2,
@@ -672,11 +562,11 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 4,
-      "sandbox-environment-management": 2,
       "scim-provisioning": 2,
       "sla-configuration": 2,
-      "slack-integration": 2,
       "sso": 4,
+      "sandbox-environment-management": 2,
+      "slack-integration": 2,
       "subscription-management": 4,
       "team-management": 2,
       "time-zone-configuration": 1,
@@ -685,28 +575,28 @@ export const INITIAL_AGENTS = [
       "workflow-administration": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a11",
-    name: "Chloe Martin",
-    initials: "CM",
-    photoUrl: agentPhoto("a11"),
-    skills: {
+    "id": "a11",
+    "name": "Chloe Martin",
+    "initials": "CM",
+    "photoUrl": "agentPhoto('a11')",
+    "skills": {
+      "api-support": 3,
       "access-management": 4,
       "account-management": 3,
       "account-ownership-transfer": 2,
       "account-recovery": 3,
       "admin-settings": 4,
-      "api-support": 3,
       "audit-logging": 2,
       "authentication": 4,
       "automated-reminders": 1,
       "billing": 4,
-      "compliance": 2,
       "crm-data-management": 4,
       "csv-import": 1,
+      "compliance": 2,
       "custom-fields": 4,
       "data-import": 3,
       "data-integration": 4,
@@ -725,12 +615,12 @@ export const INITIAL_AGENTS = [
       "queue-configuration": 4,
       "role-configuration": 3,
       "role-mapping": 4,
-      "salesforce-integration": 4,
-      "sandbox-environment-management": 3,
       "scim-provisioning": 4,
       "sla-configuration": 2,
-      "slack-integration": 2,
       "sso": 4,
+      "salesforce-integration": 4,
+      "sandbox-environment-management": 3,
+      "slack-integration": 2,
       "subscription-management": 3,
       "task-management": 3,
       "team-management": 2,
@@ -740,29 +630,29 @@ export const INITIAL_AGENTS = [
       "user-management": 4,
       "webhook-processing": 2,
       "workflow-automation": 4,
-      "workflow-configuration": 4,
-    },
+      "workflow-configuration": 4
+    }
   },
   {
-    id: "a12",
-    name: "Ethan Brown",
-    initials: "EB",
-    photoUrl: agentPhoto("a12"),
-    skills: {
+    "id": "a12",
+    "name": "Ethan Brown",
+    "initials": "EB",
+    "photoUrl": "agentPhoto('a12')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-ownership-transfer": 4,
       "account-recovery": 4,
       "admin-console": 3,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "authentication": 4,
       "billing": 3,
-      "campaign-reporting": 2,
-      "compliance": 4,
       "crm-data-management": 4,
       "crm-integration": 4,
       "csv-import": 1,
+      "campaign-reporting": 2,
+      "compliance": 4,
       "custom-fields": 4,
       "customer-support": 4,
       "dashboard-reporting": 2,
@@ -792,10 +682,10 @@ export const INITIAL_AGENTS = [
       "reporting": 3,
       "role-configuration": 4,
       "role-mapping": 4,
+      "scim-provisioning": 4,
       "sales-training": 2,
       "salesforce-integration": 4,
       "sandbox-environment-management": 3,
-      "scim-provisioning": 4,
       "slack-integration": 4,
       "spanish": 4,
       "subscription-management": 4,
@@ -810,33 +700,33 @@ export const INITIAL_AGENTS = [
       "workflow-automation": 4,
       "workflow-configuration": 4,
       "workspace-administration": 4,
-      "xero-integration": 2,
-    },
+      "xero-integration": 2
+    }
   },
   {
-    id: "a13",
-    name: "Priya Nair",
-    initials: "PN",
-    photoUrl: agentPhoto("a13"),
-    skills: {
+    "id": "a13",
+    "name": "Priya Nair",
+    "initials": "PN",
+    "photoUrl": "agentPhoto('a13')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 2,
       "account-recovery": 4,
       "admin-console": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "automated-reminders": 1,
       "automation": 3,
       "billing": 4,
-      "compliance": 4,
-      "contact-merge-troubleshooting": 3,
       "crm-configuration": 4,
       "crm-data-management": 4,
       "crm-support": 4,
       "csv-import": 3,
+      "compliance": 4,
+      "contact-merge-troubleshooting": 3,
       "custom-fields": 2,
       "dashboard-reporting": 4,
       "data-deduplication": 4,
@@ -862,8 +752,8 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 4,
-      "slack-integration": 2,
       "sso": 4,
+      "slack-integration": 2,
       "subscription-management": 2,
       "tag-management": 4,
       "team-management": 2,
@@ -873,29 +763,29 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a14",
-    name: "Tomas Silva",
-    initials: "TS",
-    photoUrl: agentPhoto("a14"),
-    skills: {
+    "id": "a14",
+    "name": "Tomas Silva",
+    "initials": "TS",
+    "photoUrl": "agentPhoto('a14')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-ownership-transfer": 2,
       "account-recovery": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "authentication": 4,
       "billing": 3,
-      "checklist-configuration": 3,
-      "contact-merge-troubleshooting": 1,
       "crm-data-management": 4,
       "crm-integration": 4,
       "csv-import": 2,
+      "checklist-configuration": 3,
+      "contact-merge-troubleshooting": 1,
       "custom-fields": 4,
       "dashboard-reporting": 3,
       "data-import": 4,
@@ -916,10 +806,10 @@ export const INITIAL_AGENTS = [
       "rate-limiting": 4,
       "reporting": 4,
       "role-mapping": 4,
-      "salesforce-integration": 4,
       "scim-provisioning": 4,
-      "slack-integration": 4,
       "sso": 4,
+      "salesforce-integration": 4,
+      "slack-integration": 4,
       "stripe-integration": 4,
       "subscription-management": 3,
       "task-management": 3,
@@ -929,15 +819,17 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 3,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 3,
-    },
+      "workspace-administration": 3
+    }
   },
   {
-    id: "a15",
-    name: "Hannah Schneider",
-    initials: "HS",
-    photoUrl: agentPhoto("a15"),
-    skills: {
+    "id": "a15",
+    "name": "Hannah Schneider",
+    "initials": "HS",
+    "photoUrl": "agentPhoto('a15')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -945,17 +837,15 @@ export const INITIAL_AGENTS = [
       "account-recovery": 4,
       "admin-console": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "billing": 4,
-      "contact-merge-troubleshooting": 4,
       "crm-configuration": 4,
       "crm-data-management": 4,
       "crm-integration": 4,
       "crm-support": 4,
       "csv-import": 4,
+      "contact-merge-troubleshooting": 4,
       "custom-fields": 2,
       "dashboard-reporting": 2,
       "data-deduplication": 4,
@@ -985,12 +875,12 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 4,
-      "salesforce-integration": 4,
-      "sandbox-environment-management": 4,
       "scim-provisioning": 4,
       "sla-management": 4,
-      "slack-integration": 1,
       "sso": 4,
+      "salesforce-integration": 4,
+      "sandbox-environment-management": 4,
+      "slack-integration": 1,
       "stripe-integration": 4,
       "subscription-management": 4,
       "team-management": 3,
@@ -1003,30 +893,30 @@ export const INITIAL_AGENTS = [
       "workflow-automation": 4,
       "workflow-configuration": 4,
       "workspace-administration": 4,
-      "xero-integration": 4,
-    },
+      "xero-integration": 4
+    }
   },
   {
-    id: "a16",
-    name: "Omar Haddad",
-    initials: "OH",
-    photoUrl: agentPhoto("a16"),
-    skills: {
+    "id": "a16",
+    "name": "Omar Haddad",
+    "initials": "OH",
+    "photoUrl": "agentPhoto('a16')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
       "account-ownership-transfer": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 3,
       "authentication": 4,
       "billing": 4,
-      "campaign-reporting": 4,
-      "compliance": 4,
       "crm-data-management": 4,
       "crm-integration": 3,
       "csv-import": 2,
+      "campaign-reporting": 4,
+      "compliance": 4,
       "custom-fields": 4,
       "dashboard-reporting": 4,
       "data-deduplication": 4,
@@ -1054,11 +944,11 @@ export const INITIAL_AGENTS = [
       "queue-configuration": 4,
       "reporting": 4,
       "role-configuration": 4,
+      "scim-provisioning": 4,
+      "sso": 4,
       "salesforce-integration": 3,
       "sandbox-environment-management": 2,
-      "scim-provisioning": 4,
       "slack-integration": 1,
-      "sso": 4,
       "subscription-management": 3,
       "task-management": 4,
       "team-management": 3,
@@ -1069,15 +959,17 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 5,
       "workflow-automation": 4,
       "workflow-configuration": 3,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a17",
-    name: "Mei Lin",
-    initials: "ML",
-    photoUrl: agentPhoto("a17"),
-    skills: {
+    "id": "a17",
+    "name": "Mei Lin",
+    "initials": "ML",
+    "photoUrl": "agentPhoto('a17')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -1085,19 +977,17 @@ export const INITIAL_AGENTS = [
       "account-recovery": 4,
       "admin-console": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 4,
       "authentication": 4,
       "automation": 4,
       "billing": 4,
-      "campaign-reporting": 4,
-      "compliance": 4,
-      "contact-merge-troubleshooting": 2,
       "crm-data-management": 4,
       "csv": 3,
       "csv-export": 4,
       "csv-import": 1,
+      "campaign-reporting": 4,
+      "compliance": 4,
+      "contact-merge-troubleshooting": 2,
       "custom-fields": 4,
       "customer-support": 4,
       "dashboard-reporting": 3,
@@ -1125,11 +1015,11 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 5,
-      "salesforce-integration": 3,
       "scim-provisioning": 4,
       "sla-management": 3,
-      "slack-integration": 2,
       "sso": 4,
+      "salesforce-integration": 3,
+      "slack-integration": 2,
       "subscription-management": 4,
       "tag-management": 2,
       "team-management": 4,
@@ -1140,15 +1030,17 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a18",
-    name: "Daniel Kowalski",
-    initials: "DK",
-    photoUrl: agentPhoto("a18"),
-    skills: {
+    "id": "a18",
+    "name": "Daniel Kowalski",
+    "initials": "DK",
+    "photoUrl": "agentPhoto('a18')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 3,
       "account-management": 4,
       "account-ownership-transfer": 4,
@@ -1156,19 +1048,17 @@ export const INITIAL_AGENTS = [
       "admin-console": 4,
       "admin-settings": 4,
       "administration": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 2,
       "authentication": 4,
       "billing": 3,
-      "compliance": 4,
-      "contact-merge-troubleshooting": 4,
       "crm-configuration": 4,
       "crm-data-management": 4,
       "crm-integration": 4,
       "crm-support": 4,
       "csv-export": 4,
       "csv-import": 1,
+      "compliance": 4,
+      "contact-merge-troubleshooting": 4,
       "custom-fields": 3,
       "customer-support": 4,
       "dashboard-reporting": 4,
@@ -1191,11 +1081,11 @@ export const INITIAL_AGENTS = [
       "reporting": 4,
       "role-configuration": 4,
       "role-mapping": 4,
+      "scim-provisioning": 3,
+      "sso": 4,
       "sales-operations": 4,
       "salesforce-integration": 3,
       "sandbox-environment-management": 2,
-      "scim-provisioning": 3,
-      "sso": 4,
       "stripe-integration": 2,
       "subscription-management": 3,
       "team-management": 2,
@@ -1206,15 +1096,17 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 4,
       "workflow-automation": 3,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a19",
-    name: "Isabella Costa",
-    initials: "IC",
-    photoUrl: agentPhoto("a19"),
-    skills: {
+    "id": "a19",
+    "name": "Isabella Costa",
+    "initials": "IC",
+    "photoUrl": "agentPhoto('a19')",
+    "skills": {
+      "api-authentication": 4,
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -1222,17 +1114,15 @@ export const INITIAL_AGENTS = [
       "account-recovery": 4,
       "admin-console": 4,
       "admin-settings": 4,
-      "api-authentication": 4,
-      "api-support": 4,
       "audit-logging": 3,
       "authentication": 4,
       "billing": 3,
-      "compliance": 4,
       "crm-configuration": 4,
       "crm-integration": 4,
       "crm-support": 4,
       "csv-export": 4,
       "csv-import": 2,
+      "compliance": 4,
       "custom-fields": 4,
       "customer-support": 4,
       "data-deduplication": 4,
@@ -1257,10 +1147,10 @@ export const INITIAL_AGENTS = [
       "polish": 5,
       "reporting": 4,
       "role-configuration": 4,
-      "sandbox-environment-management": 3,
       "scim-provisioning": 2,
-      "slack-integration": 3,
       "sso": 4,
+      "sandbox-environment-management": 3,
+      "slack-integration": 3,
       "subscription-management": 4,
       "tag-management": 2,
       "time-zone-configuration": 2,
@@ -1269,15 +1159,16 @@ export const INITIAL_AGENTS = [
       "webhook-processing": 2,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
+      "workspace-administration": 4
+    }
   },
   {
-    id: "a20",
-    name: "Liam O'Connor",
-    initials: "LO",
-    photoUrl: agentPhoto("a20"),
-    skills: {
+    "id": "a20",
+    "name": "Liam O'Connor",
+    "initials": "LO",
+    "photoUrl": "agentPhoto('a20')",
+    "skills": {
+      "api-support": 4,
       "access-management": 4,
       "account-management": 4,
       "account-migration": 4,
@@ -1285,7 +1176,6 @@ export const INITIAL_AGENTS = [
       "account-recovery": 4,
       "admin-console": 4,
       "admin-settings": 4,
-      "api-support": 4,
       "authentication": 4,
       "billing": 2,
       "crm-data-management": 4,
@@ -1315,10 +1205,10 @@ export const INITIAL_AGENTS = [
       "product-catalog": 2,
       "reporting": 4,
       "role-configuration": 4,
-      "sandbox-environment-management": 4,
       "scim-provisioning": 2,
-      "slack-integration": 1,
       "sso": 4,
+      "sandbox-environment-management": 4,
+      "slack-integration": 1,
       "subscription-management": 4,
       "task-management": 4,
       "ticketing-system": 4,
@@ -1328,172 +1218,7 @@ export const INITIAL_AGENTS = [
       "workflow-administration": 4,
       "workflow-automation": 4,
       "workflow-configuration": 4,
-      "workspace-administration": 4,
-    },
-  },
-];
-
-const AVATAR_COLORS = ['#68737d', '#3B82F6', '#8B5CF6', '#10B981', '#F59E0B', '#EF4444', '#EC4899'];
-
-export function getAvatarColor(initials) {
-  const code = (initials?.charCodeAt(0) || 0) + (initials?.charCodeAt(1) || 0);
-  return AVATAR_COLORS[code % AVATAR_COLORS.length];
-}
-
-export function getSkillName(skillId, skills = SKILLS) {
-  return skills.find((skill) => skill.id === skillId)?.name ?? skillId;
-}
-
-export function getAssignedSkillCount(agent) {
-  return Object.keys(agent.skills ?? {}).length;
-}
-
-export function getSkillProficiency(agent) {
-  const scores = Object.values(agent.skills ?? {})
-    .map((score) => Number(score))
-    .filter((score) => Number.isFinite(score));
-  if (scores.length === 0) return null;
-  const sum = scores.reduce((total, score) => total + score, 0);
-  return sum / scores.length;
-}
-
-export function formatProficiency(agent) {
-  const proficiency = getSkillProficiency(agent);
-  if (proficiency === null) return '—';
-  return `${proficiency.toFixed(1)} / 5`;
-}
-
-export function formatSkillsAssigned(agent) {
-  const count = getAssignedSkillCount(agent);
-  if (count === 0) return '0 skills';
-  if (count === 1) return '1 skill';
-  return `${count} skills`;
-}
-
-export function formatSkillsAssignedCompact(agent) {
-  return String(getAssignedSkillCount(agent));
-}
-
-export function getAssignedSkillsList(agent, skills = SKILLS) {
-  const validSkillIds = new Set(skills.map((skill) => skill.id));
-
-  return Object.entries(agent.skills ?? {})
-    .filter(([id]) => validSkillIds.has(id))
-    .map(([id, score]) => {
-      const numericScore = Number(score);
-      const safeScore = Number.isFinite(numericScore)
-        ? Math.max(1, Math.min(5, Math.round(numericScore)))
-        : 1;
-      return {
-        id,
-        name: getSkillName(id, skills),
-        score: safeScore,
-      };
-    });
-}
-
-export function getUnassignedSkills(agent, skills = SKILLS) {
-  const assigned = new Set(Object.keys(agent.skills ?? {}));
-  return skills.filter((skill) => !assigned.has(skill.id));
-}
-
-export function getCategorySkillGroups(agent, skills = SKILLS) {
-  const validSkillIds = new Set(skills.map((skill) => skill.id));
-  const assigned = agent.skills ?? {};
-
-  return DEFAULT_SKILL_CATEGORIES.map((category) => {
-    const assignedSkills = [];
-    const unassignedSkills = [];
-
-    category.skills.forEach((catSkill) => {
-      if (!validSkillIds.has(catSkill.id)) return;
-
-      const skill = {
-        id: catSkill.id,
-        name: getSkillName(catSkill.id, skills),
-      };
-
-      if (assigned[catSkill.id] != null) {
-        const numericScore = Number(assigned[catSkill.id]);
-        const safeScore = Number.isFinite(numericScore)
-          ? Math.max(1, Math.min(5, Math.round(numericScore)))
-          : 1;
-        assignedSkills.push({ ...skill, score: safeScore });
-      } else {
-        unassignedSkills.push(skill);
-      }
-    });
-
-    assignedSkills.sort((a, b) => a.name.localeCompare(b.name));
-    unassignedSkills.sort((a, b) => a.name.localeCompare(b.name));
-
-    return {
-      categoryId: category.id,
-      categoryName: category.name,
-      assignedSkills,
-      unassignedSkills,
-    };
-  }).filter((group) => group.assignedSkills.length > 0 || group.unassignedSkills.length > 0);
-}
-
-export function getAssignedSkillsGroupedByCategory(agent, skills = SKILLS) {
-  return getCategorySkillGroups(agent, skills)
-    .filter((group) => group.assignedSkills.length > 0)
-    .map((group) => ({
-      categoryId: group.categoryId,
-      categoryName: group.categoryName,
-      skills: group.assignedSkills,
-    }));
-}
-
-function sanitizeAgentSkills(rawSkills, validSkillIds) {
-  const skills = {};
-
-  if (!rawSkills || typeof rawSkills !== 'object') {
-    return skills;
-  }
-
-  Object.entries(rawSkills).forEach(([id, score]) => {
-    if (!validSkillIds.has(id)) return;
-    const numericScore = Number(score);
-    if (Number.isFinite(numericScore)) {
-      skills[id] = Math.max(1, Math.min(5, Math.round(numericScore)));
+      "workspace-administration": 4
     }
-  });
-
-  return skills;
-}
-
-export function normalizeAgents(data, { templateAgents = INITIAL_AGENTS, skills = SKILLS } = {}) {
-  const validSkillIds = new Set(skills.map((skill) => skill.id));
-  const storedById = new Map();
-
-  if (Array.isArray(data)) {
-    data.forEach((agent) => {
-      if (!agent || typeof agent !== 'object') return;
-      if (agent.id == null || agent.id === '') return;
-      storedById.set(String(agent.id), agent);
-    });
   }
-
-  return templateAgents.map((fallback) => {
-    const agent = storedById.get(String(fallback.id));
-    const nextSkills = agent
-      ? sanitizeAgentSkills(agent.skills, validSkillIds)
-      : sanitizeAgentSkills(fallback.skills, validSkillIds);
-
-    const resolvedPhoto =
-      (typeof agent?.photoUrl === 'string' && agent.photoUrl.trim())
-      || (typeof fallback.photoUrl === 'string' && fallback.photoUrl.trim())
-      || getAgentPhotoUrl(fallback.id)
-      || '';
-
-    return {
-      id: fallback.id,
-      name: typeof agent?.name === 'string' && agent.name.trim() ? agent.name : fallback.name,
-      initials: typeof agent?.initials === 'string' && agent.initials.trim() ? agent.initials : fallback.initials,
-      photoUrl: resolvedPhoto,
-      skills: nextSkills,
-    };
-  });
-}
+]

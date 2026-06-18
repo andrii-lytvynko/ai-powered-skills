@@ -9,7 +9,7 @@ import {
 } from '../data/skillsData';
 import { applyAgentChangesToMatrix } from '../utils/agentSkillsMatrixBridge';
 
-const STORAGE_KEY = 'zenbox:skills:matrix';
+const STORAGE_KEY = 'zenbox:skills:matrix:v2';
 
 function cloneCategories(categories) {
   return categories.map((cat) => ({

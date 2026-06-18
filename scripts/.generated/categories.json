@@ -1,0 +1,5308 @@
+[
+  {
+    "id": "login-and-access",
+    "name": "Login and access",
+    "skills": [
+      {
+        "id": "access-management",
+        "name": "Access Management",
+        "tickets": "178",
+        "ticketCount": 178,
+        "intents": "Access Management configuration, troubleshooting, and how-to questions",
+        "confidence": 96,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "authentication",
+        "name": "Authentication",
+        "tickets": "55",
+        "ticketCount": 55,
+        "intents": "Authentication setup, login failures, token issues, and permission errors",
+        "confidence": 93,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "api-authentication",
+        "name": "API Authentication",
+        "tickets": "39",
+        "ticketCount": 39,
+        "intents": "API Authentication setup, login failures, token issues, and permission errors",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "sso",
+        "name": "SSO",
+        "tickets": "60",
+        "ticketCount": 60,
+        "intents": "SSO setup, login failures, token issues, and permission errors",
+        "confidence": 94,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "oauth-authentication",
+        "name": "OAuth Authentication",
+        "tickets": "10",
+        "ticketCount": 10,
+        "intents": "OAuth Authentication setup, login failures, token issues, and permission errors",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "oauth-permissions",
+        "name": "OAuth Permissions",
+        "tickets": "15",
+        "ticketCount": 15,
+        "intents": "OAuth Permissions setup, login failures, token issues, and permission errors",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "multi-factor-authentication",
+        "name": "Multi-Factor Authentication",
+        "tickets": "18",
+        "ticketCount": 18,
+        "intents": "Multi-Factor Authentication setup, login failures, token issues, and permission errors",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "identity-management",
+        "name": "Identity Management",
+        "tickets": "20",
+        "ticketCount": 20,
+        "intents": "Identity Management configuration, troubleshooting, and how-to questions",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "account-recovery",
+        "name": "Account Recovery",
+        "tickets": "38",
+        "ticketCount": 38,
+        "intents": "Account Recovery configuration, troubleshooting, and how-to questions",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "okta",
+        "name": "Okta",
+        "tickets": "15",
+        "ticketCount": 15,
+        "intents": "Okta setup, login failures, token issues, and permission errors",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "okta-administration",
+        "name": "Okta Administration",
+        "tickets": "11",
+        "ticketCount": 11,
+        "intents": "Okta Administration setup, login failures, token issues, and permission errors",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "scim-provisioning",
+        "name": "SCIM Provisioning",
+        "tickets": "30",
+        "ticketCount": 30,
+        "intents": "SCIM Provisioning setup, login failures, token issues, and permission errors",
+        "confidence": 91,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "login-event-triggers",
+        "name": "Login Event Triggers",
+        "tickets": "2",
+        "ticketCount": 2,
+        "intents": "Login Event Triggers configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "user-and-account-management",
+    "name": "User and account management",
+    "skills": [
+      {
+        "id": "user-management",
+        "name": "User Management",
+        "tickets": "166",
+        "ticketCount": 166,
+        "intents": "User Management configuration, troubleshooting, and how-to questions",
+        "confidence": 96,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "account-management",
+        "name": "Account Management",
+        "tickets": "83",
+        "ticketCount": 83,
+        "intents": "Account Management configuration, troubleshooting, and how-to questions",
+        "confidence": 95,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "account-ownership-transfer",
+        "name": "Account Ownership Transfer",
+        "tickets": "69",
+        "ticketCount": 69,
+        "intents": "Account Ownership Transfer configuration, troubleshooting, and how-to questions",
+        "confidence": 95,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "account-migration",
+        "name": "Account Migration",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "Account Migration requests, mapping errors, validation failures, and recovery",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "role-configuration",
+        "name": "Role Configuration",
+        "tickets": "54",
+        "ticketCount": 54,
+        "intents": "Role Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 93,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "role-mapping",
+        "name": "Role Mapping",
+        "tickets": "17",
+        "ticketCount": 17,
+        "intents": "Role Mapping configuration, troubleshooting, and how-to questions",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "team-management",
+        "name": "Team Management",
+        "tickets": "15",
+        "ticketCount": 15,
+        "intents": "Team Management configuration, troubleshooting, and how-to questions",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "team-training",
+        "name": "Team Training",
+        "tickets": "4",
+        "ticketCount": 4,
+        "intents": "Team Training configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "tenant-administration",
+        "name": "Tenant Administration",
+        "tickets": "10",
+        "ticketCount": 10,
+        "intents": "Tenant Administration configuration, troubleshooting, and how-to questions",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "workspace-administration",
+        "name": "Workspace Administration",
+        "tickets": "46",
+        "ticketCount": 46,
+        "intents": "Workspace Administration configuration, troubleshooting, and how-to questions",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "administration",
+        "name": "Administration",
+        "tickets": "4",
+        "ticketCount": 4,
+        "intents": "Administration configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "admin-console",
+        "name": "Admin Console",
+        "tickets": "22",
+        "ticketCount": 22,
+        "intents": "Admin Console configuration, troubleshooting, and how-to questions",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "admin-settings",
+        "name": "Admin Settings",
+        "tickets": "26",
+        "ticketCount": 26,
+        "intents": "Admin Settings configuration, troubleshooting, and how-to questions",
+        "confidence": 91,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "licensing",
+        "name": "Licensing",
+        "tickets": "13",
+        "ticketCount": 13,
+        "intents": "Licensing configuration, troubleshooting, and how-to questions",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "billing-and-subscriptions",
+    "name": "Billing and subscriptions",
+    "skills": [
+      {
+        "id": "billing",
+        "name": "Billing",
+        "tickets": "158",
+        "ticketCount": 158,
+        "intents": "Billing inquiries, invoice errors, plan changes, and payment issues",
+        "confidence": 96,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "subscription-management",
+        "name": "Subscription Management",
+        "tickets": "49",
+        "ticketCount": 49,
+        "intents": "Subscription Management inquiries, invoice errors, plan changes, and payment issues",
+        "confidence": 93,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "stripe-integration",
+        "name": "Stripe Integration",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "Stripe Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "xero-integration",
+        "name": "Xero Integration",
+        "tickets": "2",
+        "ticketCount": 2,
+        "intents": "Xero Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "product-catalog",
+        "name": "Product Catalog",
+        "tickets": "3",
+        "ticketCount": 3,
+        "intents": "Product Catalog configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "data-management-and-migration",
+    "name": "Data management and migration",
+    "skills": [
+      {
+        "id": "data-management",
+        "name": "Data Management",
+        "tickets": "25",
+        "ticketCount": 25,
+        "intents": "Data Management requests, mapping errors, validation failures, and recovery",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "data-mapping",
+        "name": "Data Mapping",
+        "tickets": "49",
+        "ticketCount": 49,
+        "intents": "Data Mapping requests, mapping errors, validation failures, and recovery",
+        "confidence": 93,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "data-migration",
+        "name": "Data Migration",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "Data Migration requests, mapping errors, validation failures, and recovery",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "data-import",
+        "name": "Data Import",
+        "tickets": "26",
+        "ticketCount": 26,
+        "intents": "Data Import requests, mapping errors, validation failures, and recovery",
+        "confidence": 91,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "data-export",
+        "name": "Data Export",
+        "tickets": "22",
+        "ticketCount": 22,
+        "intents": "Data Export requests, mapping errors, validation failures, and recovery",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "data-integration",
+        "name": "Data Integration",
+        "tickets": "30",
+        "ticketCount": 30,
+        "intents": "Data Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "data-deduplication",
+        "name": "Data Deduplication",
+        "tickets": "46",
+        "ticketCount": 46,
+        "intents": "Data Deduplication requests, mapping errors, validation failures, and recovery",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "data-recovery",
+        "name": "Data Recovery",
+        "tickets": "23",
+        "ticketCount": 23,
+        "intents": "Data Recovery requests, mapping errors, validation failures, and recovery",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "data-residency",
+        "name": "Data Residency",
+        "tickets": "3",
+        "ticketCount": 3,
+        "intents": "Data Residency requests, mapping errors, validation failures, and recovery",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 1
+          }
+        ]
+      },
+      {
+        "id": "csv",
+        "name": "CSV",
+        "tickets": "3",
+        "ticketCount": 3,
+        "intents": "CSV requests, mapping errors, validation failures, and recovery",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "csv-import",
+        "name": "CSV Import",
+        "tickets": "45",
+        "ticketCount": 45,
+        "intents": "CSV Import requests, mapping errors, validation failures, and recovery",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "csv-export",
+        "name": "CSV Export",
+        "tickets": "10",
+        "ticketCount": 10,
+        "intents": "CSV Export requests, mapping errors, validation failures, and recovery",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "excel",
+        "name": "Excel",
+        "tickets": "2",
+        "ticketCount": 2,
+        "intents": "Excel configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 1
+          }
+        ]
+      },
+      {
+        "id": "contact-merge-troubleshooting",
+        "name": "Contact Merge Troubleshooting",
+        "tickets": "11",
+        "ticketCount": 11,
+        "intents": "Contact Merge Troubleshooting configuration, troubleshooting, and how-to questions",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "crm-data-management",
+        "name": "CRM Data Management",
+        "tickets": "58",
+        "ticketCount": 58,
+        "intents": "CRM Data Management requests, mapping errors, validation failures, and recovery",
+        "confidence": 93,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "file-organization",
+        "name": "File Organization",
+        "tickets": "5",
+        "ticketCount": 5,
+        "intents": "File Organization configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a4",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "pagination",
+        "name": "Pagination",
+        "tickets": "7",
+        "ticketCount": 7,
+        "intents": "Pagination configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "integrations-and-api",
+    "name": "Integrations and API",
+    "skills": [
+      {
+        "id": "api-support",
+        "name": "API Support",
+        "tickets": "97",
+        "ticketCount": 97,
+        "intents": "API Support configuration, troubleshooting, and how-to questions",
+        "confidence": 96,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "webhook-processing",
+        "name": "Webhook Processing",
+        "tickets": "43",
+        "ticketCount": 43,
+        "intents": "Webhook Processing configuration, troubleshooting, and how-to questions",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "rate-limiting",
+        "name": "Rate Limiting",
+        "tickets": "8",
+        "ticketCount": 8,
+        "intents": "Rate Limiting configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "salesforce-integration",
+        "name": "Salesforce Integration",
+        "tickets": "16",
+        "ticketCount": 16,
+        "intents": "Salesforce Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "hubspot-integration",
+        "name": "HubSpot Integration",
+        "tickets": "15",
+        "ticketCount": 15,
+        "intents": "HubSpot Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "jira-integration",
+        "name": "Jira Integration",
+        "tickets": "13",
+        "ticketCount": 13,
+        "intents": "Jira Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "slack-integration",
+        "name": "Slack Integration",
+        "tickets": "20",
+        "ticketCount": 20,
+        "intents": "Slack Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 1
+          }
+        ]
+      },
+      {
+        "id": "microsoft-teams-integration",
+        "name": "Microsoft Teams Integration",
+        "tickets": "9",
+        "ticketCount": 9,
+        "intents": "Microsoft Teams Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "google-drive-integration",
+        "name": "Google Drive Integration",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "Google Drive Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 1
+          }
+        ]
+      },
+      {
+        "id": "crm-integration",
+        "name": "CRM Integration",
+        "tickets": "25",
+        "ticketCount": 25,
+        "intents": "CRM Integration setup, sync errors, authentication, and field mapping",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "crm-configuration",
+        "name": "CRM Configuration",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "CRM Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "crm-support",
+        "name": "CRM Support",
+        "tickets": "12",
+        "ticketCount": 12,
+        "intents": "CRM Support configuration, troubleshooting, and how-to questions",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "sandbox-environment-management",
+        "name": "Sandbox Environment Management",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "Sandbox Environment Management configuration, troubleshooting, and how-to questions",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "environment-configuration",
+        "name": "Environment Configuration",
+        "tickets": "7",
+        "ticketCount": 7,
+        "intents": "Environment Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "workflow-and-configuration",
+    "name": "Workflow and configuration",
+    "skills": [
+      {
+        "id": "workflow-automation",
+        "name": "Workflow Automation",
+        "tickets": "109",
+        "ticketCount": 109,
+        "intents": "Workflow Automation rules, triggers, routing logic, and execution errors",
+        "confidence": 96,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "workflow-configuration",
+        "name": "Workflow Configuration",
+        "tickets": "38",
+        "ticketCount": 38,
+        "intents": "Workflow Configuration rules, triggers, routing logic, and execution errors",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "workflow-administration",
+        "name": "Workflow Administration",
+        "tickets": "7",
+        "ticketCount": 7,
+        "intents": "Workflow Administration rules, triggers, routing logic, and execution errors",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "automation",
+        "name": "Automation",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "Automation rules, triggers, routing logic, and execution errors",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "automated-reminders",
+        "name": "Automated Reminders",
+        "tickets": "5",
+        "ticketCount": 5,
+        "intents": "Automated Reminders configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 1
+          }
+        ]
+      },
+      {
+        "id": "notification-configuration",
+        "name": "Notification Configuration",
+        "tickets": "20",
+        "ticketCount": 20,
+        "intents": "Notification Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "form-configuration",
+        "name": "Form Configuration",
+        "tickets": "18",
+        "ticketCount": 18,
+        "intents": "Form Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "custom-fields",
+        "name": "Custom Fields",
+        "tickets": "45",
+        "ticketCount": 45,
+        "intents": "Custom Fields configuration, troubleshooting, and how-to questions",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "feature-configuration",
+        "name": "Feature Configuration",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "Feature Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "queue-configuration",
+        "name": "Queue Configuration",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "Queue Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "checklist-configuration",
+        "name": "Checklist Configuration",
+        "tickets": "2",
+        "ticketCount": 2,
+        "intents": "Checklist Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "project-configuration",
+        "name": "Project Configuration",
+        "tickets": "4",
+        "ticketCount": 4,
+        "intents": "Project Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "project-templates",
+        "name": "Project Templates",
+        "tickets": "1",
+        "ticketCount": 1,
+        "intents": "Project Templates configuration, troubleshooting, and how-to questions",
+        "confidence": 84,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "project-archiving",
+        "name": "Project Archiving",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "Project Archiving configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a4",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "time-zone-configuration",
+        "name": "Time Zone Configuration",
+        "tickets": "18",
+        "ticketCount": 18,
+        "intents": "Time Zone Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "tag-management",
+        "name": "Tag Management",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "Tag Management configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "task-management",
+        "name": "Task Management",
+        "tickets": "7",
+        "ticketCount": 7,
+        "intents": "Task Management configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reporting-and-operations",
+    "name": "Reporting and operations",
+    "skills": [
+      {
+        "id": "reporting",
+        "name": "Reporting",
+        "tickets": "105",
+        "ticketCount": 105,
+        "intents": "Reporting access, filters, exports, and data accuracy issues",
+        "confidence": 96,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "dashboard-reporting",
+        "name": "Dashboard Reporting",
+        "tickets": "34",
+        "ticketCount": 34,
+        "intents": "Dashboard Reporting access, filters, exports, and data accuracy issues",
+        "confidence": 91,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "campaign-reporting",
+        "name": "Campaign Reporting",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "Campaign Reporting access, filters, exports, and data accuracy issues",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "audit-logging",
+        "name": "Audit Logging",
+        "tickets": "25",
+        "ticketCount": 25,
+        "intents": "Audit Logging access, filters, exports, and data accuracy issues",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "compliance",
+        "name": "Compliance",
+        "tickets": "11",
+        "ticketCount": 11,
+        "intents": "Compliance configuration, troubleshooting, and how-to questions",
+        "confidence": 87,
+        "agentEntries": [
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "incident-management",
+        "name": "Incident Management",
+        "tickets": "30",
+        "ticketCount": 30,
+        "intents": "Incident Management configuration, troubleshooting, and how-to questions",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "escalation-management",
+        "name": "Escalation Management",
+        "tickets": "43",
+        "ticketCount": 43,
+        "intents": "Escalation Management configuration, troubleshooting, and how-to questions",
+        "confidence": 92,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "performance-troubleshooting",
+        "name": "Performance Troubleshooting",
+        "tickets": "51",
+        "ticketCount": 51,
+        "intents": "Performance Troubleshooting configuration, troubleshooting, and how-to questions",
+        "confidence": 93,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "sla-configuration",
+        "name": "SLA Configuration",
+        "tickets": "6",
+        "ticketCount": 6,
+        "intents": "SLA Configuration configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "sla-management",
+        "name": "SLA Management",
+        "tickets": "3",
+        "ticketCount": 3,
+        "intents": "SLA Management configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a6",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "ticketing-system",
+        "name": "Ticketing System",
+        "tickets": "19",
+        "ticketCount": 19,
+        "intents": "Ticketing System configuration, troubleshooting, and how-to questions",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "customer-support",
+        "name": "Customer Support",
+        "tickets": "5",
+        "ticketCount": 5,
+        "intents": "Customer Support configuration, troubleshooting, and how-to questions",
+        "confidence": 86,
+        "agentEntries": [
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "sales-operations",
+        "name": "Sales Operations",
+        "tickets": "2",
+        "ticketCount": 2,
+        "intents": "Sales Operations configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "sales-training",
+        "name": "Sales Training",
+        "tickets": "2",
+        "ticketCount": 2,
+        "intents": "Sales Training configuration, troubleshooting, and how-to questions",
+        "confidence": 85,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 2
+          }
+        ]
+      },
+      {
+        "id": "training",
+        "name": "Training",
+        "tickets": "36",
+        "ticketCount": 36,
+        "intents": "Training configuration, troubleshooting, and how-to questions",
+        "confidence": 91,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a3",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "email-deliverability",
+        "name": "Email Deliverability",
+        "tickets": "14",
+        "ticketCount": 14,
+        "intents": "Email Deliverability configuration, troubleshooting, and how-to questions",
+        "confidence": 89,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 2
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "language",
+    "name": "Language",
+    "skills": [
+      {
+        "id": "french",
+        "name": "French",
+        "tickets": "60",
+        "ticketCount": 60,
+        "intents": "General support in French across billing, configuration, and troubleshooting",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a8",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a10",
+            "proficiency": 1
+          },
+          {
+            "agentId": "a13",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a14",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a15",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a16",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a17",
+            "proficiency": 3
+          }
+        ]
+      },
+      {
+        "id": "german",
+        "name": "German",
+        "tickets": "51",
+        "ticketCount": 51,
+        "intents": "General support in German across billing, configuration, and troubleshooting",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "polish",
+        "name": "Polish",
+        "tickets": "40",
+        "ticketCount": 40,
+        "intents": "General support in Polish across billing, configuration, and troubleshooting",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a1",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a2",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a4",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a5",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a6",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a9",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a11",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a18",
+            "proficiency": 3
+          },
+          {
+            "agentId": "a19",
+            "proficiency": 5
+          },
+          {
+            "agentId": "a20",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "portuguese",
+        "name": "Portuguese",
+        "tickets": "79",
+        "ticketCount": 79,
+        "intents": "General support in Portuguese across billing, configuration, and troubleshooting",
+        "confidence": 90,
+        "agentEntries": [
+          {
+            "agentId": "a3",
+            "proficiency": 4
+          }
+        ]
+      },
+      {
+        "id": "spanish",
+        "name": "Spanish",
+        "tickets": "50",
+        "ticketCount": 50,
+        "intents": "General support in Spanish across billing, configuration, and troubleshooting",
+        "confidence": 88,
+        "agentEntries": [
+          {
+            "agentId": "a7",
+            "proficiency": 4
+          },
+          {
+            "agentId": "a12",
+            "proficiency": 4
+          }
+        ]
+      }
+    ]
+  }
+]
